@@ -1,31 +1,59 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+  await dotenv.load(fileName: ".env");
+  WidgetsFlutterBinding.ensureInitialized();
+  //FirebaseFirestore db = FirebaseFirestore.instance;
+  // Add a new document with a generated ID
+  //db.collection("users").add(user);
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
+  MyApp({super.key});
+  final Future<FirebaseApp> _fbApp = Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
-        primarySwatch: Colors.blue,
-      ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
-    );
+        title: 'Flutter Demo',
+        theme: ThemeData(
+          // This is the theme of your application.
+          //
+          // Try running your application with "flutter run". You'll see the
+          // application has a blue toolbar. Then, without quitting the app, try
+          // changing the primarySwatch below to Colors.green and then invoke
+          // "hot reload" (press "r" in the console where you ran "flutter run",
+          // or simply save your changes to "hot reload" in a Flutter IDE).
+          // Notice that the counter didn't reset back to zero; the application
+          // is not restarted.
+          primarySwatch: Colors.blue,
+        ),
+        home: FutureBuilder(
+          future: _fbApp,
+          builder: (context, snapshot) {
+            if (snapshot.hasError) {
+              print("You have an error!${snapshot.error.toString()}");
+              return Text("Something went wrong");
+            } else if (snapshot.hasData) {
+              DatabaseReference ref = FirebaseDatabase.instance.ref();
+              if (ref != null) {
+                return MyHomePage(title: 'Flutter Demo Home Page');
+              } else {
+                return Text("Something went wrong getting databse instance");
+              }
+            } else {
+              return Center(child: CircularProgressIndicator());
+            }
+          },
+        ));
   }
 }
 
