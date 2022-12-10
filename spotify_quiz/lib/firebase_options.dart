@@ -2,7 +2,10 @@
 // ignore_for_file: lines_longer_than_80_chars, avoid_classes_with_only_static_members
 import 'package:firebase_core/firebase_core.dart' show FirebaseOptions;
 import 'package:flutter/foundation.dart'
+
     show defaultTargetPlatform, kIsWeb, TargetPlatform;
+
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 /// Default [FirebaseOptions] for use with your Firebase apps.
 ///
@@ -46,34 +49,36 @@ class DefaultFirebaseOptions {
     }
   }
 
-  static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyDE92CgV9Aks2twogpfk6kOwA3SRmKKY2Q',
-    appId: '1:954338554494:web:f5639372e3e71faea45e2f',
+
+
+  static FirebaseOptions web = FirebaseOptions(
+    apiKey:  dotenv.get('APIKEY_WEB', fallback: 'sane-default'),
+    appId: dotenv.get('APPID_WEB', fallback: 'sane-default'),
     messagingSenderId: '954338554494',
-    projectId: 'spotify-quiz-df890',
-    authDomain: 'spotify-quiz-df890.firebaseapp.com',
-    databaseURL: 'https://spotify-quiz-df890-default-rtdb.firebaseio.com',
-    storageBucket: 'spotify-quiz-df890.appspot.com',
+    projectId: dotenv.get('PROJECT_ID', fallback: 'sane-default'),
+    authDomain: dotenv.env['AUTH_DOMAIN'],
+    databaseURL: dotenv.env['DB_URL'],
+    storageBucket: dotenv.env['STORAGE_BUCKET'],
     measurementId: 'G-7K9FNZG737',
   );
 
-  static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyBWaA3CdoodWslwzOjr8QtkyUDG9GQv0DY',
-    appId: '1:954338554494:android:9c652fbe590d9692a45e2f',
+  static FirebaseOptions android = FirebaseOptions(
+    apiKey: dotenv.get('APIKEY_ANDROID', fallback: 'sane-default'),
+    appId: dotenv.get('APPID_ANDROID', fallback: 'sane-default'),
     messagingSenderId: '954338554494',
-    projectId: 'spotify-quiz-df890',
-    databaseURL: 'https://spotify-quiz-df890-default-rtdb.firebaseio.com',
-    storageBucket: 'spotify-quiz-df890.appspot.com',
+    projectId: dotenv.get('PROJECT_ID', fallback: 'sane-default'),
+    databaseURL:  dotenv.env['DB_URL'],
+    storageBucket: dotenv.env['STORAGE_BUCKET'],
   );
 
-  static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyBX-pKlVcLZkteNFF1ZylFUmNcssk54IUk',
-    appId: '1:954338554494:ios:56afef043f3cdc41a45e2f',
+  static FirebaseOptions ios = FirebaseOptions(
+    apiKey: dotenv.get('APIKEY_IOS', fallback: 'sane-default'),
+    appId: dotenv.get('APPID_IOS', fallback: 'sane-default'),
     messagingSenderId: '954338554494',
-    projectId: 'spotify-quiz-df890',
-    databaseURL: 'https://spotify-quiz-df890-default-rtdb.firebaseio.com',
-    storageBucket: 'spotify-quiz-df890.appspot.com',
-    iosClientId: '954338554494-gk8p39qa1pfhvq953f21637ggu01tl6f.apps.googleusercontent.com',
-    iosBundleId: 'com.example.spotifyQuiz',
+    projectId: dotenv.get('PROJECT_ID', fallback: 'sane-default'),
+    databaseURL: dotenv.env['DB_URL'],
+    storageBucket: dotenv.env['STORAGE_BUCKET'],
+    iosClientId: dotenv.get('IOS_CLIENT_ID', fallback: 'sane-default'),
+    iosBundleId: dotenv.get('IOS_BUNDLE', fallback: 'sane-default'),
   );
 }
