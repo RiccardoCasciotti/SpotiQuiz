@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-//import 'firebase_options.dart';
+import 'firebase_options.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -20,8 +20,8 @@ void main() async {
 class MyApp extends StatelessWidget {
   MyApp({super.key});
   final Future<FirebaseApp> _fbApp = Firebase.initializeApp(
-      //options: DefaultFirebaseOptions.currentPlatform,
-      );
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
