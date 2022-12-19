@@ -1,9 +1,14 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'package:spotify_quiz/models/user.dart' as usermodel;
 
 void main() async {
   await dotenv.load(fileName: ".env");
@@ -23,37 +28,38 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: 'Flutter Demo',
-        theme: ThemeData(
-          // This is the theme of your application.
-          //
-          // Try running your application with "flutter run". You'll see the
-          // application has a blue toolbar. Then, without quitting the app, try
-          // changing the primarySwatch below to Colors.green and then invoke
-          // "hot reload" (press "r" in the console where you ran "flutter run",
-          // or simply save your changes to "hot reload" in a Flutter IDE).
-          // Notice that the counter didn't reset back to zero; the application
-          // is not restarted.
-          primarySwatch: Colors.blue,
-        ),
-        home: FutureBuilder(
-          future: _fbApp,
-          builder: (context, snapshot) {
-            if (snapshot.hasError) {
-              print("You have an error!${snapshot.error.toString()}");
-              return Text("Something went wrong");
-            } else if (snapshot.hasData) {
-              DatabaseReference ref = FirebaseDatabase.instance.ref();
-              if (ref != null) {
-                return MyHomePage(title: 'Flutter Demo Home Page');
-              } else {
-                return Text("Something went wrong getting databse instance");
-              }
+      title: 'Flutter Demo',
+      theme: ThemeData(
+        // This is the theme of your application.
+        //
+        // Try running your application with "flutter run". You'll see the
+        // application has a blue toolbar. Then, without quitting the app, try
+        // changing the primarySwatch below to Colors.green and then invoke
+        // "hot reload" (press "r" in the console where you ran "flutter run",
+        // or simply save your changes to "hot reload" in a Flutter IDE).
+        // Notice that the counter didn't reset back to zero; the application
+        // is not restarted.
+        primarySwatch: Colors.blue,
+      ),
+      home: FutureBuilder(
+        future: _fbApp,
+        builder: (context, snapshot) {
+          if (snapshot.hasError) {
+            print("You have an error!${snapshot.error.toString()}");
+            return Text("Something went wrong");
+          } else if (snapshot.hasData) {
+            DatabaseReference ref = FirebaseDatabase.instance.ref();
+            if (ref != null) {
+              return MyHomePage(title: 'Flutter Demo Home Page');
             } else {
-              return Center(child: CircularProgressIndicator());
+              return Text("Something went wrong getting databse instance");
             }
-          },
-        ));
+          } else {
+            return Center(child: CircularProgressIndicator());
+          }
+        },
+      ),
+    );
   }
 }
 
@@ -75,10 +81,16 @@ class MyHomePage extends StatefulWidget {
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+/*class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
 
   void _incrementCounter() {
+    createUser(
+        uid: "SpotifyQuiz",
+        coins: 0,
+        experience: 0,
+        numOfQuiz: 0,
+        username: "Ollo");
     setState(() {
       // This call to setState tells the Flutter framework that something has
       // changed in this State, which causes it to rerun the build method below
@@ -87,6 +99,26 @@ class _MyHomePageState extends State<MyHomePage> {
       // called again, and so nothing would appear to happen.
       _counter++;
     });
+  }
+
+  Future createUser(
+      {required String uid,
+      required int coins,
+      required double experience,
+      required int numOfQuiz,
+      required String username}) async {
+    //reference to document
+    final docUser = FirebaseFirestore.instance.collection('users').doc(uid);
+
+    final json = {
+      'coins': coins,
+      'experience': experience,
+      'numOfQuiz': numOfQuiz,
+      'uid': uid,
+      'username': username,
+    };
+
+    await docUser.set(json);
   }
 
   @override
@@ -138,6 +170,260 @@ class _MyHomePageState extends State<MyHomePage> {
         tooltip: 'Increment',
         child: const Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
+    );
+  }
+}*/
+
+class _MyHomePageState extends State<MyHomePage> {
+  Future createUser(
+      {required String uid,
+      required int coins,
+      required int level,
+      required double experience,
+      required int numOfQuiz,
+      required String username}) async {
+    //reference to document
+    final docUser = FirebaseFirestore.instance.collection('users').doc(uid);
+
+    final json = {
+      'coins': coins,
+      'experience': experience,
+      'level': level,
+      'numOfQuiz': numOfQuiz,
+      'uid': uid,
+      'username': username,
+    };
+
+    await docUser.set(json);
+  }
+
+  int _selectedIndex = 0;
+
+  void _onItemTapped(int index) {
+    createUser(
+        uid: "UhuhAh",
+        coins: 0,
+        level: 0,
+        experience: 0,
+        numOfQuiz: 0,
+        username: "Ollo");
+    setState(() {
+      // This call to setState tells the Flutter framework that something has
+      // changed in this State, which causes it to rerun the build method below
+      // so that the display can reflect the updated values. If we changed
+      // _counter without calling setState(), then the build method would not be
+      // called again, and so nothing would appear to happen.
+      _selectedIndex = index;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: const Color.fromARGB(255, 2, 2, 2),
+      body: Center(
+        //body: LayoutBuilder TODO, see slides
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Column(
+              children: [
+                Container(
+                  margin: const EdgeInsets.all(10.0),
+                  padding: const EdgeInsets.all(3.0),
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    border: Border.all(
+                      color: const Color.fromARGB(255, 2, 164, 26),
+                      width: 2.0,
+                    ),
+                  ),
+                  child: DecoratedBox(
+                    // add this
+                    decoration: const BoxDecoration(
+                      shape: BoxShape.circle,
+                      image: DecorationImage(
+                          image: NetworkImage(
+                              'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg'),
+                          fit: BoxFit.cover),
+                    ),
+                    child: Column(
+                      children: <Widget>[
+                        Container(
+                          margin: const EdgeInsets.all(20),
+                          width: 130.0,
+                          height: 130.0,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+
+                /* DecoratedBox(
+                  // add this
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    border: Border.all(
+                      width: 2,
+                      color: const Color.fromARGB(255, 2, 164, 26),
+                    ),
+                    image: const DecorationImage(
+                        image: NetworkImage(
+                            'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg'),
+                        fit: BoxFit.cover),
+                  ),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      Container(
+                        margin: const EdgeInsets.all(15),
+                        width: 100.0,
+                        height: 100.0,
+                      ),
+                    ],
+                  ),
+                ),
+
+                const SizedBox(
+                  height: 5,
+                ),
+                */
+
+                Container(
+                  margin: const EdgeInsets.all(10.0),
+                  padding: const EdgeInsets.all(3.0),
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: const Color.fromARGB(255, 2, 164, 26),
+                    ),
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  child: const Text.rich(
+                    textAlign: TextAlign.center,
+                    TextSpan(
+                      text: 'Username ',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Color.fromARGB(255, 2, 164, 26),
+                        fontSize: 22,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            Column(
+              children: const [
+                Text.rich(
+                  TextSpan(
+                    text: 'Level ',
+                    style: TextStyle(
+                      color: Color.fromARGB(255, 2, 164, 26),
+                      fontSize: 20,
+                    ),
+                    children: <TextSpan>[
+                      TextSpan(
+                        text: '1',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Color.fromARGB(255, 2, 164, 26),
+                          fontSize: 22,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Text.rich(
+                  TextSpan(
+                    text: '#Quiz ',
+                    style: TextStyle(
+                      color: Color.fromARGB(255, 2, 164, 26),
+                      fontSize: 20,
+                    ),
+                    children: <TextSpan>[
+                      TextSpan(
+                        text: '1',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Color.fromARGB(255, 2, 164, 26),
+                          fontSize: 22,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Text.rich(
+                  TextSpan(
+                    text: 'Best Score ',
+                    style: TextStyle(
+                      color: Color.fromARGB(255, 2, 164, 26),
+                      fontSize: 20,
+                    ),
+                    children: <TextSpan>[
+                      TextSpan(
+                        text: '2000',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Color.fromARGB(255, 2, 164, 26),
+                          fontSize: 25,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+            Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    const SizedBox(width: 16),
+                    FloatingActionButton(
+                      backgroundColor: const Color.fromARGB(255, 2, 164, 26),
+                      foregroundColor: const Color.fromARGB(255, 0, 0, 0),
+                      onPressed: () {
+                        // Add your onPressed code here!
+                        VoidCallback;
+                      },
+                      child: const Icon(Icons.emoji_events_outlined),
+                    ),
+                    FloatingActionButton(
+                      backgroundColor: const Color.fromARGB(255, 2, 164, 26),
+                      foregroundColor: const Color.fromARGB(255, 0, 0, 0),
+                      onPressed: () {
+                        // Add your onPressed code here! In future call shopping page
+                        VoidCallback;
+                      },
+                      child: const Icon(Icons.shopping_cart_outlined),
+                    ),
+                    const SizedBox(width: 16),
+                  ],
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.question_mark),
+            label: 'Quiz',
+          ),
+        ],
+        currentIndex: _selectedIndex,
+        selectedItemColor: const Color.fromARGB(255, 2, 164, 26),
+        backgroundColor: const Color.fromARGB(255, 2, 2, 2),
+        unselectedItemColor: const Color.fromARGB(255, 2, 164, 26),
+        selectedIconTheme: const IconThemeData(size: 50),
+        onTap: _onItemTapped,
+      ),
     );
   }
 }
