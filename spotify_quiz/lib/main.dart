@@ -20,33 +20,34 @@ void main() async {
   //FirebaseFirestore db = FirebaseFirestore.instance;
   // Add a new document with a generated ID
   //db.collection("users").add(user);
-  runApp(MyApp(authenticationRepository: AuthenticationRepository(),
+  runApp(MyApp(
+      authenticationRepository: AuthenticationRepository(),
       userRepository: UserRepository()));
 }
 
 class MyApp extends StatelessWidget {
-  MyApp({super.key, 
-        required this.authenticationRepository,
-        required this.userRepository,});
+  MyApp({
+    super.key,
+    required this.authenticationRepository,
+    required this.userRepository,
+  });
   final AuthenticationRepository authenticationRepository;
   final UserRepository userRepository;
-        
-        final Future<FirebaseApp> _fbApp = Firebase.initializeApp(
+
+  final Future<FirebaseApp> _fbApp = Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return RepositoryProvider.value(
-      value: authenticationRepository, 
-      child: BlocProvider(
-        create: (_) => AuthenticationBloc(
-          authenticationRepository: authenticationRepository,
-          userRepository: userRepository, 
-        ), 
-        child: const MyAppView()
-      )
-    );
+        value: authenticationRepository,
+        child: BlocProvider(
+            create: (_) => AuthenticationBloc(
+                  authenticationRepository: authenticationRepository,
+                  userRepository: userRepository,
+                ),
+            child: const MyAppView()));
     // return MaterialApp(
     //     title: 'Flutter Demo',
     //     theme: ThemeData(
@@ -94,8 +95,6 @@ class MyAppView extends StatefulWidget {
   // used by the build method of the State. Fields in a Widget subclass are
   // always marked "final".
 
-
-
   @override
   State<MyAppView> createState() => _MyAppViewState();
 }
@@ -107,8 +106,6 @@ class _MyAppViewState extends State<MyAppView> {
 
   NavigatorState get _navigator => _navigatorKey.currentState!;
 
-
-
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
@@ -119,14 +116,14 @@ class _MyAppViewState extends State<MyAppView> {
     // than having to individually change instances of widgets.
     return MaterialApp(
       navigatorKey: _navigatorKey,
-      builder: (context, child){
+      builder: (context, child) {
         return BlocListener<AuthenticationBloc, AuthenticationState>(
-          listener: (context, state){
-            switch (state.status){
+          listener: (context, state) {
+            switch (state.status) {
               case AuthenticationStatus.authenticated:
                 _navigator.pushAndRemoveUntil<void>(
                   HomePage.route(),
-                  (route) => false, 
+                  (route) => false,
                 );
                 break;
               case AuthenticationStatus.unauthenticated:
@@ -135,15 +132,14 @@ class _MyAppViewState extends State<MyAppView> {
                   (route) => false,
                 );
                 break;
-                case AuthenticationStatus.unknown: 
-                  break;
+              case AuthenticationStatus.unknown:
+                break;
             }
           },
           child: child,
         );
-
-      }, 
-      onGenerateRoute:  (_) => SplashPage.route(),
+      },
+      onGenerateRoute: (_) => SplashPage.route(),
     );
   }
 }
