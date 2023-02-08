@@ -13,7 +13,7 @@ void main() {
   mDatabase = FirebaseDatabase.instance.ref();
 
   void writeNewUser(String userId, String username, int level, int numberQuiz,
-      double experience, int coins) {
+      int experience, int coins) {
     User user = User(
         uid: userId,
         username: username,

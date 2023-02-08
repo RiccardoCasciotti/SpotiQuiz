@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:firebase_core/firebase_core.dart';
+import 'package:spotify_quiz/home_view.dart';
+import 'package:spotify_quiz/sample.dart';
+import 'package:spotify_quiz/themes/bloc/theme_bloc.dart';
 import 'firebase_options.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -41,14 +44,15 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return RepositoryProvider.value(
-        value: authenticationRepository,
-        child: BlocProvider(
-            create: (_) => AuthenticationBloc(
-                  authenticationRepository: authenticationRepository,
-                  userRepository: userRepository,
-                ),
-            child: const MyAppView()));
-    // return MaterialApp(
+      value: authenticationRepository,
+      child: BlocProvider(
+          create: (_) => AuthenticationBloc(
+                authenticationRepository: authenticationRepository,
+                userRepository: userRepository,
+              ),
+          child: const MyAppView()),
+    );
+    //     return MaterialApp(
     //     title: 'Flutter Demo',
     //     theme: ThemeData(
     //       // This is the theme of your application.
@@ -100,7 +104,7 @@ class MyAppView extends StatefulWidget {
 }
 
 class _MyAppViewState extends State<MyAppView> {
-  int _counter = 0;
+  //int _counter = 0;
 
   final _navigatorKey = GlobalKey<NavigatorState>();
 
@@ -114,75 +118,51 @@ class _MyAppViewState extends State<MyAppView> {
     // The Flutter framework has been optimized to make rerunning build methods
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
-    return MaterialApp(
-      navigatorKey: _navigatorKey,
-      builder: (context, child) {
-        return BlocListener<AuthenticationBloc, AuthenticationState>(
-          listener: (context, state) {
-            switch (state.status) {
-              case AuthenticationStatus.authenticated:
-                _navigator.pushAndRemoveUntil<void>(
-                  HomePage.route(),
-                  (route) => false,
-                );
-                break;
-              case AuthenticationStatus.unauthenticated:
-                _navigator.pushAndRemoveUntil<void>(
-                  LoginPage.route(),
-                  (route) => false,
-                );
-                break;
-              case AuthenticationStatus.unknown:
-                break;
-            }
-          },
-          child: child,
-        );
-      },
-      onGenerateRoute: (_) => SplashPage.route(),
+    return BlocProvider(
+      create: (context) => ThemeBloc(),
+      child: BlocBuilder<ThemeBloc, ThemeState>(
+        builder: (context, state) {
+          return MaterialApp(
+            navigatorKey: _navigatorKey,
+            builder: (context, child) {
+              return BlocListener<AuthenticationBloc, AuthenticationState>(
+                listener: (context, state) {
+                  switch (state.status) {
+                    case AuthenticationStatus.authenticated:
+                      _navigator.push(
+                        MaterialPageRoute(
+                          builder: (_) => BlocProvider.value(
+                            value: BlocProvider.of<ThemeBloc>(context),
+                            child: const MyHomePage(
+                              title: "ok",
+                            ),
+                          ),
+                        ),
+                      );
+                      break;
+                    case AuthenticationStatus.unauthenticated:
+                      _navigator.push(
+                        MaterialPageRoute(
+                          builder: (_) => BlocProvider.value(
+                            value: BlocProvider.of<ThemeBloc>(context),
+                            child: const MyHomePage(
+                              title: "ok",
+                            ),
+                          ),
+                        ),
+                      );
+                      break;
+                    case AuthenticationStatus.unknown:
+                      break;
+                  }
+                },
+                child: child,
+              );
+            },
+            onGenerateRoute: (__) => SplashPage.route(),
+          );
+        },
+      ),
     );
   }
 }
-//       appBar: AppBar(
-//         // Here we take the value from the MyHomePage object that was created by
-//         // the App.build method, and use it to set our appbar title.
-//         title: Text(widget.title),
-//       ),
-//       body: Center(
-//         // Center is a layout widget. It takes a single child and positions it
-//         // in the middle of the parent.
-//         child: Column(
-//           // Column is also a layout widget. It takes a list of children and
-//           // arranges them vertically. By default, it sizes itself to fit its
-//           // children horizontally, and tries to be as tall as its parent.
-//           //
-//           // Invoke "debug painting" (press "p" in the console, choose the
-//           // "Toggle Debug Paint" action from the Flutter Inspector in Android
-//           // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-//           // to see the wireframe for each widget.
-//           //
-//           // Column has various properties to control how it sizes itself and
-//           // how it positions its children. Here we use mainAxisAlignment to
-//           // center the children vertically; the main axis here is the vertical
-//           // axis because Columns are vertical (the cross axis would be
-//           // horizontal).
-//           mainAxisAlignment: MainAxisAlignment.center,
-//           children: <Widget>[
-//             const Text(
-//               'You have pushed the button this many times:',
-//             ),
-//             Text(
-//               '$_counter',
-//               style: Theme.of(context).textTheme.headline4,
-//             ),
-//           ],
-//         ),
-//       ),
-//       floatingActionButton: FloatingActionButton(
-//         onPressed: _incrementCounter,
-//         tooltip: 'Increment',
-//         child: const Icon(Icons.add),
-//       ), // This trailing comma makes auto-formatting nicer for build methods.
-//     );
-//   }
-// }
