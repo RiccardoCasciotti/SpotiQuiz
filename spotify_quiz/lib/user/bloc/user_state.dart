@@ -18,6 +18,11 @@ class UserAdded extends UserState {
   List<Object?> get props => [];
 }
 
+class UserNotFound extends UserState {
+  @override
+  List<Object?> get props => [];
+}
+
 class UserError extends UserState {
   final String error;
 

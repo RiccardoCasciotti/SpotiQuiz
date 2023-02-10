@@ -43,7 +43,11 @@ class UserBloc extends Bloc<UserEvent, UserState> {
       await Future.delayed(const Duration(seconds: 1));
       try {
         final data = await userRepository.getByID(event.uid);
-        emit(UserLoaded(data));
+        if (data.isNotEmpty) {
+          emit(UserLoaded(data));
+        } else {
+          emit(UserNotFound());
+        }
       } catch (e) {
         emit(UserError(e.toString()));
       }
