@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 Color secondaryColor = const Color.fromARGB(255, 0, 0, 0);

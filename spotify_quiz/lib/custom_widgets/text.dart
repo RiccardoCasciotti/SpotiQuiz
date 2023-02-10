@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+import 'package:spotify_quiz/utilities.dart' as utilities;
 
 class CustomText extends StatelessWidget {
   String text;
@@ -22,7 +23,7 @@ class CustomText extends StatelessWidget {
       style: TextStyle(
           fontStyle: italic ? FontStyle.italic : FontStyle.normal,
           fontSize: size,
-          color: Color.fromARGB(255, 255, 255, 255),
+          color: utilities.primaryColor,
           fontWeight: bold ? FontWeight.bold : FontWeight.normal),
     );
   }

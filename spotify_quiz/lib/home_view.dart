@@ -1,7 +1,7 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:spotify_quiz/custom_widgets/boxProfilePic.dart';
+import 'package:spotify_quiz/custom_widgets/boxProfileUsername.dart';
 import 'package:spotify_quiz/custom_widgets/text.dart';
 import 'package:spotify_quiz/repositories/user/user_repository.dart';
 import 'package:spotify_quiz/themes/app_themes.dart';
@@ -9,8 +9,6 @@ import 'package:spotify_quiz/themes/bloc/theme_bloc.dart';
 import 'package:spotify_quiz/user/bloc/user_bloc.dart';
 
 import 'package:spotify_quiz/utilities.dart' as utilities;
-
-import 'package:spotify_quiz/models/user.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
@@ -77,49 +75,18 @@ class _MyHomePageState extends State<MyHomePage> {
                       children: [
                         Column(
                           children: [
-                            Container(
-                              margin: const EdgeInsets.all(10.0),
-                              padding: const EdgeInsets.all(3.0),
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                border: Border.all(
-                                  color: const Color.fromARGB(255, 2, 164, 26),
-                                  width: 2.0,
-                                ),
-                              ),
-                              child: DecoratedBox(
-                                // add this
-                                decoration: const BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  image: DecorationImage(
-                                      image: NetworkImage(
-                                          'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg'),
-                                      fit: BoxFit.cover),
-                                ),
-                                child: Column(
-                                  children: <Widget>[
-                                    Container(
-                                      margin: const EdgeInsets.all(20),
-                                      width: 130.0,
-                                      height: 130.0,
-                                    ),
-                                  ],
-                                ),
-                              ),
+                            CustomContainerProfilePic(
+                              picUrl:
+                                  'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg',
+                              sizeBorder: 3.5,
                             ),
-                            Container(
-                              margin: const EdgeInsets.all(10.0),
-                              padding: const EdgeInsets.all(3.0),
-                              decoration: BoxDecoration(
-                                border: Border.all(
-                                  color: const Color.fromARGB(255, 2, 164, 26),
-                                ),
-                                borderRadius: BorderRadius.circular(10.0),
-                              ),
-                              child: CustomText(
+                            CustomProfileUsername(
+                              usernameText: CustomText(
                                 text: "Username",
                                 size: 25,
                               ),
+                              sizeRadius: 20.0,
+                              widthRadius: 3.0,
                             ),
                           ],
                         ),
@@ -177,33 +144,18 @@ class _MyHomePageState extends State<MyHomePage> {
                               children: [
                                 const SizedBox(width: 16),
                                 FloatingActionButton(
-                                  backgroundColor:
-                                      BlocProvider.of<ThemeBloc>(context)
-                                          .state
-                                          .themeData
-                                          .primaryColor,
-                                  foregroundColor:
-                                      const Color.fromARGB(255, 0, 0, 0),
+                                  backgroundColor: utilities.primaryColor,
+                                  foregroundColor: utilities.secondaryColor,
                                   onPressed: () {
-                                    // Add your onPressed code here!
-                                    BlocProvider.of<ThemeBloc>(context).add(
-                                        const ThemeChanged(
-                                            theme: AppTheme.purple));
                                     _createUser(context);
                                   },
                                   child:
                                       const Icon(Icons.emoji_events_outlined),
                                 ),
                                 FloatingActionButton(
-                                  backgroundColor:
-                                      BlocProvider.of<ThemeBloc>(context)
-                                          .state
-                                          .themeData
-                                          .primaryColor,
-                                  foregroundColor:
-                                      const Color.fromARGB(255, 0, 0, 0),
+                                  backgroundColor: utilities.primaryColor,
+                                  foregroundColor: utilities.secondaryColor,
                                   onPressed: () {
-                                    // Add your onPressed code here! In future call shopping page
                                     _getUsers(context);
                                   },
                                   child:
