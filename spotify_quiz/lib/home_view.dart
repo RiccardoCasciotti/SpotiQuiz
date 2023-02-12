@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:spotify_quiz/custom_widgets/boxProfilePic.dart';
+import 'package:spotify_quiz/custom_widgets/boxCustomPic.dart';
 import 'package:spotify_quiz/custom_widgets/boxProfileUsername.dart';
 import 'package:spotify_quiz/custom_widgets/text.dart';
 import 'package:spotify_quiz/repositories/user/user_repository.dart';
-import 'package:spotify_quiz/themes/app_themes.dart';
-import 'package:spotify_quiz/themes/bloc/theme_bloc.dart';
 import 'package:spotify_quiz/user/bloc/user_bloc.dart';
 
 import 'package:spotify_quiz/utilities.dart' as utilities;
@@ -35,6 +33,125 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  List<Widget> trialArtists = [
+    Column(
+      children: [
+        CustomContainerPic(
+          picUrl:
+              'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg',
+          withBorder: false,
+          width: 150,
+          height: 150,
+        ),
+        CustomText(
+          text: "Peppe",
+          size: 20,
+          bold: true,
+          italic: true,
+        ),
+      ],
+    ),
+    Column(
+      children: [
+        CustomContainerPic(
+          picUrl:
+              'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg',
+          withBorder: false,
+          width: 150,
+          height: 150,
+        ),
+        CustomText(
+          text: "Peppe",
+          size: 20,
+          bold: true,
+          italic: true,
+        ),
+      ],
+    ),
+    Column(
+      children: [
+        CustomContainerPic(
+          picUrl:
+              'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg',
+          withBorder: false,
+          width: 150,
+          height: 150,
+        ),
+        CustomText(
+          text: "Peppe",
+          size: 20,
+          bold: true,
+          italic: true,
+        ),
+      ],
+    ),
+    Column(
+      children: [
+        CustomContainerPic(
+          picUrl:
+              'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg',
+          withBorder: false,
+          width: 150,
+          height: 150,
+        ),
+        CustomText(
+          text: "Peppe",
+          size: 20,
+          bold: true,
+          italic: true,
+        ),
+      ],
+    ),
+    Column(
+      children: [
+        CustomContainerPic(
+          picUrl:
+              'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg',
+          withBorder: false,
+          width: 150,
+          height: 150,
+        ),
+        CustomText(
+          text: "Peppe",
+          size: 20,
+          bold: true,
+          italic: true,
+        ),
+      ],
+    ),
+  ];
+  List<Widget> trialArtistNames = [
+    CustomText(
+      text: "Peppe",
+      size: 20,
+      bold: true,
+      italic: true,
+    ),
+    CustomText(
+      text: "Peppe",
+      size: 20,
+      bold: true,
+      italic: true,
+    ),
+    CustomText(
+      text: "Peppe",
+      size: 20,
+      bold: true,
+      italic: true,
+    ),
+    CustomText(
+      text: "Peppe",
+      size: 20,
+      bold: true,
+      italic: true,
+    ),
+    CustomText(
+      text: "Peppe",
+      size: 20,
+      bold: true,
+      italic: true,
+    ),
+  ];
   int _selectedIndex = 0;
   void _onItemTapped(int index) {
     setState(() {
@@ -81,10 +198,10 @@ class _MyHomePageState extends State<MyHomePage> {
                       children: [
                         Column(
                           children: [
-                            CustomContainerProfilePic(
+                            CustomContainerPic(
                               picUrl:
                                   'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg',
-                              sizeBorder: 3.5,
+                              sizeBorder: 2.0,
                             ),
                             CustomProfileUsername(
                               usernameText: CustomText(
@@ -92,7 +209,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                 size: 25,
                               ),
                               sizeRadius: 20.0,
-                              widthRadius: 3.0,
+                              widthRadius: 2.0,
                             ),
                           ],
                         ),
@@ -157,6 +274,87 @@ class _MyHomePageState extends State<MyHomePage> {
               } else {
                 //ELSE WE RETURN THE QUIZ PAGE SCAFFOLD
                 return Scaffold(
+                  backgroundColor: utilities.secondaryColor,
+                  body: Column(
+                    children: [
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      //UPPER PART WITH THE TYPE OF QUIZ
+                      Column(
+                        children: [
+                          Column(
+                            children: [
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  CustomText(
+                                    text: "Choose your quiz!",
+                                    size: 30.0,
+                                    bold: true,
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              CustomContainerPic(
+                                picUrl:
+                                    'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg',
+                                circularity: 50.0,
+                                withBorder: false,
+                                height: 165,
+                                width: 165,
+                              ),
+                            ],
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              CustomContainerPic(
+                                picUrl:
+                                    'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg',
+                                circularity: 50.0,
+                                withBorder: false,
+                                height: 165,
+                                width: 165,
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                      //LOWER PART PANEL WITH FAVOURITE ARTISTS
+                      Column(
+                        children: [
+                          Column(
+                            children: [
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  CustomText(
+                                    text: "Your favourite Artists",
+                                    size: 30.0,
+                                    bold: true,
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                          SingleChildScrollView(
+                            scrollDirection: Axis.horizontal,
+                            child: Row(
+                              children: trialArtists,
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                    ],
+                  ),
                   bottomNavigationBar: CustomNavBar(
                     selectedIndex: _selectedIndex,
                     onItemTapped: _onItemTapped,
@@ -173,10 +371,10 @@ class _MyHomePageState extends State<MyHomePage> {
                     children: [
                       Column(
                         children: [
-                          CustomContainerProfilePic(
+                          CustomContainerPic(
                             picUrl:
                                 'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg',
-                            sizeBorder: 3.5,
+                            sizeBorder: 2.0,
                           ),
                           CustomProfileUsername(
                             usernameText: CustomText(
@@ -184,7 +382,7 @@ class _MyHomePageState extends State<MyHomePage> {
                               size: 25,
                             ),
                             sizeRadius: 20.0,
-                            widthRadius: 3.0,
+                            widthRadius: 2.0,
                           ),
                         ],
                       ),
@@ -321,11 +519,6 @@ class CustomButtonsHome extends StatelessWidget {
   }
 }
 
-
-
-
-
-
 //This was at line 87
 /* DecoratedBox(
                   // add this
@@ -356,6 +549,3 @@ class CustomButtonsHome extends StatelessWidget {
                   height: 5,
                 ),
                 */
-                
-
-
