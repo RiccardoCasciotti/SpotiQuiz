@@ -1,18 +1,17 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
-import 'package:spotify_quiz/custom_widgets/text.dart';
 import 'package:spotify_quiz/utilities.dart' as utilities;
 
-class CustomProfileUsername extends StatelessWidget {
+class CustomBoxedWidget extends StatelessWidget {
   double sizeRadius;
   double widthRadius;
-  CustomText usernameText;
+  Widget insideBox;
 
-  CustomProfileUsername({
+  CustomBoxedWidget({
     Key? key,
     this.widthRadius = 2.5,
     this.sizeRadius = 10.0,
-    required this.usernameText,
+    required this.insideBox,
   }) : super(key: key);
 
   @override
@@ -27,7 +26,7 @@ class CustomProfileUsername extends StatelessWidget {
         ),
         borderRadius: BorderRadius.circular(sizeRadius),
       ),
-      child: usernameText,
+      child: insideBox,
     );
   }
 }

@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:spotify_quiz/custom_widgets/boxCustomPic.dart';
-import 'package:spotify_quiz/custom_widgets/boxProfileUsername.dart';
+import 'package:spotify_quiz/custom_widgets/boxedWidget.dart';
 import 'package:spotify_quiz/custom_widgets/text.dart';
 import 'package:spotify_quiz/repositories/user/user_repository.dart';
+import 'package:spotify_quiz/sample.dart';
+import 'package:spotify_quiz/settingPageView.dart';
 import 'package:spotify_quiz/user/bloc/user_bloc.dart';
 
 import 'package:spotify_quiz/utilities.dart' as utilities;
 
 import 'custom_widgets/bottomNavBar.dart';
+import 'custom_widgets/boxCustomPicHero.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
@@ -120,39 +123,9 @@ class _MyHomePageState extends State<MyHomePage> {
       ],
     ),
   ];
-  List<Widget> trialArtistNames = [
-    CustomText(
-      text: "Peppe",
-      size: 20,
-      bold: true,
-      italic: true,
-    ),
-    CustomText(
-      text: "Peppe",
-      size: 20,
-      bold: true,
-      italic: true,
-    ),
-    CustomText(
-      text: "Peppe",
-      size: 20,
-      bold: true,
-      italic: true,
-    ),
-    CustomText(
-      text: "Peppe",
-      size: 20,
-      bold: true,
-      italic: true,
-    ),
-    CustomText(
-      text: "Peppe",
-      size: 20,
-      bold: true,
-      italic: true,
-    ),
-  ];
+
   int _selectedIndex = 0;
+
   void _onItemTapped(int index) {
     setState(() {
       // This call to setState tells the Flutter framework that something has
@@ -198,13 +171,15 @@ class _MyHomePageState extends State<MyHomePage> {
                       children: [
                         Column(
                           children: [
-                            CustomContainerPic(
+                            CustomContainerPicHero(
                               picUrl:
                                   'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg',
                               sizeBorder: 2.0,
+                              tag: "profilePic",
+                              newPage: const ProfilePage(),
                             ),
-                            CustomProfileUsername(
-                              usernameText: CustomText(
+                            CustomBoxedWidget(
+                              insideBox: CustomText(
                                 text: "Username",
                                 size: 25,
                               ),
@@ -376,8 +351,8 @@ class _MyHomePageState extends State<MyHomePage> {
                                 'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg',
                             sizeBorder: 2.0,
                           ),
-                          CustomProfileUsername(
-                            usernameText: CustomText(
+                          CustomBoxedWidget(
+                            insideBox: CustomText(
                               text: state.mydata[0].username,
                               size: 25,
                             ),
