@@ -11,7 +11,7 @@ import 'package:spotify_quiz/user/bloc/user_bloc.dart';
 import 'package:spotify_quiz/utilities.dart' as utilities;
 
 import 'custom_widgets/bottomNavBar.dart';
-import 'custom_widgets/boxCustomPicHero.dart';
+import 'custom_widgets/boxAvatarsHero.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
@@ -38,6 +38,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   List<Widget> trialArtists = [
     Column(
+      textDirection: TextDirection.ltr,
       children: [
         CustomContainerPic(
           picUrl:
@@ -50,7 +51,6 @@ class _MyHomePageState extends State<MyHomePage> {
           text: "Peppe",
           size: 20,
           bold: true,
-          italic: true,
         ),
       ],
     ),
@@ -67,7 +67,6 @@ class _MyHomePageState extends State<MyHomePage> {
           text: "Peppe",
           size: 20,
           bold: true,
-          italic: true,
         ),
       ],
     ),
@@ -84,7 +83,6 @@ class _MyHomePageState extends State<MyHomePage> {
           text: "Peppe",
           size: 20,
           bold: true,
-          italic: true,
         ),
       ],
     ),
@@ -101,7 +99,6 @@ class _MyHomePageState extends State<MyHomePage> {
           text: "Peppe",
           size: 20,
           bold: true,
-          italic: true,
         ),
       ],
     ),
@@ -116,6 +113,62 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
         CustomText(
           text: "Peppe",
+          size: 20,
+          bold: true,
+        ),
+      ],
+    ),
+  ];
+
+  List<Widget> trialGames = [
+    Column(
+      children: [
+        CustomContainerPic(
+          picUrl:
+              'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg',
+          withBorder: true,
+          width: 150,
+          height: 150,
+          circularity: 10,
+        ),
+        CustomText(
+          text: "Artists",
+          size: 20,
+          bold: true,
+          italic: true,
+        ),
+      ],
+    ),
+    Column(
+      children: [
+        CustomContainerPic(
+          picUrl:
+              'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg',
+          withBorder: true,
+          width: 150,
+          height: 150,
+          circularity: 10,
+        ),
+        CustomText(
+          text: "Songs",
+          size: 20,
+          bold: true,
+          italic: true,
+        ),
+      ],
+    ),
+    Column(
+      children: [
+        CustomContainerPic(
+          picUrl:
+              'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg',
+          withBorder: true,
+          width: 150,
+          height: 150,
+          circularity: 10,
+        ),
+        CustomText(
+          text: "Casual",
           size: 20,
           bold: true,
           italic: true,
@@ -171,11 +224,10 @@ class _MyHomePageState extends State<MyHomePage> {
                       children: [
                         Column(
                           children: [
-                            CustomContainerPicHero(
+                            CustomBoxAvatarWithHero(
                               picUrl:
                                   'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg',
-                              sizeBorder: 2.0,
-                              tag: "profilePic",
+                              tags: "profilePic",
                               newPage: const ProfilePage(),
                             ),
                             CustomBoxedWidget(
@@ -251,6 +303,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 return Scaffold(
                   backgroundColor: utilities.secondaryColor,
                   body: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       const SizedBox(
                         height: 20,
@@ -264,7 +317,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
                                   CustomText(
-                                    text: "Choose your quiz!",
+                                    text: "Choose a quiz!",
                                     size: 30.0,
                                     bold: true,
                                   ),
@@ -272,31 +325,11 @@ class _MyHomePageState extends State<MyHomePage> {
                               ),
                             ],
                           ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              CustomContainerPic(
-                                picUrl:
-                                    'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg',
-                                circularity: 50.0,
-                                withBorder: false,
-                                height: 165,
-                                width: 165,
-                              ),
-                            ],
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              CustomContainerPic(
-                                picUrl:
-                                    'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg',
-                                circularity: 50.0,
-                                withBorder: false,
-                                height: 165,
-                                width: 165,
-                              ),
-                            ],
+                          SingleChildScrollView(
+                            scrollDirection: Axis.horizontal,
+                            child: Row(
+                              children: trialGames,
+                            ),
                           ),
                         ],
                       ),
@@ -454,6 +487,7 @@ class CustomButtonsHome extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 FloatingActionButton(
+                  heroTag: null,
                   backgroundColor: utilities.primaryColor,
                   foregroundColor: utilities.secondaryColor,
                   onPressed: () {
@@ -472,6 +506,7 @@ class CustomButtonsHome extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 FloatingActionButton(
+                  heroTag: null,
                   backgroundColor: utilities.primaryColor,
                   foregroundColor: utilities.secondaryColor,
                   onPressed: () {

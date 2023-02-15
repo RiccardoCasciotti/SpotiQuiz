@@ -22,44 +22,65 @@ class ProfilePage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            Hero(
+            const Hero(
               tag: "profilePic",
-              child: CustomContainerPic(
-                picUrl:
-                    'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg',
-                height: 180.0,
-                width: 180.0,
+              child: CircleAvatar(
+                backgroundImage: NetworkImage(
+                    'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg'),
+                radius: 110,
               ),
             ),
             Column(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    CustomText(
-                      text: "Right Answers",
-                      size: 30,
-                    ),
-                    CustomText(
-                      text: "1",
-                      size: 35,
-                      bold: true,
-                    ),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    CustomText(
-                      text: "Collected Points",
-                      size: 30,
-                    ),
-                    CustomText(
-                      text: "2000",
-                      size: 35,
-                      bold: true,
-                    ),
-                  ],
+                CustomText(text: "Your statistics", size: 25),
+                CustomBoxedWidget(
+                  insideBox: Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          CustomText(
+                            text: "Correct Answers",
+                            size: 30,
+                          ),
+                          CustomText(
+                            text: "100%",
+                            size: 35,
+                            bold: true,
+                          ),
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          CustomText(
+                            text: "Wrong Answers",
+                            size: 30,
+                          ),
+                          CustomText(
+                            text: "89%",
+                            size: 35,
+                            bold: true,
+                          ),
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          CustomText(
+                            text: "Total Points",
+                            size: 30,
+                          ),
+                          CustomText(
+                            text: "70%",
+                            size: 35,
+                            bold: true,
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),

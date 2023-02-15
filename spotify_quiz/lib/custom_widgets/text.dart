@@ -21,10 +21,11 @@ class CustomText extends StatelessWidget {
     return Text(
       text,
       style: TextStyle(
-          fontStyle: italic ? FontStyle.italic : FontStyle.normal,
-          fontSize: size,
-          color: utilities.primaryColor,
-          fontWeight: bold ? FontWeight.bold : FontWeight.normal),
+        fontStyle: italic ? FontStyle.italic : FontStyle.normal,
+        fontSize: size,
+        color: utilities.primaryColor,
+        fontWeight: bold ? FontWeight.bold : FontWeight.normal,
+      ),
     );
   }
 }

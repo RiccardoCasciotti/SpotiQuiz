@@ -17,8 +17,8 @@ class CustomBoxedWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.all(10.0),
-      padding: const EdgeInsets.all(3.0),
+      margin: const EdgeInsets.all(20.0),
+      padding: const EdgeInsets.all(5.0),
       decoration: BoxDecoration(
         border: Border.all(
           color: utilities.primaryColor,
