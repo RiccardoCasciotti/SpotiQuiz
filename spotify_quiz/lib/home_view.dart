@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:spotify_quiz/custom_widgets/boxCustomPic.dart';
 import 'package:spotify_quiz/custom_widgets/boxedWidget.dart';
 import 'package:spotify_quiz/custom_widgets/text.dart';
+import 'package:spotify_quiz/gameInfoView.dart';
 import 'package:spotify_quiz/repositories/user/user_repository.dart';
 import 'package:spotify_quiz/sample.dart';
 import 'package:spotify_quiz/settingPageView.dart';
@@ -120,63 +121,6 @@ class _MyHomePageState extends State<MyHomePage> {
     ),
   ];
 
-  List<Widget> trialGames = [
-    Column(
-      children: [
-        CustomContainerPic(
-          picUrl:
-              'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg',
-          withBorder: true,
-          width: 150,
-          height: 150,
-          circularity: 10,
-        ),
-        CustomText(
-          text: "Artists",
-          size: 20,
-          bold: true,
-          italic: true,
-        ),
-      ],
-    ),
-    Column(
-      children: [
-        CustomContainerPic(
-          picUrl:
-              'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg',
-          withBorder: true,
-          width: 150,
-          height: 150,
-          circularity: 10,
-        ),
-        CustomText(
-          text: "Songs",
-          size: 20,
-          bold: true,
-          italic: true,
-        ),
-      ],
-    ),
-    Column(
-      children: [
-        CustomContainerPic(
-          picUrl:
-              'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg',
-          withBorder: true,
-          width: 150,
-          height: 150,
-          circularity: 10,
-        ),
-        CustomText(
-          text: "Casual",
-          size: 20,
-          bold: true,
-          italic: true,
-        ),
-      ],
-    ),
-  ];
-
   int _selectedIndex = 0;
 
   void _onItemTapped(int index) {
@@ -201,6 +145,98 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    List<Widget> trialGames = [
+      Column(
+        children: [
+          GestureDetector(
+            onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => GameInfoPage(selectedGame: 1),
+              ),
+            ),
+            child: Hero(
+              tag: "game1",
+              child: CustomContainerPic(
+                picUrl:
+                    'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg',
+                withBorder: true,
+                width: 150,
+                height: 150,
+                circularity: 10,
+              ),
+            ),
+          ),
+          CustomText(
+            text: "Artists",
+            size: 20,
+            bold: true,
+            italic: true,
+          ),
+        ],
+      ),
+      Column(
+        children: [
+          GestureDetector(
+            onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => GameInfoPage(selectedGame: 2),
+              ),
+            ),
+            child: Hero(
+              tag: "game2",
+              child: CustomContainerPic(
+                picUrl:
+                    'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg',
+                withBorder: true,
+                width: 150,
+                height: 150,
+                circularity: 10,
+              ),
+            ),
+          ),
+          CustomText(
+            text: "Songs",
+            size: 20,
+            bold: true,
+            italic: true,
+          ),
+        ],
+      ),
+      Column(
+        children: [
+          GestureDetector(
+            onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => GameInfoPage(
+                  selectedGame: 3,
+                ),
+              ),
+            ),
+            child: Hero(
+              tag: "game3",
+              child: CustomContainerPic(
+                picUrl:
+                    'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg',
+                withBorder: true,
+                width: 150,
+                height: 150,
+                circularity: 10,
+              ),
+            ),
+          ),
+          CustomText(
+            text: "Casual",
+            size: 20,
+            bold: true,
+            italic: true,
+          ),
+        ],
+      ),
+    ];
+
     return RepositoryProvider(
       create: (context) => UserRepository(),
       child: BlocProvider(

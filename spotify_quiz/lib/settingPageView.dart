@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:spotify_quiz/custom_widgets/boxCustomPic.dart';
 import 'package:spotify_quiz/custom_widgets/boxedWidget.dart';
 import 'package:spotify_quiz/utilities.dart' as utilities;
 
@@ -33,7 +32,11 @@ class ProfilePage extends StatelessWidget {
             Column(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                CustomText(text: "Your statistics", size: 25),
+                CustomText(
+                  text: "Your statistics",
+                  size: 25,
+                  bold: true,
+                ),
                 CustomBoxedWidget(
                   insideBox: Column(
                     children: [
@@ -42,12 +45,11 @@ class ProfilePage extends StatelessWidget {
                         children: [
                           CustomText(
                             text: "Correct Answers",
-                            size: 30,
+                            size: 20,
                           ),
                           CustomText(
                             text: "100%",
-                            size: 35,
-                            bold: true,
+                            size: 25,
                           ),
                         ],
                       ),
@@ -56,12 +58,11 @@ class ProfilePage extends StatelessWidget {
                         children: [
                           CustomText(
                             text: "Wrong Answers",
-                            size: 30,
+                            size: 20,
                           ),
                           CustomText(
                             text: "89%",
-                            size: 35,
-                            bold: true,
+                            size: 25,
                           ),
                         ],
                       ),
@@ -70,12 +71,11 @@ class ProfilePage extends StatelessWidget {
                         children: [
                           CustomText(
                             text: "Total Points",
-                            size: 30,
+                            size: 20,
                           ),
                           CustomText(
                             text: "70%",
-                            size: 35,
-                            bold: true,
+                            size: 25,
                           ),
                         ],
                       ),
@@ -87,7 +87,11 @@ class ProfilePage extends StatelessWidget {
             Column(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                CustomText(text: "Which artists you know the most", size: 25),
+                CustomText(
+                  text: "Which artists you know the most",
+                  size: 25,
+                  bold: true,
+                ),
                 CustomBoxedWidget(
                   insideBox: Column(
                     children: [
@@ -96,12 +100,11 @@ class ProfilePage extends StatelessWidget {
                         children: [
                           CustomText(
                             text: "Jessica Jones",
-                            size: 30,
+                            size: 20,
                           ),
                           CustomText(
                             text: "100%",
-                            size: 35,
-                            bold: true,
+                            size: 25,
                           ),
                         ],
                       ),
@@ -110,12 +113,11 @@ class ProfilePage extends StatelessWidget {
                         children: [
                           CustomText(
                             text: "Ed Points",
-                            size: 30,
+                            size: 20,
                           ),
                           CustomText(
                             text: "89%",
-                            size: 35,
-                            bold: true,
+                            size: 25,
                           ),
                         ],
                       ),
@@ -124,12 +126,11 @@ class ProfilePage extends StatelessWidget {
                         children: [
                           CustomText(
                             text: "Enrique Ilo",
-                            size: 30,
+                            size: 20,
                           ),
                           CustomText(
                             text: "70%",
-                            size: 35,
-                            bold: true,
+                            size: 25,
                           ),
                         ],
                       ),

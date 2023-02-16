@@ -7,6 +7,8 @@ class CustomText extends StatelessWidget {
   double size;
   bool bold;
   bool italic;
+  bool alignCenter;
+  bool secondColor;
 
   CustomText({
     Key? key,
@@ -14,16 +16,19 @@ class CustomText extends StatelessWidget {
     required this.size,
     this.bold = false,
     this.italic = false,
+    this.alignCenter = false,
+    this.secondColor = false,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Text(
       text,
+      textAlign: alignCenter ? TextAlign.center : TextAlign.justify,
       style: TextStyle(
         fontStyle: italic ? FontStyle.italic : FontStyle.normal,
         fontSize: size,
-        color: utilities.primaryColor,
+        color: secondColor ? utilities.secondaryColor : utilities.primaryColor,
         fontWeight: bold ? FontWeight.bold : FontWeight.normal,
       ),
     );
