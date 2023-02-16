@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:spotify_quiz/custom_widgets/boxedWidget.dart';
 import 'package:spotify_quiz/utilities.dart' as utilities;
 
-import 'custom_widgets/text.dart';
+import '../../custom_widgets/text.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
@@ -33,7 +33,7 @@ class ProfilePage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 CustomText(
-                  text: "Your statistics",
+                  text: "Statistics",
                   size: 25,
                   bold: true,
                 ),
@@ -88,7 +88,7 @@ class ProfilePage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 CustomText(
-                  text: "Which artists you know the most",
+                  text: "Most known artists",
                   size: 25,
                   bold: true,
                 ),

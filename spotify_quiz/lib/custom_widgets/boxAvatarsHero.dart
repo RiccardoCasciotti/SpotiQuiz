@@ -1,6 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
-import 'package:spotify_quiz/settingPageView.dart';
+import 'package:spotify_quiz/profilePage/view/settingPageView.dart';
 import 'package:spotify_quiz/utilities.dart' as utilities;
 
 class CustomBoxAvatarWithHero extends StatelessWidget {

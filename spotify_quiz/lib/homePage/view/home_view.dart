@@ -3,28 +3,19 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:spotify_quiz/custom_widgets/boxCustomPic.dart';
 import 'package:spotify_quiz/custom_widgets/boxedWidget.dart';
 import 'package:spotify_quiz/custom_widgets/text.dart';
-import 'package:spotify_quiz/gameInfoView.dart';
+import 'package:spotify_quiz/gameInfoPage/view/gameInfoView.dart';
 import 'package:spotify_quiz/repositories/user/user_repository.dart';
-import 'package:spotify_quiz/sample.dart';
-import 'package:spotify_quiz/settingPageView.dart';
+import 'package:spotify_quiz/profilePage/view/settingPageView.dart';
 import 'package:spotify_quiz/user/bloc/user_bloc.dart';
 
 import 'package:spotify_quiz/utilities.dart' as utilities;
 
-import 'custom_widgets/bottomNavBar.dart';
-import 'custom_widgets/boxAvatarsHero.dart';
+import '../../custom_widgets/bottomNavBar.dart';
+import '../../custom_widgets/boxAvatarsHero.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
 
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
   static Route<void> route() {
     return MaterialPageRoute<void>(
         builder: (_) => const MyHomePage(title: "Ciao"));
@@ -48,10 +39,14 @@ class _MyHomePageState extends State<MyHomePage> {
           width: 150,
           height: 150,
         ),
-        CustomText(
-          text: "Peppe",
-          size: 20,
-          bold: true,
+        Container(
+          alignment: Alignment.centerLeft,
+          child: CustomText(
+            text: "Peppe",
+            size: 20,
+            bold: true,
+            alignCenter: false,
+          ),
         ),
       ],
     ),
@@ -125,11 +120,6 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void _onItemTapped(int index) {
     setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
       _selectedIndex = index;
     });
   }
@@ -564,34 +554,3 @@ class CustomButtonsHome extends StatelessWidget {
     );
   }
 }
-
-//This was at line 87
-/* DecoratedBox(
-                  // add this
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    border: Border.all(
-                      width: 2,
-                      color: const Color.fromARGB(255, 2, 164, 26),
-                    ),
-                    image: const DecorationImage(
-                        image: NetworkImage(
-                            'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg'),
-                        fit: BoxFit.cover),
-                  ),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: <Widget>[
-                      Container(
-                        margin: const EdgeInsets.all(15),
-                        width: 100.0,
-                        height: 100.0,
-                      ),
-                    ],
-                  ),
-                ),
-
-                const SizedBox(
-                  height: 5,
-                ),
-                */
