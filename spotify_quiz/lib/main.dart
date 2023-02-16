@@ -9,7 +9,7 @@ import 'package:spotify_quiz/loading/splash.dart';
 import 'package:spotify_quiz/themes/bloc/theme_bloc.dart';
 import 'package:user_repository/user_repository.dart';
 
-import 'firebase_options.dart';
+import 'repositories/firebase_options.dart';
 
 void main() async {
   await dotenv.load(fileName: ".env");

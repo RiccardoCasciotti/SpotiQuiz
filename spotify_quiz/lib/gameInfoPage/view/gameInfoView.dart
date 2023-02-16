@@ -1,7 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:spotify_quiz/custom_widgets/boxedWidget.dart';
-import 'package:spotify_quiz/utilities.dart' as utilities;
+import 'package:spotify_quiz/utility/utilities.dart' as utilities;
 
 import '../../custom_widgets/text.dart';
 

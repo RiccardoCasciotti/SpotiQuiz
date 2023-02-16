@@ -8,7 +8,7 @@ import 'package:spotify_quiz/repositories/user/user_repository.dart';
 import 'package:spotify_quiz/profilePage/view/settingPageView.dart';
 import 'package:spotify_quiz/user/bloc/user_bloc.dart';
 
-import 'package:spotify_quiz/utilities.dart' as utilities;
+import 'package:spotify_quiz/utility/utilities.dart' as utilities;
 
 import '../../custom_widgets/bottomNavBar.dart';
 import '../../custom_widgets/boxAvatarsHero.dart';
