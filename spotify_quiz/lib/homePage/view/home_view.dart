@@ -12,6 +12,7 @@ import 'package:spotify_quiz/utility/utilities.dart' as utilities;
 
 import '../../custom_widgets/bottomNavBar.dart';
 import '../../custom_widgets/boxAvatarsHero.dart';
+import '../../custom_widgets/customButtons.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
@@ -486,71 +487,6 @@ class _MyHomePageState extends State<MyHomePage> {
           },
         ),
       ),
-    );
-  }
-}
-
-class CustomButtonsHome extends StatelessWidget {
-  void Function(dynamic context)? firstButtonPressed;
-  void Function(dynamic context)? secondButtonPressed;
-
-  CustomButtonsHome({
-    Key? key,
-    required this.firstButtonPressed,
-    required this.secondButtonPressed,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            const SizedBox(width: 16),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                FloatingActionButton(
-                  heroTag: null,
-                  backgroundColor: utilities.primaryColor,
-                  foregroundColor: utilities.secondaryColor,
-                  onPressed: () {
-                    firstButtonPressed!(context);
-                  },
-                  child: const Icon(Icons.emoji_events_outlined),
-                ),
-                CustomText(
-                  text: "Ranking",
-                  size: 20.0,
-                  italic: true,
-                ),
-              ],
-            ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                FloatingActionButton(
-                  heroTag: null,
-                  backgroundColor: utilities.primaryColor,
-                  foregroundColor: utilities.secondaryColor,
-                  onPressed: () {
-                    secondButtonPressed!(context);
-                  },
-                  child: const Icon(Icons.shopping_cart_outlined),
-                ),
-                CustomText(
-                  text: "Cart",
-                  size: 20.0,
-                  italic: true,
-                ),
-              ],
-            ),
-            const SizedBox(width: 16),
-          ],
-        ),
-      ],
     );
   }
 }

@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:spotify_quiz/custom_widgets/boxedWidget.dart';
+import 'package:spotify_quiz/quizPage/views/mainQuiz.dart';
 import 'package:spotify_quiz/utility/utilities.dart' as utilities;
 
 import '../../custom_widgets/text.dart';
@@ -58,7 +59,12 @@ class GameInfoPage extends StatelessWidget {
         floatingActionButton: FloatingActionButton.extended(
           elevation: 0,
           onPressed: () {
-            // Add your onPressed code here!
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const QuizPage(),
+              ),
+            );
           },
           label: CustomText(
             text: "Play",
@@ -123,7 +129,12 @@ class GameInfoPage extends StatelessWidget {
         floatingActionButton: FloatingActionButton.extended(
           elevation: 0,
           onPressed: () {
-            // Add your onPressed code here!
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const QuizPage(),
+              ),
+            );
           },
           label: CustomText(
             text: "Play",
@@ -188,7 +199,12 @@ class GameInfoPage extends StatelessWidget {
         floatingActionButton: FloatingActionButton.extended(
           elevation: 0,
           onPressed: () {
-            // Add your onPressed code here!
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const QuizPage(),
+              ),
+            );
           },
           label: CustomText(
             text: "Play",
