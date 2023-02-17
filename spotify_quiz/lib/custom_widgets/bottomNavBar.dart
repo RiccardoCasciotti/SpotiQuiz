@@ -34,3 +34,36 @@ class CustomNavBar extends StatelessWidget {
     );
   }
 }
+
+class CustomNavBarRanking extends StatelessWidget {
+  int selectedIndex;
+  void Function(int)? onItemTapped;
+
+  CustomNavBarRanking({
+    Key? key,
+    required this.selectedIndex,
+    required this.onItemTapped,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return BottomNavigationBar(
+      items: const <BottomNavigationBarItem>[
+        BottomNavigationBarItem(
+          icon: Icon(Icons.place),
+          label: 'Local',
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.public),
+          label: 'Global',
+        ),
+      ],
+      currentIndex: selectedIndex,
+      selectedItemColor: utilities.primaryColor,
+      backgroundColor: utilities.secondaryColor,
+      unselectedItemColor: utilities.primaryColor,
+      selectedIconTheme: const IconThemeData(size: 50),
+      onTap: onItemTapped,
+    );
+  }
+}

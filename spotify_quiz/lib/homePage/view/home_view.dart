@@ -4,6 +4,7 @@ import 'package:spotify_quiz/custom_widgets/boxCustomPic.dart';
 import 'package:spotify_quiz/custom_widgets/boxedWidget.dart';
 import 'package:spotify_quiz/custom_widgets/text.dart';
 import 'package:spotify_quiz/gameInfoPage/view/gameInfoView.dart';
+import 'package:spotify_quiz/rankingPage/rankingPageView.dart';
 import 'package:spotify_quiz/repositories/user/user_repository.dart';
 import 'package:spotify_quiz/profilePage/view/settingPageView.dart';
 import 'package:spotify_quiz/user/bloc/user_bloc.dart';
@@ -125,9 +126,21 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+/*
+ TO DEBUG FIREBASE FUNCTIONALITIES
   void _createUser(context) {
     BlocProvider.of<UserBloc>(context)
         .add(Create("mench", "Ursula", 1, 1, 1, 1));
+  }
+*/
+
+  void _goToRankingPage(context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const RankingPage(),
+      ),
+    );
   }
 
   void _getUsers(context) {
@@ -314,7 +327,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           ],
                         ),
                         CustomButtonsHome(
-                          firstButtonPressed: _createUser,
+                          firstButtonPressed: _goToRankingPage,
                           secondButtonPressed: _getUsers,
                         ),
                       ],
@@ -468,7 +481,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         ],
                       ),
                       CustomButtonsHome(
-                        firstButtonPressed: _createUser,
+                        firstButtonPressed: _goToRankingPage,
                         secondButtonPressed: _getUsers,
                       ),
                     ],
