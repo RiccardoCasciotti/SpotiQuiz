@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:spotify_quiz/custom_widgets/boxCustomPic.dart';
 import 'package:spotify_quiz/custom_widgets/boxedWidget.dart';
 import 'package:spotify_quiz/custom_widgets/text.dart';
+import 'package:spotify_quiz/eventsPage/view/eventsView.dart';
 import 'package:spotify_quiz/gameInfoPage/view/gameInfoView.dart';
 import 'package:spotify_quiz/rankingPage/rankingPageView.dart';
 import 'package:spotify_quiz/repositories/user/user_repository.dart';
@@ -128,10 +129,17 @@ class _MyHomePageState extends State<MyHomePage> {
 
 /*
  TO DEBUG FIREBASE FUNCTIONALITIES
+
   void _createUser(context) {
     BlocProvider.of<UserBloc>(context)
         .add(Create("mench", "Ursula", 1, 1, 1, 1));
   }
+
+
+  void _getUsers(context) {
+    BlocProvider.of<UserBloc>(context).add(GetDataByID("mench"));
+  }
+
 */
 
   void _goToRankingPage(context) {
@@ -143,8 +151,13 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  void _getUsers(context) {
-    BlocProvider.of<UserBloc>(context).add(GetDataByID("mench"));
+  void _goToEventPage(context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => EventsPage(),
+      ),
+    );
   }
 
   @override
@@ -328,7 +341,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         ),
                         CustomButtonsHome(
                           firstButtonPressed: _goToRankingPage,
-                          secondButtonPressed: _getUsers,
+                          secondButtonPressed: _goToEventPage,
                         ),
                       ],
                     ),
@@ -482,7 +495,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       ),
                       CustomButtonsHome(
                         firstButtonPressed: _goToRankingPage,
-                        secondButtonPressed: _getUsers,
+                        secondButtonPressed: _goToEventPage,
                       ),
                     ],
                   ),

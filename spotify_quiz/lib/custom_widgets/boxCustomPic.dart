@@ -43,3 +43,32 @@ class CustomContainerPic extends StatelessWidget {
     );
   }
 }
+
+class CustomBoxPic extends StatelessWidget {
+  String picUrl;
+  double sizeBorder;
+  double height;
+  double width;
+  double circularity;
+  bool withBorder;
+
+  CustomBoxPic({
+    Key? key,
+    required this.picUrl,
+    this.sizeBorder = 2.0,
+    this.height = 200,
+    this.width = 200,
+    this.circularity = 100,
+    this.withBorder = true,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: height,
+      width: width,
+      child: Image.network(
+          'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg'),
+    );
+  }
+}

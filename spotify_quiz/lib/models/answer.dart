@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:spotify_quiz/custom_widgets/text.dart';
 import 'package:spotify_quiz/utility/utilities.dart' as utilities;
 
 class Answer extends StatelessWidget {
@@ -24,12 +25,12 @@ class Answer extends StatelessWidget {
             ),
             backgroundColor: MaterialStateProperty.all(utilities.primaryColor),
           ),
-          child: Text(
-            answerText,
-            style: TextStyle(
-                color: utilities.secondaryColor,
-                fontWeight: FontWeight.bold,
-                fontSize: 20),
+          child: CustomText(
+            text: answerText,
+            size: 20,
+            alignCenter: true,
+            secondColor: true,
+            bold: true,
           ),
         ),
       ),

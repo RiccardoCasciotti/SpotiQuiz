@@ -50,10 +50,10 @@ class CustomButtonsHome extends StatelessWidget {
                   onPressed: () {
                     secondButtonPressed!(context);
                   },
-                  child: const Icon(Icons.shopping_cart_outlined),
+                  child: const Icon(Icons.star_outline_sharp),
                 ),
                 CustomText(
-                  text: "Cart",
+                  text: "Events",
                   size: 20.0,
                 ),
               ],
