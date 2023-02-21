@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../custom_widgets/text.dart';
+import '../../custom_widgets/text.dart';
 
 class Question extends StatelessWidget {
   final String questionText;

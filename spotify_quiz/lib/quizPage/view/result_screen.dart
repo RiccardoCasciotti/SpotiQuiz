@@ -1,6 +1,7 @@
 // ignore_for_file: avoid_print
 
 import 'package:flutter/material.dart';
+import 'package:spotify_quiz/custom_widgets/text_button.dart';
 import 'package:spotify_quiz/utility/utilities.dart' as utilities;
 
 import '../../custom_widgets/custom_buttons.dart';
@@ -50,10 +51,20 @@ class Result extends StatelessWidget {
                 color: utilities.primaryColor),
             textAlign: TextAlign.center,
           ), //Text
-          CustomButtonsQuiz(
-            firstButtonPressed: (context) => returnHome(),
-            secondButtonPressed: (context) => moveOn(),
-          )
+
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              CustomTextButtonResult(
+                selectHandler: (context) => returnHome(),
+                buttonText: "Return \nHome",
+              ),
+              CustomTextButtonResult(
+                selectHandler: (context) => moveOn(),
+                buttonText: "Continue",
+              ),
+            ],
+          ),
           // FlatButton is deprecated and should not be used
           // Use TextButton instead
 
