@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:spotify_quiz/custom_widgets/boxedWidget.dart';
+import 'package:spotify_quiz/custom_widgets/boxed_widgets.dart';
 import 'package:spotify_quiz/utility/utilities.dart' as utilities;
 
 import '../../custom_widgets/text.dart';

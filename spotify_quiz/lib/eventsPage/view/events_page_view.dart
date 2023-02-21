@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:spotify_quiz/custom_widgets/text.dart';
 import 'package:spotify_quiz/utility/utilities.dart' as utilities;
 
-import '../../custom_widgets/boxCustomPic.dart';
+import '../../custom_widgets/box_custom_pic.dart';
 
 class EventsPage extends StatelessWidget {
   EventsPage({super.key});
@@ -35,7 +35,7 @@ class EventsPage extends StatelessWidget {
 }
 
 Widget buildCard(int index) => ClipRRect(
-      borderRadius: BorderRadius.circular(10),
+      borderRadius: BorderRadius.circular(30),
       child: Container(
         color: utilities.secondaryColor,
         child: Image.network(

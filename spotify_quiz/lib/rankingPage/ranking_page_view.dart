@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:spotify_quiz/custom_widgets/text.dart';
 import 'package:spotify_quiz/utility/utilities.dart' as utilities;
 
-import '../custom_widgets/bottomNavBar.dart';
+import '../custom_widgets/bottom_nav_bar.dart';
 
 class RankingPage extends StatefulWidget {
   const RankingPage({super.key});

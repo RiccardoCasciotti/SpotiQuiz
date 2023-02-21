@@ -1,10 +1,9 @@
 // ignore_for_file: avoid_print
 
 import 'package:flutter/material.dart';
-import 'package:spotify_quiz/homePage/view/home_view.dart';
 import 'package:spotify_quiz/utility/utilities.dart' as utilities;
 
-import '../../custom_widgets/customButtons.dart';
+import '../../custom_widgets/custom_buttons.dart';
 
 class Result extends StatelessWidget {
   final int resultScore;

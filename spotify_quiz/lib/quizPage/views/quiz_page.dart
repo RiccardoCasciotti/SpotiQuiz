@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:spotify_quiz/home/home.dart';
-
 import 'package:spotify_quiz/utility/utilities.dart' as utilities;
 
-import 'resultPage.dart';
-import './quiz.dart';
+import 'quiz_screen.dart';
+import 'result_screen.dart';
 
 class QuizPage extends StatefulWidget {
   const QuizPage({Key? key}) : super(key: key);
