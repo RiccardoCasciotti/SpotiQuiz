@@ -1,12 +1,8 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:spotify_quiz/custom_widgets/text.dart';
 import 'package:spotify_quiz/utility/utilities.dart' as utilities;
 
-import '../../custom_widgets/box_custom_pic.dart';
-
 class EventsPage extends StatelessWidget {
-  EventsPage({super.key});
+  const EventsPage({super.key});
 
   @override
   Widget build(BuildContext context) {

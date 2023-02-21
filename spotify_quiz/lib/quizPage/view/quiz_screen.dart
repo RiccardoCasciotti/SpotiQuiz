@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:spotify_quiz/utility/utilities.dart' as utilities;
 import '../../models/answer.dart';
 import '../../models/question.dart';
 

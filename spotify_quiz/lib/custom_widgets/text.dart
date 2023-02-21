@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:spotify_quiz/utility/utilities.dart' as utilities;
 import 'package:google_fonts/google_fonts.dart';
 
+// ignore: must_be_immutable
 class CustomText extends StatelessWidget {
   String text;
   double size;
@@ -10,6 +11,7 @@ class CustomText extends StatelessWidget {
   bool italic;
   bool alignCenter;
   bool secondColor;
+  bool thirdColor;
 
   CustomText({
     Key? key,
@@ -19,16 +21,27 @@ class CustomText extends StatelessWidget {
     this.italic = false,
     this.alignCenter = false,
     this.secondColor = false,
+    this.thirdColor = false,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    Color colorTouse;
+
+    if (secondColor) {
+      colorTouse = utilities.secondaryColor;
+    } else if (thirdColor) {
+      colorTouse = utilities.tertiaryColor;
+    } else {
+      colorTouse = utilities.primaryColor;
+    }
+
     return Text(
       text,
       textAlign: alignCenter ? TextAlign.center : TextAlign.justify,
       style: GoogleFonts.openSans(
         fontSize: size,
-        color: secondColor ? utilities.secondaryColor : utilities.primaryColor,
+        color: colorTouse,
         fontWeight: bold ? FontWeight.bold : FontWeight.normal,
       ),
     );

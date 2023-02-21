@@ -1,8 +1,8 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:spotify_quiz/custom_widgets/text.dart';
 import 'package:spotify_quiz/utility/utilities.dart' as utilities;
 
+// ignore: must_be_immutable
 class CustomButtonsHome extends StatelessWidget {
   void Function(dynamic context)? firstButtonPressed;
   void Function(dynamic context)? secondButtonPressed;
@@ -66,6 +66,7 @@ class CustomButtonsHome extends StatelessWidget {
   }
 }
 
+// ignore: must_be_immutable
 class CustomButtonsQuiz extends StatelessWidget {
   void Function(dynamic context)? firstButtonPressed;
   void Function(dynamic context)? secondButtonPressed;

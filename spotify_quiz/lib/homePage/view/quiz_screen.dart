@@ -4,8 +4,9 @@ import 'package:spotify_quiz/utility/utilities.dart' as utilities;
 
 import '../../custom_widgets/bottom_nav_bar.dart';
 import '../../custom_widgets/box_custom_pic.dart';
-import '../../gameInfoPage/view/gameInfoView.dart';
+import '../../gameInfoPage/view/game_info_view.dart';
 
+// ignore: must_be_immutable
 class QuizScreen extends StatelessWidget {
   void Function(int)? onItemTapped;
   int selectedIndex;

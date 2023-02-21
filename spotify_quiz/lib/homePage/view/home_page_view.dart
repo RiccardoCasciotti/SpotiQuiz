@@ -8,14 +8,11 @@ import 'package:spotify_quiz/repositories/user/user_repository.dart';
 import 'package:spotify_quiz/user/bloc/user_bloc.dart';
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
+  const MyHomePage({super.key});
 
   static Route<void> route() {
-    return MaterialPageRoute<void>(
-        builder: (_) => const MyHomePage(title: "Ciao"));
+    return MaterialPageRoute<void>(builder: (_) => const MyHomePage());
   }
-
-  final String title;
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
@@ -56,7 +53,7 @@ class _MyHomePageState extends State<MyHomePage> {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => EventsPage(),
+        builder: (context) => const EventsPage(),
       ),
     );
   }

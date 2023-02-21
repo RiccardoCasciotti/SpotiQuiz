@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:spotify_quiz/authentication/authentication.dart';
-import 'package:spotify_quiz/homePage/view/home_view.dart';
+import 'package:spotify_quiz/homePage/view/home_page_view.dart';
 import 'package:spotify_quiz/loading/splash.dart';
 import 'package:spotify_quiz/themes/bloc/theme_bloc.dart';
 import 'package:user_repository/user_repository.dart';
@@ -127,9 +127,7 @@ class _MyAppViewState extends State<MyAppView> {
                         MaterialPageRoute(
                           builder: (_) => BlocProvider.value(
                             value: BlocProvider.of<ThemeBloc>(context),
-                            child: const MyHomePage(
-                              title: "ok",
-                            ),
+                            child: const MyHomePage(),
                           ),
                         ),
                       );
@@ -139,9 +137,7 @@ class _MyAppViewState extends State<MyAppView> {
                         MaterialPageRoute(
                           builder: (_) => BlocProvider.value(
                             value: BlocProvider.of<ThemeBloc>(context),
-                            child: const MyHomePage(
-                              title: "ok",
-                            ),
+                            child: const MyHomePage(),
                           ),
                         ),
                       );

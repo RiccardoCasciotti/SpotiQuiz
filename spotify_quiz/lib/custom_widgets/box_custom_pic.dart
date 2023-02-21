@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:spotify_quiz/utility/utilities.dart' as utilities;
 
+// ignore: must_be_immutable
 class CustomContainerPic extends StatelessWidget {
   String picUrl;
   double sizeBorder;
@@ -44,6 +45,7 @@ class CustomContainerPic extends StatelessWidget {
   }
 }
 
+// ignore: must_be_immutable
 class CustomBoxPic extends StatelessWidget {
   String picUrl;
   double sizeBorder;

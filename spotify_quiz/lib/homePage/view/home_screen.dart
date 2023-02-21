@@ -49,51 +49,102 @@ class HomeScreen extends StatelessWidget {
                 ),
               ],
             ),
-            Column(
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    CustomText(
-                      text: "Level",
-                      size: 30,
+            Table(
+              border: TableBorder.symmetric(),
+              defaultVerticalAlignment: TableCellVerticalAlignment.middle,
+              children: <TableRow>[
+                TableRow(
+                  children: <Widget>[
+                    Container(
+                      alignment: Alignment.center,
+                      child: CustomText(
+                        text: "Level",
+                        size: 30,
+                      ),
                     ),
-                    CustomText(
-                      text: "1",
-                      size: 35,
-                      bold: true,
-                    ),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    CustomText(
-                      text: "#Quiz",
-                      size: 30,
-                    ),
-                    CustomText(
-                      text: "0",
-                      size: 35,
-                      bold: true,
+                    Container(
+                      alignment: Alignment.center,
+                      child: CustomText(
+                        text: "1",
+                        size: 30,
+                        bold: true,
+                      ),
                     ),
                   ],
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    CustomText(
-                      text: "Best Score",
-                      size: 30,
+                const TableRow(
+                  children: <Widget>[
+                    SizedBox(
+                      height: 10,
                     ),
-                    CustomText(
-                      text: "2000",
-                      size: 35,
-                      bold: true,
+                    SizedBox(
+                      height: 10,
+                    ),
+                  ],
+                ),
+                TableRow(
+                  children: <Widget>[
+                    Container(
+                      alignment: Alignment.center,
+                      child: CustomText(
+                        text: "#Quiz",
+                        size: 30,
+                      ),
+                    ),
+                    Container(
+                      alignment: Alignment.center,
+                      child: CustomText(
+                        text: "2300",
+                        size: 30,
+                        bold: true,
+                      ),
+                    ),
+                  ],
+                ),
+                const TableRow(
+                  children: <Widget>[
+                    SizedBox(
+                      height: 10,
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                  ],
+                ),
+                TableRow(
+                  children: <Widget>[
+                    Container(
+                      alignment: Alignment.center,
+                      child: CustomText(
+                        text: "Coins",
+                        size: 30,
+                      ),
+                    ),
+                    Container(
+                      alignment: Alignment.center,
+                      child: CustomText(
+                        text: "1000",
+                        size: 30,
+                        bold: true,
+                      ),
+                    ),
+                  ],
+                ),
+                const TableRow(
+                  children: <Widget>[
+                    SizedBox(
+                      height: 10,
+                    ),
+                    SizedBox(
+                      height: 10,
                     ),
                   ],
                 ),
               ],
+              columnWidths: const <int, TableColumnWidth>{
+                0: FixedColumnWidth(150),
+                1: FixedColumnWidth(150),
+              },
             ),
             CustomButtonsHome(
               firstButtonPressed: firstButtonPressed,

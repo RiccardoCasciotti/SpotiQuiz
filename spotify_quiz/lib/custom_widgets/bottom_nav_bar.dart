@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:spotify_quiz/utility/utilities.dart' as utilities;
 
+// ignore: must_be_immutable
 class CustomNavBar extends StatelessWidget {
   int selectedIndex;
   void Function(int)? onItemTapped;
@@ -34,6 +35,7 @@ class CustomNavBar extends StatelessWidget {
   }
 }
 
+// ignore: must_be_immutable
 class CustomNavBarRanking extends StatelessWidget {
   int selectedIndex;
   void Function(int)? onItemTapped;

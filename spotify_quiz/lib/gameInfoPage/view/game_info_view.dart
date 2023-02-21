@@ -1,11 +1,12 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:spotify_quiz/custom_widgets/boxed_widgets.dart';
-import 'package:spotify_quiz/quizPage/views/quiz_page.dart';
+import 'package:spotify_quiz/quizPage/view/quiz_page.dart';
 import 'package:spotify_quiz/utility/utilities.dart' as utilities;
 
 import '../../custom_widgets/text.dart';
 
+// ignore: must_be_immutable
 class GameInfoPage extends StatelessWidget {
   int selectedGame;
 

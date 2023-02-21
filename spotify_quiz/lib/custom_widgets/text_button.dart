@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:spotify_quiz/utility/utilities.dart' as utilities;
 
+// ignore: must_be_immutable
 class CustomTextButton extends StatelessWidget {
   Function selectHandler;
   String buttonText;
