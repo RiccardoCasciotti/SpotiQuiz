@@ -27,9 +27,10 @@ class CustomNavBar extends StatelessWidget {
       ],
       currentIndex: selectedIndex,
       selectedItemColor: utilities.primaryColor,
-      backgroundColor: utilities.secondaryColor,
-      unselectedItemColor: utilities.primaryColor,
+      backgroundColor: utilities.similSecondaryColor,
+      unselectedItemColor: utilities.tertiaryColor,
       selectedIconTheme: const IconThemeData(size: 50),
+      elevation: 30.0,
       onTap: onItemTapped,
     );
   }
@@ -61,9 +62,10 @@ class CustomNavBarRanking extends StatelessWidget {
       ],
       currentIndex: selectedIndex,
       selectedItemColor: utilities.primaryColor,
-      backgroundColor: utilities.secondaryColor,
-      unselectedItemColor: utilities.primaryColor,
+      backgroundColor: utilities.similSecondaryColor,
+      unselectedItemColor: utilities.tertiaryColor,
       selectedIconTheme: const IconThemeData(size: 50),
+      elevation: 30.0,
       onTap: onItemTapped,
     );
   }

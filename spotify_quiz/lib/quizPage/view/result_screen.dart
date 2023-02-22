@@ -4,8 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:spotify_quiz/custom_widgets/text_button.dart';
 import 'package:spotify_quiz/utility/utilities.dart' as utilities;
 
-import '../../custom_widgets/custom_buttons.dart';
-
 class Result extends StatelessWidget {
   final int resultScore;
   final Function returnHome;

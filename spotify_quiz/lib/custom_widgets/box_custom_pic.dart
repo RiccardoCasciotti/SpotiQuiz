@@ -35,7 +35,7 @@ class CustomContainerPic extends StatelessWidget {
         ),
         border: withBorder
             ? Border.all(
-                color: utilities.primaryColor,
+                color: utilities.tertiaryColor,
                 width: sizeBorder,
               )
             : const Border(),
