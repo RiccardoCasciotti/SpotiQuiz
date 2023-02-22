@@ -16,6 +16,7 @@ class Question extends StatelessWidget {
         text: questionText,
         size: 28,
         alignCenter: true,
+        thirdColor: true,
       ), //Text
     ); //Container
   }

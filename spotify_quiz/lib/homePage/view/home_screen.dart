@@ -4,7 +4,6 @@ import 'package:spotify_quiz/utility/utilities.dart' as utilities;
 
 import '../../custom_widgets/bottom_nav_bar.dart';
 import '../../custom_widgets/box_avatar_with_hero.dart';
-import '../../custom_widgets/boxed_widgets.dart';
 import '../../custom_widgets/custom_buttons.dart';
 import '../../profilePage/view/setting_page_view.dart';
 
@@ -39,13 +38,13 @@ class HomeScreen extends StatelessWidget {
                   tags: "profilePic",
                   newPage: const ProfilePage(),
                 ),
-                CustomBoxedWidget(
-                  insideBox: CustomText(
-                    text: "Username",
-                    size: 25,
-                  ),
-                  sizeRadius: 20.0,
-                  widthRadius: 2.0,
+                const SizedBox(
+                  height: 10,
+                ),
+                CustomText(
+                  text: "Username",
+                  thirdColor: true,
+                  size: 25,
                 ),
               ],
             ),
@@ -59,7 +58,9 @@ class HomeScreen extends StatelessWidget {
                       alignment: Alignment.center,
                       child: CustomText(
                         text: "Level",
+                        thirdColor: true,
                         size: 30,
+                        bold: true,
                       ),
                     ),
                     Container(
@@ -89,6 +90,8 @@ class HomeScreen extends StatelessWidget {
                       child: CustomText(
                         text: "#Quiz",
                         size: 30,
+                        thirdColor: true,
+                        bold: true,
                       ),
                     ),
                     Container(
@@ -117,7 +120,9 @@ class HomeScreen extends StatelessWidget {
                       alignment: Alignment.center,
                       child: CustomText(
                         text: "Coins",
+                        thirdColor: true,
                         size: 30,
+                        bold: true,
                       ),
                     ),
                     Container(
@@ -146,10 +151,7 @@ class HomeScreen extends StatelessWidget {
                 1: FixedColumnWidth(150),
               },
             ),
-            CustomButtonsHome(
-              firstButtonPressed: firstButtonPressed,
-              secondButtonPressed: secondButtonPressed,
-            ),
+            const CustomButtonsHome(),
           ],
         ),
       ),

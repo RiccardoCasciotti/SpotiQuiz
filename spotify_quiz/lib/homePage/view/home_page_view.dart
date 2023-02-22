@@ -1,3 +1,4 @@
+import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:spotify_quiz/eventsPage/view/events_page_view.dart';
@@ -6,6 +7,8 @@ import 'package:spotify_quiz/homePage/view/quiz_screen.dart';
 import 'package:spotify_quiz/rankingPage/ranking_page_view.dart';
 import 'package:spotify_quiz/repositories/user/user_repository.dart';
 import 'package:spotify_quiz/user/bloc/user_bloc.dart';
+
+import 'package:spotify_quiz/utility/utilities.dart' as utilities;
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
@@ -60,6 +63,18 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final pages = [
+      HomeScreen(
+          firstButtonPressed: _goToRankingPage,
+          secondButtonPressed: _goToEventPage,
+          onItemTapped: _onItemTapped,
+          selectedIndex: _selectedIndex),
+      QuizScreen(
+        onItemTapped: _onItemTapped,
+        selectedIndex: _selectedIndex,
+      )
+    ];
+
     return RepositoryProvider(
       create: (context) => UserRepository(),
       child: BlocProvider(
@@ -73,16 +88,18 @@ class _MyHomePageState extends State<MyHomePage> {
                 state is UserNotFound ||
                 state is UserLoaded) {
               //IF USERS ARE CORRECTLY LOADED
-              return _selectedIndex == 0
-                  ? HomeScreen(
-                      firstButtonPressed: _goToRankingPage,
-                      secondButtonPressed: _goToEventPage,
-                      onItemTapped: _onItemTapped,
-                      selectedIndex: _selectedIndex)
-                  : QuizScreen(
-                      onItemTapped: _onItemTapped,
-                      selectedIndex: _selectedIndex,
-                    );
+              return PageTransitionSwitcher(
+                duration: const Duration(milliseconds: 500),
+                transitionBuilder: (child, animation, secondaryAnimation) =>
+                    SharedAxisTransition(
+                  animation: animation,
+                  secondaryAnimation: secondaryAnimation,
+                  fillColor: utilities.secondaryColor,
+                  transitionType: SharedAxisTransitionType.horizontal,
+                  child: child,
+                ),
+                child: pages[_selectedIndex],
+              );
             } else {
               return const Center(
                 child: CircularProgressIndicator(),

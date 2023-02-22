@@ -1,3 +1,4 @@
+import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:spotify_quiz/utility/utilities.dart' as utilities;
 
@@ -74,13 +75,12 @@ class _QuizPageState extends State<QuizPage> {
   var _hasAnswered = false;
 
   void _goHome() {
-    setState(() {
+    Navigator.pop(context);
+    /*setState(() {
       _questionIndex = 0;
       _totalScore = 0;
       _questionScore = 0;
-    });
-    Navigator.pop(context);
-    Navigator.pop(context);
+    });*/
   }
 
   void _moveOn() {
@@ -108,11 +108,33 @@ class _QuizPageState extends State<QuizPage> {
         body: Padding(
           padding: const EdgeInsets.all(30.0),
           child: _hasAnswered
-              ? Result(_totalScore, _questionScore, _goHome, _moveOn) //Quiz
-              : Quiz(
-                  answerQuestion: _answerQuestion,
-                  questionIndex: _questionIndex,
-                  questions: _questions,
+              ? PageTransitionSwitcher(
+                  duration: const Duration(milliseconds: 500),
+                  transitionBuilder: (child, animation, secondaryAnimation) =>
+                      SharedAxisTransition(
+                        animation: animation,
+                        secondaryAnimation: secondaryAnimation,
+                        fillColor: utilities.secondaryColor,
+                        transitionType: SharedAxisTransitionType.horizontal,
+                        child: child,
+                      ),
+                  child: Result(
+                      _totalScore, _questionScore, _goHome, _moveOn)) //Quiz
+              : PageTransitionSwitcher(
+                  duration: const Duration(milliseconds: 500),
+                  transitionBuilder: (child, animation, secondaryAnimation) =>
+                      SharedAxisTransition(
+                    animation: animation,
+                    secondaryAnimation: secondaryAnimation,
+                    fillColor: utilities.secondaryColor,
+                    transitionType: SharedAxisTransitionType.horizontal,
+                    child: child,
+                  ),
+                  child: Quiz(
+                    answerQuestion: _answerQuestion,
+                    questionIndex: _questionIndex,
+                    questions: _questions,
+                  ),
                 ),
         ), //Padding
       ), //Scaffold

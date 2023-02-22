@@ -34,10 +34,12 @@ class ProfilePage extends StatelessWidget {
               children: [
                 CustomText(
                   text: "Statistics",
+                  thirdColor: true,
                   size: 25,
                   bold: true,
                 ),
                 CustomBoxedWidget(
+                  thirdColor: true,
                   insideBox: Column(
                     children: [
                       Row(
@@ -45,6 +47,7 @@ class ProfilePage extends StatelessWidget {
                         children: [
                           CustomText(
                             text: "Correct Answers",
+                            thirdColor: true,
                             size: 20,
                           ),
                           CustomText(
@@ -58,6 +61,7 @@ class ProfilePage extends StatelessWidget {
                         children: [
                           CustomText(
                             text: "Wrong Answers",
+                            thirdColor: true,
                             size: 20,
                           ),
                           CustomText(
@@ -71,6 +75,7 @@ class ProfilePage extends StatelessWidget {
                         children: [
                           CustomText(
                             text: "Total Points",
+                            thirdColor: true,
                             size: 20,
                           ),
                           CustomText(
@@ -89,10 +94,12 @@ class ProfilePage extends StatelessWidget {
               children: [
                 CustomText(
                   text: "Most known artists",
+                  thirdColor: true,
                   size: 25,
                   bold: true,
                 ),
                 CustomBoxedWidget(
+                  thirdColor: true,
                   insideBox: Column(
                     children: [
                       Row(
@@ -100,6 +107,7 @@ class ProfilePage extends StatelessWidget {
                         children: [
                           CustomText(
                             text: "Jessica Jones",
+                            thirdColor: true,
                             size: 20,
                           ),
                           CustomText(
@@ -113,6 +121,7 @@ class ProfilePage extends StatelessWidget {
                         children: [
                           CustomText(
                             text: "Ed Points",
+                            thirdColor: true,
                             size: 20,
                           ),
                           CustomText(
@@ -126,6 +135,7 @@ class ProfilePage extends StatelessWidget {
                         children: [
                           CustomText(
                             text: "Enrique Ilo",
+                            thirdColor: true,
                             size: 20,
                           ),
                           CustomText(

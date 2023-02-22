@@ -1,17 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:spotify_quiz/custom_widgets/text.dart';
+import 'package:spotify_quiz/eventsPage/view/events_page_view.dart';
+import 'package:spotify_quiz/rankingPage/ranking_page_view.dart';
 import 'package:spotify_quiz/utility/utilities.dart' as utilities;
 
-// ignore: must_be_immutable
-class CustomButtonsHome extends StatelessWidget {
-  void Function(dynamic context)? firstButtonPressed;
-  void Function(dynamic context)? secondButtonPressed;
+import '../utility/transitions.dart';
 
-  CustomButtonsHome({
+// ignore: must_be_immutable
+class CustomButtonsHome extends StatefulWidget {
+  const CustomButtonsHome({
     Key? key,
-    required this.firstButtonPressed,
-    required this.secondButtonPressed,
   }) : super(key: key);
+
+  @override
+  State<CustomButtonsHome> createState() => _CustomButtonsHomeState();
+}
+
+class _CustomButtonsHomeState extends State<CustomButtonsHome> {
+  bool _tapped1 = false;
+  bool _tapped2 = false;
+  final animationDuration = const Duration(milliseconds: 50);
+
+  @override
+  void initState() {
+    super.initState();
+    _tapped1 = false;
+    _tapped2 = false;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,16 +42,33 @@ class CustomButtonsHome extends StatelessWidget {
               children: [
                 FloatingActionButton(
                   heroTag: null,
-                  backgroundColor: utilities.primaryColor,
+                  backgroundColor: _tapped1
+                      ? utilities.primaryColor
+                      : utilities.tertiaryColor,
                   foregroundColor: utilities.secondaryColor,
                   onPressed: () {
-                    firstButtonPressed!(context);
+                    setState(() {
+                      _tapped1 = true;
+                    });
+                    Future.delayed(animationDuration).then((_) => {
+                          Navigator.push(
+                            context,
+                            SlideRightRoute(
+                              page: const RankingPage(),
+                            ),
+                          ).then(
+                            (value) => setState(() {
+                              _tapped1 = false;
+                            }),
+                          ),
+                        });
                   },
                   child: const Icon(Icons.emoji_events_outlined),
                 ),
                 CustomText(
                   text: "Ranking",
                   size: 20.0,
+                  thirdColor: !_tapped1,
                 ),
               ],
             ),
@@ -45,16 +77,33 @@ class CustomButtonsHome extends StatelessWidget {
               children: [
                 FloatingActionButton(
                   heroTag: null,
-                  backgroundColor: utilities.primaryColor,
+                  backgroundColor: _tapped2
+                      ? utilities.primaryColor
+                      : utilities.tertiaryColor,
                   foregroundColor: utilities.secondaryColor,
                   onPressed: () {
-                    secondButtonPressed!(context);
+                    setState(() {
+                      _tapped2 = true;
+                    });
+                    Future.delayed(animationDuration).then((_) => {
+                          Navigator.push(
+                            context,
+                            SlideLeftRoute(
+                              page: const EventsPage(),
+                            ),
+                          ).then(
+                            (value) => setState(() {
+                              _tapped2 = false;
+                            }),
+                          ),
+                        });
                   },
                   child: const Icon(Icons.star_outline_sharp),
                 ),
                 CustomText(
                   text: "Events",
                   size: 20.0,
+                  thirdColor: !_tapped2,
                 ),
               ],
             ),
@@ -67,7 +116,7 @@ class CustomButtonsHome extends StatelessWidget {
 }
 
 // ignore: must_be_immutable
-class CustomButtonsQuiz extends StatelessWidget {
+/*class CustomButtonsQuiz extends StatelessWidget {
   void Function(dynamic context)? firstButtonPressed;
   void Function(dynamic context)? secondButtonPressed;
 
@@ -129,3 +178,4 @@ class CustomButtonsQuiz extends StatelessWidget {
     );
   }
 }
+*/

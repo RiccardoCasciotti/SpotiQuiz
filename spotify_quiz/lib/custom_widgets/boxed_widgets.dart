@@ -7,11 +7,13 @@ class CustomBoxedWidget extends StatelessWidget {
   double sizeRadius;
   double widthRadius;
   Widget insideBox;
+  bool thirdColor;
 
   CustomBoxedWidget({
     Key? key,
     this.widthRadius = 2.5,
     this.sizeRadius = 10.0,
+    this.thirdColor = false,
     required this.insideBox,
   }) : super(key: key);
 
@@ -22,7 +24,7 @@ class CustomBoxedWidget extends StatelessWidget {
       padding: const EdgeInsets.all(5.0),
       decoration: BoxDecoration(
         border: Border.all(
-          color: utilities.primaryColor,
+          color: thirdColor ? utilities.tertiaryColor : utilities.primaryColor,
           width: widthRadius,
         ),
         borderRadius: BorderRadius.circular(sizeRadius),

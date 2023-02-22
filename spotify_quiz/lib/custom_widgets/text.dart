@@ -12,6 +12,7 @@ class CustomText extends StatelessWidget {
   bool alignCenter;
   bool secondColor;
   bool thirdColor;
+  bool wrongColor;
 
   CustomText({
     Key? key,
@@ -22,6 +23,7 @@ class CustomText extends StatelessWidget {
     this.alignCenter = false,
     this.secondColor = false,
     this.thirdColor = false,
+    this.wrongColor = false,
   }) : super(key: key);
 
   @override
@@ -32,6 +34,8 @@ class CustomText extends StatelessWidget {
       colorTouse = utilities.secondaryColor;
     } else if (thirdColor) {
       colorTouse = utilities.tertiaryColor;
+    } else if (wrongColor) {
+      colorTouse = utilities.wrongAnswerColor;
     } else {
       colorTouse = utilities.primaryColor;
     }

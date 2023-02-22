@@ -1,8 +1,8 @@
 // ignore_for_file: avoid_print
 
 import 'package:flutter/material.dart';
-import 'package:spotify_quiz/custom_widgets/text_button.dart';
-import 'package:spotify_quiz/utility/utilities.dart' as utilities;
+import 'package:spotify_quiz/custom_widgets/text.dart';
+import 'package:spotify_quiz/quizPage/components/text_button_return.dart';
 
 class Result extends StatelessWidget {
   final int resultScore;
@@ -33,33 +33,42 @@ class Result extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
-          Text(
-            resultPhrase,
-            style: TextStyle(
-                fontSize: 26,
-                fontWeight: FontWeight.bold,
-                color: utilities.primaryColor),
-            textAlign: TextAlign.center,
-          ), //Text
-          Text(
-            'Score ' '$resultScore',
-            style: TextStyle(
-                fontSize: 36,
-                fontWeight: FontWeight.bold,
-                color: utilities.primaryColor),
-            textAlign: TextAlign.center,
-          ), //Text
-
+          CustomText(
+            text: resultPhrase,
+            size: 30,
+            alignCenter: true,
+            wrongColor: questionScore > 0 ? false : true,
+            bold: true,
+          ),
           Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              CustomTextButtonResult(
-                selectHandler: (context) => returnHome(),
-                buttonText: "Return \nHome",
+              CustomText(
+                text: "Score:",
+                size: 35,
+                alignCenter: true,
+                thirdColor: true,
+                bold: true,
               ),
-              CustomTextButtonResult(
+              CustomText(
+                text: '$resultScore',
+                size: 35,
+                alignCenter: true,
+                bold: true,
+              ),
+            ],
+          ),
+          //Text
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              TextButtonReturn(
+                text: 'Quit',
+                selectHandler: (context) => returnHome(),
+              ),
+              TextButtonReturn(
+                text: 'Continue',
                 selectHandler: (context) => moveOn(),
-                buttonText: "Continue",
               ),
             ],
           ),

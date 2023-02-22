@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:spotify_quiz/custom_widgets/boxed_widgets.dart';
+import 'package:spotify_quiz/gameInfoPage/components/play_button.dart';
 import 'package:spotify_quiz/quizPage/view/quiz_page.dart';
 import 'package:spotify_quiz/utility/utilities.dart' as utilities;
 
@@ -42,6 +43,7 @@ class GameInfoPage extends StatelessWidget {
                 ),
               ),
               CustomBoxedWidget(
+                thirdColor: true,
                 insideBox: SizedBox(
                   width: 500,
                   child: Center(
@@ -50,6 +52,7 @@ class GameInfoPage extends StatelessWidget {
                           "Game mode with questions related to your favourite artists",
                       size: 25,
                       alignCenter: true,
+                      thirdColor: true,
                     ),
                   ),
                 ),
@@ -57,35 +60,7 @@ class GameInfoPage extends StatelessWidget {
             ],
           ),
         ),
-        floatingActionButton: FloatingActionButton.extended(
-          elevation: 0,
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const QuizPage(),
-              ),
-            );
-          },
-          label: CustomText(
-            text: "Play",
-            size: 20,
-            secondColor: true,
-            bold: true,
-          ),
-          foregroundColor: utilities.secondaryColor,
-          icon: const Icon(Icons.play_circle),
-          backgroundColor: utilities.primaryColor,
-          shape: BeveledRectangleBorder(
-            borderRadius: BorderRadius.circular(2.5),
-            side: BorderSide(
-              color: utilities.primaryColor,
-              width: 1.5,
-              style: BorderStyle.solid,
-            ),
-          ),
-          heroTag: null,
-        ),
+        floatingActionButton: const PlayButton(),
       );
     } else if (selectedGame == 2) {
       return Scaffold(
@@ -112,10 +87,12 @@ class GameInfoPage extends StatelessWidget {
                 ),
               ),
               CustomBoxedWidget(
+                thirdColor: true,
                 insideBox: SizedBox(
                   width: 500,
                   child: Center(
                     child: CustomText(
+                      thirdColor: true,
                       text:
                           "Game mode with questions related to your favourite songs",
                       size: 25,
@@ -182,10 +159,12 @@ class GameInfoPage extends StatelessWidget {
                 ),
               ),
               CustomBoxedWidget(
+                thirdColor: true,
                 insideBox: SizedBox(
                   width: 500,
                   child: Center(
                     child: CustomText(
+                      thirdColor: true,
                       text:
                           "Game mode with random questions, here to test your skills",
                       size: 25,
