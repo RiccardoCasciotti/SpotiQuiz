@@ -62,7 +62,6 @@ class CustomTextButtonResult extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: SizedBox(
         width: 135,
-        height: 110,
         child: ElevatedButton(
           onPressed: (() => selectHandler(context)),
           style: ElevatedButton.styleFrom(

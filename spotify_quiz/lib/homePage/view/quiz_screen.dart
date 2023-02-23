@@ -115,68 +115,75 @@ class QuizScreen extends StatelessWidget {
         ],
       ),
     ];
+
     return Scaffold(
       backgroundColor: utilities.secondaryColor,
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          const SizedBox(
-            height: 20,
-          ),
-          //UPPER PART WITH THE TYPE OF QUIZ
-          Column(
-            children: [
-              Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      CustomText(
-                        text: "Choose a quiz!",
-                        size: 30.0,
-                        bold: true,
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  children: trialGames,
+      body: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            const SizedBox(
+              height: 50,
+            ),
+            //UPPER PART WITH THE TYPE OF QUIZ
+            Column(
+              children: [
+                Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        CustomText(
+                          text: "Choose a quiz!",
+                          size: 30.0,
+                          bold: true,
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
-              ),
-            ],
-          ),
-          //LOWER PART PANEL WITH FAVOURITE ARTISTS
-          Column(
-            children: [
-              Column(
-                children: [
-                  Row(
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      CustomText(
-                        text: "Your favourite artists",
-                        size: 30.0,
-                        bold: true,
-                      ),
-                    ],
+                    children: trialGames,
                   ),
-                ],
-              ),
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  children: trialArtists,
                 ),
-              ),
-            ],
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-        ],
+              ],
+            ),
+            const SizedBox(
+              height: 50,
+            ),
+            //LOWER PART PANEL WITH FAVOURITE ARTISTS
+            Column(
+              children: [
+                Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        CustomText(
+                          text: "Your favourite artists",
+                          size: 30.0,
+                          bold: true,
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: trialArtists,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+          ],
+        ),
       ),
       bottomNavigationBar: CustomNavBar(
         selectedIndex: selectedIndex,

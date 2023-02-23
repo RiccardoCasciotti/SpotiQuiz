@@ -72,18 +72,8 @@ class Result extends StatelessWidget {
               ),
             ],
           ),
-          // FlatButton is deprecated and should not be used
-          // Use TextButton instead
-
-          // FlatButton(
-          // child: Text(
-          //	 'Restart Quiz!',
-          // ), //Text
-          // textColor: Colors.blue,
-          // onPressed: resetHandler(),
-          // ), //FlatButton
-        ], //<Widget>[]
-      ), //Column
-    ); //Center
+        ],
+      ),
+    );
   }
 }

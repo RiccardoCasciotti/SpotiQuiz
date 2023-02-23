@@ -19,12 +19,10 @@ class _AnswerState extends State<Answer> {
 
   @override
   Widget build(BuildContext context) {
-    // use SizedBox for white space instead of Container
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: SizedBox(
         width: double.infinity,
-        height: 80,
         child: ElevatedButton(
           onPressed: () {
             setState(() {
@@ -52,6 +50,6 @@ class _AnswerState extends State<Answer> {
           ),
         ),
       ),
-    ); //Container
+    );
   }
 }

@@ -18,16 +18,15 @@ class Quiz extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Container(
-          alignment: Alignment.center,
-          height: 200,
-          width: double.infinity,
-          child: Question(
-            questions[questionIndex]['questionText'].toString(),
+        Flexible(
+          flex: 1,
+          child: Container(
+            alignment: Alignment.center,
+            width: double.infinity,
+            child: Question(
+              questions[questionIndex]['questionText'].toString(),
+            ),
           ),
-        ),
-        const SizedBox(
-          height: 100,
         ),
         Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -39,8 +38,8 @@ class Quiz extends StatelessWidget {
                   answer['text'].toString());
             })
           ],
-        ), //Question
+        ),
       ],
-    ); //Column
+    );
   }
 }

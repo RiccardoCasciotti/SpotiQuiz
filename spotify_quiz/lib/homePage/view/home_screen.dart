@@ -27,132 +27,140 @@ class HomeScreen extends StatelessWidget {
       backgroundColor: utilities.secondaryColor,
       body: Center(
         //body: LayoutBuilder TODO, see slides
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            Column(
-              children: [
-                CustomBoxAvatarWithHero(
-                  picUrl:
-                      'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg',
-                  tags: "profilePic",
-                  newPage: const ProfilePage(),
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                CustomText(
-                  text: "Username",
-                  thirdColor: true,
-                  size: 25,
-                ),
-              ],
-            ),
-            Table(
-              border: TableBorder.symmetric(),
-              defaultVerticalAlignment: TableCellVerticalAlignment.middle,
-              children: <TableRow>[
-                TableRow(
-                  children: <Widget>[
-                    Container(
-                      alignment: Alignment.center,
-                      child: CustomText(
-                        text: "Level",
-                        thirdColor: true,
-                        size: 30,
-                        bold: true,
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Column(
+                children: [
+                  CustomBoxAvatarWithHero(
+                    picUrl:
+                        'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg',
+                    tags: "profilePic",
+                    newPage: const ProfilePage(),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  CustomText(
+                    text: "Username",
+                    thirdColor: true,
+                    size: 25,
+                  ),
+                ],
+              ),
+              const SizedBox(
+                height: 50,
+              ),
+              Table(
+                border: TableBorder.symmetric(),
+                defaultVerticalAlignment: TableCellVerticalAlignment.middle,
+                children: <TableRow>[
+                  TableRow(
+                    children: <Widget>[
+                      Container(
+                        alignment: Alignment.center,
+                        child: CustomText(
+                          text: "Level",
+                          thirdColor: true,
+                          size: 30,
+                          bold: true,
+                        ),
                       ),
-                    ),
-                    Container(
-                      alignment: Alignment.center,
-                      child: CustomText(
-                        text: "1",
-                        size: 30,
-                        bold: true,
+                      Container(
+                        alignment: Alignment.center,
+                        child: CustomText(
+                          text: "1",
+                          size: 30,
+                          bold: true,
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-                const TableRow(
-                  children: <Widget>[
-                    SizedBox(
-                      height: 10,
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                  ],
-                ),
-                TableRow(
-                  children: <Widget>[
-                    Container(
-                      alignment: Alignment.center,
-                      child: CustomText(
-                        text: "#Quiz",
-                        size: 30,
-                        thirdColor: true,
-                        bold: true,
+                    ],
+                  ),
+                  const TableRow(
+                    children: <Widget>[
+                      SizedBox(
+                        height: 10,
                       ),
-                    ),
-                    Container(
-                      alignment: Alignment.center,
-                      child: CustomText(
-                        text: "2300",
-                        size: 30,
-                        bold: true,
+                      SizedBox(
+                        height: 10,
                       ),
-                    ),
-                  ],
-                ),
-                const TableRow(
-                  children: <Widget>[
-                    SizedBox(
-                      height: 10,
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                  ],
-                ),
-                TableRow(
-                  children: <Widget>[
-                    Container(
-                      alignment: Alignment.center,
-                      child: CustomText(
-                        text: "Coins",
-                        thirdColor: true,
-                        size: 30,
-                        bold: true,
+                    ],
+                  ),
+                  TableRow(
+                    children: <Widget>[
+                      Container(
+                        alignment: Alignment.center,
+                        child: CustomText(
+                          text: "#Quiz",
+                          size: 30,
+                          thirdColor: true,
+                          bold: true,
+                        ),
                       ),
-                    ),
-                    Container(
-                      alignment: Alignment.center,
-                      child: CustomText(
-                        text: "1000",
-                        size: 30,
-                        bold: true,
+                      Container(
+                        alignment: Alignment.center,
+                        child: CustomText(
+                          text: "2300",
+                          size: 30,
+                          bold: true,
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-                const TableRow(
-                  children: <Widget>[
-                    SizedBox(
-                      height: 10,
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                  ],
-                ),
-              ],
-              columnWidths: const <int, TableColumnWidth>{
-                0: FixedColumnWidth(150),
-                1: FixedColumnWidth(150),
-              },
-            ),
-            const CustomButtonsHome(),
-          ],
+                    ],
+                  ),
+                  const TableRow(
+                    children: <Widget>[
+                      SizedBox(
+                        height: 10,
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                    ],
+                  ),
+                  TableRow(
+                    children: <Widget>[
+                      Container(
+                        alignment: Alignment.center,
+                        child: CustomText(
+                          text: "Coins",
+                          thirdColor: true,
+                          size: 30,
+                          bold: true,
+                        ),
+                      ),
+                      Container(
+                        alignment: Alignment.center,
+                        child: CustomText(
+                          text: "1000",
+                          size: 30,
+                          bold: true,
+                        ),
+                      ),
+                    ],
+                  ),
+                  const TableRow(
+                    children: <Widget>[
+                      SizedBox(
+                        height: 10,
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                    ],
+                  ),
+                ],
+                columnWidths: const <int, TableColumnWidth>{
+                  0: FixedColumnWidth(150),
+                  1: FixedColumnWidth(150),
+                },
+              ),
+              const SizedBox(
+                height: 50,
+              ),
+              const CustomButtonsHome(),
+            ],
+          ),
         ),
       ),
       bottomNavigationBar: CustomNavBar(
