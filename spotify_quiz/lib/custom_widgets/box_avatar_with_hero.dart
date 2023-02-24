@@ -25,22 +25,23 @@ class CustomBoxAvatarWithHero extends StatelessWidget {
         MaterialPageRoute(builder: (context) => newPage),
       ),
       child: Hero(
-          tag: tags,
-          child: CircleAvatar(
-            radius: 100,
-            backgroundImage: NetworkImage(picUrl),
-            child: Stack(children: [
-              Align(
-                alignment: Alignment.bottomRight,
-                child: CircleAvatar(
-                  radius: 25,
-                  backgroundColor: utilities.secondaryColor,
-                  foregroundColor: utilities.tertiaryColor,
-                  child: const Icon(Icons.search),
-                ),
+        tag: tags,
+        child: CircleAvatar(
+          radius: 100,
+          backgroundImage: NetworkImage(picUrl),
+          child: Stack(children: [
+            Align(
+              alignment: Alignment.bottomRight,
+              child: CircleAvatar(
+                radius: 25,
+                backgroundColor: utilities.secondaryColor,
+                foregroundColor: utilities.tertiaryColor,
+                child: const Icon(Icons.search),
               ),
-            ]),
-          )),
+            ),
+          ]),
+        ),
+      ),
     );
   }
 }

@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:spotify_quiz/authentication/authentication.dart';
 import 'package:spotify_quiz/homePage/view/home_page_view.dart';
+import 'package:spotify_quiz/homePage/view/tablet/view/home_page_view.dart';
 import 'package:spotify_quiz/loading/splash.dart';
 import 'package:spotify_quiz/themes/bloc/theme_bloc.dart';
 import 'package:user_repository/user_repository.dart';
@@ -88,6 +89,10 @@ class MyAppView extends StatefulWidget {
 }
 
 class _MyAppViewState extends State<MyAppView> {
+  bool phoneLayout = MediaQueryData.fromWindow(WidgetsBinding.instance.window)
+          .size
+          .shortestSide <
+      600;
   //int _counter = 0;
 
   final _navigatorKey = GlobalKey<NavigatorState>();
@@ -107,24 +112,42 @@ class _MyAppViewState extends State<MyAppView> {
                 listener: (context, state) {
                   switch (state.status) {
                     case AuthenticationStatus.authenticated:
-                      _navigator.push(
-                        MaterialPageRoute(
-                          builder: (_) => BlocProvider.value(
-                            value: BlocProvider.of<ThemeBloc>(context),
-                            child: const MyHomePage(),
-                          ),
-                        ),
-                      );
+                      phoneLayout
+                          ? _navigator.push(
+                              MaterialPageRoute(
+                                builder: (_) => BlocProvider.value(
+                                  value: BlocProvider.of<ThemeBloc>(context),
+                                  child: const MyHomePage(),
+                                ),
+                              ),
+                            )
+                          : _navigator.push(
+                              MaterialPageRoute(
+                                builder: (_) => BlocProvider.value(
+                                  value: BlocProvider.of<ThemeBloc>(context),
+                                  child: const MyHomePageTablet(),
+                                ),
+                              ),
+                            );
                       break;
                     case AuthenticationStatus.unauthenticated:
-                      _navigator.push(
-                        MaterialPageRoute(
-                          builder: (_) => BlocProvider.value(
-                            value: BlocProvider.of<ThemeBloc>(context),
-                            child: const MyHomePage(),
-                          ),
-                        ),
-                      );
+                      phoneLayout
+                          ? _navigator.push(
+                              MaterialPageRoute(
+                                builder: (_) => BlocProvider.value(
+                                  value: BlocProvider.of<ThemeBloc>(context),
+                                  child: const MyHomePage(),
+                                ),
+                              ),
+                            )
+                          : _navigator.push(
+                              MaterialPageRoute(
+                                builder: (_) => BlocProvider.value(
+                                  value: BlocProvider.of<ThemeBloc>(context),
+                                  child: const MyHomePageTablet(),
+                                ),
+                              ),
+                            );
                       break;
                     case AuthenticationStatus.unknown:
                       break;
