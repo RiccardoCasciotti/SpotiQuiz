@@ -4,13 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:spotify_quiz/custom_widgets/text.dart';
 import 'package:spotify_quiz/quizPage/components/text_button_return.dart';
 
-class Result extends StatelessWidget {
+class ResultTablet extends StatelessWidget {
   final int resultScore;
   final Function returnHome;
   final Function moveOn;
   final int questionScore;
 
-  const Result(
+  const ResultTablet(
       this.resultScore, this.questionScore, this.returnHome, this.moveOn,
       {Key? key})
       : super(key: key);
@@ -35,7 +35,7 @@ class Result extends StatelessWidget {
         children: <Widget>[
           CustomText(
             text: resultPhrase,
-            size: 30,
+            size: 60,
             alignCenter: true,
             wrongColor: questionScore > 0 ? false : true,
             bold: true,
@@ -43,6 +43,9 @@ class Result extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
+              const SizedBox(
+                width: 100,
+              ),
               CustomText(
                 text: "Score:",
                 size: 35,
@@ -53,9 +56,12 @@ class Result extends StatelessWidget {
               CustomText(
                 text: '$resultScore',
                 size: 35,
-                thirdColor: true,
                 alignCenter: true,
+                thirdColor: true,
                 bold: true,
+              ),
+              const SizedBox(
+                width: 100,
               ),
             ],
           ),
@@ -63,6 +69,9 @@ class Result extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
+              const SizedBox(
+                width: 30,
+              ),
               TextButtonReturn(
                 text: 'Quit',
                 selectHandler: (context) => returnHome(),
@@ -70,6 +79,9 @@ class Result extends StatelessWidget {
               TextButtonReturn(
                 text: 'Continue',
                 selectHandler: (context) => moveOn(),
+              ),
+              const SizedBox(
+                width: 30,
               ),
             ],
           ),

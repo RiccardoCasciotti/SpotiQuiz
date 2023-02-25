@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:spotify_quiz/custom_widgets/box_custom_pic.dart';
 import 'package:spotify_quiz/custom_widgets/text.dart';
-import 'package:spotify_quiz/gameInfoPage/view/game_info_view.dart';
+import 'package:spotify_quiz/gameInfoPage/tablet/view/game_info_view.dart';
 import 'package:spotify_quiz/homePage/view/tablet/components/custom_navigation_rail.dart';
+import 'package:spotify_quiz/utility/transitions.dart';
 import 'package:spotify_quiz/utility/utilities.dart' as utilities;
 
 // ignore: must_be_immutable
@@ -26,8 +27,8 @@ class QuizScreenTablet extends StatelessWidget {
           GestureDetector(
             onTap: () => Navigator.push(
               context,
-              MaterialPageRoute(
-                builder: (context) => GameInfoPage(selectedGame: 1),
+              ScaleRoute(
+                page: GameInfoPageTablet(selectedGame: 1),
               ),
             ),
             child: Hero(
@@ -36,8 +37,6 @@ class QuizScreenTablet extends StatelessWidget {
                 picUrl:
                     'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg',
                 withBorder: true,
-                width: 150,
-                height: 150,
                 circularity: 10,
               ),
             ),
@@ -51,13 +50,16 @@ class QuizScreenTablet extends StatelessWidget {
           ),
         ],
       ),
+      const SizedBox(
+        width: 50,
+      ),
       Column(
         children: [
           GestureDetector(
             onTap: () => Navigator.push(
               context,
-              MaterialPageRoute(
-                builder: (context) => GameInfoPage(selectedGame: 2),
+              ScaleRoute(
+                page: GameInfoPageTablet(selectedGame: 2),
               ),
             ),
             child: Hero(
@@ -66,8 +68,6 @@ class QuizScreenTablet extends StatelessWidget {
                 picUrl:
                     'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg',
                 withBorder: true,
-                width: 150,
-                height: 150,
                 circularity: 10,
               ),
             ),
@@ -81,15 +81,16 @@ class QuizScreenTablet extends StatelessWidget {
           ),
         ],
       ),
+      const SizedBox(
+        width: 50,
+      ),
       Column(
         children: [
           GestureDetector(
             onTap: () => Navigator.push(
               context,
-              MaterialPageRoute(
-                builder: (context) => GameInfoPage(
-                  selectedGame: 3,
-                ),
+              ScaleRoute(
+                page: GameInfoPageTablet(selectedGame: 3),
               ),
             ),
             child: Hero(
@@ -98,8 +99,6 @@ class QuizScreenTablet extends StatelessWidget {
                 picUrl:
                     'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg',
                 withBorder: true,
-                width: 150,
-                height: 150,
                 circularity: 10,
               ),
             ),
@@ -114,7 +113,6 @@ class QuizScreenTablet extends StatelessWidget {
         ],
       ),
     ];
-
     return Scaffold(
       backgroundColor: utilities.secondaryColor,
       body: Center(

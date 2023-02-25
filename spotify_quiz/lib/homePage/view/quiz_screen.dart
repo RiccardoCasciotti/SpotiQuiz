@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:spotify_quiz/custom_widgets/text.dart';
+import 'package:spotify_quiz/utility/transitions.dart';
 import 'package:spotify_quiz/utility/utilities.dart' as utilities;
 
 import '../../custom_widgets/bottom_nav_bar.dart';
@@ -27,8 +28,8 @@ class QuizScreen extends StatelessWidget {
           GestureDetector(
             onTap: () => Navigator.push(
               context,
-              MaterialPageRoute(
-                builder: (context) => GameInfoPage(selectedGame: 1),
+              ScaleRoute(
+                page: GameInfoPage(selectedGame: 1),
               ),
             ),
             child: Hero(
@@ -57,8 +58,8 @@ class QuizScreen extends StatelessWidget {
           GestureDetector(
             onTap: () => Navigator.push(
               context,
-              MaterialPageRoute(
-                builder: (context) => GameInfoPage(selectedGame: 2),
+              ScaleRoute(
+                page: GameInfoPage(selectedGame: 2),
               ),
             ),
             child: Hero(
@@ -87,10 +88,8 @@ class QuizScreen extends StatelessWidget {
           GestureDetector(
             onTap: () => Navigator.push(
               context,
-              MaterialPageRoute(
-                builder: (context) => GameInfoPage(
-                  selectedGame: 3,
-                ),
+              ScaleRoute(
+                page: GameInfoPage(selectedGame: 3),
               ),
             ),
             child: Hero(

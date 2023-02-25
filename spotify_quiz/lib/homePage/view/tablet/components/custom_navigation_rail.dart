@@ -30,8 +30,8 @@ class CustomNavRail extends StatelessWidget {
       backgroundColor: utilities.similSecondaryColor,
       destinations: <NavigationRailDestination>[
         NavigationRailDestination(
-          icon: const Icon(Icons.favorite_border),
-          selectedIcon: const Icon(Icons.favorite),
+          icon: const Icon(Icons.home_outlined),
+          selectedIcon: const Icon(Icons.home),
           label: CustomText(
             text: "Home",
             size: selectedIndex != 0 ? 13 : 20,
@@ -39,8 +39,8 @@ class CustomNavRail extends StatelessWidget {
           ),
         ),
         NavigationRailDestination(
-          icon: const Icon(Icons.bookmark_border),
-          selectedIcon: const Icon(Icons.book),
+          icon: const Icon(Icons.question_mark_outlined),
+          selectedIcon: const Icon(Icons.question_mark),
           label: CustomText(
             text: "Quiz",
             size: selectedIndex != 1 ? 13 : 20,
@@ -48,8 +48,8 @@ class CustomNavRail extends StatelessWidget {
           ),
         ),
         NavigationRailDestination(
-          icon: const Icon(Icons.star_border),
-          selectedIcon: const Icon(Icons.star),
+          icon: const Icon(Icons.emoji_events_outlined),
+          selectedIcon: const Icon(Icons.emoji_events),
           label: CustomText(
             text: "Ranking",
             size: selectedIndex != 2 ? 13 : 20,
