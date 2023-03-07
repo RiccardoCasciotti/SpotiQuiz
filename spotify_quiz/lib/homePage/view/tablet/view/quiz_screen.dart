@@ -34,8 +34,7 @@ class QuizScreenTablet extends StatelessWidget {
             child: Hero(
               tag: "game1",
               child: CustomContainerPic(
-                picUrl:
-                    'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg',
+                picUrl: 'assets/images/singer.jpg',
                 withBorder: true,
                 circularity: 10,
               ),
@@ -65,8 +64,7 @@ class QuizScreenTablet extends StatelessWidget {
             child: Hero(
               tag: "game2",
               child: CustomContainerPic(
-                picUrl:
-                    'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg',
+                picUrl: 'assets/images/mic.jpg',
                 withBorder: true,
                 circularity: 10,
               ),
@@ -96,8 +94,7 @@ class QuizScreenTablet extends StatelessWidget {
             child: Hero(
               tag: "game3",
               child: CustomContainerPic(
-                picUrl:
-                    'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg',
+                picUrl: 'assets/images/concert.jpg',
                 withBorder: true,
                 circularity: 10,
               ),
@@ -204,7 +201,7 @@ class QuizScreenTablet extends StatelessWidget {
     Column(
       textDirection: TextDirection.ltr,
       children: [
-        CustomContainerPic(
+        CustomContainerPicNetwork(
           picUrl:
               'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg',
           withBorder: false,
@@ -225,7 +222,7 @@ class QuizScreenTablet extends StatelessWidget {
     ),
     Column(
       children: [
-        CustomContainerPic(
+        CustomContainerPicNetwork(
           picUrl:
               'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg',
           withBorder: false,
@@ -242,7 +239,7 @@ class QuizScreenTablet extends StatelessWidget {
     ),
     Column(
       children: [
-        CustomContainerPic(
+        CustomContainerPicNetwork(
           picUrl:
               'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg',
           withBorder: false,
@@ -259,7 +256,7 @@ class QuizScreenTablet extends StatelessWidget {
     ),
     Column(
       children: [
-        CustomContainerPic(
+        CustomContainerPicNetwork(
           picUrl:
               'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg',
           withBorder: false,
@@ -276,7 +273,7 @@ class QuizScreenTablet extends StatelessWidget {
     ),
     Column(
       children: [
-        CustomContainerPic(
+        CustomContainerPicNetwork(
           picUrl:
               'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg',
           withBorder: false,

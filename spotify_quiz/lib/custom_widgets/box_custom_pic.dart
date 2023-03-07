@@ -29,9 +29,11 @@ class CustomContainerPic extends StatelessWidget {
       margin: const EdgeInsets.all(10.0),
       padding: const EdgeInsets.all(3.0),
       decoration: BoxDecoration(
-        image: const DecorationImage(
-          image: NetworkImage(
-              'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg'),
+        image: DecorationImage(
+          image: AssetImage(
+            picUrl,
+          ),
+          fit: BoxFit.fill,
         ),
         border: withBorder
             ? Border.all(
@@ -39,7 +41,55 @@ class CustomContainerPic extends StatelessWidget {
                 width: sizeBorder,
               )
             : const Border(),
-        borderRadius: BorderRadius.circular(circularity),
+        borderRadius: BorderRadius.circular(
+          circularity,
+        ),
+      ),
+    );
+  }
+}
+
+// ignore: must_be_immutable
+class CustomContainerPicNetwork extends StatelessWidget {
+  String picUrl;
+  double sizeBorder;
+  double height;
+  double width;
+  double circularity;
+  bool withBorder;
+
+  CustomContainerPicNetwork({
+    Key? key,
+    required this.picUrl,
+    this.sizeBorder = 2.0,
+    this.height = 200,
+    this.width = 200,
+    this.circularity = 100,
+    this.withBorder = true,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: height,
+      width: width,
+      margin: const EdgeInsets.all(10.0),
+      padding: const EdgeInsets.all(3.0),
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          image: NetworkImage(
+            picUrl,
+          ),
+        ),
+        border: withBorder
+            ? Border.all(
+                color: utilities.tertiaryColor,
+                width: sizeBorder,
+              )
+            : const Border(),
+        borderRadius: BorderRadius.circular(
+          circularity,
+        ),
       ),
     );
   }
@@ -69,8 +119,9 @@ class CustomBoxPic extends StatelessWidget {
     return SizedBox(
       height: height,
       width: width,
-      child: Image.network(
-          'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg'),
+      child: Image.asset(
+        picUrl,
+      ),
     );
   }
 }

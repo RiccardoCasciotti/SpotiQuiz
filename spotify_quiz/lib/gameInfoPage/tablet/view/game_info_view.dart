@@ -12,16 +12,13 @@ class GameInfoPageTablet extends StatelessWidget {
   final pages = [
     GameInfoScreenTablet(
         text: 'Game mode based on your favourite artists',
-        urlImage:
-            'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg'),
+        urlImage: 'assets/images/singer.jpg'),
     GameInfoScreenTablet(
         text: 'Game mode based on your favourite songs',
-        urlImage:
-            'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg'),
+        urlImage: 'assets/images/mic.jpg'),
     GameInfoScreenTablet(
         text: 'Game mode based on casual artists and songs',
-        urlImage:
-            'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg'),
+        urlImage: 'assets/images/concert.jpg'),
   ];
 
   GameInfoPageTablet({

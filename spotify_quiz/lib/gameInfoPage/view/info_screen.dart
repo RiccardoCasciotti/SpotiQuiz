@@ -31,7 +31,7 @@ class GameInfoScreen extends StatelessWidget {
         decoration: BoxDecoration(
           image: DecorationImage(
             opacity: 0.5,
-            image: NetworkImage(
+            image: AssetImage(
               urlImage,
             ),
             fit: BoxFit.cover,
