@@ -33,7 +33,7 @@ class CustomContainerPic extends StatelessWidget {
           image: AssetImage(
             picUrl,
           ),
-          fit: BoxFit.fill,
+          fit: BoxFit.cover,
         ),
         border: withBorder
             ? Border.all(
@@ -121,6 +121,8 @@ class CustomBoxPic extends StatelessWidget {
       width: width,
       child: Image.asset(
         picUrl,
+        cacheHeight: height.toInt(),
+        cacheWidth: width.toInt(),
       ),
     );
   }

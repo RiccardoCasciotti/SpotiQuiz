@@ -44,6 +44,9 @@ class _MyHomePageTabletState extends State<MyHomePageTablet> {
 
   @override
   Widget build(BuildContext context) {
+    precacheImage(const AssetImage("assets/images/mic.jpg"), context);
+    precacheImage(const AssetImage("assets/images/singer.jpg"), context);
+    precacheImage(const AssetImage("assets/images/concert.jpg"), context);
     final pages = [
       HomeScreenTablet(
           onItemTapped: _onItemTapped, selectedIndex: _selectedIndex),
