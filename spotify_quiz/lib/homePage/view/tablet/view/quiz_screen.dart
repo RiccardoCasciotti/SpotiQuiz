@@ -18,6 +18,9 @@ class QuizScreenTablet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ImageProvider mic = const AssetImage("assets/images/mic.jpg");
+    ImageProvider singer = const AssetImage("assets/images/singer.jpg");
+    ImageProvider concert = const AssetImage("assets/images/concert.jpg");
     //List of widgets to populate the upper part.
     //It needs to be in the build because it uses a context to navigate through pages
 
@@ -34,7 +37,7 @@ class QuizScreenTablet extends StatelessWidget {
             child: Hero(
               tag: "game1",
               child: CustomContainerPic(
-                picUrl: 'assets/images/singer.jpg',
+                pic: singer,
                 withBorder: true,
                 circularity: 10,
               ),
@@ -64,7 +67,7 @@ class QuizScreenTablet extends StatelessWidget {
             child: Hero(
               tag: "game2",
               child: CustomContainerPic(
-                picUrl: 'assets/images/mic.jpg',
+                pic: mic,
                 withBorder: true,
                 circularity: 10,
               ),
@@ -94,7 +97,7 @@ class QuizScreenTablet extends StatelessWidget {
             child: Hero(
               tag: "game3",
               child: CustomContainerPic(
-                picUrl: 'assets/images/concert.jpg',
+                pic: concert,
                 withBorder: true,
                 circularity: 10,
               ),

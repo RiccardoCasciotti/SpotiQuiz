@@ -4,7 +4,7 @@ import 'package:spotify_quiz/utility/utilities.dart' as utilities;
 
 // ignore: must_be_immutable
 class CustomContainerPic extends StatelessWidget {
-  String picUrl;
+  ImageProvider<Object> pic;
   double sizeBorder;
   double height;
   double width;
@@ -13,7 +13,7 @@ class CustomContainerPic extends StatelessWidget {
 
   CustomContainerPic({
     Key? key,
-    required this.picUrl,
+    required this.pic,
     this.sizeBorder = 2.0,
     this.height = 200,
     this.width = 200,
@@ -30,9 +30,7 @@ class CustomContainerPic extends StatelessWidget {
       padding: const EdgeInsets.all(3.0),
       decoration: BoxDecoration(
         image: DecorationImage(
-          image: AssetImage(
-            picUrl,
-          ),
+          image: pic,
           fit: BoxFit.cover,
         ),
         border: withBorder
