@@ -4,23 +4,13 @@ import 'package:spotify_quiz/custom_widgets/boxed_widgets.dart';
 import 'package:spotify_quiz/gameInfoPage/view/info_screen.dart';
 import 'package:spotify_quiz/utility/utilities.dart' as utilities;
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import '../../custom_widgets/text.dart';
 
 // ignore: must_be_immutable
 class GameInfoPage extends StatelessWidget {
   int selectedGame;
-
-  final pages = [
-    GameInfoScreen(
-        text: 'Game mode based on your favourite artists',
-        urlImage: 'assets/images/singer.jpg'),
-    GameInfoScreen(
-        text: 'Game mode based on your favourite songs',
-        urlImage: 'assets/images/mic.jpg'),
-    GameInfoScreen(
-        text: 'Game mode based on casual artists and songs',
-        urlImage: 'assets/images/concert.jpg'),
-  ];
 
   GameInfoPage({
     Key? key,
@@ -29,6 +19,18 @@ class GameInfoPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final pages = [
+      GameInfoScreen(
+          text: AppLocalizations.of(context)!.gameinfoartist,
+          urlImage: 'assets/images/singer.jpg'),
+      GameInfoScreen(
+          text: AppLocalizations.of(context)!.gameinfosong,
+          urlImage: 'assets/images/mic.jpg'),
+      GameInfoScreen(
+          text: AppLocalizations.of(context)!.gameinfocasual,
+          urlImage: 'assets/images/concert.jpg'),
+    ];
+
     if (selectedGame > 0 && selectedGame < 4) {
       return pages[selectedGame - 1];
     } else {
@@ -38,7 +40,7 @@ class GameInfoPage extends StatelessWidget {
           backgroundColor: utilities.secondaryColor,
           foregroundColor: utilities.primaryColor,
           elevation: 0.0,
-          title: const Text("Go back"),
+          title: Text(AppLocalizations.of(context)!.gobackbutton),
         ),
         body: Center(
           child: Column(

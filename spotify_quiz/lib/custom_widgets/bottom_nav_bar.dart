@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:spotify_quiz/utility/utilities.dart' as utilities;
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 // ignore: must_be_immutable
 class CustomNavBar extends StatelessWidget {
   int selectedIndex;
@@ -15,14 +17,14 @@ class CustomNavBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
-      items: const <BottomNavigationBarItem>[
+      items: <BottomNavigationBarItem>[
         BottomNavigationBarItem(
-          icon: Icon(Icons.home),
-          label: 'Home',
+          icon: const Icon(Icons.home),
+          label: AppLocalizations.of(context)!.home,
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.question_mark),
-          label: 'Quiz',
+          icon: const Icon(Icons.question_mark),
+          label: AppLocalizations.of(context)!.quizpage,
         ),
       ],
       currentIndex: selectedIndex,
@@ -50,14 +52,14 @@ class CustomNavBarRanking extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
-      items: const <BottomNavigationBarItem>[
+      items: <BottomNavigationBarItem>[
         BottomNavigationBarItem(
-          icon: Icon(Icons.place),
-          label: 'Local',
+          icon: const Icon(Icons.place),
+          label: AppLocalizations.of(context)!.localbutton,
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.public),
-          label: 'Global',
+          icon: const Icon(Icons.public),
+          label: AppLocalizations.of(context)!.globalbutton,
         ),
       ],
       currentIndex: selectedIndex,

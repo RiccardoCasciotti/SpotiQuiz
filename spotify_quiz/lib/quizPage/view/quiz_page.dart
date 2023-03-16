@@ -102,43 +102,45 @@ class _QuizPageState extends State<QuizPage> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        backgroundColor: utilities.secondaryColor,
-        body: Padding(
-          padding: const EdgeInsets.all(30.0),
-          child: _hasAnswered
-              ? PageTransitionSwitcher(
-                  duration: const Duration(milliseconds: 500),
-                  transitionBuilder: (child, animation, secondaryAnimation) =>
-                      SharedAxisTransition(
-                        animation: animation,
-                        secondaryAnimation: secondaryAnimation,
-                        fillColor: utilities.secondaryColor,
-                        transitionType: SharedAxisTransitionType.horizontal,
-                        child: child,
-                      ),
-                  child: Result(
-                      _totalScore, _questionScore, _goHome, _moveOn)) //Quiz
-              : PageTransitionSwitcher(
-                  duration: const Duration(milliseconds: 500),
-                  transitionBuilder: (child, animation, secondaryAnimation) =>
-                      SharedAxisTransition(
-                    animation: animation,
-                    secondaryAnimation: secondaryAnimation,
-                    fillColor: utilities.secondaryColor,
-                    transitionType: SharedAxisTransitionType.horizontal,
-                    child: child,
-                  ),
-                  child: Quiz(
-                    answerQuestion: _answerQuestion,
-                    questionIndex: _questionIndex,
-                    questions: _questions,
-                  ),
+    return Scaffold(
+      backgroundColor: utilities.secondaryColor,
+      body: Padding(
+        padding: const EdgeInsets.all(30.0),
+        child: _hasAnswered
+            ? PageTransitionSwitcher(
+                duration: const Duration(milliseconds: 500),
+                transitionBuilder: (child, animation, secondaryAnimation) =>
+                    SharedAxisTransition(
+                  animation: animation,
+                  secondaryAnimation: secondaryAnimation,
+                  fillColor: utilities.secondaryColor,
+                  transitionType: SharedAxisTransitionType.horizontal,
+                  child: child,
                 ),
-        ), //Padding
-      ), //Scaffold
-      debugShowCheckedModeBanner: false,
-    ); //MaterialApp
+                child: Result(
+                  _totalScore,
+                  _questionScore,
+                  _goHome,
+                  _moveOn,
+                ),
+              )
+            : PageTransitionSwitcher(
+                duration: const Duration(milliseconds: 500),
+                transitionBuilder: (child, animation, secondaryAnimation) =>
+                    SharedAxisTransition(
+                  animation: animation,
+                  secondaryAnimation: secondaryAnimation,
+                  fillColor: utilities.secondaryColor,
+                  transitionType: SharedAxisTransitionType.horizontal,
+                  child: child,
+                ),
+                child: Quiz(
+                  answerQuestion: _answerQuestion,
+                  questionIndex: _questionIndex,
+                  questions: _questions,
+                ),
+              ),
+      ),
+    );
   }
 }

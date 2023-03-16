@@ -3,6 +3,8 @@ import 'package:spotify_quiz/custom_widgets/text.dart';
 import 'package:spotify_quiz/utility/transitions.dart';
 import 'package:spotify_quiz/utility/utilities.dart' as utilities;
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import '../../custom_widgets/bottom_nav_bar.dart';
 import '../../custom_widgets/box_custom_pic.dart';
 import '../../gameInfoPage/view/game_info_view.dart';
@@ -47,7 +49,7 @@ class QuizScreen extends StatelessWidget {
             ),
           ),
           CustomText(
-            text: "Artists",
+            text: AppLocalizations.of(context)!.artist,
             size: 20,
             bold: true,
             italic: true,
@@ -76,7 +78,7 @@ class QuizScreen extends StatelessWidget {
             ),
           ),
           CustomText(
-            text: "Songs",
+            text: AppLocalizations.of(context)!.song,
             size: 20,
             bold: true,
             italic: true,
@@ -105,7 +107,7 @@ class QuizScreen extends StatelessWidget {
             ),
           ),
           CustomText(
-            text: "Casual",
+            text: AppLocalizations.of(context)!.casual,
             size: 20,
             bold: true,
             italic: true,
@@ -133,7 +135,7 @@ class QuizScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         CustomText(
-                          text: "Choose a quiz!",
+                          text: AppLocalizations.of(context)!.chooseaquiz,
                           size: 30.0,
                           bold: true,
                         ),
@@ -162,7 +164,7 @@ class QuizScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         CustomText(
-                          text: "Your favourite artists",
+                          text: AppLocalizations.of(context)!.yourfavartists,
                           size: 30.0,
                           bold: true,
                         ),

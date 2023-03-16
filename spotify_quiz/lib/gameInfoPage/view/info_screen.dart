@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:spotify_quiz/gameInfoPage/components/play_button.dart';
 import 'package:spotify_quiz/utility/utilities.dart' as utilities;
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import '../../custom_widgets/text.dart';
 
 // ignore: must_be_immutable
@@ -24,7 +26,7 @@ class GameInfoScreen extends StatelessWidget {
         backgroundColor: utilities.secondaryColor,
         foregroundColor: utilities.primaryColor,
         elevation: 0.0,
-        title: const Text("Go back"),
+        title: Text(AppLocalizations.of(context)!.gobackbutton),
       ),
       body: Container(
         constraints: const BoxConstraints.expand(),

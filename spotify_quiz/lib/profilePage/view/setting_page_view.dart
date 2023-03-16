@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:spotify_quiz/custom_widgets/boxed_widgets.dart';
 import 'package:spotify_quiz/utility/utilities.dart' as utilities;
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import '../../custom_widgets/text.dart';
 
 class ProfilePage extends StatelessWidget {
@@ -15,7 +17,7 @@ class ProfilePage extends StatelessWidget {
         backgroundColor: utilities.secondaryColor,
         foregroundColor: utilities.primaryColor,
         elevation: 0.0,
-        title: const Text("Return Home"),
+        title: Text(AppLocalizations.of(context)!.gobackbutton),
       ),
       body: Center(
         child: SingleChildScrollView(
@@ -34,7 +36,7 @@ class ProfilePage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   CustomText(
-                    text: "Statistics",
+                    text: AppLocalizations.of(context)!.statistics,
                     thirdColor: true,
                     size: 25,
                     bold: true,
@@ -48,7 +50,7 @@ class ProfilePage extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             CustomText(
-                              text: "Correct Answers",
+                              text: AppLocalizations.of(context)!.correctanswer,
                               thirdColor: true,
                               size: 20,
                             ),
@@ -62,7 +64,7 @@ class ProfilePage extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             CustomText(
-                              text: "Wrong Answers",
+                              text: AppLocalizations.of(context)!.wronganswer,
                               thirdColor: true,
                               size: 20,
                             ),
@@ -76,7 +78,7 @@ class ProfilePage extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             CustomText(
-                              text: "Total Points",
+                              text: AppLocalizations.of(context)!.totpoints,
                               thirdColor: true,
                               size: 20,
                             ),

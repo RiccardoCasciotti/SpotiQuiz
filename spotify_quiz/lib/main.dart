@@ -10,6 +10,10 @@ import 'package:spotify_quiz/loading/splash.dart';
 import 'package:spotify_quiz/themes/bloc/theme_bloc.dart';
 import 'package:user_repository/user_repository.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import 'package:flutter_localizations/flutter_localizations.dart';
+
 import 'repositories/firebase_options.dart';
 
 void main() async {
@@ -107,6 +111,17 @@ class _MyAppViewState extends State<MyAppView> {
         builder: (context, state) {
           return MaterialApp(
             navigatorKey: _navigatorKey,
+            localizationsDelegates: const [
+              AppLocalizations.delegate,
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+            ],
+            supportedLocales: const [
+              Locale('en'), // English
+              Locale('es'), // Spanish
+              Locale('it'), // Italian
+            ],
             builder: (context, child) {
               return BlocListener<AuthenticationBloc, AuthenticationState>(
                 listener: (context, state) {

@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:spotify_quiz/custom_widgets/text.dart';
 import 'package:spotify_quiz/quizPage/components/text_button_return.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 class Result extends StatelessWidget {
   final int resultScore;
   final Function returnHome;
@@ -15,18 +17,6 @@ class Result extends StatelessWidget {
       {Key? key})
       : super(key: key);
 
-//Remark Logic
-  String get resultPhrase {
-    String resultText;
-    if (questionScore > 0) {
-      resultText = 'Correct Answer!';
-    } else {
-      resultText = 'Wrong Answer!';
-      print(resultScore);
-    }
-    return resultText;
-  }
-
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -34,7 +24,9 @@ class Result extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
           CustomText(
-            text: resultPhrase,
+            text: questionScore > 0
+                ? AppLocalizations.of(context)!.correctanswerquiz
+                : AppLocalizations.of(context)!.wronganswerquiz,
             size: 30,
             alignCenter: true,
             wrongColor: questionScore > 0 ? false : true,
@@ -44,7 +36,7 @@ class Result extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               CustomText(
-                text: "Score:",
+                text: AppLocalizations.of(context)!.scorequiz,
                 size: 35,
                 alignCenter: true,
                 thirdColor: true,
@@ -64,12 +56,12 @@ class Result extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               TextButtonReturn(
-                text: 'Quit',
-                selectHandler: (context) => returnHome(),
+                text: AppLocalizations.of(context)!.quitbutton,
+                selectHandler: (_) => returnHome(),
               ),
               TextButtonReturn(
-                text: 'Continue',
-                selectHandler: (context) => moveOn(),
+                text: AppLocalizations.of(context)!.continuebutton,
+                selectHandler: (_) => moveOn(),
               ),
             ],
           ),

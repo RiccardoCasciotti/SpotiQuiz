@@ -3,6 +3,8 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:spotify_quiz/utility/utilities.dart' as utilities;
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import '../../custom_widgets/text.dart';
 import '../../quizPage/view/quiz_page.dart';
 import '../../utility/transitions.dart';
@@ -52,7 +54,7 @@ class _PlayButtonState extends State<PlayButton> {
             });
       },
       label: CustomText(
-        text: "Play",
+        text: AppLocalizations.of(context)!.playbutton,
         size: 20,
         secondColor: true,
         bold: true,

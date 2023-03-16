@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:spotify_quiz/custom_widgets/text.dart';
 import 'package:spotify_quiz/utility/utilities.dart' as utilities;
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import '../../custom_widgets/bottom_nav_bar.dart';
 import '../../custom_widgets/box_avatar_with_hero.dart';
 import '../../custom_widgets/custom_buttons.dart';
@@ -61,7 +63,7 @@ class HomeScreen extends StatelessWidget {
                       Container(
                         alignment: Alignment.center,
                         child: CustomText(
-                          text: "Level",
+                          text: AppLocalizations.of(context)!.level,
                           thirdColor: true,
                           size: 30,
                           bold: true,
@@ -92,7 +94,7 @@ class HomeScreen extends StatelessWidget {
                       Container(
                         alignment: Alignment.center,
                         child: CustomText(
-                          text: "#Quiz",
+                          text: AppLocalizations.of(context)!.nofquiz,
                           size: 30,
                           thirdColor: true,
                           bold: true,
@@ -123,7 +125,7 @@ class HomeScreen extends StatelessWidget {
                       Container(
                         alignment: Alignment.center,
                         child: CustomText(
-                          text: "Coins",
+                          text: AppLocalizations.of(context)!.coins,
                           thirdColor: true,
                           size: 30,
                           bold: true,

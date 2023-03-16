@@ -79,6 +79,6 @@ class CustomTextButtonResult extends StatelessWidget {
           ),
         ),
       ),
-    ); //Container
+    );
   }
 }

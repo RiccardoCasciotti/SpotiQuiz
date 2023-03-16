@@ -4,6 +4,8 @@ import 'package:spotify_quiz/eventsPage/view/events_page_view.dart';
 import 'package:spotify_quiz/rankingPage/ranking_page_view.dart';
 import 'package:spotify_quiz/utility/utilities.dart' as utilities;
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import '../utility/transitions.dart';
 
 // ignore: must_be_immutable
@@ -66,7 +68,7 @@ class _CustomButtonsHomeState extends State<CustomButtonsHome> {
                   child: const Icon(Icons.emoji_events_outlined),
                 ),
                 CustomText(
-                  text: "Ranking",
+                  text: AppLocalizations.of(context)!.ranking,
                   size: 20.0,
                   thirdColor: !_tapped1,
                 ),
@@ -101,7 +103,7 @@ class _CustomButtonsHomeState extends State<CustomButtonsHome> {
                   child: const Icon(Icons.star_outline_sharp),
                 ),
                 CustomText(
-                  text: "Events",
+                  text: AppLocalizations.of(context)!.events,
                   size: 20.0,
                   thirdColor: !_tapped2,
                 ),

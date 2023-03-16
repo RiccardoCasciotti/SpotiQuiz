@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:spotify_quiz/custom_widgets/text.dart';
 import 'package:spotify_quiz/utility/utilities.dart' as utilities;
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import '../../custom_widgets/bottom_nav_bar.dart';
 
 class GlobalRankScreen extends StatelessWidget {
@@ -21,7 +23,7 @@ class GlobalRankScreen extends StatelessWidget {
         backgroundColor: utilities.secondaryColor,
         foregroundColor: utilities.primaryColor,
         elevation: 0.0,
-        title: const Text("Go back"),
+        title: Text(AppLocalizations.of(context)!.gobackbutton),
       ),
       backgroundColor: utilities.secondaryColor,
       body: Center(
@@ -34,7 +36,7 @@ class GlobalRankScreen extends StatelessWidget {
                 height: 40,
                 width: double.infinity,
                 child: CustomText(
-                  text: "Global ranking",
+                  text: AppLocalizations.of(context)!.globalranking,
                   thirdColor: true,
                   size: 30,
                   bold: true,
@@ -74,7 +76,8 @@ class GlobalRankScreen extends StatelessWidget {
                             Container(
                               alignment: Alignment.center,
                               child: CustomText(
-                                text: "Username",
+                                text: AppLocalizations.of(context)!
+                                    .usernameranking,
                                 thirdColor: true,
                                 size: 20,
                                 bold: true,
@@ -83,7 +86,8 @@ class GlobalRankScreen extends StatelessWidget {
                             Container(
                               alignment: Alignment.center,
                               child: CustomText(
-                                text: "Best score",
+                                text: AppLocalizations.of(context)!
+                                    .bestscoreranking,
                                 thirdColor: true,
                                 size: 20,
                                 bold: true,
