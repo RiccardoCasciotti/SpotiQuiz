@@ -4,6 +4,9 @@ import 'package:spotify_quiz/custom_widgets/text.dart';
 import 'package:spotify_quiz/gameInfoPage/tablet/view/game_info_view.dart';
 import 'package:spotify_quiz/homePage/view/tablet/components/custom_navigation_rail.dart';
 import 'package:spotify_quiz/utility/transitions.dart';
+
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import 'package:spotify_quiz/utility/utilities.dart' as utilities;
 
 // ignore: must_be_immutable
@@ -44,7 +47,7 @@ class QuizScreenTablet extends StatelessWidget {
             ),
           ),
           CustomText(
-            text: "Artists",
+            text: AppLocalizations.of(context)!.artist,
             size: 20,
             bold: true,
             italic: true,
@@ -74,7 +77,7 @@ class QuizScreenTablet extends StatelessWidget {
             ),
           ),
           CustomText(
-            text: "Songs",
+            text: AppLocalizations.of(context)!.song,
             size: 20,
             bold: true,
             italic: true,
@@ -104,7 +107,7 @@ class QuizScreenTablet extends StatelessWidget {
             ),
           ),
           CustomText(
-            text: "Casual",
+            text: AppLocalizations.of(context)!.casual,
             size: 20,
             bold: true,
             italic: true,
@@ -140,7 +143,8 @@ class QuizScreenTablet extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
                                 CustomText(
-                                  text: "Choose a quiz!",
+                                  text:
+                                      AppLocalizations.of(context)!.chooseaquiz,
                                   size: 30.0,
                                   bold: true,
                                 ),
@@ -169,7 +173,8 @@ class QuizScreenTablet extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
                                 CustomText(
-                                  text: "Your favourite artists",
+                                  text: AppLocalizations.of(context)!
+                                      .yourfavartists,
                                   size: 30.0,
                                   bold: true,
                                 ),

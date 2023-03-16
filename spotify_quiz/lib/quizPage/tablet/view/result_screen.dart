@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:spotify_quiz/custom_widgets/text.dart';
 import 'package:spotify_quiz/quizPage/components/text_button_return.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 class ResultTablet extends StatelessWidget {
   final int resultScore;
   final Function returnHome;
@@ -15,18 +17,6 @@ class ResultTablet extends StatelessWidget {
       {Key? key})
       : super(key: key);
 
-//Remark Logic
-  String get resultPhrase {
-    String resultText;
-    if (questionScore > 0) {
-      resultText = 'Correct Answer!';
-    } else {
-      resultText = 'Wrong Answer!';
-      print(resultScore);
-    }
-    return resultText;
-  }
-
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -34,7 +24,9 @@ class ResultTablet extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
           CustomText(
-            text: resultPhrase,
+            text: questionScore > 0
+                ? AppLocalizations.of(context)!.correctanswerquiz
+                : AppLocalizations.of(context)!.wronganswerquiz,
             size: 60,
             alignCenter: true,
             wrongColor: questionScore > 0 ? false : true,
@@ -47,7 +39,7 @@ class ResultTablet extends StatelessWidget {
                 width: 100,
               ),
               CustomText(
-                text: "Score:",
+                text: AppLocalizations.of(context)!.scorequiz,
                 size: 35,
                 alignCenter: true,
                 thirdColor: true,
@@ -73,11 +65,11 @@ class ResultTablet extends StatelessWidget {
                 width: 30,
               ),
               TextButtonReturn(
-                text: 'Quit',
+                text: AppLocalizations.of(context)!.quitbutton,
                 selectHandler: (context) => returnHome(),
               ),
               TextButtonReturn(
-                text: 'Continue',
+                text: AppLocalizations.of(context)!.continuebutton,
                 selectHandler: (context) => moveOn(),
               ),
               const SizedBox(

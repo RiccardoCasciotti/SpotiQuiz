@@ -4,6 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:spotify_quiz/custom_widgets/text.dart';
 import 'package:spotify_quiz/quizPage/tablet/view/quiz_page.dart';
 import 'package:spotify_quiz/utility/transitions.dart';
+
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import 'package:spotify_quiz/utility/utilities.dart' as utilities;
 
 class PlayButtonTablet extends StatefulWidget {
@@ -51,7 +54,7 @@ class _PlayButtonTabletState extends State<PlayButtonTablet> {
             });
       },
       label: CustomText(
-        text: "Play",
+        text: AppLocalizations.of(context)!.playbutton,
         size: 40,
         secondColor: true,
         bold: true,

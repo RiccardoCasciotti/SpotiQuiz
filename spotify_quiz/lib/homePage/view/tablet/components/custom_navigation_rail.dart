@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:spotify_quiz/custom_widgets/text.dart';
+
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import 'package:spotify_quiz/utility/utilities.dart' as utilities;
 
 // ignore: must_be_immutable
@@ -33,7 +36,7 @@ class CustomNavRail extends StatelessWidget {
           icon: const Icon(Icons.home_outlined),
           selectedIcon: const Icon(Icons.home),
           label: CustomText(
-            text: "Home",
+            text: AppLocalizations.of(context)!.home,
             size: selectedIndex != 0 ? 13 : 20,
             thirdColor: selectedIndex != 0,
           ),
@@ -42,7 +45,7 @@ class CustomNavRail extends StatelessWidget {
           icon: const Icon(Icons.question_mark_outlined),
           selectedIcon: const Icon(Icons.question_mark),
           label: CustomText(
-            text: "Quiz",
+            text: AppLocalizations.of(context)!.quizpage,
             size: selectedIndex != 1 ? 13 : 20,
             thirdColor: selectedIndex != 1,
           ),
@@ -51,7 +54,7 @@ class CustomNavRail extends StatelessWidget {
           icon: const Icon(Icons.emoji_events_outlined),
           selectedIcon: const Icon(Icons.emoji_events),
           label: CustomText(
-            text: "Ranking",
+            text: AppLocalizations.of(context)!.ranking,
             size: selectedIndex != 2 ? 13 : 20,
             thirdColor: selectedIndex != 2,
           ),

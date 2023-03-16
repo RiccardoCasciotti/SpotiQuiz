@@ -3,6 +3,8 @@ import 'package:spotify_quiz/custom_widgets/boxed_widgets.dart';
 import 'package:spotify_quiz/custom_widgets/text.dart';
 import 'package:spotify_quiz/utility/utilities.dart' as utilities;
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import '../components/custom_navigation_rail.dart';
 
 class HomeScreenTablet extends StatelessWidget {
@@ -69,7 +71,7 @@ class HomeScreenTablet extends StatelessWidget {
                             Container(
                               alignment: Alignment.center,
                               child: CustomText(
-                                text: "Level",
+                                text: AppLocalizations.of(context)!.level,
                                 thirdColor: true,
                                 size: 30,
                                 bold: true,
@@ -100,7 +102,7 @@ class HomeScreenTablet extends StatelessWidget {
                             Container(
                               alignment: Alignment.center,
                               child: CustomText(
-                                text: "#Quiz",
+                                text: AppLocalizations.of(context)!.nofquiz,
                                 size: 30,
                                 thirdColor: true,
                                 bold: true,
@@ -131,7 +133,7 @@ class HomeScreenTablet extends StatelessWidget {
                             Container(
                               alignment: Alignment.center,
                               child: CustomText(
-                                text: "Coins",
+                                text: AppLocalizations.of(context)!.coins,
                                 thirdColor: true,
                                 size: 30,
                                 bold: true,
@@ -173,7 +175,7 @@ class HomeScreenTablet extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
                             CustomText(
-                              text: "Statistics",
+                              text: AppLocalizations.of(context)!.statistics,
                               thirdColor: true,
                               size: 25,
                               bold: true,
@@ -188,7 +190,8 @@ class HomeScreenTablet extends StatelessWidget {
                                         MainAxisAlignment.spaceBetween,
                                     children: [
                                       CustomText(
-                                        text: "Correct Answers",
+                                        text: AppLocalizations.of(context)!
+                                            .correctanswer,
                                         thirdColor: true,
                                         size: 20,
                                       ),
@@ -203,7 +206,8 @@ class HomeScreenTablet extends StatelessWidget {
                                         MainAxisAlignment.spaceBetween,
                                     children: [
                                       CustomText(
-                                        text: "Wrong Answers",
+                                        text: AppLocalizations.of(context)!
+                                            .wronganswer,
                                         thirdColor: true,
                                         size: 20,
                                       ),
@@ -218,7 +222,8 @@ class HomeScreenTablet extends StatelessWidget {
                                         MainAxisAlignment.spaceBetween,
                                     children: [
                                       CustomText(
-                                        text: "Total Points",
+                                        text: AppLocalizations.of(context)!
+                                            .totpoints,
                                         thirdColor: true,
                                         size: 20,
                                       ),

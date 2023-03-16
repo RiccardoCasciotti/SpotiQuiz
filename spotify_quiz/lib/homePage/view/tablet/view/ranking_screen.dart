@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:spotify_quiz/custom_widgets/text.dart';
 import 'package:spotify_quiz/utility/utilities.dart' as utilities;
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import '../components/custom_navigation_rail.dart';
 
 class RankingScreenTablet extends StatelessWidget {
@@ -45,7 +47,7 @@ class RankingScreenTablet extends StatelessWidget {
                       Flexible(
                         flex: 4,
                         child: CustomText(
-                          text: "Local ranking",
+                          text: AppLocalizations.of(context)!.localranking,
                           size: 30,
                           bold: true,
                           thirdColor: true,
@@ -84,7 +86,8 @@ class RankingScreenTablet extends StatelessWidget {
                                       Container(
                                         alignment: Alignment.center,
                                         child: CustomText(
-                                          text: "Username",
+                                          text: AppLocalizations.of(context)!
+                                              .usernameranking,
                                           thirdColor: true,
                                           size: 20,
                                           bold: true,
@@ -93,7 +96,8 @@ class RankingScreenTablet extends StatelessWidget {
                                       Container(
                                         alignment: Alignment.center,
                                         child: CustomText(
-                                          text: "Best score",
+                                          text: AppLocalizations.of(context)!
+                                              .bestscoreranking,
                                           thirdColor: true,
                                           size: 20,
                                           bold: true,
@@ -194,7 +198,7 @@ class RankingScreenTablet extends StatelessWidget {
                       Flexible(
                         flex: 4,
                         child: CustomText(
-                          text: "Global ranking",
+                          text: AppLocalizations.of(context)!.globalranking,
                           size: 30,
                           bold: true,
                           thirdColor: true,
@@ -233,7 +237,8 @@ class RankingScreenTablet extends StatelessWidget {
                                       Container(
                                         alignment: Alignment.center,
                                         child: CustomText(
-                                          text: "Username",
+                                          text: AppLocalizations.of(context)!
+                                              .usernameranking,
                                           thirdColor: true,
                                           size: 20,
                                           bold: true,
@@ -242,7 +247,8 @@ class RankingScreenTablet extends StatelessWidget {
                                       Container(
                                         alignment: Alignment.center,
                                         child: CustomText(
-                                          text: "Best score",
+                                          text: AppLocalizations.of(context)!
+                                              .bestscoreranking,
                                           thirdColor: true,
                                           size: 20,
                                           bold: true,
