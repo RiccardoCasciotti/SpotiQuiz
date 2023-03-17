@@ -21,7 +21,6 @@ class RankingScreenTablet extends StatelessWidget {
     return Scaffold(
       backgroundColor: utilities.secondaryColor,
       body: Center(
-        //body: LayoutBuilder TODO, see slides
         child: Row(
           children: [
             CustomNavRail(

@@ -28,7 +28,6 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: utilities.secondaryColor,
       body: Center(
-        //body: LayoutBuilder TODO, see slides
         child: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,

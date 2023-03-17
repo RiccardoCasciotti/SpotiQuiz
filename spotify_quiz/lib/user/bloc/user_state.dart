@@ -45,3 +45,12 @@ class UserLoaded extends UserState {
   @override
   List<Object?> get props => [mydata];
 }
+
+// ignore: must_be_immutable
+class UserFound extends UserState {
+  User mydata;
+  UserFound(this.mydata);
+
+  @override
+  List<Object?> get props => [mydata];
+}

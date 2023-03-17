@@ -50,9 +50,9 @@ class UserRepository {
     List<User> userList = [];
     try {
       final user = await FirebaseFirestore.instance.collection('users').get();
-      user.docs.forEach((element) {
-        return userList.add(User.fromJson(element.data()));
-      });
+      for (var element in user.docs) {
+        userList.add(User.fromJson(element.data()));
+      }
       return userList;
     } on FirebaseException catch (e) {
       if (kDebugMode) {
@@ -64,21 +64,24 @@ class UserRepository {
     }
   }
 
-  Future<List<User>> getByID(String uid) async {
+  Future<User?> getByID(String uid) async {
     List<User> userList = [];
     try {
       final user = await FirebaseFirestore.instance.collection('users').get();
-      user.docs.forEach((element) {
+      for (var element in user.docs) {
         if ((User.fromJson(element.data())).uid == uid) {
-          return userList.add(User.fromJson(element.data()));
+          userList.add(
+            User.fromJson(element.data()),
+          );
+          return userList.first;
         }
-      });
-      return userList;
+      }
+      return null;
     } on FirebaseException catch (e) {
       if (kDebugMode) {
         print("Failed with error '${e.code}' : ${e.message}");
       }
-      return userList;
+      return null;
     } catch (e) {
       throw Exception(e.toString());
     }
