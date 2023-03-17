@@ -121,6 +121,9 @@ class _MyAppViewState extends State<MyAppView> {
               Locale('en'), // English
               Locale('es'), // Spanish
               Locale('it'), // Italian
+              Locale('fr'), // French
+              Locale('de'), // German
+              Locale('ru'), // Russian
             ],
             builder: (context, child) {
               return BlocListener<AuthenticationBloc, AuthenticationState>(
