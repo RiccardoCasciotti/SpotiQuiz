@@ -3,7 +3,6 @@ import 'package:equatable/equatable.dart';
 /// [User.empty] represents an unauthenticated user.
 
 class User extends Equatable {
- 
   const User({
     required this.id,
     this.email,
@@ -31,6 +30,7 @@ class User extends Equatable {
 
   /// Convenience getter to determine whether the current user is not empty.
   bool get isNotEmpty => this != User.empty;
+
 
   @override
   List<Object?> get props => [email, id, name, photo];

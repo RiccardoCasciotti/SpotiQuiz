@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:firebase_core/firebase_core.dart';
+import 'package:spotify_quiz/button/bloc/button_bloc.dart';
+import 'package:spotify_quiz/login/bloc/login_bloc.dart';
+import 'authentication/web_view/web_view_login.dart';
 import 'firebase_options.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -11,16 +14,20 @@ import 'package:spotify_quiz/authentication/authentication.dart';
 
 import 'package:user_repository/user_repository.dart';
 import 'package:spotify_quiz/home/home.dart';
-import 'package:spotify_quiz/login/login.dart';
+import 'login/bloc/login_bloc.dart';
+import 'login/view/login_page.dart';
 import 'package:spotify_quiz/loading/splash.dart';
+import 'button/view/button_page.dart';
 
 void main() async {
   await dotenv.load(fileName: ".env");
+  
+
   WidgetsFlutterBinding.ensureInitialized();
   //FirebaseFirestore db = FirebaseFirestore.instance;
   // Add a new document with a generated ID
   //db.collection("users").add(user);
-  runApp(MyApp(authenticationRepository: AuthenticationRepository(),
+   runApp(MyApp(authenticationRepository: AuthenticationRepository(),
       userRepository: UserRepository()));
 }
 
@@ -30,55 +37,24 @@ class MyApp extends StatelessWidget {
         required this.userRepository,});
   final AuthenticationRepository authenticationRepository;
   final UserRepository userRepository;
-        
-        final Future<FirebaseApp> _fbApp = Firebase.initializeApp(
+
+  final Future<FirebaseApp> _fbApp = Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return RepositoryProvider.value(
-      value: authenticationRepository, 
+      value: authenticationRepository,
       child: BlocProvider(
-        create: (_) => AuthenticationBloc(
-          authenticationRepository: authenticationRepository,
-          userRepository: userRepository, 
-        ), 
-        child: const MyAppView()
-      )
+          create: (_) => AuthenticationBloc(
+                authenticationRepository: authenticationRepository,
+                userRepository: userRepository,
+              ),
+          child: MyAppView())
+          ,
+          
     );
-    // return MaterialApp(
-    //     title: 'Flutter Demo',
-    //     theme: ThemeData(
-    //       // This is the theme of your application.
-    //       //
-    //       // Try running your application with "flutter run". You'll see the
-    //       // application has a blue toolbar. Then, without quitting the app, try
-    //       // changing the primarySwatch below to Colors.green and then invoke
-    //       // "hot reload" (press "r" in the console where you ran "flutter run",
-    //       // or simply save your changes to "hot reload" in a Flutter IDE).
-    //       // Notice that the counter didn't reset back to zero; the application
-    //       // is not restarted.
-    //       primarySwatch: Colors.blue,
-    //     ),
-    //     home: FutureBuilder(
-    //       future: _fbApp,
-    //       builder: (context, snapshot) {
-    //         if (snapshot.hasError) {
-    //           print("You have an error!${snapshot.error.toString()}");
-    //           return Text("Something went wrong");
-    //         } else if (snapshot.hasData) {
-    //           DatabaseReference ref = FirebaseDatabase.instance.ref();
-    //           if (ref != null) {
-    //             return MyAppView();
-    //           } else {
-    //             return Text("Something went wrong getting databse instance");
-    //           }
-    //         } else {
-    //           return Center(child: CircularProgressIndicator());
-    //         }
-    //       },
-    //     ));
   }
 }
 
@@ -94,29 +70,14 @@ class MyAppView extends StatefulWidget {
   // used by the build method of the State. Fields in a Widget subclass are
   // always marked "final".
 
-
-
   @override
   State<MyAppView> createState() => _MyAppViewState();
 }
 
 class _MyAppViewState extends State<MyAppView> {
-  int _counter = 0;
-
   final _navigatorKey = GlobalKey<NavigatorState>();
 
   NavigatorState get _navigator => _navigatorKey.currentState!;
-
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -156,46 +117,3 @@ class _MyAppViewState extends State<MyAppView> {
     );
   }
 }
-//       appBar: AppBar(
-//         // Here we take the value from the MyHomePage object that was created by
-//         // the App.build method, and use it to set our appbar title.
-//         title: Text(widget.title),
-//       ),
-//       body: Center(
-//         // Center is a layout widget. It takes a single child and positions it
-//         // in the middle of the parent.
-//         child: Column(
-//           // Column is also a layout widget. It takes a list of children and
-//           // arranges them vertically. By default, it sizes itself to fit its
-//           // children horizontally, and tries to be as tall as its parent.
-//           //
-//           // Invoke "debug painting" (press "p" in the console, choose the
-//           // "Toggle Debug Paint" action from the Flutter Inspector in Android
-//           // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-//           // to see the wireframe for each widget.
-//           //
-//           // Column has various properties to control how it sizes itself and
-//           // how it positions its children. Here we use mainAxisAlignment to
-//           // center the children vertically; the main axis here is the vertical
-//           // axis because Columns are vertical (the cross axis would be
-//           // horizontal).
-//           mainAxisAlignment: MainAxisAlignment.center,
-//           children: <Widget>[
-//             const Text(
-//               'You have pushed the button this many times:',
-//             ),
-//             Text(
-//               '$_counter',
-//               style: Theme.of(context).textTheme.headline4,
-//             ),
-//           ],
-//         ),
-//       ),
-//       floatingActionButton: FloatingActionButton(
-//         onPressed: _incrementCounter,
-//         tooltip: 'Increment',
-//         child: const Icon(Icons.add),
-//       ), // This trailing comma makes auto-formatting nicer for build methods.
-//     );
-//   }
-// }
