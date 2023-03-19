@@ -29,11 +29,7 @@ class _AnswerState extends State<Answer> {
               _tapped = true;
             });
             Future.delayed(animationDuration).then((_) => {
-                  widget.selectHandler().then(
-                        (value) => setState(() {
-                          _tapped = false;
-                        }),
-                      ),
+                  widget.selectHandler(),
                 });
           },
           style: ButtonStyle(

@@ -2,8 +2,21 @@ import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:spotify_quiz/utility/utilities.dart' as utilities;
 
+import '../controllers/question_controller.dart';
 import 'quiz_screen.dart';
 import 'result_screen.dart';
+
+//POSSIBLE QUESTIONS
+
+// In which year album X was released?
+// How many albums has artist X released?
+// How many songs has artist X released?
+// Of which albums is this song part of?
+// When was this song released?
+// How many songs are in this album?
+// Who made this album?
+// Who made this song?
+// Is this song made by this artist?
 
 class QuizPage extends StatefulWidget {
   const QuizPage({Key? key}) : super(key: key);
@@ -15,59 +28,7 @@ class QuizPage extends StatefulWidget {
 }
 
 class _QuizPageState extends State<QuizPage> {
-  final _questions = const [
-    {
-      'questionText': 'Q1. Who created Flutter?',
-      'answers': [
-        {'text': 'Facebook', 'score': -2},
-        {'text': 'Adobe', 'score': -2},
-        {'text': 'Google', 'score': 10},
-        {'text': 'Microsoft', 'score': -2},
-      ],
-    },
-    {
-      'questionText': 'Q2. What is Flutter?',
-      'answers': [
-        {'text': 'Android Development Kit', 'score': -2},
-        {'text': 'IOS Development Kit', 'score': -2},
-        {'text': 'Web Development Kit', 'score': -2},
-        {
-          'text':
-              'SDK to build beautiful IOS, Android, Web & Desktop Native Apps',
-          'score': 10
-        },
-      ],
-    },
-    {
-      'questionText': ' Q3. Which programing language is used by Flutter',
-      'answers': [
-        {'text': 'Ruby', 'score': -2},
-        {'text': 'Dart', 'score': 10},
-        {'text': 'C++', 'score': -2},
-        {'text': 'Kotlin', 'score': -2},
-      ],
-    },
-    {
-      'questionText': 'Q4. Who created Dart programing language?',
-      'answers': [
-        {'text': 'Lars Bak and Kasper Lund', 'score': 10},
-        {'text': 'Brendan Eich', 'score': -2},
-        {'text': 'Bjarne Stroustrup', 'score': -2},
-        {'text': 'Jeremy Ashkenas', 'score': -2},
-      ],
-    },
-    {
-      'questionText':
-          'Q5. Is Flutter for Web and Desktop available in stable version?',
-      'answers': [
-        {
-          'text': 'Yes',
-          'score': -2,
-        },
-        {'text': 'No', 'score': 10},
-      ],
-    },
-  ];
+  var _questions = createQuestions();
 
   var _questionIndex = 0;
   var _totalScore = 0;
@@ -75,29 +36,33 @@ class _QuizPageState extends State<QuizPage> {
   var _hasAnswered = false;
 
   void _goHome() {
+    //WE DECIDE WE WANT TO GO BACK
+    //Here we should store the final result and the various informations,
+    //also putting them in the database
     Navigator.pop(context);
-    /*setState(() {
-      _questionIndex = 0;
-      _totalScore = 0;
-      _questionScore = 0;
-    });*/
   }
 
   void _moveOn() {
+    //WE DECIDE TO CONTINUE WITH NEW QUESTIONS
     setState(() {
       _hasAnswered = false;
     });
   }
 
   void _answerQuestion(int score) {
+    //FUNCTION WE CALL WHEN WE GIVE AN ANSWER, HERE WE CAN IMPLEMENT THE LOGIC TO CREATE NEW QUESTIONS
+
     _totalScore += score;
 
+    if (_questionIndex + 1 == 5) {
+      _questions = createQuestions();
+    }
+
     setState(() {
-      _questionIndex = _questionIndex + 1;
+      _questionIndex = (_questionIndex + 1) % 5;
       _questionScore = score;
       _hasAnswered = true;
     });
-    // ignore: avoid_print
   }
 
   @override
