@@ -18,8 +18,14 @@ import 'result_screen.dart';
 // Who made this song?
 // Is this song made by this artist?
 
+// ignore: must_be_immutable
 class QuizPage extends StatefulWidget {
-  const QuizPage({Key? key}) : super(key: key);
+  int selectedMode;
+
+  QuizPage({
+    required this.selectedMode,
+    Key? key,
+  }) : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
@@ -28,7 +34,13 @@ class QuizPage extends StatefulWidget {
 }
 
 class _QuizPageState extends State<QuizPage> {
-  var _questions = createQuestions();
+  var questions;
+
+  @override
+  void initState() {
+    super.initState();
+    questions = createQuestions(widget.selectedMode);
+  }
 
   var _questionIndex = 0;
   var _totalScore = 0;
@@ -55,7 +67,7 @@ class _QuizPageState extends State<QuizPage> {
     _totalScore += score;
 
     if (_questionIndex + 1 == 5) {
-      _questions = createQuestions();
+      questions = createQuestions(widget.selectedMode);
     }
 
     setState(() {
@@ -102,7 +114,7 @@ class _QuizPageState extends State<QuizPage> {
                 child: Quiz(
                   answerQuestion: _answerQuestion,
                   questionIndex: _questionIndex,
-                  questions: _questions,
+                  questions: questions,
                 ),
               ),
       ),

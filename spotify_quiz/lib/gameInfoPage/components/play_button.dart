@@ -1,16 +1,23 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:spotify_quiz/utility/utilities.dart' as utilities;
-
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import 'package:spotify_quiz/utility/utilities.dart' as utilities;
 
 import '../../custom_widgets/text.dart';
 import '../../quizPage/view/quiz_page.dart';
 import '../../utility/transitions.dart';
 
+// ignore: must_be_immutable
 class PlayButton extends StatefulWidget {
-  const PlayButton({super.key});
+  int selectedMode;
+
+  PlayButton({
+    required this.selectedMode,
+    Key? key,
+  }) : super(key: key);
 
   @override
   State<PlayButton> createState() => _PlayButtonState();
@@ -18,12 +25,14 @@ class PlayButton extends StatefulWidget {
 
 class _PlayButtonState extends State<PlayButton> {
   bool _tapped = false;
+  int _selectedMode = 0;
   final animationDuration = const Duration(milliseconds: 50);
 
   @override
   void initState() {
     super.initState();
     _tapped = false;
+    _selectedMode = widget.selectedMode;
   }
 
   @override
@@ -44,7 +53,9 @@ class _PlayButtonState extends State<PlayButton> {
               Navigator.push(
                 context,
                 ScaleRoute(
-                  page: const QuizPage(),
+                  page: QuizPage(
+                    selectedMode: _selectedMode,
+                  ),
                 ),
               ).then(
                 (value) => setState(() {

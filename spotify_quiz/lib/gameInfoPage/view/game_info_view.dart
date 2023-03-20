@@ -21,14 +21,20 @@ class GameInfoPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final pages = [
       GameInfoScreen(
-          text: AppLocalizations.of(context)!.gameinfoartist,
-          urlImage: 'assets/images/singer.jpg'),
+        text: AppLocalizations.of(context)!.gameinfoartist,
+        urlImage: 'assets/images/singer.jpg',
+        selectedMode: selectedGame,
+      ),
       GameInfoScreen(
-          text: AppLocalizations.of(context)!.gameinfosong,
-          urlImage: 'assets/images/mic.jpg'),
+        text: AppLocalizations.of(context)!.gameinfosong,
+        urlImage: 'assets/images/mic.jpg',
+        selectedMode: selectedGame,
+      ),
       GameInfoScreen(
-          text: AppLocalizations.of(context)!.gameinfocasual,
-          urlImage: 'assets/images/concert.jpg'),
+        text: AppLocalizations.of(context)!.gameinfocasual,
+        urlImage: 'assets/images/concert.jpg',
+        selectedMode: selectedGame,
+      ),
     ];
 
     if (selectedGame > 0 && selectedGame < 4) {

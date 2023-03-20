@@ -1,4 +1,4 @@
-List<Map<String, Object>> createQuestions() {
+List<Map<String, Object>> createQuestions(int selectedMode) {
   return [
     {
       'questionText': 'In which year album X was released?',

@@ -10,11 +10,13 @@ import '../../custom_widgets/text.dart';
 class GameInfoScreen extends StatelessWidget {
   String urlImage;
   String text;
+  int selectedMode;
 
   GameInfoScreen({
     Key? key,
     required this.text,
     required this.urlImage,
+    required this.selectedMode,
   }) : super(key: key);
 
   @override
@@ -49,7 +51,9 @@ class GameInfoScreen extends StatelessWidget {
           ),
         ),
       ),
-      floatingActionButton: const PlayButton(),
+      floatingActionButton: PlayButton(
+        selectedMode: selectedMode,
+      ),
     );
   }
 }
