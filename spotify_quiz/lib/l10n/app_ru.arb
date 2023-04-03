@@ -1,0 +1,67 @@
+{
+  "helloWorld": "Здравствуй мир",
+
+  "coins": "Монеты",
+
+  "nofquiz": "#Quiz",
+
+  "level": "Уровень",
+
+  "ranking": "Рейтинг",
+
+  "events": "События",
+
+  "home": "Home",
+
+  "quizpage": "Quiz",
+
+  "statistics": "Статистика",
+
+  "correctanswer": "Правильные ответы",
+
+  "wronganswer": "Неправильные ответы",
+
+  "totpoints": "Общий балл",
+
+  "localranking": "Местное ранжирование",
+
+  "globalranking": "Глобальный рейтинг",
+
+  "localbutton": "Местный",
+
+  "globalbutton": "Глобальный",
+
+  "usernameranking": "Username",
+
+  "bestscoreranking": "Лучший результат",
+
+  "chooseaquiz": "Выберите викторину!",
+
+  "yourfavartists": "Любимые исполнители",
+
+  "artist": "Художники",
+
+  "song": "Треки",
+
+  "casual": "Случайный",
+
+  "gameinfoartist": "Режим игры по мотивам ваших любимых исполнителей",
+
+  "gameinfosong": "Игровой режим, основанный на ваших любимых треках",
+
+  "gameinfocasual": "Режим игры, основанный на случайных исполнителях и треках",
+
+  "playbutton": "Играть",
+
+  "gobackbutton": "Вернуться к началу",
+
+  "correctanswerquiz": "Правильный ответ!",
+
+  "wronganswerquiz": "Неправильный ответ!",
+
+  "quitbutton": "Конец",
+
+  "continuebutton": "Продолжение",
+
+  "scorequiz": "Оценка:"
+}

@@ -1,0 +1,67 @@
+{
+  "helloWorld": "Ciao mondo",
+
+  "coins": "Monedas",
+
+  "nofquiz": "#Quiz",
+
+  "level": "Nivel",
+
+  "ranking": "Clasificación",
+
+  "events": "Eventos",
+
+  "home": "Home",
+
+  "quizpage": "Quiz",
+
+  "statistics": "Estadísticas",
+
+  "correctanswer": "Respuestas Correctas",
+
+  "wronganswer": "Respuestas Incorrectas",
+
+  "totpoints": "Puntaje Total",
+
+  "localranking": "Clasificación local",
+
+  "globalranking": "Clasificación mundial",
+
+  "localbutton": "Local",
+
+  "globalbutton": "Mundial",
+
+  "usernameranking": "Username",
+
+  "bestscoreranking": "Mejor puntuación",
+
+  "chooseaquiz": "¡Elige un quiz!",
+
+  "yourfavartists": "Tus artistas favoritos",
+
+  "artist": "Artistas",
+
+  "song": "Pistas",
+
+  "casual": "Aleatorio",
+
+  "gameinfoartist": "Modo de juego basado en tus artistas favoritos",
+
+  "gameinfosong": "Modo de reproducción basado en tus canciones favoritas",
+
+  "gameinfocasual": "Modo de juego basado en artistas y canciones aleatorias",
+
+  "playbutton": "Juegas",
+
+  "gobackbutton": "Vaya de regreso",
+
+  "correctanswerquiz": "¡Respuesta Correcta!",
+
+  "wronganswerquiz": "¡Respuesta Incorrecta!",
+
+  "quitbutton": "Finalizar",
+
+  "continuebutton": "Continúa",
+
+  "scorequiz": "Puntaje:"
+}

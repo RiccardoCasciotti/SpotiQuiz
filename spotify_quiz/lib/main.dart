@@ -20,6 +20,18 @@ import 'home/view/home_page.dart';
 import 'loading/view/splash_page.dart';
 import 'login/view/login_page.dart';
 
+import 'package:spotify_quiz/authentication/authentication.dart';
+import 'package:spotify_quiz/homePage/view/home_page_view.dart';
+import 'package:spotify_quiz/homePage/view/tablet/view/home_page_view.dart';
+import 'package:spotify_quiz/loading/splash.dart';
+import 'package:spotify_quiz/themes/bloc/theme_bloc.dart';
+import 'package:user_repository/user_repository.dart';
+
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import 'package:flutter_localizations/flutter_localizations.dart';
+
+import 'repositories/firebase_options.dart';
 
 void main() async {
   await dotenv.load(fileName: ".env");

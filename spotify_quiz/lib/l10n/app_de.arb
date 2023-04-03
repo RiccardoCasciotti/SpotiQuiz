@@ -1,0 +1,67 @@
+{
+  "helloWorld": "Hallo welt",
+
+  "coins": "Münzen",
+
+  "nofquiz": "#Quiz",
+
+  "level": "Ebene",
+
+  "ranking": "Rangliste",
+
+  "events": "Veranstaltungen",
+
+  "home": "Home",
+
+  "quizpage": "Quiz",
+
+  "statistics": "Statistik",
+
+  "correctanswer": "Richtige Antworten",
+
+  "wronganswer": "Falsche Antworten",
+
+  "totpoints": "Gesamtpunktzahl",
+
+  "localranking": "Lokales rangliste",
+
+  "globalranking": "Globale rangliste",
+
+  "localbutton": "Lokales",
+
+  "globalbutton": "Globale",
+
+  "usernameranking": "Username",
+
+  "bestscoreranking": "Beste punktzahl",
+
+  "chooseaquiz": "Wählen sie ein quiz!",
+
+  "yourfavartists": "Ihre lieblingskünstler",
+
+  "artist": "Künstler",
+
+  "song": "Tracks",
+
+  "casual": "Zufällig",
+
+  "gameinfoartist": "Spielmodus basierend auf ihren lieblingskünstlern",
+
+  "gameinfosong": "Spielmodus auf der grundlage ihrer lieblingsstrecken",
+
+  "gameinfocasual": "Spielmodus basierend auf zufälligen künstlern und titeln",
+
+  "playbutton": "Spielen",
+
+  "gobackbutton": "Zurück zum anfang",
+
+  "correctanswerquiz": "Richtige Antwort!",
+
+  "wronganswerquiz": "Falsche Antwort!",
+
+  "quitbutton": "Ende",
+
+  "continuebutton": "Fortsetzung",
+
+  "scorequiz": "Ergebnis:"
+}

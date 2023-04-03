@@ -1,0 +1,171 @@
+{
+  "helloWorld": "Hello World!",
+  "@helloWorld": {
+    "description": "The conventional newborn programmer greeting"
+  },
+
+  "coins": "Coins",
+  "@coins": {
+    "description": "Coins of the user name displayed in the first page"
+  },
+
+  "nofquiz": "#Quiz",
+  "@nofquiz": {
+    "description": "Number of quizzes"
+  },
+
+  "level": "Level",
+  "@level": {
+    "description": "The level of the player"
+  },
+
+  "ranking": "Ranking",
+  "@ranking": {
+    "description": "Ranking in the first page"
+  },
+
+  "events": "Events",
+  "@events": {
+    "description": "Events in the first page"
+  },
+
+  "home": "Home",
+  "@home": {
+    "description": "Home button in the first page"
+  },
+
+  "quizpage": "Quiz",
+  "@quizpage": {
+    "description": "Quiz button in the first page"
+  },
+
+  "statistics": "Statistics",
+  "@statistics": {
+    "description": "Statistics of the player"
+  },
+
+  "correctanswer": "Correct Answers",
+  "@correctanswer": {
+    "description": "Correct answers of the player"
+  },
+
+  "wronganswer": "Wrong Answers",
+  "@wronganswer": {
+    "description": "Wrong answers of the player"
+  },
+
+  "totpoints": "Total Points",
+  "@totpoints": {
+    "description": "Total points of the player"
+  },
+
+  "localranking": "Local ranking",
+  "@localranking": {
+    "description": "Local ranking of the players"
+  },
+
+  "globalranking": "Global ranking",
+  "@globalranking": {
+    "description": "Global ranking of the players"
+  },
+
+  "localbutton": "Local",
+  "@localbutton": {
+    "description": "Local button"
+  },
+
+  "globalbutton": "Global",
+  "@globalbutton": {
+    "description": "Global button"
+  },
+
+  "usernameranking": "Username",
+  "@usernameranking": {
+    "description": "Username bar name"
+  },
+
+  "bestscoreranking": "Best Score",
+  "@bestscoreranking": {
+    "description": "Best score bar name"
+  },
+
+  "chooseaquiz": "Choose a quiz!",
+  "@chooseaquiz": {
+    "description": "First text in quiz page"
+  },
+
+  "yourfavartists": "Your favourite artists",
+  "@yourfavartists": {
+    "description": "Second text in quiz page"
+  },
+
+  "artist": "Artists",
+  "@artist": {
+    "description": "Artist mode text"
+  },
+
+  "song": "Songs",
+  "@song": {
+    "description": "Song mode text"
+  },
+
+  "casual": "Casual",
+  "@casual": {
+    "description": "Casual mode text"
+  },
+
+  "gameinfoartist": "Game mode based on your favourite artists",
+  "@gameinfoartist": {
+    "description": "Info box artist mode"
+  },
+
+  "gameinfosong": "Game mode based on your favourite songs",
+  "@gameinfosong": {
+    "description": "Info box song mode"
+  },
+
+  "gameinfocasual": "Game mode based on casual artists and songs",
+  "@gameinfocasual": {
+    "description": "Info box casual mode"
+  },
+
+  "playbutton": "Play",
+  "@playbutton": {
+    "description": "Play button text"
+  },
+
+  "gobackbutton": "Go back",
+  "@gobackbutton": {
+    "description": "Go back button text"
+  },
+
+  "correctanswerquiz": "Correct Answer!",
+  "@correctanswerquiz": {
+    "description": "Text if correct quiz"
+  },
+
+  "wronganswerquiz": "Wrong Answer!",
+  "@wronganswerquiz": {
+    "description": "Text if wrong quiz"
+  },
+
+  "quitbutton": "Quit",
+  "@quitbutton": {
+    "description": "Quit button text"
+  },
+
+  "continuebutton": "Continue",
+  "@continuebutton": {
+    "description": "Continue button text"
+  },
+
+   "scorequiz": "Score:",
+  "@scorequiz": {
+    "description": "Score during the quiz"
+  }
+
+}
+
+
+
+
