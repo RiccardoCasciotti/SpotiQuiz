@@ -1,5 +1,5 @@
 class User {
-  final int uid;
+  final String uid;
   String username;
   int level;
   int numberQuiz;
