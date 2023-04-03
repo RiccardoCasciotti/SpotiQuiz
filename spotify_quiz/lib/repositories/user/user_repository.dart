@@ -3,6 +3,8 @@ import 'package:flutter/foundation.dart';
 
 import '../../models/user.dart';
 
+
+
 class UserRepository {
   final _firebase = FirebaseFirestore.instance.collection('users');
 
@@ -86,4 +88,5 @@ class UserRepository {
       throw Exception(e.toString());
     }
   }
+
 }

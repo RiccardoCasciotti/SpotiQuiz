@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:spotify_quiz/authentication/authentication.dart';
+import '../../models/user.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -19,10 +20,14 @@ class HomePage extends StatelessWidget {
           children: <Widget>[
             Builder(
               builder: (context) {
-                final userId = context.select(
-                  (AuthenticationBloc bloc) => bloc.state.user.id,
+                final user = context.select(
+                  (AuthenticationBloc bloc) => bloc.state.user,
                 );
-                return Text('UserID: $userId');
+                if( user != null )
+                  return Text('UserID: ${user.uid}');
+                else{
+                  return Text('User UNKNOWN');
+                }
               },
             ),
             ElevatedButton(

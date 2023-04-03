@@ -3,7 +3,9 @@ import 'package:authentication_repository/authentication_repository.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
-import 'package:user_repository/user_repository.dart';
+import '../../repositories/user/user_repository.dart';
+import '../../models/user.dart';
+
 
 part 'authentication_event.dart';
 part 'authentication_state.dart';
@@ -63,7 +65,7 @@ class AuthenticationBloc
 
   Future<User?> _tryGetUser() async {
     try {
-      final user = await _userRepository.fetchUser();
+      //final user = await _userRepository.fetchUser();
       return null;
     } catch (_) {
       return null;
