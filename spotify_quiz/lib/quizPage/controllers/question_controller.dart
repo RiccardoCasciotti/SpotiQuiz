@@ -17,6 +17,16 @@ List<Map<String, Object>> createQuestions(int selectedMode) {
       ]..shuffle(),
     },
     {
+      'questionText': 'Which is this song?',
+      'playButton': true,
+      'answers': [
+        {'text': '1920', 'score': -2},
+        {'text': '1400', 'score': -2},
+        {'text': '800', 'score': 10},
+        {'text': '9444', 'score': -2},
+      ]..shuffle(),
+    },
+    {
       'questionText': 'How many albums has artist X released?',
       'answers': [
         {'text': '4', 'score': -2},

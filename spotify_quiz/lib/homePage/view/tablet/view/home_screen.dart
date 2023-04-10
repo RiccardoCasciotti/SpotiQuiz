@@ -127,37 +127,6 @@ class HomeScreenTablet extends StatelessWidget {
                             ),
                           ],
                         ),
-                        TableRow(
-                          children: <Widget>[
-                            Container(
-                              alignment: Alignment.center,
-                              child: CustomText(
-                                text: AppLocalizations.of(context)!.coins,
-                                thirdColor: true,
-                                size: 30,
-                                bold: true,
-                              ),
-                            ),
-                            Container(
-                              alignment: Alignment.center,
-                              child: CustomText(
-                                text: "1000",
-                                size: 30,
-                                bold: true,
-                              ),
-                            ),
-                          ],
-                        ),
-                        const TableRow(
-                          children: <Widget>[
-                            SizedBox(
-                              height: 10,
-                            ),
-                            SizedBox(
-                              height: 10,
-                            ),
-                          ],
-                        ),
                       ],
                       columnWidths: const <int, TableColumnWidth>{
                         0: FixedColumnWidth(150),

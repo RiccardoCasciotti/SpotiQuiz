@@ -134,6 +134,11 @@
     "description": "Play button text"
   },
 
+  "playbuttonquiz": "Listen",
+  "@playbuttonquiz": {
+    "description": "Play button text for listening the song in the quiz"
+  },
+
   "gobackbutton": "Go back",
   "@gobackbutton": {
     "description": "Go back button text"
