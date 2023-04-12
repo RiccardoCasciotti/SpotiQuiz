@@ -122,14 +122,34 @@ class _MyAppViewState extends State<MyAppView> {
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
     return MaterialApp(
+      localizationsDelegates: const [
+              AppLocalizations.delegate,
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+            ],
+            supportedLocales: const [
+              Locale('en'), // English
+              Locale('es'), // Spanish
+              Locale('it'), // Italian
+              Locale('fr'), // French
+              Locale('de'), // German
+              Locale('ru'), // Russian
+            ],
       navigatorKey: _navigatorKey,
+      theme: ThemeData(
+      primarySwatch: Colors.green,
+      scaffoldBackgroundColor: Colors.black, 
+    ),
       builder: (context, child){
         return BlocListener<AuthenticationBloc, AuthenticationState>(
-          listener: (context, state){
+          listener: (context, state) {
+            print(state.status);
             switch (state.status){
+              
               case AuthenticationStatus.authenticated:
                 _navigator.pushAndRemoveUntil<void>(
-                  HomePage.route(),
+                  MyHomePage.route(),
                   (route) => false, 
                 );
                 break;
@@ -143,7 +163,7 @@ class _MyAppViewState extends State<MyAppView> {
                   break;
             }
           },
-          child: child,
+        child: child,
         );
 
       }, 

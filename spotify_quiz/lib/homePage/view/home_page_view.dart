@@ -103,6 +103,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   child: child,
                 ),
                 child: pages[_selectedIndex],
+                
               );
             } else {
               return const Center(
@@ -112,6 +113,7 @@ class _MyHomePageState extends State<MyHomePage> {
           },
         ),
       ),
+      
     );
   }
 }

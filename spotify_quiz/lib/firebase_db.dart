@@ -13,14 +13,17 @@ void main() {
   mDatabase = FirebaseDatabase.instance.ref();
 
   void writeNewUser(String userId, String username, int level, int numberQuiz,
-      double experience, int coins) {
+      double experience, int coins, String refresh_token, String access_token) {
     User user = User(
         uid: userId,
         username: username,
         level: level,
         numberQuiz: numberQuiz,
         experience: experience,
-        coins: coins);
+        coins: coins,
+        access_token: access_token, 
+        refresh_token: refresh_token
+        );
     mDatabase.child("users").child(userId).set(user);
   }
 }

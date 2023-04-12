@@ -45,7 +45,7 @@ class AuthenticationBloc
       case AuthenticationStatus.unauthenticated:
         return emit(const AuthenticationState.unauthenticated());
       case AuthenticationStatus.authenticated:
-        final user = await _tryGetUser();
+        final user = await _tryGetUser(); // HERE YOU SHOULD CALL A FUNCTION WHICH POPULATES THE USER FIELDS
         return emit(
           user != null
               ? AuthenticationState.authenticated(user)
@@ -63,10 +63,13 @@ class AuthenticationBloc
     _authenticationRepository.logOut();
   }
 
+
+// HERE YOU SHOULD CALL A FUNCTION WHICH POPULATES THE USER FIELDS
   Future<User?> _tryGetUser() async {
     try {
       //final user = await _userRepository.fetchUser();
-      return null;
+      
+      return User.empty;
     } catch (_) {
       return null;
     }

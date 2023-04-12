@@ -7,14 +7,21 @@ class User {
   final num numberQuiz;
   final num experience;
   final num coins;
+  final String? refresh_token;
+  final String? access_token;
 
-  User({
+
+  static const  empty = User(uid: "-", username: "-", level: -1, numberQuiz: -1, experience:-1, coins:-1);
+
+  const User({
     required this.uid,
     required this.username,
     required this.level,
     required this.numberQuiz,
     required this.experience,
     required this.coins,
+    this.access_token,
+    this.refresh_token
   });
 
   factory User.fromJson(Map<String, dynamic> json) {
@@ -24,7 +31,10 @@ class User {
         level: json['level'],
         numberQuiz: json['numOfQuiz'],
         uid: json['uid'],
-        username: json['username']);
+        username: json['username'], 
+        access_token: json['access_token'], 
+        refresh_token: json['refresh_token']
+        );
   }
 }
 
@@ -34,7 +44,9 @@ Future createUser(
     required num level,
     required num experience,
     required num numOfQuiz,
-    required String username}) async {
+    required String username,
+    String? access_token, 
+    String? refresh_token}) async {
   //reference to document
   final docUser = FirebaseFirestore.instance.collection('users').doc(uid);
 
