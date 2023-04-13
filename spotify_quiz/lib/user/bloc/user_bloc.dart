@@ -24,6 +24,9 @@ class UserBloc extends Bloc<UserEvent, UserState> {
           experience: event.experience,
           nation: event.nation,
           bestScore: event.bestScore,
+          refreshToken: event.nation,
+          correctAnswer: 0,
+          wrongAnswer: 0,
         );
         emit(UserAdded());
       } catch (e) {
@@ -34,7 +37,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
       emit(UserLoading());
       await Future.delayed(const Duration(seconds: 1));
       try {
-        final data = await userRepository.get();
+        final data = await userRepository.getUsers();
         emit(UserLoaded(data));
       } catch (e) {
         emit(UserError(e.toString()));
@@ -73,6 +76,9 @@ class UserBloc extends Bloc<UserEvent, UserState> {
               experience: event.experience,
               nation: event.nation,
               bestScore: event.bestScore,
+              refreshToken: event.username,
+              correctAnswer: 0,
+              wrongAnswer: 0,
             );
             final newUser = await userRepository.getByID(event.uid);
             if (newUser != null) {

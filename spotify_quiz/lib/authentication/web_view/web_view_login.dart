@@ -10,6 +10,7 @@ import 'package:spotify/spotify.dart';
 import 'package:spotify_quiz/home/home.dart';
 import 'package:spotify_quiz/homePage/view/home_page_view.dart';
 import 'package:spotify_quiz/login/login.dart';
+import 'package:spotify_quiz/repositories/user/user_repository.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 // Import for Android features.
 import 'package:webview_flutter_android/webview_flutter_android.dart';
@@ -24,7 +25,7 @@ class WebViewLogin extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-  
+    final UserRepository _userRepository = UserRepository();
 
 // The URI to redirect to after the user grants or denies permission. It must
 // be in your Spotify application's Redirect URI whitelist. This URI can
@@ -50,7 +51,7 @@ class WebViewLogin extends StatelessWidget {
 
     controller
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
-      ..setBackgroundColor(Color.fromRGBO(255, 255, 255, 1))
+      ..setBackgroundColor(const Color.fromARGB(255, 25, 20, 20))
       ..setNavigationDelegate(NavigationDelegate(
         onProgress: (int progress) {
           // Update loading bar.
@@ -95,7 +96,8 @@ class WebViewLogin extends StatelessWidget {
             "content-type": "application/x-www-form-urlencoded"
           });
 
-          print(userInfo.body);
+          final user = await _userRepository.apiGetUser(
+              '${bodyJson["access_token"]}', '${bodyJson["refresh_token"]}');
 
           if (response.statusCode == 200) {
             debugPrint(

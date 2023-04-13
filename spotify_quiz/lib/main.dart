@@ -1,4 +1,3 @@
-
 import 'package:authentication_repository/authentication_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -34,7 +33,7 @@ import 'repositories/firebase_options.dart';
 
 void main() async {
   await dotenv.load(fileName: ".env");
-  
+
   final _fbApp = await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
@@ -44,9 +43,9 @@ void main() async {
   //db.collection("users").add(user);
   runApp(MyApp());
 }
+
 class MyApp extends StatefulWidget {
-   MyApp({super.key});
-  
+  MyApp({super.key});
 
   @override
   State<MyApp> createState() => _MyAppState();
@@ -84,8 +83,6 @@ class _MyAppState extends State<MyApp> {
   }
 }
 
-
-
 class MyAppView extends StatefulWidget {
   const MyAppView({super.key});
 
@@ -98,11 +95,8 @@ class MyAppView extends StatefulWidget {
   // used by the build method of the State. Fields in a Widget subclass are
   // always marked "final".
 
-  
-
   @override
   State<MyAppView> createState() => _MyAppViewState();
-  
 }
 
 class _MyAppViewState extends State<MyAppView> {
@@ -123,34 +117,33 @@ class _MyAppViewState extends State<MyAppView> {
     // than having to individually change instances of widgets.
     return MaterialApp(
       localizationsDelegates: const [
-              AppLocalizations.delegate,
-              GlobalMaterialLocalizations.delegate,
-              GlobalWidgetsLocalizations.delegate,
-              GlobalCupertinoLocalizations.delegate,
-            ],
-            supportedLocales: const [
-              Locale('en'), // English
-              Locale('es'), // Spanish
-              Locale('it'), // Italian
-              Locale('fr'), // French
-              Locale('de'), // German
-              Locale('ru'), // Russian
-            ],
+        AppLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: const [
+        Locale('en'), // English
+        Locale('es'), // Spanish
+        Locale('it'), // Italian
+        Locale('fr'), // French
+        Locale('de'), // German
+        Locale('ru'), // Russian
+      ],
       navigatorKey: _navigatorKey,
       theme: ThemeData(
-      primarySwatch: Colors.green,
-      scaffoldBackgroundColor: Colors.black, 
-    ),
-      builder: (context, child){
+        primarySwatch: Colors.green,
+        scaffoldBackgroundColor: Colors.black,
+      ),
+      builder: (context, child) {
         return BlocListener<AuthenticationBloc, AuthenticationState>(
           listener: (context, state) {
             print(state.status);
-            switch (state.status){
-              
+            switch (state.status) {
               case AuthenticationStatus.authenticated:
                 _navigator.pushAndRemoveUntil<void>(
                   MyHomePage.route(),
-                  (route) => false, 
+                  (route) => false,
                 );
                 break;
               case AuthenticationStatus.unauthenticated:
@@ -159,16 +152,14 @@ class _MyAppViewState extends State<MyAppView> {
                   (route) => false,
                 );
                 break;
-                case AuthenticationStatus.unknown: 
-                  break;
+              case AuthenticationStatus.unknown:
+                break;
             }
           },
-        child: child,
+          child: child,
         );
-
-      }, 
-      onGenerateRoute:  (_) => SplashPage.route(),
+      },
+      onGenerateRoute: (_) => SplashPage.route(),
     );
   }
 }
-

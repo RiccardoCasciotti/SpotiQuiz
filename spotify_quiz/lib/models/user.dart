@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'dart:io';
 
 class User {
   final String uid;
@@ -9,8 +8,9 @@ class User {
   final num numberQuiz;
   final num experience;
   final num bestScore;
-  final String? refreshToken;
-  final String? accessToken;
+  final num correctAnswer;
+  final num wrongAnswer;
+  final String refreshToken;
 
   static const empty = User(
       uid: "-",
@@ -19,7 +19,10 @@ class User {
       numberQuiz: -1,
       experience: -1,
       bestScore: -1,
-      nation: "-");
+      wrongAnswer: -1,
+      correctAnswer: -1,
+      nation: "-",
+      refreshToken: "-");
 
   const User(
       {required this.uid,
@@ -29,8 +32,9 @@ class User {
       required this.experience,
       required this.bestScore,
       required this.nation,
-      this.accessToken,
-      this.refreshToken});
+      required this.correctAnswer,
+      required this.wrongAnswer,
+      required this.refreshToken});
 
   factory User.fromJson(Map<String, dynamic> json) {
     return User(
@@ -39,9 +43,11 @@ class User {
       numberQuiz: json['numOfQuiz'],
       uid: json['uid'],
       username: json['username'],
-      refreshToken: json['refresh_token'],
+      refreshToken: json['refreshToken'],
       nation: json['nation'],
       bestScore: json['bestScore'],
+      wrongAnswer: json['wrongAnswers'],
+      correctAnswer: json['correctAnswers'],
     );
   }
 }
@@ -54,8 +60,9 @@ Future createUser(
     required num experience,
     required num numOfQuiz,
     required String username,
-    String? accessToken,
-    String? refreshToken}) async {
+    required num correctAnswer,
+    required num wrongAnswer,
+    required String refreshToken}) async {
   //reference to document
   final docUser = FirebaseFirestore.instance.collection('users').doc(uid);
 
@@ -66,7 +73,10 @@ Future createUser(
     'uid': uid,
     'username': username,
     'bestScore': bestScore,
-    'nation': Platform.localeName,
+    'nation': nation,
+    'refreshToken': refreshToken,
+    'wrongAnswers': wrongAnswer,
+    'correctAnswers': correctAnswer,
   };
 
   await docUser.set(json);

@@ -17,6 +17,9 @@ class UserRepository {
     required int numOfQuiz,
     required int experience,
     required int bestScore,
+    required int correctAnswer,
+    required int wrongAnswer,
+    required String refreshToken,
   }) async {
     try {
       //THIS WAS PUT INSTEAD OF
@@ -28,6 +31,9 @@ class UserRepository {
         'username': username,
         'bestScore': bestScore,
         'nation': nation,
+        'refreshToken': refreshToken,
+        'wrongAnswers': wrongAnswer,
+        'correctAnswers': correctAnswer,
       };
       await _firebase.doc(uid).set(json);
 
@@ -51,7 +57,7 @@ class UserRepository {
     }
   }
 
-  Future<List<User>> get() async {
+  Future<List<User>> getUsers() async {
     List<User> userList = [];
     try {
       final user = await FirebaseFirestore.instance.collection('users').get();
@@ -92,49 +98,54 @@ class UserRepository {
     }
   }
 
-  Future<User?> checkByID(String uid) async {
+  Future<User> apiGetUser(String accesToken, String refreshToken) async {
     List<User> userList = [];
-    try {
-      final user = await FirebaseFirestore.instance.collection('users').get();
-      for (var element in user.docs) {
-        if ((User.fromJson(element.data())).uid == uid) {
-          userList.add(
-            User.fromJson(element.data()),
-          );
-          return userList.first;
-        }
-      }
-      return null;
-    } on FirebaseException catch (e) {
-      if (kDebugMode) {
-        print("Failed with error '${e.code}' : ${e.message}");
-      }
-      return null;
-    } catch (e) {
-      throw Exception(e.toString());
-    }
-  }
 
-  Future<User> api_get_user(User user) async {
     final userInfo =
         await http.get(Uri.parse("https://api.spotify.com/v1/me"), headers: {
-      "Authorization": 'Authorization: Bearer ${user.accessToken}',
+      "Authorization": 'Authorization: Bearer $accesToken',
       "content-type": "application/x-www-form-urlencoded"
     });
+
     final userJson = json.decode(userInfo.body);
-    if (userJson["error"] != {})
+
+    if (userJson["error"] != {}) {
       print("Error in the API request: ${userJson["error"]}");
+    }
+
+    final user = await FirebaseFirestore.instance.collection('users').get();
+    for (var element in user.docs) {
+      if ((User.fromJson(element.data())).uid == userJson["id"]) {
+        userList.add(
+          User.fromJson(element.data()),
+        );
+        return userList.first;
+      }
+    }
+
+    create(
+      uid: userJson["id"],
+      username: userJson["display_name"],
+      nation: userJson["country"],
+      refreshToken: refreshToken,
+      level: 0,
+      numOfQuiz: 0,
+      experience: 0,
+      bestScore: 0,
+      wrongAnswer: 0,
+      correctAnswer: 0,
+    );
 
     return User(
-      bestScore: 0,
-      nation: "-",
-      experience: 0,
-      level: 0,
-      numberQuiz: 0,
-      uid: userJson["id"],
-      username: userJson['display_name'],
-      //access_token: userJson['access_token'],
-      //refresh_token: userJson['refresh_token']
-    );
+        bestScore: 0,
+        nation: userJson["country"],
+        experience: 0,
+        level: 0,
+        numberQuiz: 0,
+        correctAnswer: 0,
+        wrongAnswer: 0,
+        uid: userJson["id"],
+        username: userJson["display_name"],
+        refreshToken: refreshToken);
   }
 }
