@@ -13,7 +13,7 @@ class User {
   final String? access_token;
 
 
-  static const  empty = User(uid: "-", username: "-", level: -1, numberQuiz: -1, experience:-1, coins:-1);
+  static const  empty = User(uid: "-", username: "-", level: -1, numberQuiz: -1, experience:-1, bestScore: -1, nation: "-");
 
   const User({
     required this.uid,

@@ -133,7 +133,8 @@ Future<User> api_get_user(User user) async {
       print("Error in the API request: ${userJson["error"]}");
     
     return User(
-        coins: 0,
+        bestScore: 0, 
+        nation: "-", 
         experience: 0,
         level: 0,
         numberQuiz: 0,
