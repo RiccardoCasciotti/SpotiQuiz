@@ -9,23 +9,28 @@ class User {
   final num numberQuiz;
   final num experience;
   final num bestScore;
-  final String? refresh_token;
-  final String? access_token;
+  final String? refreshToken;
+  final String? accessToken;
 
+  static const empty = User(
+      uid: "-",
+      username: "-",
+      level: -1,
+      numberQuiz: -1,
+      experience: -1,
+      bestScore: -1,
+      nation: "-");
 
-  static const  empty = User(uid: "-", username: "-", level: -1, numberQuiz: -1, experience:-1, bestScore: -1, nation: "-");
-
-  const User({
-    required this.uid,
-    required this.username,
-    required this.level,
-    required this.numberQuiz,
-    required this.experience,
-    required this.bestScore,
-    required this.nation,
-    this.access_token,
-    this.refresh_token
-  });
+  const User(
+      {required this.uid,
+      required this.username,
+      required this.level,
+      required this.numberQuiz,
+      required this.experience,
+      required this.bestScore,
+      required this.nation,
+      this.accessToken,
+      this.refreshToken});
 
   factory User.fromJson(Map<String, dynamic> json) {
     return User(
@@ -33,8 +38,8 @@ class User {
       level: json['level'],
       numberQuiz: json['numOfQuiz'],
       uid: json['uid'],
-      username: json['username'], 
-      refresh_token: json['refresh_token'],
+      username: json['username'],
+      refreshToken: json['refresh_token'],
       nation: json['nation'],
       bestScore: json['bestScore'],
     );
@@ -49,8 +54,8 @@ Future createUser(
     required num experience,
     required num numOfQuiz,
     required String username,
-    String? access_token, 
-    String? refresh_token}) async {
+    String? accessToken,
+    String? refreshToken}) async {
   //reference to document
   final docUser = FirebaseFirestore.instance.collection('users').doc(uid);
 

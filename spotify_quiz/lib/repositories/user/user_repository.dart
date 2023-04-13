@@ -6,8 +6,6 @@ import 'dart:convert' show Encoding, base64, json, utf8;
 
 import '../../models/user.dart';
 
-
-
 class UserRepository {
   final _firebase = FirebaseFirestore.instance.collection('users');
 
@@ -117,33 +115,26 @@ class UserRepository {
     }
   }
 
-Future<User> api_get_user(User user) async {
-
- 
-
-    final userInfo = await http.get(
-            Uri.parse("https://api.spotify.com/v1/me"),
-            headers: {
-              "Authorization":
-                  'Authorization: Bearer ${user.access_token}',
-              "content-type": "application/x-www-form-urlencoded"
-            });
+  Future<User> api_get_user(User user) async {
+    final userInfo =
+        await http.get(Uri.parse("https://api.spotify.com/v1/me"), headers: {
+      "Authorization": 'Authorization: Bearer ${user.accessToken}',
+      "content-type": "application/x-www-form-urlencoded"
+    });
     final userJson = json.decode(userInfo.body);
-    if(userJson["error"] != {})
+    if (userJson["error"] != {})
       print("Error in the API request: ${userJson["error"]}");
-    
-    return User(
-        bestScore: 0, 
-        nation: "-", 
-        experience: 0,
-        level: 0,
-        numberQuiz: 0,
-        uid: userJson["id"],
-        username: userJson['display_name'], 
-        //access_token: userJson['access_token'], 
-        //refresh_token: userJson['refresh_token']
-        );
-    
-}
 
+    return User(
+      bestScore: 0,
+      nation: "-",
+      experience: 0,
+      level: 0,
+      numberQuiz: 0,
+      uid: userJson["id"],
+      username: userJson['display_name'],
+      //access_token: userJson['access_token'],
+      //refresh_token: userJson['refresh_token']
+    );
+  }
 }

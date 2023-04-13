@@ -18,10 +18,7 @@ import 'package:webview_flutter_wkwebview/webview_flutter_wkwebview.dart';
 
 // ignore: camel_case_types
 class WebViewLogin extends StatelessWidget {
-
-
-
-static Route<void> route() {
+  static Route<void> route() {
     return MaterialPageRoute<void>(builder: (_) => WebViewLogin());
   }
 
@@ -60,7 +57,6 @@ static Route<void> route() {
         "response_type=code&client_id=${client_id}&scope=${scopes}&redirect_uri=${redirectUri}");
 
     print(url1);
-   
 
     WebViewController controller = webViewController
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
@@ -81,7 +77,6 @@ static Route<void> route() {
           debugPrint(code);
           Uri url = Uri.parse("https://accounts.spotify.com/api/token");
 
-         
           final response = await http.post(
             Uri.parse("https://accounts.spotify.com/api/token"),
             headers: {
@@ -97,30 +92,27 @@ static Route<void> route() {
             },
           );
 
-        
           print("RESPONSE BODY:  ${response.body}");
           print(response.headers);
 
           print("STATUS CODE: ${response.statusCode}");
           final bodyJson = json.decode(response.body);
-          
-          final userInfo = await http.get(
-            Uri.parse("https://api.spotify.com/v1/me"),
-            headers: {
-              "Authorization":
-                  'Authorization: Bearer ${bodyJson["access_token"]}',
-              "content-type": "application/x-www-form-urlencoded"
-            });
+
+          final userInfo = await http
+              .get(Uri.parse("https://api.spotify.com/v1/me"), headers: {
+            "Authorization":
+                'Authorization: Bearer ${bodyJson["access_token"]}',
+            "content-type": "application/x-www-form-urlencoded"
+          });
 
           print(userInfo.body);
-      
-          if( response.statusCode == 200){
-            debugPrint("1 #####################################################################");
+
+          if (response.statusCode == 200) {
+            debugPrint(
+                "1 #####################################################################");
             Navigator.pop(context);
           }
-           
-           
-            
+
           if (!responseUri.contains(redirectUri)) {
             debugPrint(responseUri);
             return NavigationDecision.navigate;
