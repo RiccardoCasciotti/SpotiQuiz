@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:spotify_quiz/authentication/bloc/authentication_bloc.dart';
 import 'package:spotify_quiz/custom_widgets/text.dart';
 import 'package:spotify_quiz/utility/utilities.dart' as utilities;
