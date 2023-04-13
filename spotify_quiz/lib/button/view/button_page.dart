@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:spotify_quiz/button/bloc/button_bloc.dart';
 
+import '../bloc/button_bloc.dart';
+
 class ButtonPage extends StatelessWidget {
   const ButtonPage({super.key});
 
@@ -21,15 +23,13 @@ class ButtonPage extends StatelessWidget {
                   BlocBuilder<ButtonBloc, ButtonState>(
                     builder: (context, state) {
                       return FloatingActionButton(
-                        onPressed: () {
-                          context
-                              .read<ButtonBloc>()
-                              .add(ButtonPressed(state.status));
-                          debugPrint("Button is pressed\n");
-                        },
-                        tooltip: 'Pressed',
-                        child: const Icon(Icons.lightbulb),
-                      );
+                    onPressed: () {
+                      context.read<ButtonBloc>().add( ButtonPressed(state.status));
+                      debugPrint("Button is pressed\n");
+                    },
+                    tooltip: 'Pressed',
+                    child: const Icon(Icons.lightbulb),
+                  );
                     },
                   ),
                   //Should I use BlocBuilder just to send an event??

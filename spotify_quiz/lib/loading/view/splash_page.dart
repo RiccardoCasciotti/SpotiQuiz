@@ -10,17 +10,17 @@ class SplashPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        color: Colors.black,
-        child: Center(
-            child: Container(
-          margin: const EdgeInsets.all(10.0),
-
-          width: 150.0,
-          height: 200.0,
-          //constraints: BoxConstraints.expand(),
-
-          child: const Image(
-              image: AssetImage("assets/images/logo.png"), fit: BoxFit.cover),
-        )));
+      color: Colors.black,
+      child: Center(
+    child: Container(
+    margin: const EdgeInsets.all(10.0),
+    
+    width: 150.0,
+    height: 200.0,
+    //constraints: BoxConstraints.expand(),
+    
+    child: Image(
+          image: AssetImage("assets/images/logo.png"), fit: BoxFit.cover),
+    )));
   }
 }
