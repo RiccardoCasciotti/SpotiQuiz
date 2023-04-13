@@ -20,7 +20,7 @@ class SplashPage extends StatelessWidget {
     //constraints: BoxConstraints.expand(),
     
     child: Image(
-          image: AssetImage("images/logo.png"), fit: BoxFit.cover),
+          image: AssetImage("assets/images/logo.png"), fit: BoxFit.cover),
     )));
   }
 }

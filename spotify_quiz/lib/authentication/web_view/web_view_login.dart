@@ -24,19 +24,7 @@ class WebViewLogin extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final WebViewController webViewController = WebViewController();
-
-    // final AndroidWebViewController androidController =
-    //       webViewController.platform as AndroidWebViewController;
-    // if (WebViewPlatform.instance is WebKitWebViewPlatform) {
-    //   final WebKitWebViewController webKitController =
-    //       webViewController.platform as WebKitWebViewController;
-    // }
-
-    final credentials = SpotifyApiCredentials(
-        dotenv.env['SPOTIFY_CLIENT_ID'], dotenv.env['SPOTIFY_CLIENT_SECRET']);
-
-    final grant = SpotifyApi.authorizationCodeGrant(credentials);
+  
 
 // The URI to redirect to after the user grants or denies permission. It must
 // be in your Spotify application's Redirect URI whitelist. This URI can
