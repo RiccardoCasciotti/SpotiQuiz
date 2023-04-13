@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:spotify_quiz/authentication/authentication.dart';
 import 'package:spotify_quiz/authentication/web_view/web_view_login.dart';
 import 'package:spotify_quiz/login/login.dart';
-import 'package:formz/formz.dart';
 import 'package:spotify_quiz/utility/utilities.dart' as utilities;
-
-import '../../home/view/home_page.dart';
 
 //Here is where we click the button to open the WebViewer
 class LoginButton extends StatelessWidget {

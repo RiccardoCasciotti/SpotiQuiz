@@ -96,10 +96,10 @@ class WebViewLogin extends StatelessWidget {
             "content-type": "application/x-www-form-urlencoded"
           });
 
-          final user = await _userRepository.apiGetUser(
-              '${bodyJson["access_token"]}', '${bodyJson["refresh_token"]}');
-
           if (response.statusCode == 200) {
+            final user = await _userRepository.apiGetUser(
+                '${bodyJson["access_token"]}', '${bodyJson["refresh_token"]}');
+
             debugPrint(
                 "1 #####################################################################");
             Navigator.pop(context);

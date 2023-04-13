@@ -2,50 +2,37 @@ import 'package:authentication_repository/authentication_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'package:firebase_core/firebase_core.dart';
-import 'package:spotify_quiz/button/bloc/button_bloc.dart';
-import 'package:spotify_quiz/login/bloc/login_bloc.dart';
 import 'authentication/authentication.dart';
-import 'authentication/web_view/web_view_login.dart';
 import 'repositories/firebase_options.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-import 'home/view/home_page.dart';
 import 'loading/view/splash_page.dart';
 import 'login/view/login_page.dart';
 
-import 'package:spotify_quiz/authentication/authentication.dart';
 import 'package:spotify_quiz/homePage/view/home_page_view.dart';
-import 'package:spotify_quiz/homePage/view/tablet/view/home_page_view.dart';
 import 'package:spotify_quiz/loading/splash.dart';
-import 'package:spotify_quiz/themes/bloc/theme_bloc.dart';
 import 'repositories/user/user_repository.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'package:flutter_localizations/flutter_localizations.dart';
 
-import 'repositories/firebase_options.dart';
-
 void main() async {
   await dotenv.load(fileName: ".env");
 
-  final _fbApp = await Firebase.initializeApp(
+  final fbApp = await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
   WidgetsFlutterBinding.ensureInitialized();
   //FirebaseFirestore db = FirebaseFirestore.instance;
   // Add a new document with a generated ID
   //db.collection("users").add(user);
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatefulWidget {
-  MyApp({super.key});
+  const MyApp({super.key});
 
   @override
   State<MyApp> createState() => _MyAppState();
@@ -103,9 +90,6 @@ class _MyAppViewState extends State<MyAppView> {
   final _navigatorKey = GlobalKey<NavigatorState>();
 
   NavigatorState get _navigator => _navigatorKey.currentState!;
-
-  late final AuthenticationRepository _authenticationRepository;
-  late final UserRepository _userRepository;
 
   @override
   Widget build(BuildContext context) {

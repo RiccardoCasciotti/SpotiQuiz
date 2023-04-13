@@ -34,6 +34,7 @@ class QuizPage extends StatefulWidget {
 }
 
 class _QuizPageState extends State<QuizPage> {
+  // ignore: prefer_typing_uninitialized_variables
   var questions;
 
   @override
