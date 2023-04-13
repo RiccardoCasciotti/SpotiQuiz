@@ -42,16 +42,16 @@ class WebViewLogin extends StatelessWidget {
     final client_secret = dotenv.env['SPOTIFY_CLIENT_SECRET'];
     // ignore: prefer_interpolation_to_compose_strings
     final url1 = Uri.parse('https://accounts.spotify.com/authorize?' +
-        "response_type=code&client_id=${client_id}&scope=${scopes}&redirect_uri=${redirectUri}");
+        "show_dialog=true&response_type=code&client_id=${client_id}&scope=${scopes}&redirect_uri=${redirectUri}");
 
     print(url1);
-    final params = const PlatformWebViewControllerCreationParams();
+    var params = const PlatformWebViewControllerCreationParams();
     final WebViewController controller =
         WebViewController.fromPlatformCreationParams(params);
 
     controller
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
-      ..setBackgroundColor(const Color.fromARGB(255, 25, 20, 20))
+      ..setBackgroundColor(Color.fromARGB(255, 255, 255, 255))
       ..setNavigationDelegate(NavigationDelegate(
         onProgress: (int progress) {
           // Update loading bar.

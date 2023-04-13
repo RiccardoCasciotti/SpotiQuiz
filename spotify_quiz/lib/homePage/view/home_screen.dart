@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_cache_manager/flutter_cache_manager.dart';
+import 'package:spotify_quiz/authentication/bloc/authentication_bloc.dart';
 import 'package:spotify_quiz/custom_widgets/text.dart';
 import 'package:spotify_quiz/utility/utilities.dart' as utilities;
 
@@ -26,6 +29,23 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: utilities.secondaryColor,
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(
+              Icons.logout_outlined,
+              color: utilities.primaryColor,
+            ),
+            onPressed: () async {
+              context
+                  .read<AuthenticationBloc>()
+                  .add(AuthenticationLogoutRequested());
+              // ignore: use_build_context_synchronously
+            },
+          )
+        ],
+      ),
       backgroundColor: utilities.secondaryColor,
       body: Center(
         child: SingleChildScrollView(
