@@ -24,15 +24,14 @@ class WebViewLogin extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final WebViewController webViewController = WebViewController();
+    // final WebViewController webViewController = WebViewController();
 
-    if (WebViewPlatform.instance is WebKitWebViewPlatform) {
-      final WebKitWebViewController webKitController =
-          webViewController.platform as WebKitWebViewController;
-    } else if (WebViewPlatform.instance is AndroidWebViewPlatform) {
-      final AndroidWebViewController androidController =
-          webViewController.platform as AndroidWebViewController;
-    }
+    // final AndroidWebViewController androidController =
+    //       webViewController.platform as AndroidWebViewController;
+    // if (WebViewPlatform.instance is WebKitWebViewPlatform) {
+    //   final WebKitWebViewController webKitController =
+    //       webViewController.platform as WebKitWebViewController;
+    // }
 
     final credentials = SpotifyApiCredentials(
         dotenv.env['SPOTIFY_CLIENT_ID'], dotenv.env['SPOTIFY_CLIENT_SECRET']);
@@ -57,8 +56,11 @@ class WebViewLogin extends StatelessWidget {
         "response_type=code&client_id=${client_id}&scope=${scopes}&redirect_uri=${redirectUri}");
 
     print(url1);
+    final params = const PlatformWebViewControllerCreationParams();
+    final WebViewController controller =
+        WebViewController.fromPlatformCreationParams(params);
 
-    WebViewController controller = webViewController
+    controller
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
       ..setBackgroundColor(Color.fromRGBO(255, 255, 255, 1))
       ..setNavigationDelegate(NavigationDelegate(
