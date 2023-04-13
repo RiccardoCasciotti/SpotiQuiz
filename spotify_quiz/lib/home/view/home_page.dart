@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:spotify_quiz/authentication/authentication.dart';
-import '../../models/user.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -23,10 +22,10 @@ class HomePage extends StatelessWidget {
                 final user = context.select(
                   (AuthenticationBloc bloc) => bloc.state.user,
                 );
-                if( user != null )
+                if (user != null) {
                   return Text('UserID: ${user.uid}');
-                else{
-                  return Text('User UNKNOWN');
+                } else {
+                  return const Text('User UNKNOWN');
                 }
               },
             ),
@@ -36,7 +35,6 @@ class HomePage extends StatelessWidget {
                 context
                     .read<AuthenticationBloc>()
                     .add(AuthenticationLogoutRequested());
-                    
               },
             ),
           ],

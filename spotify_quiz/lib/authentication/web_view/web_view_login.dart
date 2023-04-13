@@ -1,51 +1,44 @@
 import 'dart:convert' show Encoding, base64, json, utf8;
-import 'dart:io';
-import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
-import 'package:spotify/spotify.dart';
-import 'package:spotify_quiz/home/home.dart';
-import 'package:spotify_quiz/homePage/view/home_page_view.dart';
-import 'package:spotify_quiz/login/login.dart';
 import 'package:spotify_quiz/repositories/user/user_repository.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 // Import for Android features.
-import 'package:webview_flutter_android/webview_flutter_android.dart';
 // Import for iOS features.
-import 'package:webview_flutter_wkwebview/webview_flutter_wkwebview.dart';
 
 // ignore: camel_case_types
 class WebViewLogin extends StatelessWidget {
+  const WebViewLogin({super.key});
+
   static Route<void> route() {
-    return MaterialPageRoute<void>(builder: (_) => WebViewLogin());
+    return MaterialPageRoute<void>(builder: (_) => const WebViewLogin());
   }
 
   @override
   Widget build(BuildContext context) {
-    final UserRepository _userRepository = UserRepository();
+    final UserRepository userRepository = UserRepository();
 
 // The URI to redirect to after the user grants or denies permission. It must
 // be in your Spotify application's Redirect URI whitelist. This URI can
 // either be a web address pointing to an authorization server or a fabricated
 // URI that allows the client device to function as an authorization server.
-    final redirectUri = 'http://spotify_quiz-api.com';
+    const redirectUri = 'http://spotify_quiz-api.com';
 
 // See https://developer.spotify.com/documentation/general/guides/scopes/
 // for a complete list of these Spotify authorization permissions. If no
 // scopes are specified, only public Spotify information will be available.
-    final scopes = "user-read-private user-read-email";
+    const scopes = "user-read-private user-read-email";
 
-    final client_id = dotenv.env['SPOTIFY_CLIENT_ID'];
-    final client_secret = dotenv.env['SPOTIFY_CLIENT_SECRET'];
+    String? clientId = dotenv.env['SPOTIFY_CLIENT_ID'];
+    String? clientSecret = dotenv.env['SPOTIFY_CLIENT_SECRET'];
     // ignore: prefer_interpolation_to_compose_strings
     final url1 = Uri.parse('https://accounts.spotify.com/authorize?' +
-        "response_type=code&client_id=${client_id}&scope=${scopes}&redirect_uri=${redirectUri}");
+        "response_type=code&client_id=$clientId&scope=$scopes&redirect_uri=$redirectUri");
 
     print(url1);
-    final params = const PlatformWebViewControllerCreationParams();
+    const params = PlatformWebViewControllerCreationParams();
     final WebViewController controller =
         WebViewController.fromPlatformCreationParams(params);
 
@@ -72,13 +65,13 @@ class WebViewLogin extends StatelessWidget {
             Uri.parse("https://accounts.spotify.com/api/token"),
             headers: {
               "Authorization":
-                  'Basic ${base64.encode(utf8.encode("${client_id}:${client_secret}"))}',
+                  'Basic ${base64.encode(utf8.encode("$clientId:$clientSecret"))}',
               "content-type": "application/x-www-form-urlencoded"
             },
             encoding: Encoding.getByName('utf-8'),
             body: {
-              "code": "${code}",
-              "redirect_uri": "${redirectUri}",
+              "code": code,
+              "redirect_uri": redirectUri,
               "grant_type": "authorization_code"
             },
           );
@@ -96,7 +89,7 @@ class WebViewLogin extends StatelessWidget {
             "content-type": "application/x-www-form-urlencoded"
           });
 
-          final user = await _userRepository.apiGetUser(
+          final user = await userRepository.apiGetUser(
               '${bodyJson["access_token"]}', '${bodyJson["refresh_token"]}');
 
           if (response.statusCode == 200) {
