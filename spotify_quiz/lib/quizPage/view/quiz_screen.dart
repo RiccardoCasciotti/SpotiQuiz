@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:spotify_quiz/quizPage/components/playbuttonquiz.dart';
 import '../components/answer.dart';
 import '../components/question.dart';
 
@@ -28,6 +29,15 @@ class Quiz extends StatelessWidget {
             ),
           ),
         ),
+        if (questions[questionIndex]['playButton'] != null)
+          Flexible(
+            flex: 1,
+            child: Container(
+              alignment: Alignment.center,
+              width: double.infinity,
+              child: const PlayButtonQuiz(),
+            ),
+          ),
         Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [

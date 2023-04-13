@@ -10,26 +10,26 @@ import '../../models/user.dart';
 
 class UserRepository {
   final _firebase = FirebaseFirestore.instance.collection('users');
-  
 
-  Future<void> create(
-      {required String uid,
-      required String username,
-      required int level,
-      required int numOfQuiz,
-      required int experience,
-      required int coins, 
-      }) async {
+  Future<void> create({
+    required String uid,
+    required String username,
+    required String nation,
+    required int level,
+    required int numOfQuiz,
+    required int experience,
+    required int bestScore,
+  }) async {
     try {
       //THIS WAS PUT INSTEAD OF
       final json = {
-        'coins': coins,
         'experience': experience,
         'level': level,
         'numOfQuiz': numOfQuiz,
         'uid': uid,
         'username': username,
-       
+        'bestScore': bestScore,
+        'nation': nation,
       };
       await _firebase.doc(uid).set(json);
 
@@ -94,48 +94,32 @@ class UserRepository {
     }
   }
 
+  Future<User?> checkByID(String uid) async {
+    List<User> userList = [];
+    try {
+      final user = await FirebaseFirestore.instance.collection('users').get();
+      for (var element in user.docs) {
+        if ((User.fromJson(element.data())).uid == uid) {
+          userList.add(
+            User.fromJson(element.data()),
+          );
+          return userList.first;
+        }
+      }
+      return null;
+    } on FirebaseException catch (e) {
+      if (kDebugMode) {
+        print("Failed with error '${e.code}' : ${e.message}");
+      }
+      return null;
+    } catch (e) {
+      throw Exception(e.toString());
+    }
+  }
+
 Future<User> api_get_user(User user) async {
 
-  
-    // final redirectUri = 'http://spotify_quiz-api.com';
-
-    // final scopes = 'user-read-email';
-
-    // final client_id = dotenv.env['SPOTIFY_CLIENT_ID'];
-
-    // final client_secret = dotenv.env['SPOTIFY_CLIENT_SECRET'];
-    
-    // final url1 = Uri.parse('https://accounts.spotify.com/authorize?' +
-    //     "response_type=code&client_id=${client_id}&scope=${scopes}&redirect_uri=${redirectUri}");
-
-    // final response = await http.post(
-    //         Uri.parse("https://accounts.spotify.com/api/token"),
-    //         headers: {
-    //           "Authorization":
-    //               'Basic ${base64.encode(utf8.encode("${client_id}:${client_secret}"))}',
-    //           "content-type": "application/x-www-form-urlencoded"
-    //         },
-    //         encoding: Encoding.getByName('utf-8'),
-    //         body: {
-    //           "code": "${code}",
-    //           "redirect_uri": "${redirectUri}",
-    //           "grant_type": "authorization_code"
-    //         },);
-    // final response = await http.get(
-    //         Uri.parse("https://api.spotify.com/v1/me"),
-    //         headers: {
-    //           "Authorization":
-    //               'Basic ${base64.encode(utf8.encode("${client_id}:${client_secret}"))}',
-    //           "content-type": "application/x-www-form-urlencoded"
-    //         },
-    //         encoding: Encoding.getByName('utf-8'),
-    //         body: {
-    //           "code": "${code}",
-    //           "redirect_uri": "${redirectUri}",
-    //           "grant_type": "authorization_code"
-    //         },);
-
-
+ 
 
     final userInfo = await http.get(
             Uri.parse("https://api.spotify.com/v1/me"),

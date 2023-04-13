@@ -1,12 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'dart:io';
 
 class User {
   final String uid;
   final String username;
+  final String nation;
   final num level;
   final num numberQuiz;
   final num experience;
-  final num coins;
+  final num bestScore;
   final String? refresh_token;
   final String? access_token;
 
@@ -19,28 +21,30 @@ class User {
     required this.level,
     required this.numberQuiz,
     required this.experience,
-    required this.coins,
+    required this.bestScore,
+    required this.nation,
     this.access_token,
     this.refresh_token
   });
 
   factory User.fromJson(Map<String, dynamic> json) {
     return User(
-        coins: json['coins'],
-        experience: json['experience'],
-        level: json['level'],
-        numberQuiz: json['numOfQuiz'],
-        uid: json['uid'],
-        username: json['username'], 
-        access_token: json['access_token'], 
-        refresh_token: json['refresh_token']
-        );
+      experience: json['experience'],
+      level: json['level'],
+      numberQuiz: json['numOfQuiz'],
+      uid: json['uid'],
+      username: json['username'], 
+      refresh_token: json['refresh_token'],
+      nation: json['nation'],
+      bestScore: json['bestScore'],
+    );
   }
 }
 
 Future createUser(
     {required String uid,
-    required num coins,
+    required String nation,
+    required num bestScore,
     required num level,
     required num experience,
     required num numOfQuiz,
@@ -51,12 +55,13 @@ Future createUser(
   final docUser = FirebaseFirestore.instance.collection('users').doc(uid);
 
   final json = {
-    'coins': coins,
     'experience': experience,
     'level': level,
     'numOfQuiz': numOfQuiz,
     'uid': uid,
     'username': username,
+    'bestScore': bestScore,
+    'nation': Platform.localeName,
   };
 
   await docUser.set(json);
