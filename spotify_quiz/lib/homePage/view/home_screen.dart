@@ -54,8 +54,7 @@ class HomeScreen extends StatelessWidget {
               Column(
                 children: [
                   CustomBoxAvatarWithHero(
-                    picUrl:
-                        'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg',
+                    picUrl: utilities.imageUserProfile,
                     tags: "profilePic",
                     newPage: const ProfilePage(),
                   ),
@@ -63,7 +62,7 @@ class HomeScreen extends StatelessWidget {
                     height: 10,
                   ),
                   CustomText(
-                    text: "Username",
+                    text: context.read<AuthenticationBloc>().user.username,
                     thirdColor: true,
                     size: 25,
                   ),
@@ -90,7 +89,11 @@ class HomeScreen extends StatelessWidget {
                       Container(
                         alignment: Alignment.center,
                         child: CustomText(
-                          text: "1",
+                          text: context
+                              .read<AuthenticationBloc>()
+                              .user
+                              .level
+                              .toString(),
                           size: 30,
                           bold: true,
                         ),
@@ -121,7 +124,11 @@ class HomeScreen extends StatelessWidget {
                       Container(
                         alignment: Alignment.center,
                         child: CustomText(
-                          text: "2300",
+                          text: context
+                              .read<AuthenticationBloc>()
+                              .user
+                              .numberQuiz
+                              .toString(),
                           size: 30,
                           bold: true,
                         ),

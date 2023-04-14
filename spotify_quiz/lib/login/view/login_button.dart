@@ -13,7 +13,7 @@ class LoginButton extends StatelessWidget {
       key: const Key('loginForm_continue_raisedButton'),
       onPressed: () async => {
         await Navigator.of(context).push(
-          MaterialPageRoute(builder: (context) => WebViewLogin()),
+          MaterialPageRoute(builder: (context) => const WebViewLogin()),
         ),
         context.read<LoginBloc>().add(const LoginSubmitted()),
       },

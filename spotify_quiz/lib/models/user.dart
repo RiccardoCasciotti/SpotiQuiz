@@ -11,6 +11,7 @@ class User {
   final num correctAnswer;
   final num wrongAnswer;
   final String refreshToken;
+  final String accessToken = '-';
 
   static const empty = User(
       uid: "-",
@@ -24,17 +25,18 @@ class User {
       nation: "-",
       refreshToken: "-");
 
-  const User(
-      {required this.uid,
-      required this.username,
-      required this.level,
-      required this.numberQuiz,
-      required this.experience,
-      required this.bestScore,
-      required this.nation,
-      required this.correctAnswer,
-      required this.wrongAnswer,
-      required this.refreshToken});
+  const User({
+    required this.uid,
+    required this.username,
+    required this.level,
+    required this.numberQuiz,
+    required this.experience,
+    required this.bestScore,
+    required this.nation,
+    required this.correctAnswer,
+    required this.wrongAnswer,
+    required this.refreshToken,
+  });
 
   factory User.fromJson(Map<String, dynamic> json) {
     return User(

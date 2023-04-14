@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert' show json;
+import 'package:spotify_quiz/utility/utilities.dart' as utilities;
 
 import '../../models/user.dart';
 
@@ -100,6 +101,8 @@ class UserRepository {
   Future<User> apiGetUser(String accesToken, String refreshToken) async {
     List<User> userList = [];
 
+    utilities.accessToken = accesToken;
+
     final userInfo =
         await http.get(Uri.parse("https://api.spotify.com/v1/me"), headers: {
       "Authorization": 'Authorization: Bearer $accesToken',
@@ -109,7 +112,13 @@ class UserRepository {
     final userJson = json.decode(userInfo.body);
 
     if (userJson["error"] != {}) {
-      print("Error in the API request: ${userJson["error"]}");
+      debugPrint("Error in the API request: ${userJson["error"]}");
+    }
+
+    try {
+      utilities.imageUserProfile = userJson["images"][0]["url"];
+    } catch (e) {
+      debugPrint("theImageWasNotPresent");
     }
 
     final user = await FirebaseFirestore.instance.collection('users').get();

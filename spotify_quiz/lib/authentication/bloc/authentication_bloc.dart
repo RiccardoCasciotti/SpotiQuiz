@@ -6,12 +6,13 @@ import 'package:equatable/equatable.dart';
 import '../../repositories/user/user_repository.dart';
 import '../../models/user.dart';
 
-
 part 'authentication_event.dart';
 part 'authentication_state.dart';
 
 class AuthenticationBloc
     extends Bloc<AuthenticationEvent, AuthenticationState> {
+  User user = User.empty;
+
   AuthenticationBloc({
     required AuthenticationRepository authenticationRepository,
     required UserRepository userRepository,
@@ -39,15 +40,15 @@ class AuthenticationBloc
 
   Future<void> _onAuthenticationStatusChanged(
     _AuthenticationStatusChanged event,
-    Emitter<AuthenticationState> emit, // emit new state of the current BLOC, different from stream controller.add which sends a new event on a stream and all subscribed clients receive that event. 
+    Emitter<AuthenticationState>
+        emit, // emit new state of the current BLOC, different from stream controller.add which sends a new event on a stream and all subscribed clients receive that event.
   ) async {
     switch (event.status) {
       case AuthenticationStatus.unauthenticated:
         return emit(const AuthenticationState.unauthenticated());
       case AuthenticationStatus.authenticated:
-        final user = await _tryGetUser(); // HERE YOU SHOULD CALL A FUNCTION WHICH POPULATES THE USER FIELDS
         return emit(
-          user != null
+          user != User.empty
               ? AuthenticationState.authenticated(user)
               : const AuthenticationState.unauthenticated(),
         );
@@ -61,17 +62,5 @@ class AuthenticationBloc
     Emitter<AuthenticationState> emit,
   ) {
     _authenticationRepository.logOut();
-  }
-
-
-// HERE YOU SHOULD CALL A FUNCTION WHICH POPULATES THE USER FIELDS
-  Future<User?> _tryGetUser() async {
-    try {
-      //final user = await _userRepository.fetchUser();
-      
-      return User.empty;
-    } catch (_) {
-      return null;
-    }
   }
 }

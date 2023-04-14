@@ -24,11 +24,10 @@ class ProfilePage extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              const Hero(
+              Hero(
                 tag: "profilePic",
                 child: CircleAvatar(
-                  backgroundImage: NetworkImage(
-                      'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg'),
+                  backgroundImage: NetworkImage(utilities.imageUserProfile),
                   radius: 110,
                 ),
               ),
