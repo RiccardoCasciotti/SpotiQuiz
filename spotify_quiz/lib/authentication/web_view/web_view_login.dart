@@ -7,6 +7,8 @@ import 'package:spotify_quiz/authentication/bloc/authentication_bloc.dart';
 import 'package:spotify_quiz/repositories/user/user_repository.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
+import '../../login/bloc/login_bloc.dart';
+
 // Import for Android features.
 // Import for iOS features.
 
@@ -84,18 +86,16 @@ class WebViewLogin extends StatelessWidget {
           debugPrint("STATUS CODE: ${response.statusCode}");
           final bodyJson = json.decode(response.body);
 
-          await http.get(Uri.parse("https://api.spotify.com/v1/me"), headers: {
-            "Authorization":
-                'Authorization: Bearer ${bodyJson["access_token"]}',
-            "content-type": "application/x-www-form-urlencoded"
-          });
+
 
           if (response.statusCode == 200) {
+            
             var data = await userRepository.apiGetUser(
                 '${bodyJson["access_token"]}', '${bodyJson["refresh_token"]}');
             // ignore: use_build_context_synchronously
             context.read<AuthenticationBloc>().user = data;
             // ignore: use_build_context_synchronously
+            context.read<LoginBloc>().add(const LoginSubmitted());
             Navigator.pop(context);
 
             debugPrint(

@@ -20,16 +20,9 @@ class LoginPage extends StatelessWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.all(12),
-        child: BlocProvider(
-          create: (context) {
-            return LoginBloc(
-              authenticationRepository:
-                  RepositoryProvider.of<AuthenticationRepository>(context),
-            );
-          },
-          child: const LoginButton(),
+        child: const LoginButton()
         ),
-      ),
-    );
+      );
+    
   }
 }
