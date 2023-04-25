@@ -156,4 +156,22 @@ class UserRepository {
         username: userJson["display_name"],
         refreshToken: refreshToken);
   }
+
+  Future <void> UpdateAfterQuizOnDB(String uid, int prevCorrectAnswers, int prevWrongAnswers,int prevExperience,int prevNumberOfQuiz, int correctAnswersQuiz, int wrongAnswersQuiz, int prevBestScore, int score) async {
+    
+    int newExperience = prevExperience + 30 * correctAnswersQuiz + 10 * wrongAnswersQuiz;
+    int newBestScore = prevBestScore < score ? score : prevBestScore;
+
+    FirebaseFirestore.instance
+    .collection("users")
+    .doc(uid)
+    .update({
+    "numOfQuiz": prevNumberOfQuiz + 1, 
+    "wrongAnswers": prevWrongAnswers + wrongAnswersQuiz,
+    "correctAnswers": prevCorrectAnswers + correctAnswersQuiz,
+    'experience': newExperience,
+    'level': newExperience % 1000,
+    'bestScore': newBestScore,
+    });
+  } 
 }
