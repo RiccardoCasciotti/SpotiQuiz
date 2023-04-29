@@ -63,6 +63,7 @@ dependencies:
   url_launcher: ^6.1.9
   spotify: ^0.8.0
   webview_flutter: ^4.0.6
+  path_provider: ^2.0.14
 
 dev_dependencies:
   flutter_test:

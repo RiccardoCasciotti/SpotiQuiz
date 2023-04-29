@@ -96,6 +96,7 @@ class WebViewLogin extends StatelessWidget {
             context.read<AuthenticationBloc>().user = data;
             // ignore: use_build_context_synchronously
             context.read<LoginBloc>().add(const LoginSubmitted());
+            controller.clearCache();
             Navigator.pop(context);
 
             debugPrint(
