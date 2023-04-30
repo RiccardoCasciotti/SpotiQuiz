@@ -1,3 +1,5 @@
+import 'models.dart';
+
 class Quiz {
   final int uid;
   final int points;
