@@ -1,5 +1,3 @@
-import 'dart:convert';
-import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 
 Color secondaryColor = const Color.fromARGB(255, 25, 20, 20);
