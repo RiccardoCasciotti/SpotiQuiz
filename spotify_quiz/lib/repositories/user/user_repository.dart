@@ -157,21 +157,35 @@ class UserRepository {
         refreshToken: refreshToken);
   }
 
-  Future <void> UpdateAfterQuizOnDB(String uid, int prevCorrectAnswers, int prevWrongAnswers,int prevExperience,int prevNumberOfQuiz, int correctAnswersQuiz, int wrongAnswersQuiz, int prevBestScore, int score) async {
-    
-    int newExperience = prevExperience + 30 * correctAnswersQuiz + 10 * wrongAnswersQuiz;
-    int newBestScore = prevBestScore < score ? score : prevBestScore;
+  // ignore: non_constant_identifier_names
+  Future<User> UpdateAfterQuizOnDB(User actualUser, int correctAnswersQuiz,
+      int wrongAnswersQuiz, int score) async {
+    int newExperience = actualUser.experience.toInt() +
+        30 * correctAnswersQuiz +
+        10 * wrongAnswersQuiz;
+    int newBestScore = actualUser.bestScore.toInt() < score
+        ? score
+        : actualUser.bestScore.toInt();
 
-    FirebaseFirestore.instance
-    .collection("users")
-    .doc(uid)
-    .update({
-    "numOfQuiz": prevNumberOfQuiz + 1, 
-    "wrongAnswers": prevWrongAnswers + wrongAnswersQuiz,
-    "correctAnswers": prevCorrectAnswers + correctAnswersQuiz,
-    'experience': newExperience,
-    'level': newExperience % 1000,
-    'bestScore': newBestScore,
+    FirebaseFirestore.instance.collection("users").doc(actualUser.uid).update({
+      "numOfQuiz": actualUser.numberQuiz + 1,
+      "wrongAnswers": actualUser.wrongAnswer + wrongAnswersQuiz,
+      "correctAnswers": actualUser.correctAnswer + correctAnswersQuiz,
+      'experience': newExperience,
+      'level': (newExperience / 200).floor(),
+      'bestScore': newBestScore,
     });
-  } 
+
+    return User(
+        bestScore: newBestScore,
+        nation: actualUser.nation,
+        experience: newExperience,
+        level: (newExperience / 200).floor(),
+        numberQuiz: actualUser.numberQuiz + 1,
+        correctAnswer: actualUser.correctAnswer + correctAnswersQuiz,
+        wrongAnswer: actualUser.wrongAnswer + wrongAnswersQuiz,
+        uid: actualUser.uid,
+        username: actualUser.username,
+        refreshToken: actualUser.refreshToken);
+  }
 }
