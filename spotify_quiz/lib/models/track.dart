@@ -14,4 +14,11 @@ class Track {
      this.preview_url = preview_url;
      
   }
+
+  dynamic toJson() => {'id': id, 'name': name, 'images': images, 'artists': artists, 'preview_url': preview_url};
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
 }

@@ -10,9 +10,9 @@ import '../utility/api_calls.dart';
 
 class ArtistRepository {
 
-Future<Artist> new_artist(String id) async {
-  var artist_data = await get_artist(id);
-  return new Artist(artist_data[0], artist_data[1], artist_data[2], artist_data[3]);
-}
+// Future<Artist> new_artist(String id) async {
+//   var artist_data = await get_artist(id);
+//   return new Artist(artist_data[0], artist_data[1], artist_data[2], artist_data[3]);
+// }
 
 }

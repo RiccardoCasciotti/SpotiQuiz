@@ -1,0 +1,33 @@
+{
+    "items": [
+        {
+            "artists": [
+                {
+                    "id": "0TnOYISbd1XYRBk9myaseg",
+                    "name": "Pitbull"
+                }
+            ],
+            "id": "6nCJAxRvXmPkPiZo8Vh5ZG",
+            "images": [
+                {
+                    "height": 640,
+                    "url": "https://i.scdn.co/image/ab67616d0000b273f0dd8e557b66318ea8e6978d",
+                    "width": 640
+                },
+                {
+                    "height": 300,
+                    "url": "https://i.scdn.co/image/ab67616d00001e02f0dd8e557b66318ea8e6978d",
+                    "width": 300
+                },
+                {
+                    "height": 64,
+                    "url": "https://i.scdn.co/image/ab67616d00004851f0dd8e557b66318ea8e6978d",
+                    "width": 64
+                }
+            ],
+            "name": "Libertad 548",
+            "release_date": "2019-09-27",
+            "release_date_precision": "day",
+        }
+    ]
+}

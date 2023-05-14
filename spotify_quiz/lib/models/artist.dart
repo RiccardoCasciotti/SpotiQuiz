@@ -17,4 +17,12 @@ class Artist {
      this.name = name;
      //this.tracks = tracks;
   }
+
+  dynamic toJson() => {'id': id, 'name': name, 'images': images, 'genres': genres};
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+  
 }

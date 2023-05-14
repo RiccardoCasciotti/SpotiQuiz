@@ -33,7 +33,7 @@ class WebViewLogin extends StatelessWidget {
 // See https://developer.spotify.com/documentation/general/guides/scopes/
 // for a complete list of these Spotify authorization permissions. If no
 // scopes are specified, only public Spotify information will be available.
-    String scopes = "user-read-private user-read-email";
+    String scopes = "user-read-private user-read-email user-follow-read";
 
     final clientId = dotenv.env['SPOTIFY_CLIENT_ID'];
     final clientSecret = dotenv.env['SPOTIFY_CLIENT_SECRET'];
@@ -96,7 +96,7 @@ class WebViewLogin extends StatelessWidget {
             context.read<AuthenticationBloc>().user = data;
             // ignore: use_build_context_synchronously
             context.read<LoginBloc>().add(const LoginSubmitted());
-            controller.clearCache();
+            //controller.clearCache();
             Navigator.pop(context);
 
             debugPrint(

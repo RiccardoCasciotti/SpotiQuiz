@@ -11,4 +11,12 @@ class Image {
      this.width = width;
      this.heigth = heigth;
   }
+
+  
+  dynamic toJson() => {'url': url, 'heigth': heigth, 'width': width};
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
 }
