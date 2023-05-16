@@ -75,6 +75,28 @@ class UserRepository {
     }
   }
 
+  Future<List<User>> getUsersByNation(String nation) async {
+    List<User> userList = [];
+    try {
+      final user = await FirebaseFirestore.instance.collection('users').get();
+      for (var element in user.docs) {
+        if ((User.fromJson(element.data())).nation == nation) {
+          userList.add(
+            User.fromJson(element.data()),
+          );
+        }
+      }
+      return userList;
+    } on FirebaseException catch (e) {
+      if (kDebugMode) {
+        print("Failed with error '${e.code}' : ${e.message}");
+      }
+      return userList;
+    } catch (e) {
+      throw Exception(e.toString());
+    }
+  }
+
   Future<User?> getByID(String uid) async {
     List<User> userList = [];
     try {

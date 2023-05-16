@@ -3,7 +3,7 @@
 
   "coins": "Monedas",
 
-  "nofquiz": "#Quiz",
+  "nofquiz": "Quiz N.",
 
   "level": "Nivel",
 
@@ -65,5 +65,9 @@
 
   "continuebutton": "Continúa",
 
-  "scorequiz": "Puntaje:"
+  "scorequiz": "Puntaje:",
+
+  "bestScore": "Mejor Puntuación",
+
+  "experience": "Experiencia"
 }
