@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:spotify_quiz/custom_widgets/text.dart';
+import 'package:spotify_quiz/models/user.dart';
 import 'package:spotify_quiz/utility/utilities.dart' as utilities;
+
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:spotify_quiz/authentication/bloc/authentication_bloc.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -18,6 +22,36 @@ class LocalRankScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final rows = <TableRow>[];
+
+    for (User user in context.read<AuthenticationBloc>().userByNation) {
+      rows.add(
+        TableRow(
+          children: <Widget>[
+            CustomText(
+              alignCenter: true,
+              text: user.username,
+              thirdColor: true,
+              size: 18,
+            ),
+            CustomText(
+              alignCenter: true,
+              text: user.level.toString(),
+              size: 18,
+              thirdColor: true,
+              bold: true,
+            ),
+            CustomText(
+              alignCenter: true,
+              text: user.bestScore.toString(),
+              size: 18,
+              bold: true,
+            ),
+          ],
+        ),
+      );
+    }
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: utilities.secondaryColor,
@@ -79,7 +113,16 @@ class LocalRankScreen extends StatelessWidget {
                                 text: AppLocalizations.of(context)!
                                     .usernameranking,
                                 thirdColor: true,
-                                size: 20,
+                                size: 18,
+                                bold: true,
+                              ),
+                            ),
+                            Container(
+                              alignment: Alignment.center,
+                              child: CustomText(
+                                text: AppLocalizations.of(context)!.level,
+                                thirdColor: true,
+                                size: 18,
                                 bold: true,
                               ),
                             ),
@@ -89,7 +132,7 @@ class LocalRankScreen extends StatelessWidget {
                                 text: AppLocalizations.of(context)!
                                     .bestscoreranking,
                                 thirdColor: true,
-                                size: 20,
+                                size: 18,
                                 bold: true,
                               ),
                             ),
@@ -103,68 +146,12 @@ class LocalRankScreen extends StatelessWidget {
                             SizedBox(
                               height: 20,
                             ),
-                          ],
-                        ),
-                        TableRow(
-                          children: <Widget>[
-                            Container(
-                              alignment: Alignment.center,
-                              child: CustomText(
-                                text: "Lollo",
-                                thirdColor: true,
-                                size: 20,
-                              ),
-                            ),
-                            Container(
-                              alignment: Alignment.center,
-                              child: CustomText(
-                                text: "3000",
-                                size: 20,
-                                bold: true,
-                              ),
+                            SizedBox(
+                              height: 20,
                             ),
                           ],
                         ),
-                        TableRow(
-                          children: <Widget>[
-                            Container(
-                              alignment: Alignment.center,
-                              child: CustomText(
-                                text: "Arci",
-                                thirdColor: true,
-                                size: 20,
-                              ),
-                            ),
-                            Container(
-                              alignment: Alignment.center,
-                              child: CustomText(
-                                text: "2300",
-                                size: 20,
-                                bold: true,
-                              ),
-                            ),
-                          ],
-                        ),
-                        TableRow(
-                          children: <Widget>[
-                            Container(
-                              alignment: Alignment.center,
-                              child: CustomText(
-                                text: "Romolo",
-                                thirdColor: true,
-                                size: 20,
-                              ),
-                            ),
-                            Container(
-                              alignment: Alignment.center,
-                              child: CustomText(
-                                text: "1000",
-                                size: 20,
-                                bold: true,
-                              ),
-                            ),
-                          ],
-                        ),
+                        for (TableRow row in rows) row
                       ],
                       defaultColumnWidth: const FlexColumnWidth(),
                     ),

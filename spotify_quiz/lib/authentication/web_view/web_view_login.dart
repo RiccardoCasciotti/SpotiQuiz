@@ -61,6 +61,7 @@ class WebViewLogin extends StatelessWidget {
             responseUri.indexOf("code") + 5,
           );
           debugPrint(code);
+          // ignore: unused_local_variable
           Uri url = Uri.parse("https://accounts.spotify.com/api/token");
 
           final response = await http.post(
@@ -95,6 +96,7 @@ class WebViewLogin extends StatelessWidget {
                 '${bodyJson["access_token"]}', '${bodyJson["refresh_token"]}');
             // ignore: use_build_context_synchronously
             context.read<AuthenticationBloc>().user = data;
+
             // ignore: use_build_context_synchronously
             Navigator.pop(context);
 
