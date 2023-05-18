@@ -18,11 +18,20 @@ class LoginPage extends StatelessWidget {
         title: const Text('Login'),
         backgroundColor: utilities.primaryColor,
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(12),
-        child: const LoginButton()
+      body: Center(
+        child: Padding(
+          padding: const EdgeInsets.all(12),
+          child: BlocProvider(
+            create: (context) {
+              return LoginBloc(
+                authenticationRepository:
+                    RepositoryProvider.of<AuthenticationRepository>(context),
+              );
+            },
+            child: const LoginButton(),
+          ),
         ),
-      );
-    
+      ),
+    );
   }
 }

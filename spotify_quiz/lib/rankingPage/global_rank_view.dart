@@ -85,85 +85,83 @@ class GlobalRankScreen extends StatelessWidget {
             ),
             Flexible(
               flex: 16,
-              child: Container(
-                width: 300,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20.0),
-                    border: Border.all(
-                      color: utilities.tertiaryColor,
-                      style: BorderStyle.solid,
-                      width: 0.1,
-                    ),
-                    shape: BoxShape.rectangle),
-                child: Column(
-                  children: [
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    Scrollbar(
-                      child: SingleChildScrollView(
-                        scrollDirection: Axis.vertical,
-                        child: Table(
-                          border: TableBorder.symmetric(),
-                          defaultVerticalAlignment:
-                              TableCellVerticalAlignment.middle,
-                          children: <TableRow>[
-                            TableRow(
-                              children: <Widget>[
-                                Container(
-                                  alignment: Alignment.center,
-                                  child: CustomText(
-                                    text: AppLocalizations.of(context)!
-                                        .usernameranking,
-                                    thirdColor: true,
-                                    size: 18,
-                                    bold: true,
-                                  ),
-                                ),
-                                Container(
-                                  alignment: Alignment.center,
-                                  child: CustomText(
-                                    text: AppLocalizations.of(context)!.level,
-                                    thirdColor: true,
-                                    size: 18,
-                                    bold: true,
-                                  ),
-                                ),
-                                Container(
-                                  alignment: Alignment.center,
-                                  child: CustomText(
-                                    text: AppLocalizations.of(context)!
-                                        .bestscoreranking,
-                                    thirdColor: true,
-                                    size: 18,
-                                    bold: true,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            const TableRow(
-                              children: <Widget>[
-                                SizedBox(
-                                  height: 20,
-                                ),
-                                SizedBox(
-                                  height: 20,
-                                ),
-                                SizedBox(
-                                  height: 20,
-                                ),
-                              ],
-                            ),
-                            for (TableRow row in rows) row
-                          ],
-                          defaultColumnWidth: const FlexColumnWidth(),
-                        ),
+              child: SingleChildScrollView(
+                scrollDirection: Axis.vertical,
+                child: Container(
+                  width: 300,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20.0),
+                      border: Border.all(
+                        color: utilities.tertiaryColor,
+                        style: BorderStyle.solid,
+                        width: 0.1,
                       ),
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                  ],
+                      shape: BoxShape.rectangle),
+                  child: Column(
+                    children: [
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Table(
+                        border: TableBorder.symmetric(),
+                        defaultVerticalAlignment:
+                            TableCellVerticalAlignment.middle,
+                        children: <TableRow>[
+                          TableRow(
+                            children: <Widget>[
+                              Container(
+                                alignment: Alignment.center,
+                                child: CustomText(
+                                  text: AppLocalizations.of(context)!
+                                      .usernameranking,
+                                  thirdColor: true,
+                                  size: 18,
+                                  bold: true,
+                                ),
+                              ),
+                              Container(
+                                alignment: Alignment.center,
+                                child: CustomText(
+                                  text: AppLocalizations.of(context)!.level,
+                                  thirdColor: true,
+                                  size: 18,
+                                  bold: true,
+                                ),
+                              ),
+                              Container(
+                                alignment: Alignment.center,
+                                child: CustomText(
+                                  text: AppLocalizations.of(context)!
+                                      .bestscoreranking,
+                                  thirdColor: true,
+                                  size: 18,
+                                  bold: true,
+                                ),
+                              ),
+                            ],
+                          ),
+                          const TableRow(
+                            children: <Widget>[
+                              SizedBox(
+                                height: 20,
+                              ),
+                              SizedBox(
+                                height: 20,
+                              ),
+                              SizedBox(
+                                height: 20,
+                              ),
+                            ],
+                          ),
+                          for (TableRow row in rows) row
+                        ],
+                        defaultColumnWidth: const FlexColumnWidth(),
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
