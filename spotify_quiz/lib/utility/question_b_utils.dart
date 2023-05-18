@@ -1,6 +1,7 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'dart:math';
 
-import 'package:flutter/material.dart';
 import 'package:spotify_quiz/models/models.dart' as model;
 import 'package:spotify_quiz/utility/api_calls.dart';
 
@@ -31,14 +32,14 @@ int similar_index = 0;
 Future<void> init_data() async {
 
   
-  if (followed_artists.length == 0){
+  if (followed_artists.isEmpty){
     followed_artists = await get_followed_artists();
     consume_followed_artists = followed_artists;
     consume_followed_artists.shuffle();
   }
 
   if (consume_similar_artists.length < 4){
-    String similar_id = followed_artists.length == 0
+    String similar_id = followed_artists.isEmpty
         ? "0TnOYISbd1XYRBk9myaseg"
         : followed_artists[similar_index%(followed_artists.length -1)].id;
     //print("############################ $similar_id");
@@ -77,10 +78,11 @@ Future<model.Question> generate_b() async{
     
     for(var i = 0; i < 3; i++){
       int index = random.nextInt(consume_followed_artists.length); 
-      if( !options.contains(consume_followed_artists[index].name))
+      if( !options.contains(consume_followed_artists[index].name)) {
         options.add(consume_followed_artists[index].name);
-      else
+      } else {
         i--;
+      }
     }
 
   }
@@ -95,10 +97,11 @@ Future<model.Question> generate_b() async{
     tracks = await get_top_tracks(artist.id);
     for(var i = 0; i < 3; i++){
       int index = random.nextInt(consume_similar_artists.length); 
-      if( !options.contains(consume_similar_artists[index].name))
+      if( !options.contains(consume_similar_artists[index].name)) {
         options.add(consume_similar_artists[index].name);
-      else
+      } else {
         i--;
+      }
     }
   }
   int index = random.nextInt(tracks.length); 

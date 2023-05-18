@@ -1,6 +1,5 @@
 
 
-import 'models.dart';
 
 class Question {
   void obj;
@@ -9,13 +8,7 @@ class Question {
   late String type;
 
 
-  Question( String answer, List<String> options, String type, void obj){
-     this.answer = answer;
-     this.options = options;
-     this.type = type;
-     this.obj = obj;
-     
-  }
+  Question( this.answer, this.options, this.type, this.obj);
 
   dynamic toJson() => {'answer': answer, 'options': options, 'type': type};
 

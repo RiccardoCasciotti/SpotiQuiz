@@ -1,10 +1,10 @@
-import 'dart:math';
+
+// ignore_for_file: non_constant_identifier_names
 
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:spotify_quiz/models/models.dart' as model;
 import 'package:spotify_quiz/utility/api_calls.dart';
-import 'package:random_date/random_date.dart';
 import 'package:random_x/random_x.dart';
 
 //POSSIBLE QUESTIONS
@@ -33,18 +33,18 @@ List<model.Album> consume_albums = [];
 int similar_index = 0;
 
 Future<void> init_data() async {
-  if (followed_artists.length == 0) {
+  if (followed_artists.isEmpty) {
     followed_artists = await get_followed_artists();
     consume_followed_artists = followed_artists;
     consume_followed_artists.shuffle();
   }
 
   if (consume_similar_artists.length < 4) {
-    String similar_id = followed_artists.length == 0
+    String similarId = followed_artists.isEmpty
         ? "0TnOYISbd1XYRBk9myaseg"
         : followed_artists[similar_index % (followed_artists.length - 1)].id;
     //print("############################ $similar_id");
-    consume_similar_artists = await get_related_artists(similar_id);
+    consume_similar_artists = await get_related_artists(similarId);
     consume_similar_artists = consume_similar_artists.sublist(
         0,
         consume_similar_artists.length < 30
@@ -106,11 +106,11 @@ Future<model.Question> generate_c() async {
 
     date = DateUtils.dateOnly(date);
 
-    final String date_formatted = formatter.format(date);
+    final String dateFormatted = formatter.format(date);
 
-    if (!options.contains(date_formatted) &&
+    if (!options.contains(dateFormatted) &&
         date != DateUtils.dateOnly(album.date)) {
-      options.add(date_formatted);
+      options.add(dateFormatted);
     } else {
       i--;
     }

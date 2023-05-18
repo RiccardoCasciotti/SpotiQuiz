@@ -1,6 +1,7 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'dart:math';
 
-import 'package:flutter/material.dart';
 import 'package:spotify_quiz/models/models.dart' as model;
 import 'package:spotify_quiz/utility/api_calls.dart';
 
@@ -31,22 +32,27 @@ int similar_index = 0;
 Future<void> init_data() async {
 
   
-  if (followed_artists.length == 0){
+  if (followed_artists.isEmpty){
     followed_artists = await get_followed_artists();
+
     consume_followed_artists = followed_artists;
     consume_followed_artists.shuffle();
   }
 
   if (consume_similar_artists.length < 3){
-    String similar_id = followed_artists.length == 0
+    String similar_id = followed_artists.isEmpty
         ? "0TnOYISbd1XYRBk9myaseg"
         : followed_artists[similar_index%(followed_artists.length -1)].id;
+
     consume_similar_artists = await get_related_artists(similar_id);
     consume_similar_artists = consume_similar_artists.sublist(0,consume_similar_artists.length < 30 ? consume_similar_artists.length : 30 );
     consume_similar_artists.shuffle();
     similar_index++;
     //print("SIMILAR_INDEX $similar_index");
   }
+  // if(consume_followed_artists.length < 4){
+  //   consume_similar_artists = consume_followed_artists + consume_similar_artists;
+  // }
 
 }
 
@@ -59,36 +65,37 @@ Future<model.Question> generate_a() async{
   List<String> options = [];
   model.Artist artist;
   
-  if(consume_followed_artists.length > 2){
+  if(consume_followed_artists.length > 3){
     artist = consume_followed_artists.last;
     consume_followed_artists.removeLast();
     // for(var i = 0; i < consume_followed_artists.length; i++)
     //   print("FOLLOWED: ${consume_followed_artists[i].name}");
     // print("FOLLOWED LENGTH: ${consume_followed_artists.length}");
-    Random random = new Random();
+    Random random = Random();
     for(var i = 0; i < 3; i++){
       int index = random.nextInt(consume_followed_artists.length); 
-      if( !options.contains(consume_followed_artists[index].name))
+      if( !options.contains(consume_followed_artists[index].name)) {
         options.add(consume_followed_artists[index].name);
-      else
+      } else {
         i--;
+      }
     }
 
   }
   else{
-    
     artist = consume_similar_artists.last;
     consume_similar_artists.removeLast();
     // for(var i = 0; i < consume_similar_artists.length; i++)
     //   print("SIMILAR: ${consume_similar_artists[i].name}");
     // print("SIMILAR LENGTH: ${consume_similar_artists.length}");
-    Random random = new Random();
+    Random random = Random();
     for(var i = 0; i < 3; i++){
       int index = random.nextInt(consume_similar_artists.length); 
-      if( !options.contains(consume_similar_artists[index].name))
+      if( !options.contains(consume_similar_artists[index].name)) {
         options.add(consume_similar_artists[index].name);
-      else
+      } else {
         i--;
+      }
     }
   }
 
@@ -96,7 +103,7 @@ Future<model.Question> generate_a() async{
   obj =  artist;
   String type = "A";
 
-  var res = model.Question(answer as String, options as List<String>, type, obj as model.Artist);
+  var res = model.Question(answer, options, type, obj as model.Artist);
   // print(res.toString());
   // print((res.text as model.Image).toString());
   return res;

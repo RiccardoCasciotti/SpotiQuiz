@@ -1,4 +1,3 @@
-import 'models.dart';
 
 class Image {
   late String url;
@@ -6,11 +5,7 @@ class Image {
   late int width;
   
 
-  Image( String url, int heigth, int width){
-     this.url = url;
-     this.width = width;
-     this.heigth = heigth;
-  }
+  Image( this.url, this.heigth, this.width);
 
   
   dynamic toJson() => {'url': url, 'heigth': heigth, 'width': width};

@@ -1,10 +1,10 @@
 import 'package:authentication_repository/authentication_repository.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:spotify_quiz/repositories/firebase_options.dart';
 
-import 'package:firebase_core/firebase_core.dart';
 import 'authentication/authentication.dart';
-import 'repositories/firebase_options.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 import 'loading/view/splash_page.dart';
@@ -21,13 +21,14 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 void main() async {
   await dotenv.load(fileName: ".env");
 
-  final fbApp = await Firebase.initializeApp(
+   final fbApp = await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
   WidgetsFlutterBinding.ensureInitialized();
   //FirebaseFirestore db = FirebaseFirestore.instance;
   // Add a new document with a generated ID
   //db.collection("users").add(user);
+  
   runApp(const MyApp());
 }
 

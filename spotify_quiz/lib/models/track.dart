@@ -4,16 +4,11 @@ class Track {
   late String name;
   late List<Image> images;
   late List<Artist> artists;
+  // ignore: non_constant_identifier_names
   late String preview_url;
 
-  Track(String id, String name, List<Image> images, List<Artist> artists, String preview_url){
-     this.id = id;
-     this.images = images;
-     this.name = name;
-     this.artists = artists;
-     this.preview_url = preview_url;
-     
-  }
+  // ignore: non_constant_identifier_names
+  Track(this.id, this.name, this.images, this.artists, this.preview_url);
 
   dynamic toJson() => {'id': id, 'name': name, 'images': images, 'artists': artists, 'preview_url': preview_url};
 

@@ -9,14 +9,7 @@ class Album {
   late String precision;
   
 
-  Album(String id, String name, List<Image>? images, List<Artist> artists, DateTime date, String precision){
-     this.id = id;
-     this.images = images;
-     this.name = name;
-     this.artists = artists;
-     this.date = date;
-     this.precision = precision;
-  }
+  Album(this.id, this.name, this.images, this.artists, this.date, this.precision);
 
   dynamic toJson() => {'id': id, 'name': name, 'images': images, 'artists': artists, 'date': date, "precision": precision};
 

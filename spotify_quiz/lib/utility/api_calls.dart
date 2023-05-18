@@ -1,20 +1,15 @@
+// ignore_for_file: non_constant_identifier_names, prefer_if_null_operators
+
 import 'dart:convert';
 
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
-import 'package:http/http.dart';
-import 'package:spotify_quiz/utility/question_a_utils.dart';
-import 'package:spotify_quiz/utility/question_b_utils.dart';
-import 'package:spotify_quiz/utility/question_c_utils.dart';
-import 'package:spotify_quiz/utility/question_d_utils.dart';
 import 'package:spotify_quiz/utility/quiz_utils.dart';
 import 'package:spotify_quiz/utility/utilities.dart';
 
 import '../models/models.dart' as model;
 import 'package:http/http.dart' as http;
 
-import 'package:spotify_quiz/utility/utilities.dart' as utilities;
 
+var i = 0;
 List<model.Image> img_objs(List list) {
   List<model.Image> images = [];
   list = List.from(list);
@@ -22,7 +17,7 @@ List<model.Image> img_objs(List list) {
   for (var i = 0; i < list.length; i++) {
     var tmp = list[i];
 
-    model.Image img = new model.Image(tmp["url"], tmp["height"], tmp["width"]);
+    model.Image img = model.Image(tmp["url"], tmp["height"], tmp["width"]);
     images.add(img);
   }
   return images;
@@ -93,11 +88,11 @@ Future<List<model.Artist>> get_related_artists(String artist_id) async {
 
 Future<List<model.Album>> get_artist_albums(String artist_id) async {
   accessToken = await getAccessToken();
-  final market = "IT";
+  const market = "IT";
 
   final albumsInfo = await http.get(
       Uri.parse(
-          "https://api.spotify.com/v1/artists/$artist_id/albums?market=${market}&limit=4"),
+          "https://api.spotify.com/v1/artists/$artist_id/albums?market=$market&limit=20"),
       headers: {
         "Authorization": 'Authorization: Bearer $accessToken',
         "content-type": "application/x-www-form-urlencoded"
@@ -118,7 +113,7 @@ Future<List<model.Artist>> get_followed_artists() async {
   accessToken = await getAccessToken();
 
   final artistsInfo = await http.get(
-      Uri.parse("https://api.spotify.com/v1/me/following?type=artist&limit=4"),
+      Uri.parse("https://api.spotify.com/v1/me/following?type=artist&limit=20"),
       headers: {
         "Authorization": 'Authorization: Bearer $accessToken',
         "content-type": "application/x-www-form-urlencoded"
@@ -141,7 +136,11 @@ Future<model.Artist> get_artist(String artist_id) async {
   accessToken = await getAccessToken();
 
   // ######################################### Insert here to test
-  var tmp = await generate_quiz("R");
+ // if( i == 0 ){
+     // ignore: unused_local_variable
+     //var tmp = await generate_quiz("R");
+  //   i++;
+ // }
   
   
 

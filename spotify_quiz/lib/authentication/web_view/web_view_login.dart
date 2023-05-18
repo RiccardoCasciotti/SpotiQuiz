@@ -63,7 +63,7 @@ class WebViewLogin extends StatelessWidget {
             responseUri.indexOf("code") + 5,
           );
           debugPrint(code);
-          Uri url = Uri.parse("https://accounts.spotify.com/api/token");
+          
 
           final response = await http.post(
             Uri.parse("https://accounts.spotify.com/api/token"),
@@ -103,11 +103,11 @@ class WebViewLogin extends StatelessWidget {
                 "1 #####################################################################");
           }
 
-          if (!responseUri.contains(redirectUri)) {
-            debugPrint(responseUri);
-            return NavigationDecision.navigate;
-          }
-          return NavigationDecision.prevent;
+          // if (!responseUri.contains(redirectUri)) {
+          //   debugPrint(responseUri);
+          //   return NavigationDecision.navigate;
+          // }
+          return NavigationDecision.navigate;
         },
       ))
       ..loadRequest(url1);

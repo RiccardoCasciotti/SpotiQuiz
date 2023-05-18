@@ -12,6 +12,7 @@ part 'authentication_state.dart';
 class AuthenticationBloc
     extends Bloc<AuthenticationEvent, AuthenticationState> {
   User user = User.empty;
+  final UserRepository _userRepository;
 
   AuthenticationBloc({
     required AuthenticationRepository authenticationRepository,
@@ -27,7 +28,6 @@ class AuthenticationBloc
   }
 
   final AuthenticationRepository _authenticationRepository;
-  final UserRepository _userRepository;
   late StreamSubscription<AuthenticationStatus>
       _authenticationStatusSubscription;
 

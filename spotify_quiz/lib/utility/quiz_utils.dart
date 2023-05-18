@@ -35,9 +35,9 @@ Future<model.Quiz> generate_quiz(String type) async {
   } else {
     final types = [generate_a, generate_b, generate_c, generate_d];
     Random random = Random();
-    for (var i = 0; i < 5; i++) {
+    for (var i = 0; i < 20; i++) {
       int index = random.nextInt(types.length);
-      final question = await generate_a();
+      final question = await types[index]();
       questions.add(question);
     }
   }

@@ -10,13 +10,7 @@ class Artist {
    
   
 
-  Artist(String id, String name, List<Image> ?images, List<String>? genres ){//,  //List<Track> ?tracks){
-     this.id = id;
-     this.images = images;
-     this.genres = genres;
-     this.name = name;
-     //this.tracks = tracks;
-  }
+  Artist(this.id, this.name, this.images, this.genres );
 
   dynamic toJson() => {'id': id, 'name': name, 'images': images, 'genres': genres};
 
