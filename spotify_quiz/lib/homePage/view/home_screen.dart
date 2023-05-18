@@ -23,7 +23,7 @@ class HomeScreen extends StatelessWidget {
     required this.secondButtonPressed,
     required this.onItemTapped,
     required this.selectedIndex,
-  }) : super(key: key);
+  }) : super(key: const Key("HomePage"));
 
   @override
   Widget build(BuildContext context) {
@@ -32,6 +32,7 @@ class HomeScreen extends StatelessWidget {
         backgroundColor: utilities.secondaryColor,
         actions: <Widget>[
           IconButton(
+            key: const Key("LogoutHome"),
             icon: Icon(
               Icons.logout_outlined,
               color: utilities.primaryColor,
@@ -54,6 +55,7 @@ class HomeScreen extends StatelessWidget {
               Column(
                 children: [
                   CustomBoxAvatarWithHero(
+                    key: const Key("ProfilePicHome"),
                     picUrl: utilities.imageUserProfile,
                     tags: "profilePic",
                     newPage: const ProfilePage(),
@@ -62,6 +64,7 @@ class HomeScreen extends StatelessWidget {
                     height: 10,
                   ),
                   CustomText(
+                    key: const Key("UsernameHome"),
                     text: context.read<AuthenticationBloc>().user.username,
                     thirdColor: true,
                     size: 25,
@@ -80,6 +83,7 @@ class HomeScreen extends StatelessWidget {
                       Container(
                         alignment: Alignment.center,
                         child: CustomText(
+                          key: const Key("LevelHome"),
                           text: AppLocalizations.of(context)!.level,
                           thirdColor: true,
                           size: 30,
@@ -89,6 +93,7 @@ class HomeScreen extends StatelessWidget {
                       Container(
                         alignment: Alignment.center,
                         child: CustomText(
+                          key: const Key("LevelHomeInfo"),
                           text: context
                               .read<AuthenticationBloc>()
                               .user
@@ -115,6 +120,7 @@ class HomeScreen extends StatelessWidget {
                       Container(
                         alignment: Alignment.center,
                         child: CustomText(
+                          key: const Key("NOfQuizHome"),
                           text: AppLocalizations.of(context)!.nofquiz,
                           size: 30,
                           thirdColor: true,
@@ -124,6 +130,7 @@ class HomeScreen extends StatelessWidget {
                       Container(
                         alignment: Alignment.center,
                         child: CustomText(
+                          key: const Key("NOfQuizHomeInfo"),
                           text: context
                               .read<AuthenticationBloc>()
                               .user
@@ -160,6 +167,7 @@ class HomeScreen extends StatelessWidget {
         ),
       ),
       bottomNavigationBar: CustomNavBar(
+        key: const Key("NavBarHome"),
         selectedIndex: selectedIndex,
         onItemTapped: onItemTapped,
       ),

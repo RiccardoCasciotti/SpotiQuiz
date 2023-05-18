@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:spotify_quiz/utility/utilities.dart' as utilities;
 
 class EventsPage extends StatelessWidget {
-  const EventsPage({super.key});
+  const EventsPage({
+    Key? key,
+  }) : super(key: const Key("EventPage"));
 
   @override
   Widget build(BuildContext context) {
