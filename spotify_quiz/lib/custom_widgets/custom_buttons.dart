@@ -46,6 +46,7 @@ class _CustomButtonsHomeState extends State<CustomButtonsHome> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 FloatingActionButton(
+                  key: const Key("RankingButtonHome"),
                   heroTag: null,
                   backgroundColor: _tapped1
                       ? utilities.primaryColor
@@ -101,6 +102,7 @@ class _CustomButtonsHomeState extends State<CustomButtonsHome> {
                   child: const Icon(Icons.emoji_events_outlined),
                 ),
                 CustomText(
+                  key: const Key("RankingTextHome"),
                   text: AppLocalizations.of(context)!.ranking,
                   size: 20.0,
                   thirdColor: !_tapped1,
@@ -111,6 +113,7 @@ class _CustomButtonsHomeState extends State<CustomButtonsHome> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 FloatingActionButton(
+                  key: const Key("EventButtonHome"),
                   heroTag: null,
                   backgroundColor: _tapped2
                       ? utilities.primaryColor
@@ -136,6 +139,7 @@ class _CustomButtonsHomeState extends State<CustomButtonsHome> {
                   child: const Icon(Icons.star_outline_sharp),
                 ),
                 CustomText(
+                  key: const Key("EventTextHome"),
                   text: AppLocalizations.of(context)!.events,
                   size: 20.0,
                   thirdColor: !_tapped2,

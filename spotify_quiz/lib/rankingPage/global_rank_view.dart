@@ -18,7 +18,7 @@ class GlobalRankScreen extends StatelessWidget {
     Key? key,
     required this.onItemTapped,
     required this.selectedIndex,
-  }) : super(key: key);
+  }) : super(key: const Key("GlobalRankingPage"));
 
   @override
   Widget build(BuildContext context) {

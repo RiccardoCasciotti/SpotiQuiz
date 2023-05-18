@@ -9,7 +9,9 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../custom_widgets/text.dart';
 
 class ProfilePage extends StatelessWidget {
-  const ProfilePage({super.key});
+  const ProfilePage({
+    Key? key,
+  }) : super(key: const Key("ProfilePage"));
 
   @override
   Widget build(BuildContext context) {
@@ -17,6 +19,7 @@ class ProfilePage extends StatelessWidget {
     var wrongAnswers = context.read<AuthenticationBloc>().user.wrongAnswer;
     var bestScore = context.read<AuthenticationBloc>().user.bestScore;
     var experience = context.read<AuthenticationBloc>().user.experience;
+    var nOfQuiz = context.read<AuthenticationBloc>().user.numberQuiz;
 
     return Scaffold(
       backgroundColor: utilities.secondaryColor,
@@ -64,8 +67,9 @@ class ProfilePage extends StatelessWidget {
                               size: 20,
                             ),
                             CustomText(
-                              text:
-                                  "${(100 * correctAnswers / (correctAnswers + wrongAnswers)).round()}%",
+                              text: nOfQuiz != 0
+                                  ? "${(100 * correctAnswers / (correctAnswers + wrongAnswers)).round()}%"
+                                  : "0",
                               size: 25,
                             ),
                           ],
@@ -79,8 +83,9 @@ class ProfilePage extends StatelessWidget {
                               size: 20,
                             ),
                             CustomText(
-                              text:
-                                  "${(100 * wrongAnswers / (correctAnswers + wrongAnswers)).round()}%",
+                              text: nOfQuiz != 0
+                                  ? "${(100 * wrongAnswers / (correctAnswers + wrongAnswers)).round()}%"
+                                  : "0",
                               size: 25,
                             ),
                           ],
