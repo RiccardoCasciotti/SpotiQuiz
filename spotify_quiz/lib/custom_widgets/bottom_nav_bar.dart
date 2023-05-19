@@ -47,7 +47,7 @@ class CustomNavBarRanking extends StatelessWidget {
     Key? key,
     required this.selectedIndex,
     required this.onItemTapped,
-  }) : super(key: key);
+  }) : super(key: const Key("NavBarRanking"));
 
   @override
   Widget build(BuildContext context) {
