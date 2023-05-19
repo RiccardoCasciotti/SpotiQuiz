@@ -1,4 +1,3 @@
-// ignore: file_names
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
@@ -155,6 +154,30 @@ void main() {
 
     //test
     expect(find.byKey(const Key("NavBarHome")), findsOneWidget);
+  });
+
+  testWidgets('Logout', (WidgetTester tester) async {
+    //setup
+    app.main();
+
+    await tester.pumpAndSettle(const Duration(seconds: 5));
+
+    final Finder button = find.byKey(const Key('LoginButton'));
+
+    //do
+
+    await tester.tap(button);
+
+    await tester.pumpAndSettle(const Duration(seconds: 2));
+
+    final Finder buttonLogout = find.byIcon(Icons.logout_outlined);
+
+    await tester.tap(buttonLogout);
+
+    await tester.pumpAndSettle(const Duration(seconds: 2));
+
+    //test
+    expect(find.byKey(const Key("LoginButton")), findsOneWidget);
   });
 
   testWidgets('HomePage Layout : EventButton', (WidgetTester tester) async {

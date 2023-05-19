@@ -167,7 +167,6 @@ class HomeScreen extends StatelessWidget {
         ),
       ),
       bottomNavigationBar: CustomNavBar(
-        key: const Key("NavBarHome"),
         selectedIndex: selectedIndex,
         onItemTapped: onItemTapped,
       ),
