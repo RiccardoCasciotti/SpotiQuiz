@@ -16,37 +16,31 @@ class Quiz extends StatelessWidget {
     required this.questionIndex,
   }) : super(key: key);
 
-  
-
   @override
   Widget build(BuildContext context) {
     return Column(
-      
       children: [
         Container(
+          alignment: Alignment.center,
+          width: double.infinity,
+          child: Question(
+            questions![questionIndex]['questionText'].toString(),
+          ),
+        ),
+        if (questions![questionIndex]['image'] != null)
+          Container(
             alignment: Alignment.center,
             width: double.infinity,
-            child: Question(
-              questions![questionIndex]['questionText'].toString(),
-            ),
+            child: Image.network(
+                (questions![questionIndex]['image'] as model.Image).url,
+                height: (questions![questionIndex]['image'] as model.Image)
+                    .heigth
+                    .toDouble(),
+                width: (questions![questionIndex]['image'] as model.Image)
+                    .width
+                    .toDouble()),
           ),
-        if (questions![questionIndex]['image'] != null)
-        Container(
-              
-              alignment: Alignment.center,
-              width: double.infinity,
-              child: 
-              
-              Image.network(
-                  (questions![questionIndex]['image'] as model.Image).url,
-                  height: (questions![questionIndex]['image'] as model.Image)
-                      .heigth
-                      .toDouble(),
-                  width: (questions![questionIndex]['image'] as model.Image)
-                      .width
-                      .toDouble()),
-            ),
-            Column(
+        Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             ...(questions![questionIndex]['answers']).map((answer) {
