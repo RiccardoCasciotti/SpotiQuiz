@@ -27,6 +27,7 @@ import 'result_screen.dart';
 // ignore: must_be_immutable
 
 int limit = quiz_utils.limit;
+
 class QuizPage extends StatefulWidget {
   int selectedMode;
 
@@ -49,7 +50,6 @@ class _QuizPageState extends State<QuizPage> {
   @override
   void initState() {
     _questions = createQuestions(widget.selectedMode);
-    
 
     super.initState();
     //List<Map<String, Object>> questions = [];
@@ -79,7 +79,6 @@ class _QuizPageState extends State<QuizPage> {
     }
     _totalScore += score;
     if ((_questionIndex) % limit == 0) {
-      print("Ci sono passatooooooo");
       setState(() {
         _questions = _secondSlotQuestions;
       });
@@ -113,118 +112,117 @@ class _QuizPageState extends State<QuizPage> {
     }
 
     return Scaffold(
-        backgroundColor: utilities.secondaryColor,
-        body: Padding(
-            padding: const EdgeInsets.all(30.0),
-            child: FutureBuilder<List<dynamic>>(
-                future:
-                    _questions, // a previously-obtained Future<String> or null
-                builder: (BuildContext context,
-                    AsyncSnapshot<List<dynamic>> snapshot) {
-                  List<Widget> children = [];
+      backgroundColor: utilities.secondaryColor,
+      body: Center(
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.all(30.0),
+          child: FutureBuilder<List<dynamic>>(
+            future: _questions, // a previously-obtained Future<String> or null
+            builder:
+                (BuildContext context, AsyncSnapshot<List<dynamic>> snapshot) {
+              List<Widget> children = [];
 
-                  if (snapshot.connectionState == ConnectionState.done ||
-                      quizRunning) {
-                    if (snapshot.hasError) {
-                      print("Error ${snapshot.error}");
-                    }
-                    if (snapshot.hasData || quizRunning) {
-                      print("DATAAAAAA ${snapshot.data}");
-                      _hasAnswered
-                          ? children = [
-                              PageTransitionSwitcher(
-                                duration: const Duration(milliseconds: 500),
-                                transitionBuilder:
-                                    (child, animation, secondaryAnimation) =>
-                                        SharedAxisTransition(
-                                  animation: animation,
-                                  secondaryAnimation: secondaryAnimation,
-                                  fillColor: utilities.secondaryColor,
-                                  transitionType:
-                                      SharedAxisTransitionType.horizontal,
-                                  child: child,
-                                ),
-                                child: Result(
-                                  _totalScore,
-                                  _questionScore,
-                                  goHome,
-                                  moveOn,
-                                ),
-                              )
-                            ]
-                          : children = [
-                              PageTransitionSwitcher(
-                                  duration: const Duration(milliseconds: 500),
-                                  transitionBuilder: (child, animation,
-                                          secondaryAnimation) =>
+              if (snapshot.connectionState == ConnectionState.done ||
+                  quizRunning) {
+                if (snapshot.hasError) {
+                  print("Error ${snapshot.error}");
+                }
+                if (snapshot.hasData || quizRunning) {
+                  //print("DATAAAAAA ${snapshot.data}");
+                  _hasAnswered
+                      ? children = [
+                          PageTransitionSwitcher(
+                            duration: const Duration(milliseconds: 500),
+                            transitionBuilder:
+                                (child, animation, secondaryAnimation) =>
+                                    SharedAxisTransition(
+                              animation: animation,
+                              secondaryAnimation: secondaryAnimation,
+                              fillColor: utilities.secondaryColor,
+                              transitionType: SharedAxisTransitionType.scaled,
+                              child: child,
+                            ),
+                            child: Result(
+                              _totalScore,
+                              _questionScore,
+                              goHome,
+                              moveOn,
+                            ),
+                          )
+                        ]
+                      : children = [
+                          PageTransitionSwitcher(
+                              duration: const Duration(milliseconds: 500),
+                              transitionBuilder:
+                                  (child, animation, secondaryAnimation) =>
                                       SharedAxisTransition(
                                         animation: animation,
                                         secondaryAnimation: secondaryAnimation,
                                         fillColor: utilities.secondaryColor,
                                         transitionType:
-                                            SharedAxisTransitionType.horizontal,
+                                            SharedAxisTransitionType.scaled,
                                         child: child,
                                       ),
-                                  child: Quiz(
-                                    answerQuestion: _answerQuestion,
-                                    questionIndex: _questionIndex,
-                                    questions: snapshot.data,
-                                  ))
-                            ];
-                    }
-                  } else {
-                    children = [
-                      PageTransitionSwitcher(
-                        duration: const Duration(milliseconds: 500),
-                        transitionBuilder:
-                            (child, animation, secondaryAnimation) =>
-                                SharedAxisTransition(
-                          animation: animation,
-                          secondaryAnimation: secondaryAnimation,
-                          fillColor: utilities.secondaryColor,
-                          transitionType: SharedAxisTransitionType.horizontal,
-                          child: child,
-                        ),
-                        child: Center(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: children,
-                          ),
-                        ),
-                      )
-                    ];
-                    children = <Widget>[
-                      const SizedBox(
-                        width: 60,
-                        height: 60,
-                        child: CircularProgressIndicator(),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 16),
-                        child: CustomText(
-                          text: 'Creating your quiz...',
-                          size: 20,
-                        ),
-                      ),
-                    ];
-                  }
-                  return PageTransitionSwitcher(
+                              child: Quiz(
+                                answerQuestion: _answerQuestion,
+                                questionIndex: _questionIndex,
+                                questions: snapshot.data,
+                              ))
+                        ];
+                }
+              } else if (quizRunning == false) {
+                children = [
+                  PageTransitionSwitcher(
                     duration: const Duration(milliseconds: 500),
                     transitionBuilder: (child, animation, secondaryAnimation) =>
                         SharedAxisTransition(
                       animation: animation,
                       secondaryAnimation: secondaryAnimation,
                       fillColor: utilities.secondaryColor,
-                      transitionType: SharedAxisTransitionType.horizontal,
+                      transitionType: SharedAxisTransitionType.scaled,
                       child: child,
                     ),
-                    child: Center(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: children,
-                      ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const SizedBox(
+                          width: 60,
+                          height: 60,
+                          child: CircularProgressIndicator(),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 16),
+                          child: CustomText(
+                            text: 'Creating your quiz...',
+                            size: 20,
+                          ),
+                        ),
+                      ],
                     ),
-                  );
-                })));
+                  )
+                ];
+              }
+              return PageTransitionSwitcher(
+                duration: const Duration(milliseconds: 500),
+                transitionBuilder: (child, animation, secondaryAnimation) =>
+                    SharedAxisTransition(
+                  animation: animation,
+                  secondaryAnimation: secondaryAnimation,
+                  fillColor: utilities.secondaryColor,
+                  transitionType: SharedAxisTransitionType.scaled,
+                  child: child,
+                ),
+                child: Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: children,
+                  ),
+                ),
+              );
+            },
+          ),
+        ),
+      ),
+    );
   }
 }

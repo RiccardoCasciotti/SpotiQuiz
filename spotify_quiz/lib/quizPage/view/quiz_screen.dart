@@ -30,7 +30,8 @@ class Quiz extends StatelessWidget {
         if (questions![questionIndex]['image'] != null)
           Container(
             alignment: Alignment.center,
-            width: double.infinity,
+            width: 300,
+            height: 300,
             child: Image.network(
                 (questions![questionIndex]['image'] as model.Image).url,
                 height: (questions![questionIndex]['image'] as model.Image)
