@@ -11,62 +11,124 @@ class Result extends StatelessWidget {
   final Function returnHome;
   final Function moveOn;
   final int questionScore;
-  
 
   const Result(
-      this.resultScore, this.questionScore, this.returnHome, this.moveOn,  
+      this.resultScore, this.questionScore, this.returnHome, this.moveOn,
       {Key? key})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: <Widget>[
-          CustomText(
-            text: questionScore > 0
-                ? AppLocalizations.of(context)!.correctanswerquiz
-                : AppLocalizations.of(context)!.wronganswerquiz,
-            size: 30,
-            alignCenter: true,
-            wrongColor: questionScore > 0 ? false : true,
-            bold: true,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              CustomText(
-                text: AppLocalizations.of(context)!.scorequiz,
-                size: 35,
-                alignCenter: true,
-                thirdColor: true,
-                bold: true,
-              ),
-              CustomText(
-                text: '$resultScore',
-                size: 35,
-                thirdColor: true,
-                alignCenter: true,
-                bold: true,
-              ),
-            ],
-          ),
-          //Text
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              TextButtonReturn(text: AppLocalizations.of(context)!.quitbutton,
-                selectHandler: (_) => returnHome(),
-              ),
-              TextButtonReturn(
-                text: AppLocalizations.of(context)!.continuebutton,
-                selectHandler: (_)  => moveOn(),
-              ),
-            ],
-          ),
-        ],
-      ),
-    );
+    return MediaQuery.of(context).orientation == Orientation.portrait
+        ? Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                CustomText(
+                  text: questionScore > 0
+                      ? AppLocalizations.of(context)!.correctanswerquiz
+                      : AppLocalizations.of(context)!.wronganswerquiz,
+                  size: 30,
+                  alignCenter: true,
+                  wrongColor: questionScore > 0 ? false : true,
+                  bold: true,
+                ),
+                const SizedBox(
+                  height: 150,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    CustomText(
+                      text: AppLocalizations.of(context)!.scorequiz,
+                      size: 35,
+                      alignCenter: true,
+                      thirdColor: true,
+                      bold: true,
+                    ),
+                    CustomText(
+                      text: '$resultScore',
+                      size: 35,
+                      thirdColor: true,
+                      alignCenter: true,
+                      bold: true,
+                    ),
+                  ],
+                ),
+                const SizedBox(
+                  height: 150,
+                ),
+                //Text
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    TextButtonReturn(
+                      text: AppLocalizations.of(context)!.quitbutton,
+                      selectHandler: (_) => returnHome(),
+                    ),
+                    TextButtonReturn(
+                      text: AppLocalizations.of(context)!.continuebutton,
+                      selectHandler: (_) => moveOn(),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          )
+        : Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                CustomText(
+                  text: questionScore > 0
+                      ? AppLocalizations.of(context)!.correctanswerquiz
+                      : AppLocalizations.of(context)!.wronganswerquiz,
+                  size: 30,
+                  alignCenter: true,
+                  wrongColor: questionScore > 0 ? false : true,
+                  bold: true,
+                ),
+                const SizedBox(
+                  height: 35,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    CustomText(
+                      text: AppLocalizations.of(context)!.scorequiz,
+                      size: 35,
+                      alignCenter: true,
+                      thirdColor: true,
+                      bold: true,
+                    ),
+                    CustomText(
+                      text: '$resultScore',
+                      size: 35,
+                      thirdColor: true,
+                      alignCenter: true,
+                      bold: true,
+                    ),
+                  ],
+                ),
+                const SizedBox(
+                  height: 35,
+                ),
+                //Text
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    TextButtonReturn(
+                      text: AppLocalizations.of(context)!.quitbutton,
+                      selectHandler: (_) => returnHome(),
+                    ),
+                    TextButtonReturn(
+                      text: AppLocalizations.of(context)!.continuebutton,
+                      selectHandler: (_) => moveOn(),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          );
   }
 }

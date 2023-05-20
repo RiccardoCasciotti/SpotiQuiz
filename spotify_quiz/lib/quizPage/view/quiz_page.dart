@@ -101,6 +101,8 @@ class _QuizPageState extends State<QuizPage> {
   @override
   Widget build(BuildContext context) {
     Future<void> goHome() async {
+      quizRunning = false;
+      _questionIndex = 0;
       UserRepository userRepository = UserRepository();
       context.read<AuthenticationBloc>().user =
           await userRepository.UpdateAfterQuizOnDB(
