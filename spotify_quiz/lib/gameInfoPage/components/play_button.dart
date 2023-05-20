@@ -17,7 +17,7 @@ class PlayButton extends StatefulWidget {
   PlayButton({
     required this.selectedMode,
     Key? key,
-  }) : super(key: const Key("PlayButtonInfoPage"));
+  }) : super(key: key);
 
   @override
   State<PlayButton> createState() => _PlayButtonState();

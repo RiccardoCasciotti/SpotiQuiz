@@ -24,7 +24,6 @@ class ProfilePage extends StatelessWidget {
     return Scaffold(
       backgroundColor: utilities.secondaryColor,
       appBar: AppBar(
-        key: const Key("GoBackProfilePage"),
         backgroundColor: utilities.secondaryColor,
         foregroundColor: utilities.primaryColor,
         elevation: 0.0,
@@ -38,7 +37,6 @@ class ProfilePage extends StatelessWidget {
               Hero(
                 tag: "profilePic",
                 child: CircleAvatar(
-                  key: const Key("ProfilePicProfilePage"),
                   backgroundImage: NetworkImage(utilities.imageUserProfile),
                   radius: 125,
                 ),
@@ -50,7 +48,6 @@ class ProfilePage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   CustomText(
-                    key: const Key("StatisticsText"),
                     text: AppLocalizations.of(context)!.statistics,
                     thirdColor: true,
                     size: 25,
@@ -65,13 +62,11 @@ class ProfilePage extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             CustomText(
-                              key: const Key("CorrectAnswerTextProfile"),
                               text: AppLocalizations.of(context)!.correctanswer,
                               thirdColor: true,
                               size: 20,
                             ),
                             CustomText(
-                              key: const Key("CorrectAnswerInfoProfile"),
                               text: nOfQuiz != 0
                                   ? "${(100 * correctAnswers / (correctAnswers + wrongAnswers)).round()}%"
                                   : "0",
@@ -83,13 +78,11 @@ class ProfilePage extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             CustomText(
-                              key: const Key("WrongAnswerTextProfile"),
                               text: AppLocalizations.of(context)!.wronganswer,
                               thirdColor: true,
                               size: 20,
                             ),
                             CustomText(
-                              key: const Key("WrongAnswerInfoProfile"),
                               text: nOfQuiz != 0
                                   ? "${(100 * wrongAnswers / (correctAnswers + wrongAnswers)).round()}%"
                                   : "0",
@@ -101,13 +94,11 @@ class ProfilePage extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             CustomText(
-                              key: const Key("ExperienceTextProfile"),
                               text: AppLocalizations.of(context)!.experience,
                               thirdColor: true,
                               size: 20,
                             ),
                             CustomText(
-                              key: const Key("ExperienceInfoProfile"),
                               text: experience.toString(),
                               size: 25,
                             ),
@@ -117,13 +108,11 @@ class ProfilePage extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             CustomText(
-                              key: const Key("BestScoreTextProfile"),
                               text: AppLocalizations.of(context)!.bestScore,
                               thirdColor: true,
                               size: 20,
                             ),
                             CustomText(
-                              key: const Key("BestScoreInfoProfile"),
                               text: bestScore.toString(),
                               size: 25,
                             ),
