@@ -78,7 +78,8 @@ class _QuizPageState extends State<QuizPage> {
       _wrongAnswers++;
     }
     _totalScore += score;
-    if ((_questionIndex + 1) % limit == 0) {
+    if ((_questionIndex) % limit == 0) {
+      print("Ci sono passatooooooo");
       setState(() {
         _questions = _secondSlotQuestions;
       });
@@ -92,7 +93,6 @@ class _QuizPageState extends State<QuizPage> {
 
   void moveOn() {
     //WE DECIDE TO CONTINUE WITH NEW QUESTIONS
-    print("NEW QUIZ CRETAED");
     setState(() {
       _hasAnswered = false;
       _questionIndex = (_questionIndex + 1) % limit;
@@ -129,7 +129,7 @@ class _QuizPageState extends State<QuizPage> {
                       print("Error ${snapshot.error}");
                     }
                     if (snapshot.hasData || quizRunning) {
-                      //print("DATAAAAAA ${snapshot.data}");
+                      print("DATAAAAAA ${snapshot.data}");
                       _hasAnswered
                           ? children = [
                               PageTransitionSwitcher(

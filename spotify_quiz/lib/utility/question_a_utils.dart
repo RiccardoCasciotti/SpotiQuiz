@@ -70,6 +70,7 @@ Future<void> init_data() async {
     else if (similar_artists.isEmpty){
 
       similar_artists = await get_related_artists(similar_id);
+      similar_artists = similar_artists.sublist(0,similar_artists.length < 30 ? similar_artists.length : 30 );
       similar_artists.shuffle();
       candidate = similar_artists.last;
       similar_artists.removeLast();
