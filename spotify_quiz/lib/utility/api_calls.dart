@@ -10,8 +10,7 @@ import 'package:http/http.dart' as http;
 import 'package:spotify_quiz/utility/utilities.dart' as utilities;
 
 
-int limit_albums = 20;
-int limit_followed_artists = 100;
+String limit_albums = "20";
 String market = utilities.nationality;
 
 var i = 0;
@@ -115,16 +114,19 @@ Future<List<model.Album>> get_artist_albums(String artist_id) async {
 }
 
 Future<List<model.Artist>> get_followed_artists() async {
+  print("OK11");
   accessToken = await getAccessToken();
+  print("OK12");
 
   final artistsInfo = await http.get(
-      Uri.parse("https://api.spotify.com/v1/me/following?type=artist&limit=$limit_followed_artists"),
+      Uri.parse("https://api.spotify.com/v1/me/following?type=artist"),
       headers: {
         "Authorization": 'Authorization: Bearer $accessToken',
         "content-type": "application/x-www-form-urlencoded"
       });
 
   final artistsJson = json.decode(artistsInfo.body);
+
 
   List<model.Artist> artists = [];
   for (var i = 0; i < List.from(artistsJson["artists"]["items"]).length; i++) {

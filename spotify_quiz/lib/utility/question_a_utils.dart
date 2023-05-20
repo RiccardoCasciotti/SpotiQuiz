@@ -38,9 +38,14 @@ Future<void> init_data() async {
  
   
   if (followed_artists.isEmpty && i == 0){
+    print("ok1");
     followed_artists = await get_followed_artists();
-    consume_followed_artists = followed_artists;
-    consume_followed_artists.shuffle();
+    if(!followed_artists.isEmpty){
+      consume_followed_artists = followed_artists;
+      consume_followed_artists.shuffle();
+    }
+    print("ok2");
+    
     i++;
   }
 
@@ -50,29 +55,45 @@ Future<void> init_data() async {
   if (consume_similar_artists.length < 4){
 
     var candidate;
+    print("OK1");
 
     if(!followed_artists.isEmpty ){
+          print("OK2");
+
       candidate = followed_artists.last;
       followed_artists.removeLast();
-      
+         print("OK3");
+ 
     }
+
     else if(!similar_artists.isEmpty) {
+          print("OK4");
+
       candidate = similar_artists.last;
       similar_artists.removeLast();
-      
+          print("OK5");
+
     }
     else if (similar_artists.isEmpty){
+          print("OK6");
+
       similar_artists = await get_related_artists(similar_id);
       similar_artists.shuffle();
       candidate = similar_artists.last;
       similar_artists.removeLast();
-    }
+          print("OK7");
 
+    }
     similar_id = candidate.id;
+        print("OK8");
+
     consume_similar_artists = await get_related_artists(similar_id);
+        print("OK9");
+
     consume_similar_artists = consume_similar_artists.sublist(0,consume_similar_artists.length < 30 ? consume_similar_artists.length : 30 );
   
-    
+        print("OK10");
+
     //print("SIMILAR_INDEX $similar_index");
   }
   //print("LEN consume_followed_artists: ${consume_followed_artists.length}");

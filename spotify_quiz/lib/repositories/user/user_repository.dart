@@ -154,7 +154,7 @@ class UserRepository {
         return userList.first;
       }
     }
-    utilities.nationality = userJson["country"];
+   utilities.nationality = userJson["country"];
     create(
       uid: userJson["id"],
       username: userJson["display_name"],

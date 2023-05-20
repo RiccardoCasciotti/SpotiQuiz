@@ -2,11 +2,12 @@ import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:spotify_quiz/utility/utilities.dart' as utilities;
+import 'package:spotify_quiz/utility/quiz_utils.dart' as quiz_utils;
+
 import 'package:spotify_quiz/authentication/bloc/authentication_bloc.dart';
 import 'package:spotify_quiz/repositories/user/user_repository.dart';
 
 import '../../custom_widgets/text.dart';
-import '../../utility/quiz_utils.dart' as quiz_utils;
 import '../controllers/question_controller.dart';
 import 'quiz_screen.dart';
 import 'result_screen.dart';
@@ -48,6 +49,7 @@ class _QuizPageState extends State<QuizPage> {
   @override
   void initState() {
     _questions = createQuestions(widget.selectedMode);
+    
 
     super.initState();
     //List<Map<String, Object>> questions = [];
@@ -76,13 +78,13 @@ class _QuizPageState extends State<QuizPage> {
       _wrongAnswers++;
     }
     _totalScore += score;
-    if ((_questionIndex + 1) % 5 == 0) {
+    if ((_questionIndex + 1) % limit == 0) {
       setState(() {
         _questions = _secondSlotQuestions;
       });
     }
     setState(() {
-      _questionIndex = (_questionIndex + 1) % 5;
+      _questionIndex = (_questionIndex + 1) % limit;
       _questionScore = score;
       _hasAnswered = true;
     });
@@ -93,29 +95,12 @@ class _QuizPageState extends State<QuizPage> {
     print("NEW QUIZ CRETAED");
     setState(() {
       _hasAnswered = false;
-      _questionIndex = (_questionIndex + 1) % 5;
+      _questionIndex = (_questionIndex + 1) % limit;
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    void moveOn() {
-      //WE DECIDE TO CONTINUE WITH NEW QUESTIONS
-      if ((_questionIndex + 1) % 5 == 0) {
-        print("NEW QUIZ CRETAED");
-      var tmp = createQuestions(widget.selectedMode);
-      setState(() {
-        _questions = tmp;
-        _hasAnswered = true;
-        _questionIndex = (_questionIndex + 1) % 5;
-      });
-      }
-      else{setState(() {
-        _hasAnswered = false;
-      });}
-      
-    }
-
     Future<void> goHome() async {
       UserRepository userRepository = UserRepository();
       context.read<AuthenticationBloc>().user =

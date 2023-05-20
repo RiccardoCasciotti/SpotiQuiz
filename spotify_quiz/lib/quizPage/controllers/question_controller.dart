@@ -31,10 +31,13 @@ return {
 
   var questionsList = [];
   if( selectedMode == 1 ){
+
     model.Quiz quiz_a = await generate_quiz("A");
+
     for( var i = 0; i < quiz_a.questions.length; i++){
       questionsList.add(format_a(quiz_a.questions[i]));
     }
+  
 
  }
   return questionsList;
