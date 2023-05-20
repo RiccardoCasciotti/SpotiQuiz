@@ -10,4 +10,4 @@ String accessToken = '-';
 String imageUserProfile =
     'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg';
 
-bool runningTest = true;
+bool runningTest = false;
