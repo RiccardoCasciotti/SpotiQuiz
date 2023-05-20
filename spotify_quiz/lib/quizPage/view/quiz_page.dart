@@ -50,51 +50,52 @@ class _QuizPageState extends State<QuizPage> {
     //List<Map<String, Object>> questions = [];
   }
 
+  bool quizRunning = false;
   var _questionIndex = 0;
   var _totalScore = 0;
   var _wrongAnswers = 0;
   var _correctAnswers = 0;
   var _questionScore = 0;
   var _hasAnswered = false;
+  // ignore: prefer_typing_uninitialized_variables
+  var _secondSlotQuestions;
 
   void _answerQuestion(int score) {
     //FUNCTION WE CALL WHEN WE GIVE AN ANSWER, HERE WE CAN IMPLEMENT THE LOGIC TO CREATE NEW QUESTIONS
+    if (_questionIndex == 0) {
+      print("Ci sono passato");
+      quizRunning = true;
+      _secondSlotQuestions = createQuestions(widget.selectedMode);
+    }
     if (score > 0) {
       _correctAnswers++;
     } else {
       _wrongAnswers++;
     }
     _totalScore += score;
-
-    
-    
+    if ((_questionIndex + 1) % 5 == 0) {
       setState(() {
-        _questionIndex = (_questionIndex + 1) % 5;
-        _questionScore = score;
-        _hasAnswered = true;
+        _questions = _secondSlotQuestions;
       });
-    
+    }
+    setState(() {
+      _questionIndex = (_questionIndex + 1) % 5;
+      _questionScore = score;
+      _hasAnswered = true;
+    });
+  }
+
+  void moveOn() {
+    //WE DECIDE TO CONTINUE WITH NEW QUESTIONS
+    print("NEW QUIZ CRETAED");
+    setState(() {
+      _hasAnswered = false;
+      _questionIndex = (_questionIndex + 1) % 5;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    void moveOn() {
-      //WE DECIDE TO CONTINUE WITH NEW QUESTIONS
-      if ((_questionIndex + 1) % 5 == 0) {
-        print("NEW QUIZ CRETAED");
-      var tmp = createQuestions(widget.selectedMode);
-      setState(() {
-        _questions = tmp;
-        _hasAnswered = true;
-        _questionIndex = (_questionIndex + 1) % 5;
-      });
-      }
-      else{setState(() {
-        _hasAnswered = false;
-      });}
-      
-    }
-
     Future<void> goHome() async {
       UserRepository userRepository = UserRepository();
       context.read<AuthenticationBloc>().user =
@@ -117,11 +118,12 @@ class _QuizPageState extends State<QuizPage> {
                     AsyncSnapshot<List<dynamic>> snapshot) {
                   List<Widget> children = [];
 
-                  if (snapshot.connectionState == ConnectionState.done) {
+                  if (snapshot.connectionState == ConnectionState.done ||
+                      quizRunning) {
                     if (snapshot.hasError) {
                       print("Error ${snapshot.error}");
                     }
-                    if (snapshot.hasData) {
+                    if (snapshot.hasData || quizRunning) {
                       //print("DATAAAAAA ${snapshot.data}");
                       _hasAnswered
                           ? children = [
@@ -164,26 +166,58 @@ class _QuizPageState extends State<QuizPage> {
                                     questions: snapshot.data,
                                   ))
                             ];
-                    } 
-                  }
-                  else {
-                      children = <Widget>[
-                        const SizedBox(
-                          width: 60,
-                          height: 60,
-                          child:  CircularProgressIndicator(),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 16),
-                          child: CustomText(text: 'Creating your quiz...', size: 20,
-                              ),
-                        ),
-                      ];
                     }
-                  return Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: children,
+                  } else {
+                    children = [
+                      PageTransitionSwitcher(
+                        duration: const Duration(milliseconds: 500),
+                        transitionBuilder:
+                            (child, animation, secondaryAnimation) =>
+                                SharedAxisTransition(
+                          animation: animation,
+                          secondaryAnimation: secondaryAnimation,
+                          fillColor: utilities.secondaryColor,
+                          transitionType: SharedAxisTransitionType.horizontal,
+                          child: child,
+                        ),
+                        child: Center(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: children,
+                          ),
+                        ),
+                      )
+                    ];
+                    children = <Widget>[
+                      const SizedBox(
+                        width: 60,
+                        height: 60,
+                        child: CircularProgressIndicator(),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 16),
+                        child: CustomText(
+                          text: 'Creating your quiz...',
+                          size: 20,
+                        ),
+                      ),
+                    ];
+                  }
+                  return PageTransitionSwitcher(
+                    duration: const Duration(milliseconds: 500),
+                    transitionBuilder: (child, animation, secondaryAnimation) =>
+                        SharedAxisTransition(
+                      animation: animation,
+                      secondaryAnimation: secondaryAnimation,
+                      fillColor: utilities.secondaryColor,
+                      transitionType: SharedAxisTransitionType.horizontal,
+                      child: child,
+                    ),
+                    child: Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: children,
+                      ),
                     ),
                   );
                 })));
