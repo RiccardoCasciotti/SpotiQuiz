@@ -108,12 +108,7 @@ class ProfilePage extends StatelessWidget {
                               size: 20,
                             ),
                             CustomText(
-<<<<<<< Updated upstream
-                              key: const Key("ExperienceInfoProfile"),
-                              text: experience.toString(),
-=======
                               text: "$experience/$newlevelCap",
->>>>>>> Stashed changes
                               size: 25,
                             ),
                           ],
