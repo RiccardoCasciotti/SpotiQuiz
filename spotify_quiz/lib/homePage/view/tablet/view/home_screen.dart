@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:spotify_quiz/custom_widgets/boxed_widgets.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:spotify_quiz/custom_widgets/text.dart';
 import 'package:spotify_quiz/utility/utilities.dart' as utilities;
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import '../../../../authentication/bloc/authentication_bloc.dart';
 import '../components/custom_navigation_rail.dart';
 
 class HomeScreenTablet extends StatelessWidget {
@@ -19,6 +20,12 @@ class HomeScreenTablet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var correctAnswers = context.read<AuthenticationBloc>().user.correctAnswer;
+    var wrongAnswers = context.read<AuthenticationBloc>().user.wrongAnswer;
+    var bestScore = context.read<AuthenticationBloc>().user.bestScore;
+    var experience = context.read<AuthenticationBloc>().user.experience;
+    var nOfQuiz = context.read<AuthenticationBloc>().user.numberQuiz;
+
     return Scaffold(
       backgroundColor: utilities.secondaryColor,
       body: Center(
@@ -43,7 +50,7 @@ class HomeScreenTablet extends StatelessWidget {
                     Column(
                       children: [
                         const CircleAvatar(
-                          radius: 100,
+                          radius: 115,
                           backgroundImage: NetworkImage(
                               'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg'),
                         ),
@@ -136,137 +143,106 @@ class HomeScreenTablet extends StatelessWidget {
                     const SizedBox(
                       height: 40,
                     ),
-                    Row(
+                    Column(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            CustomText(
-                              text: AppLocalizations.of(context)!.statistics,
-                              thirdColor: true,
-                              size: 25,
-                              bold: true,
-                            ),
-                            CustomBoxedWidget(
-                              thirdColor: true,
-                              widthRadius: 0.1,
-                              insideBox: Column(
-                                children: [
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      CustomText(
-                                        text: AppLocalizations.of(context)!
-                                            .correctanswer,
-                                        thirdColor: true,
-                                        size: 20,
-                                      ),
-                                      CustomText(
-                                        text: "100%",
-                                        size: 25,
-                                      ),
-                                    ],
-                                  ),
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      CustomText(
-                                        text: AppLocalizations.of(context)!
-                                            .wronganswer,
-                                        thirdColor: true,
-                                        size: 20,
-                                      ),
-                                      CustomText(
-                                        text: "89%",
-                                        size: 25,
-                                      ),
-                                    ],
-                                  ),
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      CustomText(
-                                        text: AppLocalizations.of(context)!
-                                            .totpoints,
-                                        thirdColor: true,
-                                        size: 20,
-                                      ),
-                                      CustomText(
-                                        text: "70%",
-                                        size: 25,
-                                      ),
-                                    ],
-                                  ),
-                                ],
+                        CustomText(
+                          text: AppLocalizations.of(context)!.statistics,
+                          thirdColor: true,
+                          size: 25,
+                          bold: true,
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        Table(
+                          children: <TableRow>[
+                            TableRow(children: [
+                              CustomText(
+                                key: const Key("CorrectAnswerTextProfile"),
+                                text:
+                                    AppLocalizations.of(context)!.correctanswer,
+                                thirdColor: true,
+                                size: 20,
                               ),
-                            ),
+                              CustomText(
+                                key: const Key("CorrectAnswerInfoProfile"),
+                                text: nOfQuiz != 0
+                                    ? "${(100 * correctAnswers / (correctAnswers + wrongAnswers)).round()}%"
+                                    : "0",
+                                size: 25,
+                              ),
+                            ]),
                           ],
                         ),
                         Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
-                            CustomText(
-                              text: "Most known artists",
-                              thirdColor: true,
-                              size: 25,
-                              bold: true,
+                            Row(
+                              children: [
+                                CustomText(
+                                  key: const Key("CorrectAnswerTextProfile"),
+                                  text: AppLocalizations.of(context)!
+                                      .correctanswer,
+                                  thirdColor: true,
+                                  size: 20,
+                                ),
+                                CustomText(
+                                  key: const Key("CorrectAnswerInfoProfile"),
+                                  text: nOfQuiz != 0
+                                      ? "${(100 * correctAnswers / (correctAnswers + wrongAnswers)).round()}%"
+                                      : "0",
+                                  size: 25,
+                                ),
+                              ],
                             ),
-                            CustomBoxedWidget(
-                              widthRadius: 0.1,
-                              thirdColor: true,
-                              insideBox: Column(
-                                children: [
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      CustomText(
-                                        text: "Jessica Jones",
-                                        thirdColor: true,
-                                        size: 20,
-                                      ),
-                                      CustomText(
-                                        text: "100%",
-                                        size: 25,
-                                      ),
-                                    ],
-                                  ),
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      CustomText(
-                                        text: "Ed Points",
-                                        thirdColor: true,
-                                        size: 20,
-                                      ),
-                                      CustomText(
-                                        text: "89%",
-                                        size: 25,
-                                      ),
-                                    ],
-                                  ),
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      CustomText(
-                                        text: "Enrique Ilo",
-                                        thirdColor: true,
-                                        size: 20,
-                                      ),
-                                      CustomText(
-                                        text: "70%",
-                                        size: 25,
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
+                            Row(
+                              children: [
+                                CustomText(
+                                  key: const Key("WrongAnswerTextProfile"),
+                                  text:
+                                      AppLocalizations.of(context)!.wronganswer,
+                                  thirdColor: true,
+                                  size: 20,
+                                ),
+                                CustomText(
+                                  key: const Key("WrongAnswerInfoProfile"),
+                                  text: nOfQuiz != 0
+                                      ? "${(100 * wrongAnswers / (correctAnswers + wrongAnswers)).round()}%"
+                                      : "0",
+                                  size: 25,
+                                ),
+                              ],
+                            ),
+                            Row(
+                              children: [
+                                CustomText(
+                                  key: const Key("ExperienceTextProfile"),
+                                  text:
+                                      AppLocalizations.of(context)!.experience,
+                                  thirdColor: true,
+                                  size: 20,
+                                ),
+                                CustomText(
+                                  key: const Key("ExperienceInfoProfile"),
+                                  text: experience.toString(),
+                                  size: 25,
+                                ),
+                              ],
+                            ),
+                            Row(
+                              children: [
+                                CustomText(
+                                  key: const Key("BestScoreTextProfile"),
+                                  text: AppLocalizations.of(context)!.bestScore,
+                                  thirdColor: true,
+                                  size: 20,
+                                ),
+                                CustomText(
+                                  key: const Key("BestScoreInfoProfile"),
+                                  text: bestScore.toString(),
+                                  size: 25,
+                                ),
+                              ],
                             ),
                           ],
                         ),

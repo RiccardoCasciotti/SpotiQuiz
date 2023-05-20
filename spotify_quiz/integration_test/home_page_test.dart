@@ -1,4 +1,3 @@
-// ignore: file_names
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
@@ -25,7 +24,7 @@ void main() {
 
     await tester.tap(button);
 
-    await tester.pumpAndSettle(const Duration(seconds: 5));
+    await tester.pumpAndSettle(const Duration(seconds: 2));
 
     //test
     expect(find.byKey(const Key("LogoutHome")), findsOneWidget);
@@ -43,7 +42,7 @@ void main() {
 
     await tester.tap(button);
 
-    await tester.pumpAndSettle(const Duration(seconds: 5));
+    await tester.pumpAndSettle(const Duration(seconds: 2));
 
     //test
     expect(find.byKey(const Key("ProfilePicHome")), findsOneWidget);
@@ -61,7 +60,7 @@ void main() {
 
     await tester.tap(button);
 
-    await tester.pumpAndSettle(const Duration(seconds: 5));
+    await tester.pumpAndSettle(const Duration(seconds: 2));
 
     //test
     expect(find.byKey(const Key("UsernameHome")), findsOneWidget);
@@ -79,7 +78,7 @@ void main() {
 
     await tester.tap(button);
 
-    await tester.pumpAndSettle(const Duration(seconds: 5));
+    await tester.pumpAndSettle(const Duration(seconds: 2));
 
     //test
     expect(find.byKey(const Key("LevelHome")), findsOneWidget);
@@ -97,7 +96,7 @@ void main() {
 
     await tester.tap(button);
 
-    await tester.pumpAndSettle(const Duration(seconds: 5));
+    await tester.pumpAndSettle(const Duration(seconds: 2));
 
     //test
     expect(find.byKey(const Key("LevelHomeInfo")), findsOneWidget);
@@ -115,7 +114,7 @@ void main() {
 
     await tester.tap(button);
 
-    await tester.pumpAndSettle(const Duration(seconds: 5));
+    await tester.pumpAndSettle(const Duration(seconds: 2));
 
     //test
     expect(find.byKey(const Key("NOfQuizHome")), findsOneWidget);
@@ -133,7 +132,7 @@ void main() {
 
     await tester.tap(button);
 
-    await tester.pumpAndSettle(const Duration(seconds: 5));
+    await tester.pumpAndSettle(const Duration(seconds: 2));
 
     //test
     expect(find.byKey(const Key("NOfQuizHomeInfo")), findsOneWidget);
@@ -151,10 +150,34 @@ void main() {
 
     await tester.tap(button);
 
-    await tester.pumpAndSettle(const Duration(seconds: 5));
+    await tester.pumpAndSettle(const Duration(seconds: 2));
 
     //test
     expect(find.byKey(const Key("NavBarHome")), findsOneWidget);
+  });
+
+  testWidgets('Logout', (WidgetTester tester) async {
+    //setup
+    app.main();
+
+    await tester.pumpAndSettle(const Duration(seconds: 5));
+
+    final Finder button = find.byKey(const Key('LoginButton'));
+
+    //do
+
+    await tester.tap(button);
+
+    await tester.pumpAndSettle(const Duration(seconds: 2));
+
+    final Finder buttonLogout = find.byIcon(Icons.logout_outlined);
+
+    await tester.tap(buttonLogout);
+
+    await tester.pumpAndSettle(const Duration(seconds: 2));
+
+    //test
+    expect(find.byKey(const Key("LoginButton")), findsOneWidget);
   });
 
   testWidgets('HomePage Layout : EventButton', (WidgetTester tester) async {
@@ -169,7 +192,7 @@ void main() {
 
     await tester.tap(button);
 
-    await tester.pumpAndSettle(const Duration(seconds: 5));
+    await tester.pumpAndSettle(const Duration(seconds: 2));
 
     //test
     expect(find.byKey(const Key("EventButtonHome")), findsOneWidget);
@@ -187,7 +210,7 @@ void main() {
 
     await tester.tap(button);
 
-    await tester.pumpAndSettle(const Duration(seconds: 5));
+    await tester.pumpAndSettle(const Duration(seconds: 2));
 
     //test
     expect(find.byKey(const Key("EventTextHome")), findsOneWidget);
@@ -205,7 +228,7 @@ void main() {
 
     await tester.tap(button);
 
-    await tester.pumpAndSettle(const Duration(seconds: 5));
+    await tester.pumpAndSettle(const Duration(seconds: 2));
 
     //test
     expect(find.byKey(const Key("RankingTextHome")), findsOneWidget);
@@ -223,7 +246,7 @@ void main() {
 
     await tester.tap(button);
 
-    await tester.pumpAndSettle(const Duration(seconds: 5));
+    await tester.pumpAndSettle(const Duration(seconds: 2));
 
     //test
     expect(find.byKey(const Key("RankingButtonHome")), findsOneWidget);
@@ -241,7 +264,7 @@ void main() {
 
     await tester.tap(button);
 
-    await tester.pumpAndSettle(const Duration(seconds: 5));
+    await tester.pumpAndSettle(const Duration(seconds: 2));
 
     //test
     expect(find.byIcon(Icons.home), findsOneWidget);
@@ -258,7 +281,7 @@ void main() {
     //do
 
     await tester.tap(button);
-    await tester.pumpAndSettle(const Duration(seconds: 5));
+    await tester.pumpAndSettle(const Duration(seconds: 2));
 
     //test
     expect(find.byIcon(Icons.question_mark), findsOneWidget);
@@ -274,12 +297,12 @@ void main() {
     //do
 
     await tester.tap(buttonLogin);
-    await tester.pumpAndSettle(const Duration(seconds: 5));
+    await tester.pumpAndSettle(const Duration(seconds: 2));
 
     final Finder buttonHome = find.byIcon(Icons.home);
 
     await tester.tap(buttonHome);
-    await tester.pumpAndSettle(const Duration(seconds: 5));
+    await tester.pumpAndSettle(const Duration(seconds: 2));
 
     //test
     expect(find.byKey(const Key("HomePage")), findsOneWidget);
@@ -295,12 +318,12 @@ void main() {
     //do
 
     await tester.tap(buttonLogin);
-    await tester.pumpAndSettle(const Duration(seconds: 5));
+    await tester.pumpAndSettle(const Duration(seconds: 2));
 
     final Finder buttonPic = find.byKey(const Key("ProfilePicHome"));
 
     await tester.tap(buttonPic);
-    await tester.pumpAndSettle(const Duration(seconds: 5));
+    await tester.pumpAndSettle(const Duration(seconds: 2));
 
     //test
     expect(find.byKey(const Key("ProfilePage")), findsOneWidget);
@@ -316,12 +339,12 @@ void main() {
     //do
 
     await tester.tap(buttonLogin);
-    await tester.pumpAndSettle(const Duration(seconds: 5));
+    await tester.pumpAndSettle(const Duration(seconds: 2));
 
     final Finder buttonQuiz = find.byIcon(Icons.question_mark);
 
     await tester.tap(buttonQuiz);
-    await tester.pumpAndSettle(const Duration(seconds: 5));
+    await tester.pumpAndSettle(const Duration(seconds: 2));
 
     //test
     expect(find.byKey(const Key("QuizPage")), findsOneWidget);
@@ -337,12 +360,12 @@ void main() {
     //do
 
     await tester.tap(buttonLogin);
-    await tester.pumpAndSettle(const Duration(seconds: 5));
+    await tester.pumpAndSettle(const Duration(seconds: 2));
 
     final Finder buttonRanking = find.byKey(const Key("RankingButtonHome"));
 
     await tester.tap(buttonRanking);
-    await tester.pumpAndSettle(const Duration(seconds: 5));
+    await tester.pumpAndSettle(const Duration(seconds: 2));
 
     //test
     expect(find.byKey(const Key("LocalRankingPage")), findsOneWidget);
@@ -358,12 +381,12 @@ void main() {
     //do
 
     await tester.tap(buttonLogin);
-    await tester.pumpAndSettle(const Duration(seconds: 5));
+    await tester.pumpAndSettle(const Duration(seconds: 2));
 
     final Finder eventRanking = find.byKey(const Key("EventButtonHome"));
 
     await tester.tap(eventRanking);
-    await tester.pumpAndSettle(const Duration(seconds: 5));
+    await tester.pumpAndSettle(const Duration(seconds: 2));
 
     //test
     expect(find.byKey(const Key("EventPage")), findsOneWidget);
