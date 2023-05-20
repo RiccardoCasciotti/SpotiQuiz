@@ -39,7 +39,7 @@ Future<void> init_data() async {
     consume_followed_artists.shuffle();
   }
 
-  if (consume_similar_artists.length < 3){
+  if (consume_similar_artists.length < 4){
     String similar_id = followed_artists.isEmpty
         ? "0TnOYISbd1XYRBk9myaseg"
         : followed_artists[similar_index%(followed_artists.length -1)].id;
@@ -50,6 +50,7 @@ Future<void> init_data() async {
     similar_index++;
     //print("SIMILAR_INDEX $similar_index");
   }
+  //print("LEN consume_followed_artists: ${consume_followed_artists.length}");
   // if(consume_followed_artists.length < 4){
   //   consume_similar_artists = consume_followed_artists + consume_similar_artists;
   // }
@@ -89,6 +90,8 @@ Future<model.Question> generate_a() async{
     //   print("SIMILAR: ${consume_similar_artists[i].name}");
     // print("SIMILAR LENGTH: ${consume_similar_artists.length}");
     Random random = Random();
+    
+    print(consume_similar_artists.length);
     for(var i = 0; i < 3; i++){
       int index = random.nextInt(consume_similar_artists.length); 
       if( !options.contains(consume_similar_artists[index].name)) {
@@ -97,6 +100,7 @@ Future<model.Question> generate_a() async{
         i--;
       }
     }
+     
   }
 
   answer = artist.name;
@@ -104,7 +108,7 @@ Future<model.Question> generate_a() async{
   String type = "A";
 
   var res = model.Question(answer, options, type, obj as model.Artist);
-  // print(res.toString());
+  //print("OK2");
   // print((res.text as model.Image).toString());
   return res;
 

@@ -5,6 +5,7 @@ import 'package:spotify_quiz/utility/utilities.dart' as utilities;
 import 'package:spotify_quiz/authentication/bloc/authentication_bloc.dart';
 import 'package:spotify_quiz/repositories/user/user_repository.dart';
 
+import '../../custom_widgets/text.dart';
 import '../controllers/question_controller.dart';
 import 'quiz_screen.dart';
 import 'result_screen.dart';
@@ -43,12 +44,10 @@ class _QuizPageState extends State<QuizPage> {
 
   @override
   void initState() {
-    
-       _questions = createQuestions(widget.selectedMode);
-   
+    _questions = createQuestions(widget.selectedMode);
+
     super.initState();
     //List<Map<String, Object>> questions = [];
-    
   }
 
   var _questionIndex = 0;
@@ -67,25 +66,33 @@ class _QuizPageState extends State<QuizPage> {
     }
     _totalScore += score;
 
-    if (_questionIndex + 1 == 5) {
-      // Future<List<Map<String, Object>>> questions =
-      //     createQuestions(widget.selectedMode);
-    }
-
-    setState(() {
-      _questionIndex = (_questionIndex + 1) % 5;
-      _questionScore = score;
-      _hasAnswered = true;
-    });
+    
+    
+      setState(() {
+        _questionIndex = (_questionIndex + 1) % 5;
+        _questionScore = score;
+        _hasAnswered = true;
+      });
+    
   }
 
   @override
   Widget build(BuildContext context) {
     void moveOn() {
       //WE DECIDE TO CONTINUE WITH NEW QUESTIONS
+      if ((_questionIndex + 1) % 5 == 0) {
+        print("NEW QUIZ CRETAED");
+      var tmp = createQuestions(widget.selectedMode);
       setState(() {
-        _hasAnswered = false;
+        _questions = tmp;
+        _hasAnswered = true;
+        _questionIndex = (_questionIndex + 1) % 5;
       });
+      }
+      else{setState(() {
+        _hasAnswered = false;
+      });}
+      
     }
 
     Future<void> goHome() async {
@@ -109,70 +116,76 @@ class _QuizPageState extends State<QuizPage> {
                 builder: (BuildContext context,
                     AsyncSnapshot<List<dynamic>> snapshot) {
                   List<Widget> children = [];
-                  
-    if (snapshot.connectionState == ConnectionState.done) {
-          
-            if(snapshot.hasError){
-print("Error ${snapshot.error}");            }
-                  if (snapshot.hasData) {
-                    print("DATAAAAAA ${snapshot.data}");
-                    _hasAnswered
-                        ? children = [PageTransitionSwitcher(
-                            duration: const Duration(milliseconds: 500),
-                            transitionBuilder:
-                                (child, animation, secondaryAnimation) =>
-                                    SharedAxisTransition(
-                              animation: animation,
-                              secondaryAnimation: secondaryAnimation,
-                              fillColor: utilities.secondaryColor,
-                              transitionType:
-                                  SharedAxisTransitionType.horizontal,
-                              child: child,
-                            ),
-                            child: Result(
-                              _totalScore,
-                              _questionScore,
-                              goHome,
-                              moveOn,
-                            ),
-                          )
-                        ]: children = [PageTransitionSwitcher(
-                            duration: const Duration(milliseconds: 500),
-                            transitionBuilder:
-                                (child, animation, secondaryAnimation) =>
-                                    SharedAxisTransition(
-                              animation: animation,
-                              secondaryAnimation: secondaryAnimation,
-                              fillColor: utilities.secondaryColor,
-                              transitionType:
-                                  SharedAxisTransitionType.horizontal,
-                              child: child,
-                            ),
-                            child: Quiz(
-                              answerQuestion: _answerQuestion,
-                              questionIndex: _questionIndex,
-                              questions: snapshot.data,
-                            )
-                          )];
-                  } else {
-                    children = const <Widget>[
-                      SizedBox(
-                        width: 60,
-                        height: 60,
-                        child: CircularProgressIndicator(),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(top: 16),
-                        child: Text('Creating your quiz...', selectionColor: Colors.white70),
-                      ),
-                    ];
+
+                  if (snapshot.connectionState == ConnectionState.done) {
+                    if (snapshot.hasError) {
+                      print("Error ${snapshot.error}");
+                    }
+                    if (snapshot.hasData) {
+                      //print("DATAAAAAA ${snapshot.data}");
+                      _hasAnswered
+                          ? children = [
+                              PageTransitionSwitcher(
+                                duration: const Duration(milliseconds: 500),
+                                transitionBuilder:
+                                    (child, animation, secondaryAnimation) =>
+                                        SharedAxisTransition(
+                                  animation: animation,
+                                  secondaryAnimation: secondaryAnimation,
+                                  fillColor: utilities.secondaryColor,
+                                  transitionType:
+                                      SharedAxisTransitionType.horizontal,
+                                  child: child,
+                                ),
+                                child: Result(
+                                  _totalScore,
+                                  _questionScore,
+                                  goHome,
+                                  moveOn,
+                                ),
+                              )
+                            ]
+                          : children = [
+                              PageTransitionSwitcher(
+                                  duration: const Duration(milliseconds: 500),
+                                  transitionBuilder: (child, animation,
+                                          secondaryAnimation) =>
+                                      SharedAxisTransition(
+                                        animation: animation,
+                                        secondaryAnimation: secondaryAnimation,
+                                        fillColor: utilities.secondaryColor,
+                                        transitionType:
+                                            SharedAxisTransitionType.horizontal,
+                                        child: child,
+                                      ),
+                                  child: Quiz(
+                                    answerQuestion: _answerQuestion,
+                                    questionIndex: _questionIndex,
+                                    questions: snapshot.data,
+                                  ))
+                            ];
+                    } 
                   }
-                  
-   } return Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: children,
-            ),
-          );})));
+                  else {
+                      children = <Widget>[
+                        const SizedBox(
+                          width: 60,
+                          height: 60,
+                          child:  CircularProgressIndicator(),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 16),
+                          child: CustomText(text: 'Creating your quiz...', size: 20,
+                              ),
+                        ),
+                      ];
+                    }
+                  return Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: children,
+                    ),
+                  );
+                })));
   }
 }
