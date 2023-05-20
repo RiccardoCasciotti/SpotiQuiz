@@ -24,30 +24,71 @@ import 'package:spotify_quiz/utility/api_calls.dart';
 //
 //
 List<model.Artist> followed_artists = [];
+List<model.Artist> similar_artists = [];
+String similar_id = "0TnOYISbd1XYRBk9myaseg";
+
 List<model.Artist> consume_followed_artists = [];
 List<model.Artist> consume_similar_artists = [];
+
 int similar_index = 0;
+int i = 0;
 
 Future<void> init_data() async {
+ 
+  
+  if (followed_artists.isEmpty && i == 0){
+    followed_artists = await get_followed_artists();
+    if(!followed_artists.isEmpty){
+      consume_followed_artists = followed_artists;
+      consume_followed_artists.shuffle();
+    }
+    
+    i++;
+  }
 
   
-  if (followed_artists.length == 0){
-    followed_artists = await get_followed_artists();
-    consume_followed_artists = followed_artists;
-    consume_followed_artists.shuffle();
-  }
+
 
   if (consume_similar_artists.length < 4){
-    String similar_id = followed_artists.length == 0
-        ? "0TnOYISbd1XYRBk9myaseg"
-        : followed_artists[similar_index%(followed_artists.length -1)].id;
-    //print("############################ $similar_id");
+
+    var candidate;
+
+    if(!followed_artists.isEmpty ){
+
+      candidate = followed_artists.last;
+      followed_artists.removeLast();
+ 
+    }
+
+    else if(!similar_artists.isEmpty) {
+
+      candidate = similar_artists.last;
+      similar_artists.removeLast();
+
+    }
+    else if (similar_artists.isEmpty){
+
+      similar_artists = await get_related_artists(similar_id);
+      similar_artists = similar_artists.sublist(0,similar_artists.length < 30 ? similar_artists.length : 30 );
+      similar_artists.shuffle();
+      candidate = similar_artists.last;
+      similar_artists.removeLast();
+
+    }
+    similar_id = candidate.id;
+
     consume_similar_artists = await get_related_artists(similar_id);
+
     consume_similar_artists = consume_similar_artists.sublist(0,consume_similar_artists.length < 30 ? consume_similar_artists.length : 30 );
-    consume_similar_artists.shuffle();
-    similar_index++;
+  
+
     //print("SIMILAR_INDEX $similar_index");
   }
+  //print("LEN consume_followed_artists: ${consume_followed_artists.length}");
+  // if(consume_followed_artists.length < 4){
+  //   consume_similar_artists = consume_followed_artists + consume_similar_artists;
+  // }
+
 
 }
 
