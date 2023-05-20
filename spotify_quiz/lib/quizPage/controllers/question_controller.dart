@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:spotify_quiz/utility/quiz_utils.dart';
-
+import '../../utility/quiz_utils.dart';
 import '../../models/models.dart' as model;
+
 
 Map<String, Object> format_a(model.Question q){
 

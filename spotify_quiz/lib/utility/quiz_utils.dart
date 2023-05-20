@@ -12,6 +12,8 @@ import 'package:uuid/uuid.dart';
 // Create uuid object
 
 // type: A B C D R
+
+int limit = 20;
 Future<model.Quiz> generate_quiz(String type) async {
   List<model.Question> questions = [];
   var uuid = Uuid();
@@ -28,14 +30,14 @@ Future<model.Quiz> generate_quiz(String type) async {
       generator = generate_d;
     }
 
-    for (var i = 0; i < 20; i++) {
+    for (var i = 0; i < limit; i++) {
       final question = await generator();
       questions.add(question);
     }
   } else {
     final types = [generate_a, generate_b, generate_c, generate_d];
     Random random = Random();
-    for (var i = 0; i < 20; i++) {
+    for (var i = 0; i < limit; i++) {
       int index = random.nextInt(types.length);
       final question = await types[index]();
       questions.add(question);

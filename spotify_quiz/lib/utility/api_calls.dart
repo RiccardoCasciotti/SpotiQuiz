@@ -7,7 +7,12 @@ import 'package:spotify_quiz/utility/utilities.dart';
 
 import '../models/models.dart' as model;
 import 'package:http/http.dart' as http;
+import 'package:spotify_quiz/utility/utilities.dart' as utilities;
 
+
+int limit_albums = 20;
+int limit_followed_artists = 100;
+String market = utilities.nationality;
 
 var i = 0;
 List<model.Image> img_objs(List list) {
@@ -92,7 +97,7 @@ Future<List<model.Album>> get_artist_albums(String artist_id) async {
 
   final albumsInfo = await http.get(
       Uri.parse(
-          "https://api.spotify.com/v1/artists/$artist_id/albums?market=$market&limit=20"),
+          "https://api.spotify.com/v1/artists/$artist_id/albums?market=$market&limit=$limit_albums"),
       headers: {
         "Authorization": 'Authorization: Bearer $accessToken',
         "content-type": "application/x-www-form-urlencoded"
@@ -113,7 +118,7 @@ Future<List<model.Artist>> get_followed_artists() async {
   accessToken = await getAccessToken();
 
   final artistsInfo = await http.get(
-      Uri.parse("https://api.spotify.com/v1/me/following?type=artist&limit=20"),
+      Uri.parse("https://api.spotify.com/v1/me/following?type=artist&limit=$limit_followed_artists"),
       headers: {
         "Authorization": 'Authorization: Bearer $accessToken',
         "content-type": "application/x-www-form-urlencoded"
@@ -175,7 +180,7 @@ Future<List<model.Track>> get_top_tracks(String artist_id) async {
 
   final tracksInfo = await http.get(
       Uri.parse(
-          "https://api.spotify.com/v1/artists/$artist_id/top-tracks?market=IT"),
+          "https://api.spotify.com/v1/artists/$artist_id/top-tracks?market=$market"),
       headers: {
         "Authorization": 'Authorization: Bearer $accessToken',
         "content-type": "application/x-www-form-urlencoded"

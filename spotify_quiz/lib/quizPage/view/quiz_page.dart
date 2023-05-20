@@ -6,6 +6,7 @@ import 'package:spotify_quiz/authentication/bloc/authentication_bloc.dart';
 import 'package:spotify_quiz/repositories/user/user_repository.dart';
 
 import '../../custom_widgets/text.dart';
+import '../../utility/quiz_utils.dart' as quiz_utils;
 import '../controllers/question_controller.dart';
 import 'quiz_screen.dart';
 import 'result_screen.dart';
@@ -23,6 +24,8 @@ import 'result_screen.dart';
 // Is this song made by this artist?
 
 // ignore: must_be_immutable
+
+int limit = quiz_utils.limit;
 class QuizPage extends StatefulWidget {
   int selectedMode;
 
@@ -69,7 +72,7 @@ class _QuizPageState extends State<QuizPage> {
     
     
       setState(() {
-        _questionIndex = (_questionIndex + 1) % 5;
+        _questionIndex = (_questionIndex + 1) % limit;
         _questionScore = score;
         _hasAnswered = true;
       });
@@ -80,13 +83,14 @@ class _QuizPageState extends State<QuizPage> {
   Widget build(BuildContext context) {
     void moveOn() {
       //WE DECIDE TO CONTINUE WITH NEW QUESTIONS
-      if ((_questionIndex + 1) % 5 == 0) {
+      if ((_questionIndex + 1) % limit == 0) {
         print("NEW QUIZ CRETAED");
       var tmp = createQuestions(widget.selectedMode);
+
       setState(() {
         _questions = tmp;
         _hasAnswered = true;
-        _questionIndex = (_questionIndex + 1) % 5;
+        _questionIndex = (_questionIndex + 1) % limit;
       });
       }
       else{setState(() {
