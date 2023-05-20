@@ -21,7 +21,8 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 void main() async {
   await dotenv.load(fileName: ".env");
 
-   final fbApp = await Firebase.initializeApp(
+  // ignore: unused_local_variable
+  final fbApp = await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
   WidgetsFlutterBinding.ensureInitialized();
@@ -123,7 +124,7 @@ class _MyAppViewState extends State<MyAppView> {
       builder: (context, child) {
         return BlocListener<AuthenticationBloc, AuthenticationState>(
           listener: (context, state) {
-            print(state.status);
+            //print(state.status);
             switch (state.status) {
               case AuthenticationStatus.authenticated:
                 _navigator.pushAndRemoveUntil<void>(

@@ -1,16 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:spotify_quiz/custom_widgets/boxed_widgets.dart';
 import 'package:spotify_quiz/utility/utilities.dart' as utilities;
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:spotify_quiz/authentication/bloc/authentication_bloc.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../custom_widgets/text.dart';
 
 class ProfilePage extends StatelessWidget {
-  const ProfilePage({super.key});
+  const ProfilePage({
+    Key? key,
+  }) : super(key: const Key("ProfilePage"));
 
   @override
   Widget build(BuildContext context) {
+    var correctAnswers = context.read<AuthenticationBloc>().user.correctAnswer;
+    var wrongAnswers = context.read<AuthenticationBloc>().user.wrongAnswer;
+    var bestScore = context.read<AuthenticationBloc>().user.bestScore;
+    var experience = context.read<AuthenticationBloc>().user.experience;
+    var nOfQuiz = context.read<AuthenticationBloc>().user.numberQuiz;
+
     return Scaffold(
       backgroundColor: utilities.secondaryColor,
       appBar: AppBar(
@@ -28,8 +38,11 @@ class ProfilePage extends StatelessWidget {
                 tag: "profilePic",
                 child: CircleAvatar(
                   backgroundImage: NetworkImage(utilities.imageUserProfile),
-                  radius: 110,
+                  radius: 125,
                 ),
+              ),
+              const SizedBox(
+                height: 100,
               ),
               Column(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -54,7 +67,9 @@ class ProfilePage extends StatelessWidget {
                               size: 20,
                             ),
                             CustomText(
-                              text: "100%",
+                              text: nOfQuiz != 0
+                                  ? "${(100 * correctAnswers / (correctAnswers + wrongAnswers)).round()}%"
+                                  : "0",
                               size: 25,
                             ),
                           ],
@@ -68,7 +83,9 @@ class ProfilePage extends StatelessWidget {
                               size: 20,
                             ),
                             CustomText(
-                              text: "89%",
+                              text: nOfQuiz != 0
+                                  ? "${(100 * wrongAnswers / (correctAnswers + wrongAnswers)).round()}%"
+                                  : "0",
                               size: 25,
                             ),
                           ],
@@ -77,45 +94,12 @@ class ProfilePage extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             CustomText(
-                              text: AppLocalizations.of(context)!.totpoints,
+                              text: AppLocalizations.of(context)!.experience,
                               thirdColor: true,
                               size: 20,
                             ),
                             CustomText(
-                              text: "70%",
-                              size: 25,
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  CustomText(
-                    text: "Most known artists",
-                    thirdColor: true,
-                    size: 25,
-                    bold: true,
-                  ),
-                  CustomBoxedWidget(
-                    widthRadius: 0.1,
-                    thirdColor: true,
-                    insideBox: Column(
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            CustomText(
-                              text: "Jessica Jones",
-                              thirdColor: true,
-                              size: 20,
-                            ),
-                            CustomText(
-                              text: "100%",
+                              text: experience.toString(),
                               size: 25,
                             ),
                           ],
@@ -124,26 +108,12 @@ class ProfilePage extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             CustomText(
-                              text: "Ed Points",
+                              text: AppLocalizations.of(context)!.bestScore,
                               thirdColor: true,
                               size: 20,
                             ),
                             CustomText(
-                              text: "89%",
-                              size: 25,
-                            ),
-                          ],
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            CustomText(
-                              text: "Enrique Ilo",
-                              thirdColor: true,
-                              size: 20,
-                            ),
-                            CustomText(
-                              text: "70%",
+                              text: bestScore.toString(),
                               size: 25,
                             ),
                           ],

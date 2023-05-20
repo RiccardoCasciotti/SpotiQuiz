@@ -9,7 +9,7 @@
     "description": "Coins of the user name displayed in the first page"
   },
 
-  "nofquiz": "#Quiz",
+  "nofquiz": "Quiz N.",
   "@nofquiz": {
     "description": "Number of quizzes"
   },
@@ -167,6 +167,16 @@
    "scorequiz": "Score:",
   "@scorequiz": {
     "description": "Score during the quiz"
+  },
+
+     "bestScore": "Best Score",
+  "@bestScore": {
+    "description": "The best score of the user"
+  },
+
+     "experience": "Experience",
+  "@experience": {
+    "description": "The experience of the user"
   }
 
 }

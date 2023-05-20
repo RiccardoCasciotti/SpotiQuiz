@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:spotify_quiz/custom_widgets/text.dart';
 import 'package:spotify_quiz/eventsPage/view/events_page_view.dart';
 import 'package:spotify_quiz/rankingPage/ranking_page_view.dart';
@@ -6,6 +7,8 @@ import 'package:spotify_quiz/utility/utilities.dart' as utilities;
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import '../authentication/bloc/authentication_bloc.dart';
+import '../repositories/user/user_repository.dart';
 import '../utility/transitions.dart';
 
 // ignore: must_be_immutable
@@ -43,15 +46,46 @@ class _CustomButtonsHomeState extends State<CustomButtonsHome> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 FloatingActionButton(
+                  key: const Key("RankingButtonHome"),
                   heroTag: null,
                   backgroundColor: _tapped1
                       ? utilities.primaryColor
                       : utilities.tertiaryColor,
                   foregroundColor: utilities.secondaryColor,
-                  onPressed: () {
+                  onPressed: () async {
                     setState(() {
                       _tapped1 = true;
                     });
+                    final UserRepository userRepository = UserRepository();
+
+                    var userByNation = await userRepository.getUsersByNation(
+                        context.read<AuthenticationBloc>().user.nation);
+                    userByNation.sort(((a, b) {
+                      if (a.bestScore > b.bestScore) {
+                        return -1;
+                      } else if (a.bestScore < b.bestScore) {
+                        return 1;
+                      } else {
+                        return 0;
+                      }
+                    }));
+                    // ignore: use_build_context_synchronously
+                    context.read<AuthenticationBloc>().userByNation =
+                        userByNation;
+
+                    var users = await userRepository.getUsers();
+                    users.sort(((a, b) {
+                      if (a.bestScore > b.bestScore) {
+                        return -1;
+                      } else if (a.bestScore < b.bestScore) {
+                        return 1;
+                      } else {
+                        return 0;
+                      }
+                    }));
+                    // ignore: use_build_context_synchronously
+                    context.read<AuthenticationBloc>().userGlobal = users;
+
                     Future.delayed(animationDuration).then((_) => {
                           Navigator.push(
                             context,
@@ -68,6 +102,7 @@ class _CustomButtonsHomeState extends State<CustomButtonsHome> {
                   child: const Icon(Icons.emoji_events_outlined),
                 ),
                 CustomText(
+                  key: const Key("RankingTextHome"),
                   text: AppLocalizations.of(context)!.ranking,
                   size: 20.0,
                   thirdColor: !_tapped1,
@@ -78,6 +113,7 @@ class _CustomButtonsHomeState extends State<CustomButtonsHome> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 FloatingActionButton(
+                  key: const Key("EventButtonHome"),
                   heroTag: null,
                   backgroundColor: _tapped2
                       ? utilities.primaryColor
@@ -103,6 +139,7 @@ class _CustomButtonsHomeState extends State<CustomButtonsHome> {
                   child: const Icon(Icons.star_outline_sharp),
                 ),
                 CustomText(
+                  key: const Key("EventTextHome"),
                   text: AppLocalizations.of(context)!.events,
                   size: 20.0,
                   thirdColor: !_tapped2,

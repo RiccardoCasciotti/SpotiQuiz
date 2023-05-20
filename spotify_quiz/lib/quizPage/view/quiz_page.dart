@@ -1,6 +1,9 @@
 import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:spotify_quiz/utility/utilities.dart' as utilities;
+import 'package:spotify_quiz/authentication/bloc/authentication_bloc.dart';
+import 'package:spotify_quiz/repositories/user/user_repository.dart';
 
 import '../controllers/question_controller.dart';
 import 'quiz_screen.dart';
@@ -50,26 +53,18 @@ class _QuizPageState extends State<QuizPage> {
 
   var _questionIndex = 0;
   var _totalScore = 0;
+  var _wrongAnswers = 0;
+  var _correctAnswers = 0;
   var _questionScore = 0;
   var _hasAnswered = false;
 
-  void _goHome() {
-    //WE DECIDE WE WANT TO GO BACK
-    //Here we should store the final result and the various informations,
-    //also putting them in the database
-    Navigator.pop(context);
-  }
-
-  void _moveOn() {
-    //WE DECIDE TO CONTINUE WITH NEW QUESTIONS
-    setState(() {
-      _hasAnswered = false;
-    });
-  }
-
-  void _answerQuestion(int score) { // ############################## ASYNC CALL PROBLEM
+  void _answerQuestion(int score) {
     //FUNCTION WE CALL WHEN WE GIVE AN ANSWER, HERE WE CAN IMPLEMENT THE LOGIC TO CREATE NEW QUESTIONS
-
+    if (score > 0) {
+      _correctAnswers++;
+    } else {
+      _wrongAnswers++;
+    }
     _totalScore += score;
 
     if (_questionIndex + 1 == 5) {
@@ -86,6 +81,24 @@ class _QuizPageState extends State<QuizPage> {
 
   @override
   Widget build(BuildContext context) {
+    void moveOn() {
+      //WE DECIDE TO CONTINUE WITH NEW QUESTIONS
+      setState(() {
+        _hasAnswered = false;
+      });
+    }
+
+    Future<void> goHome() async {
+      UserRepository userRepository = UserRepository();
+      context.read<AuthenticationBloc>().user =
+          await userRepository.UpdateAfterQuizOnDB(
+                  context.read<AuthenticationBloc>().user,
+                  _correctAnswers,
+                  _wrongAnswers,
+                  _totalScore)
+              .whenComplete(() => Navigator.pop(context));
+    }
+
     return Scaffold(
         backgroundColor: utilities.secondaryColor,
         body: Padding(

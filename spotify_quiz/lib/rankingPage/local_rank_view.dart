@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:spotify_quiz/custom_widgets/text.dart';
+import 'package:spotify_quiz/models/user.dart';
 import 'package:spotify_quiz/utility/utilities.dart' as utilities;
+
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:spotify_quiz/authentication/bloc/authentication_bloc.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -14,10 +18,40 @@ class LocalRankScreen extends StatelessWidget {
     Key? key,
     required this.onItemTapped,
     required this.selectedIndex,
-  }) : super(key: key);
+  }) : super(key: const Key("LocalRankingPage"));
 
   @override
   Widget build(BuildContext context) {
+    final rows = <TableRow>[];
+
+    for (User user in context.read<AuthenticationBloc>().userByNation) {
+      rows.add(
+        TableRow(
+          children: <Widget>[
+            CustomText(
+              alignCenter: true,
+              text: user.username,
+              thirdColor: true,
+              size: 18,
+            ),
+            CustomText(
+              alignCenter: true,
+              text: user.level.toString(),
+              size: 18,
+              thirdColor: true,
+              bold: true,
+            ),
+            CustomText(
+              alignCenter: true,
+              text: user.bestScore.toString(),
+              size: 18,
+              bold: true,
+            ),
+          ],
+        ),
+      );
+    }
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: utilities.secondaryColor,
@@ -51,127 +85,83 @@ class LocalRankScreen extends StatelessWidget {
             ),
             Flexible(
               flex: 16,
-              child: Container(
-                width: 300,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20.0),
-                    border: Border.all(
-                      color: utilities.tertiaryColor,
-                      style: BorderStyle.solid,
-                      width: 0.1,
-                    ),
-                    shape: BoxShape.rectangle),
-                child: Column(
-                  children: [
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    Table(
-                      border: TableBorder.symmetric(),
-                      defaultVerticalAlignment:
-                          TableCellVerticalAlignment.middle,
-                      children: <TableRow>[
-                        TableRow(
-                          children: <Widget>[
-                            Container(
-                              alignment: Alignment.center,
-                              child: CustomText(
-                                text: AppLocalizations.of(context)!
-                                    .usernameranking,
-                                thirdColor: true,
-                                size: 20,
-                                bold: true,
+              child: SingleChildScrollView(
+                scrollDirection: Axis.vertical,
+                child: Container(
+                  width: 300,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20.0),
+                      border: Border.all(
+                        color: utilities.tertiaryColor,
+                        style: BorderStyle.solid,
+                        width: 0.1,
+                      ),
+                      shape: BoxShape.rectangle),
+                  child: Column(
+                    children: [
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Table(
+                        border: TableBorder.symmetric(),
+                        defaultVerticalAlignment:
+                            TableCellVerticalAlignment.middle,
+                        children: <TableRow>[
+                          TableRow(
+                            children: <Widget>[
+                              Container(
+                                alignment: Alignment.center,
+                                child: CustomText(
+                                  text: AppLocalizations.of(context)!
+                                      .usernameranking,
+                                  thirdColor: true,
+                                  size: 18,
+                                  bold: true,
+                                ),
                               ),
-                            ),
-                            Container(
-                              alignment: Alignment.center,
-                              child: CustomText(
-                                text: AppLocalizations.of(context)!
-                                    .bestscoreranking,
-                                thirdColor: true,
-                                size: 20,
-                                bold: true,
+                              Container(
+                                alignment: Alignment.center,
+                                child: CustomText(
+                                  text: AppLocalizations.of(context)!.level,
+                                  thirdColor: true,
+                                  size: 18,
+                                  bold: true,
+                                ),
                               ),
-                            ),
-                          ],
-                        ),
-                        const TableRow(
-                          children: <Widget>[
-                            SizedBox(
-                              height: 20,
-                            ),
-                            SizedBox(
-                              height: 20,
-                            ),
-                          ],
-                        ),
-                        TableRow(
-                          children: <Widget>[
-                            Container(
-                              alignment: Alignment.center,
-                              child: CustomText(
-                                text: "Lollo",
-                                thirdColor: true,
-                                size: 20,
+                              Container(
+                                alignment: Alignment.center,
+                                child: CustomText(
+                                  text: AppLocalizations.of(context)!
+                                      .bestscoreranking,
+                                  thirdColor: true,
+                                  size: 18,
+                                  bold: true,
+                                ),
                               ),
-                            ),
-                            Container(
-                              alignment: Alignment.center,
-                              child: CustomText(
-                                text: "3000",
-                                size: 20,
-                                bold: true,
+                            ],
+                          ),
+                          const TableRow(
+                            children: <Widget>[
+                              SizedBox(
+                                height: 20,
                               ),
-                            ),
-                          ],
-                        ),
-                        TableRow(
-                          children: <Widget>[
-                            Container(
-                              alignment: Alignment.center,
-                              child: CustomText(
-                                text: "Arci",
-                                thirdColor: true,
-                                size: 20,
+                              SizedBox(
+                                height: 20,
                               ),
-                            ),
-                            Container(
-                              alignment: Alignment.center,
-                              child: CustomText(
-                                text: "2300",
-                                size: 20,
-                                bold: true,
+                              SizedBox(
+                                height: 20,
                               ),
-                            ),
-                          ],
-                        ),
-                        TableRow(
-                          children: <Widget>[
-                            Container(
-                              alignment: Alignment.center,
-                              child: CustomText(
-                                text: "Romolo",
-                                thirdColor: true,
-                                size: 20,
-                              ),
-                            ),
-                            Container(
-                              alignment: Alignment.center,
-                              child: CustomText(
-                                text: "1000",
-                                size: 20,
-                                bold: true,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                      defaultColumnWidth: const FlexColumnWidth(),
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                  ],
+                            ],
+                          ),
+                          for (TableRow row in rows) row
+                        ],
+                        defaultColumnWidth: const FlexColumnWidth(),
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),

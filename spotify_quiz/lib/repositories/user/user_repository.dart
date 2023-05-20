@@ -75,6 +75,28 @@ class UserRepository {
     }
   }
 
+  Future<List<User>> getUsersByNation(String nation) async {
+    List<User> userList = [];
+    try {
+      final user = await FirebaseFirestore.instance.collection('users').get();
+      for (var element in user.docs) {
+        if ((User.fromJson(element.data())).nation == nation) {
+          userList.add(
+            User.fromJson(element.data()),
+          );
+        }
+      }
+      return userList;
+    } on FirebaseException catch (e) {
+      if (kDebugMode) {
+        print("Failed with error '${e.code}' : ${e.message}");
+      }
+      return userList;
+    } catch (e) {
+      throw Exception(e.toString());
+    }
+  }
+
   Future<User?> getByID(String uid) async {
     List<User> userList = [];
     try {
@@ -156,5 +178,37 @@ class UserRepository {
         uid: userJson["id"],
         username: userJson["display_name"],
         refreshToken: refreshToken);
+  }
+
+  // ignore: non_constant_identifier_names
+  Future<User> UpdateAfterQuizOnDB(User actualUser, int correctAnswersQuiz,
+      int wrongAnswersQuiz, int score) async {
+    int newExperience = actualUser.experience.toInt() +
+        30 * correctAnswersQuiz +
+        10 * wrongAnswersQuiz;
+    int newBestScore = actualUser.bestScore.toInt() < score
+        ? score
+        : actualUser.bestScore.toInt();
+
+    FirebaseFirestore.instance.collection("users").doc(actualUser.uid).update({
+      "numOfQuiz": actualUser.numberQuiz + 1,
+      "wrongAnswers": actualUser.wrongAnswer + wrongAnswersQuiz,
+      "correctAnswers": actualUser.correctAnswer + correctAnswersQuiz,
+      'experience': newExperience,
+      'level': (newExperience / 200).floor(),
+      'bestScore': newBestScore,
+    });
+
+    return User(
+        bestScore: newBestScore,
+        nation: actualUser.nation,
+        experience: newExperience,
+        level: (newExperience / 200).floor(),
+        numberQuiz: actualUser.numberQuiz + 1,
+        correctAnswer: actualUser.correctAnswer + correctAnswersQuiz,
+        wrongAnswer: actualUser.wrongAnswer + wrongAnswersQuiz,
+        uid: actualUser.uid,
+        username: actualUser.username,
+        refreshToken: actualUser.refreshToken);
   }
 }

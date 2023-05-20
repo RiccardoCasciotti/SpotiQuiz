@@ -3,7 +3,7 @@
 
   "coins": "Монеты",
 
-  "nofquiz": "#Quiz",
+  "nofquiz": "викторина Ч.",
 
   "level": "Уровень",
 
@@ -65,5 +65,9 @@
 
   "continuebutton": "Продолжение",
 
-  "scorequiz": "Оценка:"
+  "scorequiz": "Оценка:",
+
+  "bestScore": "Лучший результат",
+
+  "experience": "Oпыт"
 }

@@ -12,8 +12,8 @@ part 'authentication_state.dart';
 class AuthenticationBloc
     extends Bloc<AuthenticationEvent, AuthenticationState> {
   User user = User.empty;
-  final UserRepository _userRepository;
-  //List<dynamic> questionsList = List<dynamic>.empty();
+  List<User> userByNation = List<User>.empty();
+  List<User> userGlobal = List<User>.empty();
 
   AuthenticationBloc({
     required AuthenticationRepository authenticationRepository,
@@ -29,6 +29,8 @@ class AuthenticationBloc
   }
 
   final AuthenticationRepository _authenticationRepository;
+  // ignore: unused_field
+  final UserRepository _userRepository;
   late StreamSubscription<AuthenticationStatus>
       _authenticationStatusSubscription;
 
