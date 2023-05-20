@@ -132,8 +132,8 @@ print("Error ${snapshot.error}");            }
                             child: Result(
                               _totalScore,
                               _questionScore,
-                              _goHome,
-                              _moveOn,
+                              goHome,
+                              moveOn,
                             ),
                           )
                         ]: children = [PageTransitionSwitcher(
