@@ -1,3 +1,4 @@
+import 'package:authentication_repository/authentication_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:spotify_quiz/authentication/web_view/web_view_login.dart';
@@ -23,7 +24,21 @@ class LoginButton extends StatelessWidget {
             ? context.read<AuthenticationBloc>().user = userTest!
             // ignore: use_build_context_synchronously
             : await Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) => const WebViewLogin()),
+                MaterialPageRoute(builder: (context) {
+                  // return BlocProvider.value(
+                  // value: BlocProvider.of<LoginBloc>(context),
+                  // child: const WebViewLogin(),);
+
+                  return BlocProvider(
+                      create: (context) {
+                        return LoginBloc(
+                          authenticationRepository:
+                              RepositoryProvider.of<AuthenticationRepository>(
+                                  context),
+                        );
+                      },
+                      child: const WebViewLogin());
+                }),
               );
         // ignore: use_build_context_synchronously
         context.read<LoginBloc>().add(const LoginSubmitted());
