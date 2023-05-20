@@ -30,10 +30,8 @@ Future<model.Quiz> generate_quiz(String type) async {
       generator = generate_d;
     }
 
-    for (var i = 0; i < 20; i++) {
-print("OUT");
+    for (var i = 0; i < limit; i++) {
       final question = await generator();
-      print("OUT");
       questions.add(question);
     }
   } else {

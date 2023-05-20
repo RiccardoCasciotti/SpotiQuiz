@@ -114,9 +114,7 @@ Future<List<model.Album>> get_artist_albums(String artist_id) async {
 }
 
 Future<List<model.Artist>> get_followed_artists() async {
-  print("OK11");
   accessToken = await getAccessToken();
-  print("OK12");
 
   final artistsInfo = await http.get(
       Uri.parse("https://api.spotify.com/v1/me/following?type=artist"),
