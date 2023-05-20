@@ -16,7 +16,7 @@ class HomeScreenTablet extends StatelessWidget {
     Key? key,
     required this.onItemTapped,
     required this.selectedIndex,
-  }) : super(key: key);
+  }) : super(key: const Key("TabletHomePage"));
 
   @override
   Widget build(BuildContext context) {
@@ -25,6 +25,7 @@ class HomeScreenTablet extends StatelessWidget {
     var bestScore = context.read<AuthenticationBloc>().user.bestScore;
     var experience = context.read<AuthenticationBloc>().user.experience;
     var nOfQuiz = context.read<AuthenticationBloc>().user.numberQuiz;
+    var newlevelCap = ((experience / 200).floor() + 1) * 200;
 
     return Scaffold(
       backgroundColor: utilities.secondaryColor,
@@ -49,16 +50,17 @@ class HomeScreenTablet extends StatelessWidget {
                     ),
                     Column(
                       children: [
-                        const CircleAvatar(
+                        CircleAvatar(
                           radius: 115,
-                          backgroundImage: NetworkImage(
-                              'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg'),
+                          backgroundImage:
+                              NetworkImage(utilities.imageUserProfile),
                         ),
                         const SizedBox(
                           height: 10,
                         ),
                         CustomText(
-                          text: "Username",
+                          text:
+                              context.read<AuthenticationBloc>().user.username,
                           thirdColor: true,
                           size: 25,
                         ),
@@ -86,7 +88,11 @@ class HomeScreenTablet extends StatelessWidget {
                             Container(
                               alignment: Alignment.center,
                               child: CustomText(
-                                text: "1",
+                                text: context
+                                    .read<AuthenticationBloc>()
+                                    .user
+                                    .level
+                                    .toString(),
                                 size: 30,
                                 bold: true,
                               ),
@@ -117,7 +123,11 @@ class HomeScreenTablet extends StatelessWidget {
                             Container(
                               alignment: Alignment.center,
                               child: CustomText(
-                                text: "2300",
+                                text: context
+                                    .read<AuthenticationBloc>()
+                                    .user
+                                    .numberQuiz
+                                    .toString(),
                                 size: 30,
                                 bold: true,
                               ),
@@ -158,92 +168,94 @@ class HomeScreenTablet extends StatelessWidget {
                         Table(
                           children: <TableRow>[
                             TableRow(children: [
+                              const SizedBox(
+                                width: 5,
+                              ),
                               CustomText(
                                 key: const Key("CorrectAnswerTextProfile"),
+                                alignCenter: true,
                                 text:
                                     AppLocalizations.of(context)!.correctanswer,
                                 thirdColor: true,
-                                size: 20,
+                                size: 25,
                               ),
                               CustomText(
                                 key: const Key("CorrectAnswerInfoProfile"),
+                                alignCenter: true,
                                 text: nOfQuiz != 0
                                     ? "${(100 * correctAnswers / (correctAnswers + wrongAnswers)).round()}%"
                                     : "0",
                                 size: 25,
                               ),
+                              const SizedBox(
+                                width: 5,
+                              ),
                             ]),
-                          ],
-                        ),
-                        Column(
-                          children: [
-                            Row(
-                              children: [
-                                CustomText(
-                                  key: const Key("CorrectAnswerTextProfile"),
-                                  text: AppLocalizations.of(context)!
-                                      .correctanswer,
-                                  thirdColor: true,
-                                  size: 20,
-                                ),
-                                CustomText(
-                                  key: const Key("CorrectAnswerInfoProfile"),
-                                  text: nOfQuiz != 0
-                                      ? "${(100 * correctAnswers / (correctAnswers + wrongAnswers)).round()}%"
-                                      : "0",
-                                  size: 25,
-                                ),
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                CustomText(
-                                  key: const Key("WrongAnswerTextProfile"),
-                                  text:
-                                      AppLocalizations.of(context)!.wronganswer,
-                                  thirdColor: true,
-                                  size: 20,
-                                ),
-                                CustomText(
-                                  key: const Key("WrongAnswerInfoProfile"),
-                                  text: nOfQuiz != 0
-                                      ? "${(100 * wrongAnswers / (correctAnswers + wrongAnswers)).round()}%"
-                                      : "0",
-                                  size: 25,
-                                ),
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                CustomText(
-                                  key: const Key("ExperienceTextProfile"),
-                                  text:
-                                      AppLocalizations.of(context)!.experience,
-                                  thirdColor: true,
-                                  size: 20,
-                                ),
-                                CustomText(
-                                  key: const Key("ExperienceInfoProfile"),
-                                  text: experience.toString(),
-                                  size: 25,
-                                ),
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                CustomText(
-                                  key: const Key("BestScoreTextProfile"),
-                                  text: AppLocalizations.of(context)!.bestScore,
-                                  thirdColor: true,
-                                  size: 20,
-                                ),
-                                CustomText(
-                                  key: const Key("BestScoreInfoProfile"),
-                                  text: bestScore.toString(),
-                                  size: 25,
-                                ),
-                              ],
-                            ),
+                            TableRow(children: [
+                              const SizedBox(
+                                width: 10,
+                              ),
+                              CustomText(
+                                key: const Key("WrongAnswerTextProfile"),
+                                alignCenter: true,
+                                text: AppLocalizations.of(context)!.wronganswer,
+                                thirdColor: true,
+                                size: 25,
+                              ),
+                              CustomText(
+                                key: const Key("WrongAnswerInfoProfile"),
+                                alignCenter: true,
+                                text: nOfQuiz != 0
+                                    ? "${(100 * wrongAnswers / (correctAnswers + wrongAnswers)).round()}%"
+                                    : "0",
+                                size: 25,
+                              ),
+                              const SizedBox(
+                                width: 10,
+                              ),
+                            ]),
+                            TableRow(children: [
+                              const SizedBox(
+                                width: 10,
+                              ),
+                              CustomText(
+                                key: const Key("ExperienceTextProfile"),
+                                alignCenter: true,
+                                text: AppLocalizations.of(context)!.experience,
+                                thirdColor: true,
+                                size: 25,
+                              ),
+                              CustomText(
+                                key: const Key("ExperienceInfoProfile"),
+                                alignCenter: true,
+                                text: "$experience/$newlevelCap",
+                                size: 25,
+                              ),
+                              const SizedBox(
+                                width: 10,
+                              ),
+                            ]),
+                            TableRow(children: [
+                              const SizedBox(
+                                width: 10,
+                              ),
+                              CustomText(
+                                key: const Key("BestScoreTextProfile"),
+                                alignCenter: true,
+                                text: AppLocalizations.of(context)!.bestScore,
+                                thirdColor: true,
+                                size: 25,
+                              ),
+                              CustomText(
+                                key: const Key("BestScoreInfoProfile"),
+                                alignCenter: true,
+                                text: bestScore.toString(),
+                                size: 25,
+                              ),
+                              const SizedBox(
+                                width: 10,
+                              ),
+                            ]),
                           ],
                         ),
                       ],

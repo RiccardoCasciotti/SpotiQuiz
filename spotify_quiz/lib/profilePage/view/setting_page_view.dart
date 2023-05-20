@@ -20,6 +20,7 @@ class ProfilePage extends StatelessWidget {
     var bestScore = context.read<AuthenticationBloc>().user.bestScore;
     var experience = context.read<AuthenticationBloc>().user.experience;
     var nOfQuiz = context.read<AuthenticationBloc>().user.numberQuiz;
+    var newlevelCap = ((experience / 200).floor() + 1) * 200;
 
     return Scaffold(
       backgroundColor: utilities.secondaryColor,
@@ -107,8 +108,12 @@ class ProfilePage extends StatelessWidget {
                               size: 20,
                             ),
                             CustomText(
+<<<<<<< Updated upstream
                               key: const Key("ExperienceInfoProfile"),
                               text: experience.toString(),
+=======
+                              text: "$experience/$newlevelCap",
+>>>>>>> Stashed changes
                               size: 25,
                             ),
                           ],
