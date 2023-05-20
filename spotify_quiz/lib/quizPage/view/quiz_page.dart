@@ -41,7 +41,7 @@ class _QuizPageState extends State<QuizPage> {
   @override
   void initState() {
     
-       _questions = createQuestions(1);
+       _questions = createQuestions(widget.selectedMode);
    
     super.initState();
     //List<Map<String, Object>> questions = [];

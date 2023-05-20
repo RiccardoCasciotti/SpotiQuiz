@@ -11,9 +11,10 @@ class Result extends StatelessWidget {
   final Function returnHome;
   final Function moveOn;
   final int questionScore;
+  
 
   const Result(
-      this.resultScore, this.questionScore, this.returnHome, this.moveOn,
+      this.resultScore, this.questionScore, this.returnHome, this.moveOn,  
       {Key? key})
       : super(key: key);
 
@@ -55,13 +56,12 @@ class Result extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              TextButtonReturn(
-                text: AppLocalizations.of(context)!.quitbutton,
+              TextButtonReturn(text: AppLocalizations.of(context)!.quitbutton,
                 selectHandler: (_) => returnHome(),
               ),
               TextButtonReturn(
                 text: AppLocalizations.of(context)!.continuebutton,
-                selectHandler: (_) => moveOn(),
+                selectHandler: (_)  => moveOn(),
               ),
             ],
           ),

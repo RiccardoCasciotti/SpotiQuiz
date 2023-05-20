@@ -1,8 +1,9 @@
+import 'package:flutter/material.dart';
 import 'package:spotify_quiz/utility/quiz_utils.dart';
 
-import '../../models/models.dart';
+import '../../models/models.dart' as model;
 
-Map<String, Object> format_a(Question q){
+Map<String, Object> format_a(model.Question q){
 
   const qText = "Who is the following artist?";
   var answers = [];
@@ -11,7 +12,7 @@ Map<String, Object> format_a(Question q){
   }
   answers.add({"text" : q.answer, "score": 10});
   answers.shuffle();
-  Image image = (q.obj as Artist).images![0];
+  model.Image image = (q.obj as model.Artist).images![1];
 
 
 return {
@@ -30,13 +31,14 @@ return {
 
   var questionsList = [];
   if( selectedMode == 1 ){
-    Quiz quiz_a = await generate_quiz("A");
+    model.Quiz quiz_a = await generate_quiz("A");
     for( var i = 0; i < quiz_a.questions.length; i++){
       questionsList.add(format_a(quiz_a.questions[i]));
     }
 
  }
   return questionsList;
+
   // return [
   //   {
   //     'questionText': 'In which year album X was released?',

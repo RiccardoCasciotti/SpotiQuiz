@@ -16,36 +16,28 @@ class Quiz extends StatelessWidget {
     required this.questionIndex,
   }) : super(key: key);
 
+  
+
   @override
   Widget build(BuildContext context) {
     return Column(
+      
       children: [
-        Flexible(
-          flex: 1,
-          child: Container(
+        Container(
             alignment: Alignment.center,
             width: double.infinity,
             child: Question(
               questions![questionIndex]['questionText'].toString(),
             ),
           ),
-        ),
-        if (questions![questionIndex]['playButton'] != null)
-          Flexible(
-            flex: 1,
-            child: Container(
+        if (questions![questionIndex]['image'] != null)
+        Container(
+              
               alignment: Alignment.center,
               width: double.infinity,
-              child: const PlayButtonQuiz(),
-            ),
-          ),
-        if (questions![questionIndex]['image'] == null)
-          Flexible(
-            flex: 1,
-            child: Container(
-              alignment: Alignment.center,
-              width: double.infinity,
-              child: Image.network(
+              child: 
+              
+              Image.network(
                   (questions![questionIndex]['image'] as model.Image).url,
                   height: (questions![questionIndex]['image'] as model.Image)
                       .heigth
@@ -54,8 +46,7 @@ class Quiz extends StatelessWidget {
                       .width
                       .toDouble()),
             ),
-          ),
-        Column(
+            Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             ...(questions![questionIndex]['answers']).map((answer) {
@@ -63,7 +54,7 @@ class Quiz extends StatelessWidget {
                   answer['text'].toString());
             })
           ],
-        ),
+        )
       ],
     );
   }

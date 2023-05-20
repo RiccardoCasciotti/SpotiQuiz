@@ -13,6 +13,7 @@ class AuthenticationBloc
     extends Bloc<AuthenticationEvent, AuthenticationState> {
   User user = User.empty;
   final UserRepository _userRepository;
+  //List<dynamic> questionsList = List<dynamic>.empty();
 
   AuthenticationBloc({
     required AuthenticationRepository authenticationRepository,
