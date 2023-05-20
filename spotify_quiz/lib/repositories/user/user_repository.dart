@@ -123,7 +123,8 @@ class UserRepository {
   Future<User> apiGetUser(String accesToken, String refreshToken) async {
     List<User> userList = [];
 
-    utilities.accessToken = accesToken;
+    //utilities.accessToken = accesToken;
+    utilities.refreshToken = refreshToken;
 
     final userInfo =
         await http.get(Uri.parse("https://api.spotify.com/v1/me"), headers: {

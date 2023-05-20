@@ -38,12 +38,17 @@ class QuizPage extends StatefulWidget {
 
 class _QuizPageState extends State<QuizPage> {
   // ignore: prefer_typing_uninitialized_variables
-  var questions;
+  //Future<List<Map<String, Object>>> _questions = createQuestions(widget.selectedMode);
+  Future<List<dynamic>>? _questions;
 
   @override
   void initState() {
+    
+       _questions = createQuestions(widget.selectedMode);
+   
     super.initState();
-    questions = createQuestions(widget.selectedMode);
+    //List<Map<String, Object>> questions = [];
+    
   }
 
   var _questionIndex = 0;
@@ -63,7 +68,8 @@ class _QuizPageState extends State<QuizPage> {
     _totalScore += score;
 
     if (_questionIndex + 1 == 5) {
-      questions = createQuestions(widget.selectedMode);
+      // Future<List<Map<String, Object>>> questions =
+      //     createQuestions(widget.selectedMode);
     }
 
     setState(() {
@@ -94,44 +100,79 @@ class _QuizPageState extends State<QuizPage> {
     }
 
     return Scaffold(
-      backgroundColor: utilities.secondaryColor,
-      body: Padding(
-        padding: const EdgeInsets.all(30.0),
-        child: _hasAnswered
-            ? PageTransitionSwitcher(
-                duration: const Duration(milliseconds: 500),
-                transitionBuilder: (child, animation, secondaryAnimation) =>
-                    SharedAxisTransition(
-                  animation: animation,
-                  secondaryAnimation: secondaryAnimation,
-                  fillColor: utilities.secondaryColor,
-                  transitionType: SharedAxisTransitionType.horizontal,
-                  child: child,
-                ),
-                child: Result(
-                  _totalScore,
-                  _questionScore,
-                  goHome,
-                  moveOn,
-                ),
-              )
-            : PageTransitionSwitcher(
-                duration: const Duration(milliseconds: 500),
-                transitionBuilder: (child, animation, secondaryAnimation) =>
-                    SharedAxisTransition(
-                  animation: animation,
-                  secondaryAnimation: secondaryAnimation,
-                  fillColor: utilities.secondaryColor,
-                  transitionType: SharedAxisTransitionType.horizontal,
-                  child: child,
-                ),
-                child: Quiz(
-                  answerQuestion: _answerQuestion,
-                  questionIndex: _questionIndex,
-                  questions: questions,
-                ),
-              ),
-      ),
-    );
+        backgroundColor: utilities.secondaryColor,
+        body: Padding(
+            padding: const EdgeInsets.all(30.0),
+            child: FutureBuilder<List<dynamic>>(
+                future:
+                    _questions, // a previously-obtained Future<String> or null
+                builder: (BuildContext context,
+                    AsyncSnapshot<List<dynamic>> snapshot) {
+                  List<Widget> children = [];
+                  
+    if (snapshot.connectionState == ConnectionState.done) {
+          
+            if(snapshot.hasError){
+print("Error ${snapshot.error}");            }
+                  if (snapshot.hasData) {
+                    print("DATAAAAAA ${snapshot.data}");
+                    _hasAnswered
+                        ? children = [PageTransitionSwitcher(
+                            duration: const Duration(milliseconds: 500),
+                            transitionBuilder:
+                                (child, animation, secondaryAnimation) =>
+                                    SharedAxisTransition(
+                              animation: animation,
+                              secondaryAnimation: secondaryAnimation,
+                              fillColor: utilities.secondaryColor,
+                              transitionType:
+                                  SharedAxisTransitionType.horizontal,
+                              child: child,
+                            ),
+                            child: Result(
+                              _totalScore,
+                              _questionScore,
+                              goHome,
+                              moveOn,
+                            ),
+                          )
+                        ]: children = [PageTransitionSwitcher(
+                            duration: const Duration(milliseconds: 500),
+                            transitionBuilder:
+                                (child, animation, secondaryAnimation) =>
+                                    SharedAxisTransition(
+                              animation: animation,
+                              secondaryAnimation: secondaryAnimation,
+                              fillColor: utilities.secondaryColor,
+                              transitionType:
+                                  SharedAxisTransitionType.horizontal,
+                              child: child,
+                            ),
+                            child: Quiz(
+                              answerQuestion: _answerQuestion,
+                              questionIndex: _questionIndex,
+                              questions: snapshot.data,
+                            )
+                          )];
+                  } else {
+                    children = const <Widget>[
+                      SizedBox(
+                        width: 60,
+                        height: 60,
+                        child: CircularProgressIndicator(),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(top: 16),
+                        child: Text('Creating your quiz...', selectionColor: Colors.white70),
+                      ),
+                    ];
+                  }
+                  
+   } return Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: children,
+            ),
+          );})));
   }
 }
