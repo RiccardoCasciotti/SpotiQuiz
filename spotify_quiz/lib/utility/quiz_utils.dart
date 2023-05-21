@@ -13,7 +13,7 @@ import 'package:uuid/uuid.dart';
 
 // type: A B C D R
 
-int limit = 20;
+int limit = 6;
 Future<model.Quiz> generate_quiz(String type) async {
   List<model.Question> questions = [];
   var uuid = Uuid();

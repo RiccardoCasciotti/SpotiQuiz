@@ -35,6 +35,6 @@ void main() {
     await tester.pumpAndSettle(const Duration(seconds: 2));
 
     //test
-    expect(find.byKey(const Key("HomePage")), findsOneWidget);
+    expect(find.byKey(const Key("TabletHomePage")), findsOneWidget);
   });
 }

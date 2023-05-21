@@ -9,6 +9,8 @@ import 'package:spotify_quiz/user/bloc/user_bloc.dart';
 
 import 'package:spotify_quiz/utility/utilities.dart' as utilities;
 
+import '../../../../authentication/bloc/authentication_bloc.dart';
+
 class MyHomePageTablet extends StatefulWidget {
   const MyHomePageTablet({super.key});
 
@@ -23,7 +25,37 @@ class MyHomePageTablet extends StatefulWidget {
 class _MyHomePageTabletState extends State<MyHomePageTablet> {
   int _selectedIndex = 0;
 
-  void _onItemTapped(int index) {
+  Future<void> _onItemTapped(int index) async {
+    if (index == 2) {
+      final UserRepository userRepository = UserRepository();
+
+      var userByNation = await userRepository
+          .getUsersByNation(context.read<AuthenticationBloc>().user.nation);
+      userByNation.sort(((a, b) {
+        if (a.bestScore > b.bestScore) {
+          return -1;
+        } else if (a.bestScore < b.bestScore) {
+          return 1;
+        } else {
+          return 0;
+        }
+      }));
+      // ignore: use_build_context_synchronously
+      context.read<AuthenticationBloc>().userByNation = userByNation;
+
+      var users = await userRepository.getUsers();
+      users.sort(((a, b) {
+        if (a.bestScore > b.bestScore) {
+          return -1;
+        } else if (a.bestScore < b.bestScore) {
+          return 1;
+        } else {
+          return 0;
+        }
+      }));
+      // ignore: use_build_context_synchronously
+      context.read<AuthenticationBloc>().userGlobal = users;
+    }
     setState(() {
       _selectedIndex = index;
     });

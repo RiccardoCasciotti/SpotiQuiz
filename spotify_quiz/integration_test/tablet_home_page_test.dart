@@ -12,15 +12,7 @@ void main() {
 
   binding.framePolicy = LiveTestWidgetsFlutterBindingFramePolicy.fullyLive;
 
-  testWidgets('Check Login Page', (WidgetTester tester) async {
-    //setup
-    app.main();
-    await tester.pumpAndSettle(const Duration(seconds: 5));
-
-    expect(find.byKey(const Key("LoginButton")), findsOneWidget);
-  });
-
-  testWidgets('Login in the app', (WidgetTester tester) async {
+  testWidgets('HomePage Layout: NavigationRail', (WidgetTester tester) async {
     //setup
     app.main();
 
@@ -35,6 +27,6 @@ void main() {
     await tester.pumpAndSettle(const Duration(seconds: 2));
 
     //test
-    expect(find.byKey(const Key("HomePage")), findsOneWidget);
+    expect(find.byKey(const Key("NavigationRail")), findsOneWidget);
   });
 }
