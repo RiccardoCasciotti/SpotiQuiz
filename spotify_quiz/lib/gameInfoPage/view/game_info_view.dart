@@ -10,7 +10,7 @@ import '../../custom_widgets/text.dart';
 
 // ignore: must_be_immutable
 class GameInfoPage extends StatelessWidget {
-  int selectedGame;
+  String selectedGame;
 
   GameInfoPage({
     Key? key,
@@ -35,11 +35,35 @@ class GameInfoPage extends StatelessWidget {
         urlImage: 'assets/images/concert.jpg',
         selectedMode: selectedGame,
       ),
+      GameInfoScreen(
+        text: AppLocalizations.of(context)!.gameinfocasual,
+        urlImage: 'assets/images/concert.jpg',
+        selectedMode: selectedGame,
+      ),
+      GameInfoScreen(
+        text: AppLocalizations.of(context)!.gameinfocasual,
+        urlImage: 'assets/images/concert.jpg',
+        selectedMode: selectedGame,
+      ),
     ];
 
-    if (selectedGame > 0 && selectedGame < 4) {
-      return pages[selectedGame - 1];
-    } else {
+    if (selectedGame == "A") {
+      return pages[0];
+    }
+    else if (selectedGame == "B") {
+      return pages[1];
+    } 
+    else if (selectedGame == "C") {
+      return pages[2];
+    } 
+    else if (selectedGame == "D") {
+      return pages[3];
+    } 
+    else if (selectedGame == "R") {
+      return pages[4];
+    } 
+    
+     else {
       return Scaffold(
         backgroundColor: utilities.secondaryColor,
         appBar: AppBar(

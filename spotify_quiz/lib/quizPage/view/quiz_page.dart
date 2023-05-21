@@ -30,7 +30,7 @@ import 'result_screen.dart';
 int limit = quiz_utils.limit;
 
 class QuizPage extends StatefulWidget {
-  int selectedMode;
+  String selectedMode;
 
   QuizPage({
     required this.selectedMode,

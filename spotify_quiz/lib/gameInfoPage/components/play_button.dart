@@ -12,7 +12,7 @@ import '../../utility/transitions.dart';
 
 // ignore: must_be_immutable
 class PlayButton extends StatefulWidget {
-  int selectedMode;
+  String selectedMode;
 
   PlayButton({
     required this.selectedMode,
@@ -25,7 +25,7 @@ class PlayButton extends StatefulWidget {
 
 class _PlayButtonState extends State<PlayButton> {
   bool _tapped = false;
-  int _selectedMode = 0;
+  String _selectedMode = "";
   final animationDuration = const Duration(milliseconds: 50);
 
   @override

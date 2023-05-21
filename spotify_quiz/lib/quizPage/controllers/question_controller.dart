@@ -33,11 +33,11 @@ Map<String, Object> format_a(model.Question q) {
   };
 }
 
-Future<List<dynamic>> createQuestions(int selectedMode) async {
+Future<List<dynamic>> createQuestions(String selectedMode) async {
   // ASK TO MODIFY FROM NUMBERS TO LETTERS
 
   var questionsList = [];
-  if (selectedMode == 1) {
+  if (selectedMode == "A") {
     model.Quiz quiz_a = await generate_quiz("A");
 
     for (var i = 0; i < quiz_a.questions.length; i++) {

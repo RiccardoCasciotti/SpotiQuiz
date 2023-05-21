@@ -28,11 +28,15 @@ List<model.Artist> followed_artists = [];
 List<model.Artist> similar_artists = [];
 String similar_id = "0TnOYISbd1XYRBk9myaseg";
 
+String initializer_id = "0TnOYISbd1XYRBk9myaseg";
+int count = 0;
+
 List<model.Artist> consume_followed_artists = [];
 List<model.Artist> consume_similar_artists = [];
 
 int similar_index = 0;
 int i = 0;
+
 
 Future<void> init_data() async {
  
@@ -81,7 +85,15 @@ Future<void> init_data() async {
     consume_similar_artists = await get_related_artists(similar_id);
 
     consume_similar_artists = consume_similar_artists.sublist(0,consume_similar_artists.length < 30 ? consume_similar_artists.length : 30 );
-  
+    while (consume_similar_artists.length < 4 && count < 10) {
+      count++;
+      await init_data();
+    }
+    if(count == 10){
+      similar_id = initializer_id;
+      count = 0;
+      await init_data();
+    }
 
     //print("SIMILAR_INDEX $similar_index");
   }

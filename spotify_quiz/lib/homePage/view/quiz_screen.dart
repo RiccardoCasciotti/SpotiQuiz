@@ -34,7 +34,7 @@ class QuizScreen extends StatelessWidget {
             onTap: () => Navigator.push(
               context,
               ScaleRoute(
-                page: GameInfoPage(selectedGame: 1),
+                page: GameInfoPage(selectedGame: "A"),
               ),
             ),
             child: Hero(
@@ -65,7 +65,7 @@ class QuizScreen extends StatelessWidget {
             onTap: () => Navigator.push(
               context,
               ScaleRoute(
-                page: GameInfoPage(selectedGame: 2),
+                page: GameInfoPage(selectedGame: "B"),
               ),
             ),
             child: Hero(
@@ -96,7 +96,7 @@ class QuizScreen extends StatelessWidget {
             onTap: () => Navigator.push(
               context,
               ScaleRoute(
-                page: GameInfoPage(selectedGame: 3),
+                page: GameInfoPage(selectedGame: "C"),
               ),
             ),
             child: Hero(

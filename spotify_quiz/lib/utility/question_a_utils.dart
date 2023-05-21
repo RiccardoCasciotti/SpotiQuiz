@@ -27,12 +27,14 @@ import 'package:spotify_quiz/utility/api_calls.dart';
 List<model.Artist> followed_artists = [];
 List<model.Artist> similar_artists = [];
 String similar_id = "0TnOYISbd1XYRBk9myaseg";
+String initializer_id = "0TnOYISbd1XYRBk9myaseg";
 
 List<model.Artist> consume_followed_artists = [];
 List<model.Artist> consume_similar_artists = [];
 
 int similar_index = 0;
 int i = 0;
+int count = 0;
 
 Future<void> init_data() async {
   if (followed_artists.isEmpty && i == 0) {
@@ -71,13 +73,17 @@ Future<void> init_data() async {
         consume_similar_artists.length < 30
             ? consume_similar_artists.length
             : 30);
-
-    //print("SIMILAR_INDEX $similar_index");
+    while (consume_similar_artists.length < 4 && count < 10) {
+      count++;
+      await init_data();
+    }
+    if(count == 10){
+      similar_id = initializer_id;
+      count = 0;
+      await init_data();
+    }
+   
   }
-  //print("LEN consume_followed_artists: ${consume_followed_artists.length}");
-  // if(consume_followed_artists.length < 4){
-  //   consume_similar_artists = consume_followed_artists + consume_similar_artists;
-  // }
 }
 
 Future<model.Question> generate_a() async {
@@ -105,9 +111,7 @@ Future<model.Question> generate_a() async {
       }
     }
   } else {
-    while (consume_similar_artists.length < 4) {
-      await init_data();
-    }
+    
     artist = consume_similar_artists.last;
     consume_similar_artists.removeLast();
     // for(var i = 0; i < consume_similar_artists.length; i++)

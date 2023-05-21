@@ -10,7 +10,7 @@ import '../../custom_widgets/text.dart';
 class GameInfoScreen extends StatelessWidget {
   String urlImage;
   String text;
-  int selectedMode;
+  String selectedMode;
 
   GameInfoScreen({
     Key? key,
