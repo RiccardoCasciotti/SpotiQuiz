@@ -119,7 +119,7 @@
     "description": "Info box artist mode"
   },
 
-  "gameinfosong": "Listen the song and guess which one is it!"",
+  "gameinfosong": "Listen the song and guess which one is it!",
   "@gameinfosong": {
     "description": "Info box song mode"
   },

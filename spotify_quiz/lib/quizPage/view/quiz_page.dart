@@ -13,6 +13,8 @@ import '../controllers/question_controller.dart';
 import 'quiz_screen.dart';
 import 'result_screen.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 //POSSIBLE QUESTIONS
 
 // In which year album X was released?
@@ -219,7 +221,7 @@ class _QuizPageState extends State<QuizPage> {
                       Padding(
                         padding: const EdgeInsets.only(top: 16),
                         child: CustomText(
-                          text: 'Creating your quiz...',
+                          text: AppLocalizations.of(context)!.createquiz,
                           size: 20,
                         ),
                       ),
