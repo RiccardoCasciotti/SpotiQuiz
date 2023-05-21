@@ -14,6 +14,8 @@ String refreshToken = "";
 String imageUserProfile =
     'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg';
 
+bool runningTest = false;
+
 Future<String> getAccessToken() async {
   final clientId = dotenv.env['SPOTIFY_CLIENT_ID'];
   final clientSecret = dotenv.env['SPOTIFY_CLIENT_SECRET'];
@@ -31,4 +33,4 @@ Future<String> getAccessToken() async {
   return bodyJson["access_token"];
 }
 
-bool runningTest = false;
+

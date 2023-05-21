@@ -1,6 +1,4 @@
-import 'package:authentication_repository/authentication_repository.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:spotify_quiz/login/login.dart';
 import 'package:spotify_quiz/utility/utilities.dart' as utilities;
 
@@ -18,9 +16,9 @@ class LoginPage extends StatelessWidget {
         title: const Text('Login'),
         backgroundColor: utilities.primaryColor,
       ),
-      body: Center(
+      body: const Center(
         child: Padding(
-          padding: const EdgeInsets.all(12),
+          padding:  EdgeInsets.all(12),
           child: LoginButton(),
           ),
         ),

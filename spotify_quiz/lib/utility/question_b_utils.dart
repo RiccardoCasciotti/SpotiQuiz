@@ -51,7 +51,7 @@ Future<void> init_data() async {
     i++;
   }
 
-  
+  print("OK4");
 
 
   if (consume_similar_artists.length < 4){
@@ -112,6 +112,7 @@ Future<model.Question> generate_b() async{
 
   
   await init_data();
+  print("OK5");
   model.Track obj;
   String answer;
   List<String> options = [];
@@ -120,14 +121,15 @@ Future<model.Question> generate_b() async{
   Random random = Random();
   
   if(consume_followed_artists.length > 3){
+    
     artist = consume_followed_artists.last;
     consume_followed_artists.removeLast();
     // for(var i = 0; i < consume_followed_artists.length; i++)
     //   print("FOLLOWED: ${consume_followed_artists[i].name}");
     // print("FOLLOWED LENGTH: ${consume_followed_artists.length}");
-
+    print(artist.id);
     tracks = await get_top_tracks(artist.id);
-    
+    print("OK5");
     for(var i = 0; i < 3; i++){
       int index = random.nextInt(consume_followed_artists.length); 
       if( !options.contains(consume_followed_artists[index].name)) {

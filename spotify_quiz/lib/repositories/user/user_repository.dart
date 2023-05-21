@@ -106,6 +106,7 @@ class UserRepository {
           userList.add(
             User.fromJson(element.data()),
           );
+          
           return userList.first;
         }
       }

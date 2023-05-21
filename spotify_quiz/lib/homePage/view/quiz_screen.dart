@@ -38,7 +38,7 @@ class QuizScreen extends StatelessWidget {
               ),
             ),
             child: Hero(
-              tag: "game1",
+              tag: "gameA",
               child: CustomContainerPic(
                 key: const Key("FirstQuizButton"),
                 pic: singer,
@@ -69,7 +69,7 @@ class QuizScreen extends StatelessWidget {
               ),
             ),
             child: Hero(
-              tag: "game2",
+              tag: "gameB",
               child: CustomContainerPic(
                 key: const Key("SecondQuizButton"),
                 pic: mic,
@@ -100,7 +100,7 @@ class QuizScreen extends StatelessWidget {
               ),
             ),
             child: Hero(
-              tag: "game3",
+              tag: "gameC",
               child: CustomContainerPic(
                 key: const Key("ThirdQuizButton"),
                 pic: concert,
@@ -113,6 +113,68 @@ class QuizScreen extends StatelessWidget {
           ),
           CustomText(
             key: const Key("ThirdQuizText"),
+            text: AppLocalizations.of(context)!.casual,
+            size: 20,
+            bold: true,
+            italic: true,
+            thirdColor: true,
+          ),
+        ],
+      ),
+      Column(
+        children: [
+          GestureDetector(
+            onTap: () => Navigator.push(
+              context,
+              ScaleRoute(
+                page: GameInfoPage(selectedGame: "D"),
+              ),
+            ),
+            child: Hero(
+              tag: "gameD",
+              child: CustomContainerPic(
+                key: const Key("ForthQuizButton"),
+                pic: concert,
+                withBorder: true,
+                width: 150,
+                height: 150,
+                circularity: 10,
+              ),
+            ),
+          ),
+          CustomText(
+            key: const Key("ForthQuizButton"),
+            text: AppLocalizations.of(context)!.casual,
+            size: 20,
+            bold: true,
+            italic: true,
+            thirdColor: true,
+          ),
+        ],
+      ),
+      Column(
+        children: [
+          GestureDetector(
+            onTap: () => Navigator.push(
+              context,
+              ScaleRoute(
+                page: GameInfoPage(selectedGame: "R"),
+              ),
+            ),
+            child: Hero(
+              tag: "gameR",
+              child: CustomContainerPic(
+                key: const Key("FifthQuizText"),
+                pic: concert,
+                withBorder: true,
+                width: 150,
+                height: 150,
+                circularity: 10,
+              ),
+            ),
+          ),
+          CustomText(
+            key: const Key("FifthQuizText"),
             text: AppLocalizations.of(context)!.casual,
             size: 20,
             bold: true,

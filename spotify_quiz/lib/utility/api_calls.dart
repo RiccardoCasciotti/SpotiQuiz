@@ -11,7 +11,7 @@ import 'package:spotify_quiz/utility/utilities.dart' as utilities;
 
 
 String limit_albums = "20";
-String market = utilities.nationality;
+String market = 'IT';
 
 var i = 0;
 List<model.Image> img_objs(List list) {
@@ -177,7 +177,7 @@ model.Track track_format(track) {
 
 Future<List<model.Track>> get_top_tracks(String artist_id) async {
   accessToken = await getAccessToken();
-
+  
   final tracksInfo = await http.get(
       Uri.parse(
           "https://api.spotify.com/v1/artists/$artist_id/top-tracks?market=$market"),
@@ -187,7 +187,7 @@ Future<List<model.Track>> get_top_tracks(String artist_id) async {
       });
 
   final tracksJson = json.decode(tracksInfo.body);
-
+  
   List<model.Track> tracks = [];
 
   for (var i = 0; i < List.from(tracksJson["tracks"]).length; i++) {
