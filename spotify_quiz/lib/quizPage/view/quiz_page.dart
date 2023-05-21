@@ -27,7 +27,7 @@ import 'result_screen.dart';
 
 // ignore: must_be_immutable
 
-int limit = 10;
+int limit = quiz_utils.limit;
 
 class QuizPage extends StatefulWidget {
   int selectedMode;
@@ -65,7 +65,6 @@ class _QuizPageState extends State<QuizPage> {
   var _secondSlotQuestions;
 
   Future<void> _answerQuestion(int score) async {
-    quizRunning = true;
     print("QuestionIndex");
     print(_questionIndex);
     //FUNCTION WE CALL WHEN WE GIVE AN ANSWER, HERE WE CAN IMPLEMENT THE LOGIC TO CREATE NEW QUESTIONS
