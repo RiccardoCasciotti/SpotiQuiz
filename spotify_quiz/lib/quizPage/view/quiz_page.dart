@@ -1,14 +1,10 @@
 import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:spotify_quiz/quizPage/components/question.dart';
 import 'package:spotify_quiz/utility/utilities.dart' as utilities;
-import 'package:spotify_quiz/utility/quiz_utils.dart' as quiz_utils;
-
 import 'package:spotify_quiz/authentication/bloc/authentication_bloc.dart';
 import 'package:spotify_quiz/repositories/user/user_repository.dart';
 
-import '../../custom_widgets/text.dart';
 import '../controllers/question_controller.dart';
 import 'quiz_screen.dart';
 import 'result_screen.dart';
@@ -26,9 +22,6 @@ import 'result_screen.dart';
 // Is this song made by this artist?
 
 // ignore: must_be_immutable
-
-int limit = quiz_utils.limit;
-
 class QuizPage extends StatefulWidget {
   int selectedMode;
 
@@ -45,35 +38,23 @@ class QuizPage extends StatefulWidget {
 
 class _QuizPageState extends State<QuizPage> {
   // ignore: prefer_typing_uninitialized_variables
-  //Future<List<Map<String, Object>>> _questions = createQuestions(widget.selectedMode);
-  Future<List<dynamic>>? _questions;
+  var questions;
 
   @override
   void initState() {
-    _questions = createQuestions(widget.selectedMode);
     super.initState();
-    //List<Map<String, Object>> questions = [];
+    questions = createQuestions(widget.selectedMode);
   }
 
-  bool quizRunning = false;
   var _questionIndex = 0;
   var _totalScore = 0;
   var _wrongAnswers = 0;
   var _correctAnswers = 0;
   var _questionScore = 0;
   var _hasAnswered = false;
-  // ignore: prefer_typing_uninitialized_variables
-  var _secondSlotQuestions;
 
-  Future<void> _answerQuestion(int score) async {
-    quizRunning = true;
-    print("QuestionIndex");
-    print(_questionIndex);
+  void _answerQuestion(int score) {
     //FUNCTION WE CALL WHEN WE GIVE AN ANSWER, HERE WE CAN IMPLEMENT THE LOGIC TO CREATE NEW QUESTIONS
-    if ((_questionIndex + 1) % limit == 1) {
-      print("Create Second List");
-      _secondSlotQuestions = createQuestions(widget.selectedMode);
-    }
     if (score > 0) {
       _correctAnswers++;
     } else {
@@ -81,31 +62,27 @@ class _QuizPageState extends State<QuizPage> {
     }
     _totalScore += score;
 
-    if ((_questionIndex + 1) % limit == 0) {
-      print(_questionIndex);
-      print("Populating First List");
-      _questions = _secondSlotQuestions;
+    if (_questionIndex + 1 == 5) {
+      questions = createQuestions(widget.selectedMode);
     }
 
     setState(() {
-      _questionIndex = (_questionIndex + 1) % limit;
+      _questionIndex = (_questionIndex + 1) % 5;
       _questionScore = score;
       _hasAnswered = true;
     });
   }
 
-  void moveOn() {
-    //WE DECIDE TO CONTINUE WITH NEW QUESTIONS
-    setState(() {
-      _hasAnswered = false;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
+    void moveOn() {
+      //WE DECIDE TO CONTINUE WITH NEW QUESTIONS
+      setState(() {
+        _hasAnswered = false;
+      });
+    }
+
     Future<void> goHome() async {
-      quizRunning = false;
-      _questionIndex = 0;
       UserRepository userRepository = UserRepository();
       context.read<AuthenticationBloc>().user =
           await userRepository.UpdateAfterQuizOnDB(
@@ -118,121 +95,42 @@ class _QuizPageState extends State<QuizPage> {
 
     return Scaffold(
       backgroundColor: utilities.secondaryColor,
-      body: Center(
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.all(30.0),
-          child: FutureBuilder<List<dynamic>>(
-            future: _questions, // a previously-obtained Future<String> or null
-            builder:
-                (BuildContext context, AsyncSnapshot<List<dynamic>> snapshot) {
-              if (snapshot.connectionState == ConnectionState.done) {
-                if (snapshot.hasError) {
-                  print("Error ${snapshot.error}");
-                }
-                if (snapshot.hasData) {
-                  if (snapshot.hasData == false) {
-                    print("NO DATAAA");
-                  }
-                  //print("DATAAAAAA ${snapshot.data}");
-                  return _hasAnswered
-                      ? PageTransitionSwitcher(
-                          duration: const Duration(milliseconds: 500),
-                          transitionBuilder:
-                              (child, animation, secondaryAnimation) =>
-                                  SharedAxisTransition(
-                            animation: animation,
-                            secondaryAnimation: secondaryAnimation,
-                            fillColor: utilities.secondaryColor,
-                            transitionType: SharedAxisTransitionType.horizontal,
-                            child: child,
-                          ),
-                          child: Result(
-                            _totalScore,
-                            _questionScore,
-                            goHome,
-                            moveOn,
-                          ),
-                        )
-                      : PageTransitionSwitcher(
-                          duration: const Duration(milliseconds: 500),
-                          transitionBuilder:
-                              (child, animation, secondaryAnimation) =>
-                                  SharedAxisTransition(
-                                    animation: animation,
-                                    secondaryAnimation: secondaryAnimation,
-                                    fillColor: utilities.secondaryColor,
-                                    transitionType:
-                                        SharedAxisTransitionType.horizontal,
-                                    child: child,
-                                  ),
-                          child: Quiz(
-                            answerQuestion: _answerQuestion,
-                            questionIndex: _questionIndex,
-                            questions: snapshot.data,
-                          ));
-                } else {
-                  return PageTransitionSwitcher(
-                    duration: const Duration(milliseconds: 500),
-                    transitionBuilder: (child, animation, secondaryAnimation) =>
-                        SharedAxisTransition(
-                      animation: animation,
-                      secondaryAnimation: secondaryAnimation,
-                      fillColor: utilities.secondaryColor,
-                      transitionType: SharedAxisTransitionType.horizontal,
-                      child: child,
-                    ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const SizedBox(
-                          width: 60,
-                          height: 60,
-                          child: CircularProgressIndicator(),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 16),
-                          child: CustomText(
-                            text: 'No data snapshot...',
-                            size: 20,
-                          ),
-                        ),
-                      ],
-                    ),
-                  );
-                }
-              } else {
-                return PageTransitionSwitcher(
-                  duration: const Duration(milliseconds: 500),
-                  transitionBuilder: (child, animation, secondaryAnimation) =>
-                      SharedAxisTransition(
-                    animation: animation,
-                    secondaryAnimation: secondaryAnimation,
-                    fillColor: utilities.secondaryColor,
-                    transitionType: SharedAxisTransitionType.horizontal,
-                    child: child,
-                  ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const SizedBox(
-                        width: 60,
-                        height: 60,
-                        child: CircularProgressIndicator(),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 16),
-                        child: CustomText(
-                          text: 'Creating your quiz...',
-                          size: 20,
-                        ),
-                      ),
-                    ],
-                  ),
-                );
-              }
-            },
-          ),
-        ),
+      body: Padding(
+        padding: const EdgeInsets.all(30.0),
+        child: _hasAnswered
+            ? PageTransitionSwitcher(
+                duration: const Duration(milliseconds: 500),
+                transitionBuilder: (child, animation, secondaryAnimation) =>
+                    SharedAxisTransition(
+                  animation: animation,
+                  secondaryAnimation: secondaryAnimation,
+                  fillColor: utilities.secondaryColor,
+                  transitionType: SharedAxisTransitionType.horizontal,
+                  child: child,
+                ),
+                child: Result(
+                  _totalScore,
+                  _questionScore,
+                  goHome,
+                  moveOn,
+                ),
+              )
+            : PageTransitionSwitcher(
+                duration: const Duration(milliseconds: 500),
+                transitionBuilder: (child, animation, secondaryAnimation) =>
+                    SharedAxisTransition(
+                  animation: animation,
+                  secondaryAnimation: secondaryAnimation,
+                  fillColor: utilities.secondaryColor,
+                  transitionType: SharedAxisTransitionType.horizontal,
+                  child: child,
+                ),
+                child: Quiz(
+                  answerQuestion: _answerQuestion,
+                  questionIndex: _questionIndex,
+                  questions: questions,
+                ),
+              ),
       ),
     );
   }

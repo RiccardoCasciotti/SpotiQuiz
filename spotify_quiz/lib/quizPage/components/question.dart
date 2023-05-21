@@ -21,23 +21,3 @@ class Question extends StatelessWidget {
     ); //Container
   }
 }
-
-class QuestionHorizontal extends StatelessWidget {
-  final String questionText;
-
-  const QuestionHorizontal(this.questionText, {Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      margin: const EdgeInsets.all(10),
-      child: CustomText(
-        text: questionText,
-        size: 23,
-        alignCenter: true,
-        thirdColor: true,
-      ), //Text
-    ); //Container
-  }
-}

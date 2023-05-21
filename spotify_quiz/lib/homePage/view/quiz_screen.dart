@@ -40,6 +40,7 @@ class QuizScreen extends StatelessWidget {
             child: Hero(
               tag: "game1",
               child: CustomContainerPic(
+                key: const Key("FirstQuizButton"),
                 pic: singer,
                 withBorder: true,
                 width: 150,
@@ -49,6 +50,7 @@ class QuizScreen extends StatelessWidget {
             ),
           ),
           CustomText(
+            key: const Key("FirstQuizText"),
             text: AppLocalizations.of(context)!.artist,
             size: 20,
             bold: true,
@@ -69,6 +71,7 @@ class QuizScreen extends StatelessWidget {
             child: Hero(
               tag: "game2",
               child: CustomContainerPic(
+                key: const Key("SecondQuizButton"),
                 pic: mic,
                 withBorder: true,
                 width: 150,
@@ -78,6 +81,7 @@ class QuizScreen extends StatelessWidget {
             ),
           ),
           CustomText(
+            key: const Key("SecondQuizText"),
             text: AppLocalizations.of(context)!.song,
             size: 20,
             bold: true,
@@ -98,6 +102,7 @@ class QuizScreen extends StatelessWidget {
             child: Hero(
               tag: "game3",
               child: CustomContainerPic(
+                key: const Key("ThirdQuizButton"),
                 pic: concert,
                 withBorder: true,
                 width: 150,
@@ -107,6 +112,7 @@ class QuizScreen extends StatelessWidget {
             ),
           ),
           CustomText(
+            key: const Key("ThirdQuizText"),
             text: AppLocalizations.of(context)!.casual,
             size: 20,
             bold: true,
@@ -135,6 +141,7 @@ class QuizScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         CustomText(
+                          key: const Key("PresentationText"),
                           text: AppLocalizations.of(context)!.chooseaquiz,
                           size: 30.0,
                           bold: true,
@@ -144,6 +151,7 @@ class QuizScreen extends StatelessWidget {
                   ],
                 ),
                 SingleChildScrollView(
+                  key: const Key("GameList"),
                   scrollDirection: Axis.horizontal,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
@@ -164,6 +172,7 @@ class QuizScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         CustomText(
+                          key: const Key("ArtistText"),
                           text: AppLocalizations.of(context)!.yourfavartists,
                           size: 30.0,
                           bold: true,
@@ -173,6 +182,7 @@ class QuizScreen extends StatelessWidget {
                   ],
                 ),
                 SingleChildScrollView(
+                  key: const Key("ArtistList"),
                   scrollDirection: Axis.horizontal,
                   child: Row(
                     children: trialArtists,
