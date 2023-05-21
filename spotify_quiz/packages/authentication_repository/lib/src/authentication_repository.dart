@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:path_provider/path_provider.dart';
 
 enum AuthenticationStatus { unknown, authenticated, unauthenticated }
 
@@ -24,7 +25,14 @@ class AuthenticationRepository {
   
   }
 
-  void logOut() {
+  void logOut() async{
+    
+    final cacheDir = await getTemporaryDirectory();
+    print("LOGOUTTTTTTTTTTTTTT");
+    if (cacheDir.existsSync()) {
+      cacheDir.deleteSync(recursive: true);
+    }
+     
     _controller.add(AuthenticationStatus.unauthenticated);
   }
 

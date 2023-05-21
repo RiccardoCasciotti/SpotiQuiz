@@ -17,7 +17,7 @@ class GameInfoScreen extends StatelessWidget {
     required this.text,
     required this.urlImage,
     required this.selectedMode,
-  }) : super(key: const Key("GameInfoPage"));
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -25,14 +25,12 @@ class GameInfoScreen extends StatelessWidget {
       backgroundColor: utilities.secondaryColor,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       appBar: AppBar(
-        key: const Key("GoBackButtonInfoPage"),
         backgroundColor: utilities.secondaryColor,
         foregroundColor: utilities.primaryColor,
         elevation: 0.0,
         title: Text(AppLocalizations.of(context)!.gobackbutton),
       ),
       body: Container(
-        key: const Key("BackGroundImage"),
         constraints: const BoxConstraints.expand(),
         decoration: BoxDecoration(
           image: DecorationImage(
@@ -45,7 +43,6 @@ class GameInfoScreen extends StatelessWidget {
         ),
         child: Center(
           child: CustomText(
-            key: const Key("TextInfoPage"),
             thirdColor: true,
             text: text,
             size: 25,

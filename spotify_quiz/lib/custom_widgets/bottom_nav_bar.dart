@@ -12,7 +12,7 @@ class CustomNavBar extends StatelessWidget {
     Key? key,
     required this.selectedIndex,
     required this.onItemTapped,
-  }) : super(key: const Key("NavBarHome"));
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +47,7 @@ class CustomNavBarRanking extends StatelessWidget {
     Key? key,
     required this.selectedIndex,
     required this.onItemTapped,
-  }) : super(key: const Key("NavBarRanking"));
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
