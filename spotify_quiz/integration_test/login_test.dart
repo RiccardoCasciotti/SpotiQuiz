@@ -32,7 +32,7 @@ void main() {
 
     await tester.tap(button);
 
-    await tester.pumpAndSettle(const Duration(seconds: 5));
+    await tester.pumpAndSettle(const Duration(seconds: 2));
 
     //test
     expect(find.byKey(const Key("HomePage")), findsOneWidget);
