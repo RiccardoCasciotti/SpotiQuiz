@@ -1,0 +1,99 @@
+{
+    "artists": {
+        "limit": 10,
+        "total": 23,
+        "items": [
+            {
+                "followers": {
+                    "href": null,
+                    "total": 296474
+                },
+                "genres": [
+                    "drill italiana",
+                    "emo rap italiano",
+                    "italian hip hop",
+                    "trap italiana"
+                ],
+                "id": "0pSx3asj3usz5PRt8COo0E",
+                "images": [
+                    {
+                        "url": "https://i.scdn.co/image/ab6761610000e5eb29baa379ec93e6727252d2e5",
+                        "height": 640,
+                        "width": 640
+                    },
+                    {
+                        "url": "https://i.scdn.co/image/ab6761610000517429baa379ec93e6727252d2e5",
+                        "height": 320,
+                        "width": 320
+                    },
+                    {
+                        "url": "https://i.scdn.co/image/ab6761610000f17829baa379ec93e6727252d2e5",
+                        "height": 160,
+                        "width": 160
+                    }
+                ],
+                "name": "Ketama126",
+            },
+            {
+                "followers": {
+                    "href": null,
+                    "total": 2011528
+                },
+                "genres": [
+                    "italian adult pop",
+                    "italian pop"
+                ],
+                "id": "11TplWqOPQBTmg2eiSLt1m",
+                "images": [
+                    {
+                        "url": "https://i.scdn.co/image/ab6761610000e5eb7de5281575c4dd15bff8e17b",
+                        "height": 640,
+                        "width": 640
+                    },
+                    {
+                        "url": "https://i.scdn.co/image/ab676161000051747de5281575c4dd15bff8e17b",
+                        "height": 320,
+                        "width": 320
+                    },
+                    {
+                        "url": "https://i.scdn.co/image/ab6761610000f1787de5281575c4dd15bff8e17b",
+                        "height": 160,
+                        "width": 160
+                    }
+                ],
+                "name": "Tiziano Ferro",
+                "popularity": 65,
+                "type": "artist",
+                "uri": "spotify:artist:11TplWqOPQBTmg2eiSLt1m"
+            },
+            {
+                "followers": {
+                    "href": null,
+                    "total": 173881
+                },
+                "genres": [
+                    "indie pop rap"
+                ],
+                "id": "1S9WGrK7SZfXXQtHBYzDle",
+                "images": [
+                    {
+                        "url": "https://i.scdn.co/image/ab6761610000e5eb8ac722e4fe2f2fbfbca95833",
+                        "height": 640,
+                        "width": 640
+                    },
+                    {
+                        "url": "https://i.scdn.co/image/ab676161000051748ac722e4fe2f2fbfbca95833",
+                        "height": 320,
+                        "width": 320
+                    },
+                    {
+                        "url": "https://i.scdn.co/image/ab6761610000f1788ac722e4fe2f2fbfbca95833",
+                        "height": 160,
+                        "width": 160
+                    }
+                ],
+                "name": "Sammy Adams"
+            }
+        ]
+    }
+}
