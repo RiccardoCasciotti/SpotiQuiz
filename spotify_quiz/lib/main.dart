@@ -1,11 +1,11 @@
 import 'package:authentication_repository/authentication_repository.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:spotify_quiz/repositories/firebase_options.dart';
 
+import 'package:firebase_core/firebase_core.dart';
 import 'package:spotify_quiz/homePage/view/tablet/view/home_page_view.dart';
 import 'authentication/authentication.dart';
+import 'repositories/firebase_options.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 import 'loading/view/splash_page.dart';
@@ -30,7 +30,6 @@ void main() async {
   //FirebaseFirestore db = FirebaseFirestore.instance;
   // Add a new document with a generated ID
   //db.collection("users").add(user);
-  
   runApp(const MyApp());
 }
 

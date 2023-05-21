@@ -10,8 +10,6 @@ import 'package:spotify_quiz/user/bloc/user_bloc.dart';
 
 import 'package:spotify_quiz/utility/utilities.dart' as utilities;
 
-import '../../utility/api_calls.dart';
-
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
 
@@ -68,7 +66,7 @@ class _MyHomePageState extends State<MyHomePage> {
     precacheImage(const AssetImage("assets/images/mic.jpg"), context);
     precacheImage(const AssetImage("assets/images/singer.jpg"), context);
     precacheImage(const AssetImage("assets/images/concert.jpg"), context);
-    var tmp = get_artist("0TnOYISbd1XYRBk9myaseg");// ############################################### !!
+
     final pages = [
       HomeScreen(
           firstButtonPressed: _goToRankingPage,

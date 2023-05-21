@@ -54,6 +54,7 @@ class GlobalRankScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
+        key: const Key("GoBackButtonGlobalRanking"),
         backgroundColor: utilities.secondaryColor,
         foregroundColor: utilities.primaryColor,
         elevation: 0.0,
@@ -70,6 +71,7 @@ class GlobalRankScreen extends StatelessWidget {
                 height: 40,
                 width: double.infinity,
                 child: CustomText(
+                  key: const Key("GlobalRankingText"),
                   text: AppLocalizations.of(context)!.globalranking,
                   size: 30,
                   bold: true,
@@ -103,6 +105,7 @@ class GlobalRankScreen extends StatelessWidget {
                         height: 10,
                       ),
                       Table(
+                        key: const Key("TableGlobalRanking"),
                         border: TableBorder.symmetric(),
                         defaultVerticalAlignment:
                             TableCellVerticalAlignment.middle,
@@ -112,6 +115,7 @@ class GlobalRankScreen extends StatelessWidget {
                               Container(
                                 alignment: Alignment.center,
                                 child: CustomText(
+                                  key: const Key("UsernameGlobalRanking"),
                                   text: AppLocalizations.of(context)!
                                       .usernameranking,
                                   thirdColor: true,
@@ -122,6 +126,7 @@ class GlobalRankScreen extends StatelessWidget {
                               Container(
                                 alignment: Alignment.center,
                                 child: CustomText(
+                                  key: const Key("LevelGlobalRanking"),
                                   text: AppLocalizations.of(context)!.level,
                                   thirdColor: true,
                                   size: 18,
@@ -131,6 +136,7 @@ class GlobalRankScreen extends StatelessWidget {
                               Container(
                                 alignment: Alignment.center,
                                 child: CustomText(
+                                  key: const Key("BestScoreGlobalRanking"),
                                   text: AppLocalizations.of(context)!
                                       .bestscoreranking,
                                   thirdColor: true,

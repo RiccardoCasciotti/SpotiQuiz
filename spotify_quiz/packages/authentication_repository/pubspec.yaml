@@ -7,5 +7,3 @@ environment:
 
 dev_dependencies:
   very_good_analysis: ^3.1.0
-dependencies:
-  path_provider: ^2.0.14
