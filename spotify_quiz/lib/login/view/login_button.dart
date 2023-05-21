@@ -18,21 +18,25 @@ class LoginButton extends StatelessWidget {
       key: const Key('LoginButton'),
       onPressed: () async {
         var userTest = await userRepository.getByID("11136145170");
-        // ignore: use_build_context_synchronously
-        utilities.runningTest
-            // ignore: use_build_context_synchronously
-            ? context.read<AuthenticationBloc>().user = userTest!
-            // ignore: use_build_context_synchronously
-            : await Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) {
-                  return BlocProvider.value(
-                  value: BlocProvider.of<LoginBloc>(context),
-                  child: const WebViewLogin(),);
 
-                  //return WebViewLogin();
-                }),
-                
+        // ignore: use_build_context_synchronously
+        if (utilities.runningTest) {
+          context.read<AuthenticationBloc>().user = userTest!;
+          context.read<LoginBloc>().add(const LoginSubmitted());
+        }
+        // ignore: use_build_context_synchronously
+        else {
+          await Navigator.of(context).push(
+            MaterialPageRoute(builder: (context) {
+              return BlocProvider.value(
+                value: BlocProvider.of<LoginBloc>(context),
+                child: const WebViewLogin(),
               );
+
+              //return WebViewLogin();
+            }),
+          );
+        }
         // ignore: use_build_context_synchronously
         //context.read<LoginBloc>().add(const LoginSubmitted());
       },
