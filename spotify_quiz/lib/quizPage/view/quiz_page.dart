@@ -37,7 +37,7 @@ class QuizPage extends StatefulWidget {
   QuizPage({
     required this.selectedMode,
     Key? key,
-  }) : super(key: key);
+  }) : super(key: const Key("QuizLogicPage"));
 
   @override
   State<StatefulWidget> createState() {

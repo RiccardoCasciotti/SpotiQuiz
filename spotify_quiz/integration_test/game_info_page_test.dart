@@ -154,6 +154,35 @@ void main() {
     expect(find.byKey(const Key("QuizPage")), findsOneWidget);
   });
 
-  //TODO
-  //Clicking on the playbutton
+  testWidgets('Click on Play', (WidgetTester tester) async {
+    //setup
+    app.main();
+
+    await tester.pumpAndSettle(const Duration(seconds: 5));
+
+    final Finder buttonLogin = find.byKey(const Key('LoginButton'));
+
+    //do
+
+    await tester.tap(buttonLogin);
+    await tester.pumpAndSettle(const Duration(seconds: 2));
+
+    final Finder buttonQuiz = find.byIcon(Icons.question_mark);
+
+    await tester.tap(buttonQuiz);
+    await tester.pumpAndSettle(const Duration(seconds: 2));
+
+    final Finder buttonGame = find.byKey(const Key("FirstQuizButton"));
+
+    await tester.tap(buttonGame);
+    await tester.pumpAndSettle(const Duration(seconds: 2));
+
+    final Finder buttonPlay = find.byKey(const Key("PlayButtonInfoPage"));
+
+    await tester.tap(buttonPlay);
+    await tester.pumpAndSettle(const Duration(seconds: 5));
+
+    //test
+    expect(find.byKey(const Key("QuizLogicPage")), findsOneWidget);
+  });
 }
