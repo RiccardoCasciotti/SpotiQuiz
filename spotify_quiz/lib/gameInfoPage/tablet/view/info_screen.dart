@@ -15,7 +15,7 @@ class GameInfoScreenTablet extends StatelessWidget {
     Key? key,
     required this.text,
     required this.urlImage,
-  }) : super(key: key);
+  }) : super(key: const Key("TableGameInfoPage"));
 
   @override
   Widget build(BuildContext context) {
@@ -23,12 +23,14 @@ class GameInfoScreenTablet extends StatelessWidget {
       backgroundColor: utilities.secondaryColor,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       appBar: AppBar(
+        key: const Key("TabletGoBackInfoPage"),
         backgroundColor: utilities.secondaryColor,
         foregroundColor: utilities.primaryColor,
         elevation: 0.0,
         title: Text(AppLocalizations.of(context)!.gobackbutton),
       ),
       body: Container(
+        key: const Key("TabletBackgroundImageInfoPage"),
         constraints: const BoxConstraints.expand(),
         decoration: BoxDecoration(
           image: DecorationImage(
@@ -41,6 +43,7 @@ class GameInfoScreenTablet extends StatelessWidget {
         ),
         child: Center(
           child: CustomText(
+            key: const Key("TabletInfoText"),
             thirdColor: true,
             text: text,
             size: 35,

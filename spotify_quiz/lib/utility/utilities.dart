@@ -14,24 +14,21 @@ String refreshToken = "";
 String imageUserProfile =
     'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg';
 
-
-Future<String> getAccessToken() async{
+Future<String> getAccessToken() async {
   final clientId = dotenv.env['SPOTIFY_CLIENT_ID'];
   final clientSecret = dotenv.env['SPOTIFY_CLIENT_SECRET'];
   final response = await http.post(
-            Uri.parse("https://accounts.spotify.com/api/token"),
-            headers: {
-              "Authorization":
-                  'Basic ${base64.encode(utf8.encode("$clientId:$clientSecret"))}',
-              "content-type": "application/x-www-form-urlencoded"
-            },
-            encoding: Encoding.getByName('utf-8'),
-            body: {
-              "refresh_token": refreshToken,
-              "grant_type": "refresh_token"
-            },
-          );
+    Uri.parse("https://accounts.spotify.com/api/token"),
+    headers: {
+      "Authorization":
+          'Basic ${base64.encode(utf8.encode("$clientId:$clientSecret"))}',
+      "content-type": "application/x-www-form-urlencoded"
+    },
+    encoding: Encoding.getByName('utf-8'),
+    body: {"refresh_token": refreshToken, "grant_type": "refresh_token"},
+  );
   final bodyJson = json.decode(response.body);
   return bodyJson["access_token"];
 }
+
 bool runningTest = false;

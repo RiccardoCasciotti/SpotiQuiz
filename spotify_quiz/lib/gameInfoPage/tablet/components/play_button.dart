@@ -10,7 +10,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:spotify_quiz/utility/utilities.dart' as utilities;
 
 class PlayButtonTablet extends StatefulWidget {
-  const PlayButtonTablet({super.key});
+  const PlayButtonTablet() : super(key: const Key("TabletPlayButtonInfoPage"));
 
   @override
   State<PlayButtonTablet> createState() => _PlayButtonTabletState();
@@ -55,7 +55,7 @@ class _PlayButtonTabletState extends State<PlayButtonTablet> {
       },
       label: CustomText(
         text: AppLocalizations.of(context)!.playbutton,
-        size: 40,
+        size: 30,
         secondColor: true,
         bold: true,
       ),

@@ -17,7 +17,7 @@ class QuizScreenTablet extends StatelessWidget {
     Key? key,
     required this.onItemTapped,
     required this.selectedIndex,
-  }) : super(key: key);
+  }) : super(key: const Key("TabletQuizPage"));
 
   @override
   Widget build(BuildContext context) {
@@ -31,6 +31,7 @@ class QuizScreenTablet extends StatelessWidget {
       Column(
         children: [
           GestureDetector(
+            key: const Key("TabletGame1"),
             onTap: () => Navigator.push(
               context,
               ScaleRoute(
@@ -47,6 +48,7 @@ class QuizScreenTablet extends StatelessWidget {
             ),
           ),
           CustomText(
+            key: const Key("TabletGame1Text"),
             text: AppLocalizations.of(context)!.artist,
             size: 20,
             bold: true,
@@ -61,6 +63,7 @@ class QuizScreenTablet extends StatelessWidget {
       Column(
         children: [
           GestureDetector(
+            key: const Key("TabletGame2"),
             onTap: () => Navigator.push(
               context,
               ScaleRoute(
@@ -77,6 +80,7 @@ class QuizScreenTablet extends StatelessWidget {
             ),
           ),
           CustomText(
+            key: const Key("TabletGame2Text"),
             text: AppLocalizations.of(context)!.song,
             size: 20,
             bold: true,
@@ -91,6 +95,7 @@ class QuizScreenTablet extends StatelessWidget {
       Column(
         children: [
           GestureDetector(
+            key: const Key("TabletGame3"),
             onTap: () => Navigator.push(
               context,
               ScaleRoute(
@@ -107,6 +112,7 @@ class QuizScreenTablet extends StatelessWidget {
             ),
           ),
           CustomText(
+            key: const Key("TabletGame3Text"),
             text: AppLocalizations.of(context)!.casual,
             size: 20,
             bold: true,
@@ -143,6 +149,7 @@ class QuizScreenTablet extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
                                 CustomText(
+                                  key: const Key("TabletPresentationText"),
                                   text:
                                       AppLocalizations.of(context)!.chooseaquiz,
                                   size: 30.0,
@@ -153,6 +160,7 @@ class QuizScreenTablet extends StatelessWidget {
                           ],
                         ),
                         SingleChildScrollView(
+                          key: const Key("TabletListGames"),
                           scrollDirection: Axis.horizontal,
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.start,
@@ -173,6 +181,7 @@ class QuizScreenTablet extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
                                 CustomText(
+                                  key: const Key("TabletArtistText"),
                                   text: AppLocalizations.of(context)!
                                       .yourfavartists,
                                   size: 30.0,
@@ -183,6 +192,7 @@ class QuizScreenTablet extends StatelessWidget {
                           ],
                         ),
                         SingleChildScrollView(
+                          key: const Key("TabletArtistList"),
                           scrollDirection: Axis.horizontal,
                           child: Row(
                             children: trialArtists,
