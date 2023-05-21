@@ -10,7 +10,6 @@ import 'package:spotify_quiz/user/bloc/user_bloc.dart';
 
 import 'package:spotify_quiz/utility/utilities.dart' as utilities;
 
-import '../../utility/api_calls.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
