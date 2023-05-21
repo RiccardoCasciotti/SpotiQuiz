@@ -54,7 +54,6 @@ class LocalRankScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        key: const Key("GoBackButtonLocalRanking"),
         backgroundColor: utilities.secondaryColor,
         foregroundColor: utilities.primaryColor,
         elevation: 0.0,
@@ -71,7 +70,6 @@ class LocalRankScreen extends StatelessWidget {
                 height: 40,
                 width: double.infinity,
                 child: CustomText(
-                  key: const Key("LocalRankingText"),
                   text: AppLocalizations.of(context)!.localranking,
                   size: 30,
                   bold: true,
@@ -105,7 +103,6 @@ class LocalRankScreen extends StatelessWidget {
                         height: 10,
                       ),
                       Table(
-                        key: const Key("TableLocalRanking"),
                         border: TableBorder.symmetric(),
                         defaultVerticalAlignment:
                             TableCellVerticalAlignment.middle,
@@ -115,7 +112,6 @@ class LocalRankScreen extends StatelessWidget {
                               Container(
                                 alignment: Alignment.center,
                                 child: CustomText(
-                                  key: const Key("UsernameLocalRanking"),
                                   text: AppLocalizations.of(context)!
                                       .usernameranking,
                                   thirdColor: true,
@@ -126,7 +122,6 @@ class LocalRankScreen extends StatelessWidget {
                               Container(
                                 alignment: Alignment.center,
                                 child: CustomText(
-                                  key: const Key("LevelLocalRanking"),
                                   text: AppLocalizations.of(context)!.level,
                                   thirdColor: true,
                                   size: 18,
@@ -136,7 +131,6 @@ class LocalRankScreen extends StatelessWidget {
                               Container(
                                 alignment: Alignment.center,
                                 child: CustomText(
-                                  key: const Key("BestScoreLocalRanking"),
                                   text: AppLocalizations.of(context)!
                                       .bestscoreranking,
                                   thirdColor: true,

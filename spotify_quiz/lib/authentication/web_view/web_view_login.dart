@@ -7,6 +7,8 @@ import 'package:spotify_quiz/authentication/bloc/authentication_bloc.dart';
 import 'package:spotify_quiz/repositories/user/user_repository.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
+import '../../login/bloc/login_bloc.dart';
+
 // Import for Android features.
 // Import for iOS features.
 
@@ -31,7 +33,7 @@ class WebViewLogin extends StatelessWidget {
 // See https://developer.spotify.com/documentation/general/guides/scopes/
 // for a complete list of these Spotify authorization permissions. If no
 // scopes are specified, only public Spotify information will be available.
-    String scopes = "user-read-private user-read-email";
+    String scopes = "user-read-private user-read-email user-follow-read";
 
     final clientId = dotenv.env['SPOTIFY_CLIENT_ID'];
     final clientSecret = dotenv.env['SPOTIFY_CLIENT_SECRET'];
@@ -61,8 +63,7 @@ class WebViewLogin extends StatelessWidget {
             responseUri.indexOf("code") + 5,
           );
           debugPrint(code);
-          // ignore: unused_local_variable
-          Uri url = Uri.parse("https://accounts.spotify.com/api/token");
+          
 
           final response = await http.post(
             Uri.parse("https://accounts.spotify.com/api/token"),
@@ -85,30 +86,29 @@ class WebViewLogin extends StatelessWidget {
           debugPrint("STATUS CODE: ${response.statusCode}");
           final bodyJson = json.decode(response.body);
 
-          await http.get(Uri.parse("https://api.spotify.com/v1/me"), headers: {
-            "Authorization":
-                'Authorization: Bearer ${bodyJson["access_token"]}',
-            "content-type": "application/x-www-form-urlencoded"
-          });
+
 
           if (response.statusCode == 200) {
+            
             var data = await userRepository.apiGetUser(
                 '${bodyJson["access_token"]}', '${bodyJson["refresh_token"]}');
             // ignore: use_build_context_synchronously
             context.read<AuthenticationBloc>().user = data;
 
             // ignore: use_build_context_synchronously
+            context.read<LoginBloc>().add(const LoginSubmitted());
+            //controller.clearCache();
             Navigator.pop(context);
 
             debugPrint(
                 "1 #####################################################################");
           }
 
-          if (!responseUri.contains(redirectUri)) {
-            debugPrint(responseUri);
-            return NavigationDecision.navigate;
-          }
-          return NavigationDecision.prevent;
+          // if (!responseUri.contains(redirectUri)) {
+          //   debugPrint(responseUri);
+          //   return NavigationDecision.navigate;
+          // }
+          return NavigationDecision.navigate;
         },
       ))
       ..loadRequest(url1);
