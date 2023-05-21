@@ -1,6 +1,7 @@
 import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:spotify_quiz/quizPage/components/question.dart';
 import 'package:spotify_quiz/utility/utilities.dart' as utilities;
 import 'package:spotify_quiz/utility/quiz_utils.dart' as quiz_utils;
 
@@ -50,7 +51,6 @@ class _QuizPageState extends State<QuizPage> {
   @override
   void initState() {
     _questions = createQuestions(widget.selectedMode);
-
     super.initState();
     //List<Map<String, Object>> questions = [];
   }
@@ -65,11 +65,13 @@ class _QuizPageState extends State<QuizPage> {
   // ignore: prefer_typing_uninitialized_variables
   var _secondSlotQuestions;
 
-  void _answerQuestion(int score) {
+  Future<void> _answerQuestion(int score) async {
+    quizRunning = true;
+    print("QuestionIndex");
+    print(_questionIndex);
     //FUNCTION WE CALL WHEN WE GIVE AN ANSWER, HERE WE CAN IMPLEMENT THE LOGIC TO CREATE NEW QUESTIONS
-    if (_questionIndex == 0) {
-      print("Ci sono passato");
-      quizRunning = true;
+    if ((_questionIndex + 1) % limit == 1) {
+      print("Create Second List");
       _secondSlotQuestions = createQuestions(widget.selectedMode);
     }
     if (score > 0) {
@@ -78,11 +80,13 @@ class _QuizPageState extends State<QuizPage> {
       _wrongAnswers++;
     }
     _totalScore += score;
-    if ((_questionIndex) % limit == 0) {
-      setState(() {
-        _questions = _secondSlotQuestions;
-      });
+
+    if ((_questionIndex + 1) % limit == 0) {
+      print(_questionIndex);
+      print("Populating First List");
+      _questions = _secondSlotQuestions;
     }
+
     setState(() {
       _questionIndex = (_questionIndex + 1) % limit;
       _questionScore = score;
@@ -94,7 +98,6 @@ class _QuizPageState extends State<QuizPage> {
     //WE DECIDE TO CONTINUE WITH NEW QUESTIONS
     setState(() {
       _hasAnswered = false;
-      _questionIndex = (_questionIndex + 1) % limit;
     });
   }
 
@@ -122,66 +125,60 @@ class _QuizPageState extends State<QuizPage> {
             future: _questions, // a previously-obtained Future<String> or null
             builder:
                 (BuildContext context, AsyncSnapshot<List<dynamic>> snapshot) {
-              List<Widget> children = [];
-
-              if (snapshot.connectionState == ConnectionState.done ||
-                  quizRunning) {
+              if (snapshot.connectionState == ConnectionState.done) {
                 if (snapshot.hasError) {
                   print("Error ${snapshot.error}");
                 }
-                if (snapshot.hasData || quizRunning) {
+                if (snapshot.hasData) {
+                  if (snapshot.hasData == false) {
+                    print("NO DATAAA");
+                  }
                   //print("DATAAAAAA ${snapshot.data}");
-                  _hasAnswered
-                      ? children = [
-                          PageTransitionSwitcher(
-                            duration: const Duration(milliseconds: 500),
-                            transitionBuilder:
-                                (child, animation, secondaryAnimation) =>
-                                    SharedAxisTransition(
-                              animation: animation,
-                              secondaryAnimation: secondaryAnimation,
-                              fillColor: utilities.secondaryColor,
-                              transitionType: SharedAxisTransitionType.scaled,
-                              child: child,
-                            ),
-                            child: Result(
-                              _totalScore,
-                              _questionScore,
-                              goHome,
-                              moveOn,
-                            ),
-                          )
-                        ]
-                      : children = [
-                          PageTransitionSwitcher(
-                              duration: const Duration(milliseconds: 500),
-                              transitionBuilder:
-                                  (child, animation, secondaryAnimation) =>
-                                      SharedAxisTransition(
-                                        animation: animation,
-                                        secondaryAnimation: secondaryAnimation,
-                                        fillColor: utilities.secondaryColor,
-                                        transitionType:
-                                            SharedAxisTransitionType.scaled,
-                                        child: child,
-                                      ),
-                              child: Quiz(
-                                answerQuestion: _answerQuestion,
-                                questionIndex: _questionIndex,
-                                questions: snapshot.data,
-                              ))
-                        ];
-                }
-              } else if (quizRunning == false) {
-                children = [
-                  PageTransitionSwitcher(
+                  return _hasAnswered
+                      ? PageTransitionSwitcher(
+                          duration: const Duration(milliseconds: 500),
+                          transitionBuilder:
+                              (child, animation, secondaryAnimation) =>
+                                  SharedAxisTransition(
+                            animation: animation,
+                            secondaryAnimation: secondaryAnimation,
+                            fillColor: utilities.secondaryColor,
+                            transitionType: SharedAxisTransitionType.horizontal,
+                            child: child,
+                          ),
+                          child: Result(
+                            _totalScore,
+                            _questionScore,
+                            goHome,
+                            moveOn,
+                          ),
+                        )
+                      : PageTransitionSwitcher(
+                          duration: const Duration(milliseconds: 500),
+                          transitionBuilder:
+                              (child, animation, secondaryAnimation) =>
+                                  SharedAxisTransition(
+                                    animation: animation,
+                                    secondaryAnimation: secondaryAnimation,
+                                    fillColor: utilities.secondaryColor,
+                                    transitionType:
+                                        SharedAxisTransitionType.horizontal,
+                                    child: child,
+                                  ),
+                          child: Quiz(
+                            answerQuestion: _answerQuestion,
+                            questionIndex: _questionIndex,
+                            questions: snapshot.data,
+                          ));
+                } else {
+                  return PageTransitionSwitcher(
                     duration: const Duration(milliseconds: 500),
                     transitionBuilder: (child, animation, secondaryAnimation) =>
                         SharedAxisTransition(
                       animation: animation,
                       secondaryAnimation: secondaryAnimation,
                       fillColor: utilities.secondaryColor,
-                      transitionType: SharedAxisTransitionType.scaled,
+                      transitionType: SharedAxisTransitionType.horizontal,
                       child: child,
                     ),
                     child: Column(
@@ -195,32 +192,44 @@ class _QuizPageState extends State<QuizPage> {
                         Padding(
                           padding: const EdgeInsets.only(top: 16),
                           child: CustomText(
-                            text: 'Creating your quiz...',
+                            text: 'No data snapshot...',
                             size: 20,
                           ),
                         ),
                       ],
                     ),
-                  )
-                ];
-              }
-              return PageTransitionSwitcher(
-                duration: const Duration(milliseconds: 500),
-                transitionBuilder: (child, animation, secondaryAnimation) =>
-                    SharedAxisTransition(
-                  animation: animation,
-                  secondaryAnimation: secondaryAnimation,
-                  fillColor: utilities.secondaryColor,
-                  transitionType: SharedAxisTransitionType.scaled,
-                  child: child,
-                ),
-                child: Center(
+                  );
+                }
+              } else {
+                return PageTransitionSwitcher(
+                  duration: const Duration(milliseconds: 500),
+                  transitionBuilder: (child, animation, secondaryAnimation) =>
+                      SharedAxisTransition(
+                    animation: animation,
+                    secondaryAnimation: secondaryAnimation,
+                    fillColor: utilities.secondaryColor,
+                    transitionType: SharedAxisTransitionType.horizontal,
+                    child: child,
+                  ),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: children,
+                    children: [
+                      const SizedBox(
+                        width: 60,
+                        height: 60,
+                        child: CircularProgressIndicator(),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 16),
+                        child: CustomText(
+                          text: 'Creating your quiz...',
+                          size: 20,
+                        ),
+                      ),
+                    ],
                   ),
-                ),
-              );
+                );
+              }
             },
           ),
         ),

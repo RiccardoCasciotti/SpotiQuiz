@@ -1,45 +1,49 @@
 import 'package:flutter/material.dart';
 import '../../utility/quiz_utils.dart';
+//import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../models/models.dart' as model;
+import 'package:spotify_quiz/utility/utilities.dart' as utilities;
 
-
-Map<String, Object> format_a(model.Question q){
-
+Map<String, Object> format_a(model.Question q) {
+  //AppLocalizations.of(context)!.bestScore;
   const qText = "Who is the following artist?";
   var answers = [];
-  for( var i = 0; i < q.options.length; i ++ ){
-    answers.add({"text" : q.options[i], "score": -2});
+  for (var i = 0; i < q.options.length; i++) {
+    answers.add({"text": q.options[i], "score": -2});
   }
-  answers.add({"text" : q.answer, "score": 10});
+  answers.add({"text": q.answer, "score": 10});
   answers.shuffle();
-  model.Image image = (q.obj as model.Artist).images![1];
-
-
-return {
+  if ((q.obj as model.Artist).images != null) {
+    print("There was an image");
+    print((q.obj as model.Artist).images!.length);
+    model.Image image = (q.obj as model.Artist).images![1];
+    return {
       'questionText': qText,
       'answers': answers,
-      'image' : image
+      'image': image,
     };
+  }
+  print("There was no image");
+  print((q.obj as model.Artist).images!.length);
 
+  return {
+    'questionText': qText,
+    'answers': answers,
+    'image': utilities.imageUserProfile
+  };
 }
 
-
-
-
- Future<List<dynamic>> createQuestions(int selectedMode) async{
+Future<List<dynamic>> createQuestions(int selectedMode) async {
   // ASK TO MODIFY FROM NUMBERS TO LETTERS
 
   var questionsList = [];
-  if( selectedMode == 1 ){
-
+  if (selectedMode == 1) {
     model.Quiz quiz_a = await generate_quiz("A");
 
-    for( var i = 0; i < quiz_a.questions.length; i++){
+    for (var i = 0; i < quiz_a.questions.length; i++) {
       questionsList.add(format_a(quiz_a.questions[i]));
     }
-  
-
- }
+  }
   return questionsList;
 
   // return [
