@@ -45,11 +45,11 @@
 
   "casual": "Casuale",
 
-  "gameinfoartist": "Modalità di gioco basata sui tuoi artisti preferiti",
+  "gameinfoartist": "Indovina l'artista in base alla sua immagine!",
 
-  "gameinfosong": "Modalità di gioco basata sui tuoi brani preferiti",
+  "gameinfosong": "Ascolta la canzone e indovina qual é!",
 
-  "gameinfocasual": "Modalità di gioco basata su artisti e brani casuali",
+  "gameinfocasual": "Un mix di tutte le modalità con domande aggiuntive!",
 
   "playbutton": "Gioca",
 
@@ -69,5 +69,7 @@
 
   "bestScore": "Miglior Punteggio",
 
-  "experience": "Esperienza"
+  "experience": "Esperienza",
+
+  "createquiz": "Creando il tuo quiz..."
 }

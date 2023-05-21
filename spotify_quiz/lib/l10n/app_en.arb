@@ -114,17 +114,17 @@
     "description": "Casual mode text"
   },
 
-  "gameinfoartist": "Game mode based on your favourite artists",
+  "gameinfoartist": "Guess the artist based on the picture!",
   "@gameinfoartist": {
     "description": "Info box artist mode"
   },
 
-  "gameinfosong": "Game mode based on your favourite songs",
+  "gameinfosong": "Listen the song and guess which one is it!"",
   "@gameinfosong": {
     "description": "Info box song mode"
   },
 
-  "gameinfocasual": "Game mode based on casual artists and songs",
+  "gameinfocasual": "A mix of all the modes with other type of questions!",
   "@gameinfocasual": {
     "description": "Info box casual mode"
   },
@@ -177,7 +177,13 @@
      "experience": "Experience",
   "@experience": {
     "description": "The experience of the user"
+  },
+
+  "createquiz": "Creating your quiz...",
+  "@createquiz": {
+    "description": "Text waiting for the quiz"
   }
+
 
 }
 

@@ -45,11 +45,11 @@
 
   "casual": "Zufällig",
 
-  "gameinfoartist": "Spielmodus basierend auf ihren lieblingskünstlern",
+  "gameinfoartist": "Erraten Sie den Künstler anhand des Bildes!",
 
-  "gameinfosong": "Spielmodus auf der grundlage ihrer lieblingsstrecken",
+  "gameinfosong": "Hören Sie sich das Lied an und raten Sie, was es ist!",
 
-  "gameinfocasual": "Spielmodus basierend auf zufälligen künstlern und titeln",
+  "gameinfocasual": "Ein Mix aus allen Modi mit zusätzlichen Fragen!",
 
   "playbutton": "Spielen",
 
@@ -69,5 +69,7 @@
 
   "bestScore": "Bestes Ergebnis",
 
-  "experience": "Erfahrung"
+  "experience": "Erfahrung",
+
+  "createquiz": "Erstellen Sie Ihr Quiz..."
 }

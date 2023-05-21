@@ -45,11 +45,11 @@
 
   "casual": "Aleatorio",
 
-  "gameinfoartist": "Modo de juego basado en tus artistas favoritos",
+  "gameinfoartist": "¡Adivina el artista basándote en la imagen!",
 
-  "gameinfosong": "Modo de reproducción basado en tus canciones favoritas",
+  "gameinfosong": "¡Escucha la canción y adivina cuál es!",
 
-  "gameinfocasual": "Modo de juego basado en artistas y canciones aleatorias",
+  "gameinfocasual": "¡Una combinación de todos los modos con preguntas adicionales!",
 
   "playbutton": "Juegas",
 
@@ -69,5 +69,7 @@
 
   "bestScore": "Mejor Puntuación",
 
-  "experience": "Experiencia"
+  "experience": "Experiencia",
+
+  "createquiz": "Creando tu prueba..."
 }
