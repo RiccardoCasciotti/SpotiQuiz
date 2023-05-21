@@ -26,7 +26,7 @@ import 'result_screen.dart';
 
 // ignore: must_be_immutable
 
-int limit = quiz_utils.limit;
+int limit = 10;
 
 class QuizPage extends StatefulWidget {
   int selectedMode;
@@ -50,12 +50,10 @@ class _QuizPageState extends State<QuizPage> {
   @override
   void initState() {
     _questions = createQuestions(widget.selectedMode);
-
     super.initState();
     //List<Map<String, Object>> questions = [];
   }
 
-  bool quizRunning = false;
   var _questionIndex = 0;
   var _totalScore = 0;
   var _wrongAnswers = 0;
@@ -69,7 +67,6 @@ class _QuizPageState extends State<QuizPage> {
     //FUNCTION WE CALL WHEN WE GIVE AN ANSWER, HERE WE CAN IMPLEMENT THE LOGIC TO CREATE NEW QUESTIONS
     if (_questionIndex == 0) {
       print("Ci sono passato");
-      quizRunning = true;
       _secondSlotQuestions = createQuestions(widget.selectedMode);
     }
     if (score > 0) {
@@ -78,16 +75,21 @@ class _QuizPageState extends State<QuizPage> {
       _wrongAnswers++;
     }
     _totalScore += score;
+
     if ((_questionIndex) % limit == 0) {
       setState(() {
         _questions = _secondSlotQuestions;
+        _questionIndex = (_questionIndex + 1) % limit;
+        _questionScore = score;
+        _hasAnswered = true;
+      });
+    } else {
+      setState(() {
+        _questionIndex = (_questionIndex + 1) % limit;
+        _questionScore = score;
+        _hasAnswered = true;
       });
     }
-    setState(() {
-      _questionIndex = (_questionIndex + 1) % limit;
-      _questionScore = score;
-      _hasAnswered = true;
-    });
   }
 
   void moveOn() {
@@ -101,7 +103,6 @@ class _QuizPageState extends State<QuizPage> {
   @override
   Widget build(BuildContext context) {
     Future<void> goHome() async {
-      quizRunning = false;
       _questionIndex = 0;
       UserRepository userRepository = UserRepository();
       context.read<AuthenticationBloc>().user =
@@ -122,59 +123,49 @@ class _QuizPageState extends State<QuizPage> {
             future: _questions, // a previously-obtained Future<String> or null
             builder:
                 (BuildContext context, AsyncSnapshot<List<dynamic>> snapshot) {
-              List<Widget> children = [];
-
-              if (snapshot.connectionState == ConnectionState.done ||
-                  quizRunning) {
+              if (snapshot.connectionState == ConnectionState.done) {
                 if (snapshot.hasError) {
                   print("Error ${snapshot.error}");
                 }
-                if (snapshot.hasData || quizRunning) {
+                if (snapshot.hasData) {
                   //print("DATAAAAAA ${snapshot.data}");
-                  _hasAnswered
-                      ? children = [
-                          PageTransitionSwitcher(
-                            duration: const Duration(milliseconds: 500),
-                            transitionBuilder:
-                                (child, animation, secondaryAnimation) =>
-                                    SharedAxisTransition(
-                              animation: animation,
-                              secondaryAnimation: secondaryAnimation,
-                              fillColor: utilities.secondaryColor,
-                              transitionType: SharedAxisTransitionType.scaled,
-                              child: child,
-                            ),
-                            child: Result(
-                              _totalScore,
-                              _questionScore,
-                              goHome,
-                              moveOn,
-                            ),
-                          )
-                        ]
-                      : children = [
-                          PageTransitionSwitcher(
-                              duration: const Duration(milliseconds: 500),
-                              transitionBuilder:
-                                  (child, animation, secondaryAnimation) =>
-                                      SharedAxisTransition(
-                                        animation: animation,
-                                        secondaryAnimation: secondaryAnimation,
-                                        fillColor: utilities.secondaryColor,
-                                        transitionType:
-                                            SharedAxisTransitionType.scaled,
-                                        child: child,
-                                      ),
-                              child: Quiz(
-                                answerQuestion: _answerQuestion,
-                                questionIndex: _questionIndex,
-                                questions: snapshot.data,
-                              ))
-                        ];
-                }
-              } else if (quizRunning == false) {
-                children = [
-                  PageTransitionSwitcher(
+                  return _hasAnswered
+                      ? PageTransitionSwitcher(
+                          duration: const Duration(milliseconds: 500),
+                          transitionBuilder:
+                              (child, animation, secondaryAnimation) =>
+                                  SharedAxisTransition(
+                            animation: animation,
+                            secondaryAnimation: secondaryAnimation,
+                            fillColor: utilities.secondaryColor,
+                            transitionType: SharedAxisTransitionType.scaled,
+                            child: child,
+                          ),
+                          child: Result(
+                            _totalScore,
+                            _questionScore,
+                            goHome,
+                            moveOn,
+                          ),
+                        )
+                      : PageTransitionSwitcher(
+                          duration: const Duration(milliseconds: 500),
+                          transitionBuilder: (child, animation,
+                                  secondaryAnimation) =>
+                              SharedAxisTransition(
+                                animation: animation,
+                                secondaryAnimation: secondaryAnimation,
+                                fillColor: utilities.secondaryColor,
+                                transitionType: SharedAxisTransitionType.scaled,
+                                child: child,
+                              ),
+                          child: Quiz(
+                            answerQuestion: _answerQuestion,
+                            questionIndex: _questionIndex,
+                            questions: snapshot.data,
+                          ));
+                } else {
+                  return PageTransitionSwitcher(
                     duration: const Duration(milliseconds: 500),
                     transitionBuilder: (child, animation, secondaryAnimation) =>
                         SharedAxisTransition(
@@ -195,32 +186,44 @@ class _QuizPageState extends State<QuizPage> {
                         Padding(
                           padding: const EdgeInsets.only(top: 16),
                           child: CustomText(
-                            text: 'Creating your quiz...',
+                            text: 'No data snapshot...',
                             size: 20,
                           ),
                         ),
                       ],
                     ),
-                  )
-                ];
-              }
-              return PageTransitionSwitcher(
-                duration: const Duration(milliseconds: 500),
-                transitionBuilder: (child, animation, secondaryAnimation) =>
-                    SharedAxisTransition(
-                  animation: animation,
-                  secondaryAnimation: secondaryAnimation,
-                  fillColor: utilities.secondaryColor,
-                  transitionType: SharedAxisTransitionType.scaled,
-                  child: child,
-                ),
-                child: Center(
+                  );
+                }
+              } else {
+                return PageTransitionSwitcher(
+                  duration: const Duration(milliseconds: 500),
+                  transitionBuilder: (child, animation, secondaryAnimation) =>
+                      SharedAxisTransition(
+                    animation: animation,
+                    secondaryAnimation: secondaryAnimation,
+                    fillColor: utilities.secondaryColor,
+                    transitionType: SharedAxisTransitionType.scaled,
+                    child: child,
+                  ),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: children,
+                    children: [
+                      const SizedBox(
+                        width: 60,
+                        height: 60,
+                        child: CircularProgressIndicator(),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 16),
+                        child: CustomText(
+                          text: 'Creating your quiz...',
+                          size: 20,
+                        ),
+                      ),
+                    ],
                   ),
-                ),
-              );
+                );
+              }
             },
           ),
         ),

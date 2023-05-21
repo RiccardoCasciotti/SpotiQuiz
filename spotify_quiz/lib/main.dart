@@ -9,6 +9,7 @@ import 'authentication/authentication.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 import 'loading/view/splash_page.dart';
+import 'login/bloc/login_bloc.dart';
 import 'login/view/login_page.dart';
 
 import 'package:spotify_quiz/homePage/view/home_page_view.dart';
@@ -30,7 +31,7 @@ void main() async {
   //FirebaseFirestore db = FirebaseFirestore.instance;
   // Add a new document with a generated ID
   //db.collection("users").add(user);
-  
+
   runApp(const MyApp());
 }
 
@@ -62,11 +63,21 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return RepositoryProvider.value(
       value: _authenticationRepository,
-      child: BlocProvider(
-        create: (_) => AuthenticationBloc(
-          authenticationRepository: _authenticationRepository,
-          userRepository: _userRepository,
-        ),
+      child: MultiBlocProvider(
+        providers: [
+          BlocProvider(
+            create: (_) => AuthenticationBloc(
+              authenticationRepository: _authenticationRepository,
+              userRepository: _userRepository,
+            ),
+          ),
+          BlocProvider(create: (context) {
+            return LoginBloc(
+              authenticationRepository:
+                  RepositoryProvider.of<AuthenticationRepository>(context),
+            );
+          }),
+        ],
         child: const MediaQuery(data: MediaQueryData(), child: MyAppView()),
       ),
     );
@@ -127,6 +138,10 @@ class _MyAppViewState extends State<MyAppView> {
                 );
                 break;
               case AuthenticationStatus.unknown:
+                _navigator.pushAndRemoveUntil<void>(
+                  LoginPage.route(),
+                  (route) => false,
+                );
                 break;
             }
           },

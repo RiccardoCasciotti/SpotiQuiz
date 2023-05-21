@@ -25,23 +25,16 @@ class LoginButton extends StatelessWidget {
             // ignore: use_build_context_synchronously
             : await Navigator.of(context).push(
                 MaterialPageRoute(builder: (context) {
-                  // return BlocProvider.value(
-                  // value: BlocProvider.of<LoginBloc>(context),
-                  // child: const WebViewLogin(),);
+                  return BlocProvider.value(
+                  value: BlocProvider.of<LoginBloc>(context),
+                  child: const WebViewLogin(),);
 
-                  return BlocProvider(
-                      create: (context) {
-                        return LoginBloc(
-                          authenticationRepository:
-                              RepositoryProvider.of<AuthenticationRepository>(
-                                  context),
-                        );
-                      },
-                      child: const WebViewLogin());
+                  //return WebViewLogin();
                 }),
+                
               );
         // ignore: use_build_context_synchronously
-        context.read<LoginBloc>().add(const LoginSubmitted());
+        //context.read<LoginBloc>().add(const LoginSubmitted());
       },
       style: ButtonStyle(
           backgroundColor: MaterialStateProperty.all(utilities.secondaryColor)),

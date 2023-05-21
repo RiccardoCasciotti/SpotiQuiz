@@ -24,15 +24,10 @@ class WebViewLogin extends StatelessWidget {
   Widget build(BuildContext context) {
     final UserRepository userRepository = UserRepository();
 
-// The URI to redirect to after the user grants or denies permission. It must
-// be in your Spotify application's Redirect URI whitelist. This URI can
-// either be a web address pointing to an authorization server or a fabricated
-// URI that allows the client device to function as an authorization server.
+
     String redirectUri = 'http://spotify_quiz-api.com';
 
-// See https://developer.spotify.com/documentation/general/guides/scopes/
-// for a complete list of these Spotify authorization permissions. If no
-// scopes are specified, only public Spotify information will be available.
+
     String scopes = "user-read-private user-read-email user-follow-read";
 
     final clientId = dotenv.env['SPOTIFY_CLIENT_ID'];
@@ -41,7 +36,7 @@ class WebViewLogin extends StatelessWidget {
     final url1 = Uri.parse('https://accounts.spotify.com/authorize?' +
         "show_dialog=true&response_type=code&client_id=$clientId&scope=$scopes&redirect_uri=$redirectUri");
 
-    debugPrint(url1.toString());
+    
     var params = const PlatformWebViewControllerCreationParams();
     final WebViewController controller =
         WebViewController.fromPlatformCreationParams(params);
@@ -54,18 +49,25 @@ class WebViewLogin extends StatelessWidget {
           // Update loading bar.
         },
         onPageStarted: (String url) {},
-        onPageFinished: (String url) {},
+        onPageFinished: (String url) async {},
         onWebResourceError: (WebResourceError error) {},
-        onNavigationRequest: (NavigationRequest res) async {
-          var responseUri = res.url;
-          debugPrint(responseUri);
-          final code = responseUri.substring(
-            responseUri.indexOf("code") + 5,
-          );
-          debugPrint(code);
+        onNavigationRequest: (NavigationRequest req) async {
+          var requestUri = req.url;
+        
           
+          if( requestUri.contains("error=access_denied")){
+  
+          
+          Navigator.pop(context);
+          context.read<AuthenticationBloc>().add( AuthenticationLogoutRequested());
+          return NavigationDecision.prevent;
+          
+          }
 
-          final response = await http.post(
+          else if( requestUri.contains("http://spotify_quiz-api.com/?code=" )){
+            var code = requestUri.split("code=")[1];
+
+            final response = await http.post(
             Uri.parse("https://accounts.spotify.com/api/token"),
             headers: {
               "Authorization":
@@ -80,35 +82,37 @@ class WebViewLogin extends StatelessWidget {
             },
           );
 
-          debugPrint("RESPONSE BODY:  ${response.body}");
-          //print(response.headers);
+         
+           
 
-          debugPrint("STATUS CODE: ${response.statusCode}");
+
           final bodyJson = json.decode(response.body);
-
-
 
           if (response.statusCode == 200) {
             
             var data = await userRepository.apiGetUser(
                 '${bodyJson["access_token"]}', '${bodyJson["refresh_token"]}');
-            // ignore: use_build_context_synchronously
+             
             context.read<AuthenticationBloc>().user = data;
 
-            // ignore: use_build_context_synchronously
+        
             context.read<LoginBloc>().add(const LoginSubmitted());
-            //controller.clearCache();
+            controller.clearCache();
             Navigator.pop(context);
-
-            debugPrint(
-                "1 #####################################################################");
+          
+           }
+           else{
+            Navigator.pop(context);
+           }
+            return NavigationDecision.prevent;
           }
-
-          // if (!responseUri.contains(redirectUri)) {
-          //   debugPrint(responseUri);
-          //   return NavigationDecision.navigate;
-          // }
-          return NavigationDecision.navigate;
+          else if(redirectUri != "http://spotify_quiz-api.com"){
+            
+            return NavigationDecision.prevent;
+          }
+          
+         return NavigationDecision.navigate;
+           
         },
       ))
       ..loadRequest(url1);
