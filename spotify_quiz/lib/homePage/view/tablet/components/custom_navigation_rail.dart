@@ -15,7 +15,7 @@ class CustomNavRail extends StatelessWidget {
     Key? key,
     required this.selectedIndex,
     required this.onItemTapped,
-  }) : super(key: key);
+  }) : super(key: const Key("NavigationRail"));
 
   @override
   Widget build(BuildContext context) {
