@@ -68,7 +68,7 @@ class _MyHomePageState extends State<MyHomePage> {
     precacheImage(const AssetImage("assets/images/mic.jpg"), context);
     precacheImage(const AssetImage("assets/images/singer.jpg"), context);
     precacheImage(const AssetImage("assets/images/concert.jpg"), context);
-    var tmp = get_artist("0TnOYISbd1XYRBk9myaseg");// ############################################### !!
+    //var tmp = get_artist("0TnOYISbd1XYRBk9myaseg");// ############################################### !!
     final pages = [
       HomeScreen(
           firstButtonPressed: _goToRankingPage,

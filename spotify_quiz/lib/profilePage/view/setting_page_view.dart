@@ -108,6 +108,7 @@ class ProfilePage extends StatelessWidget {
                               size: 20,
                             ),
                             CustomText(
+                              key: const Key("ExperienceInfoProfile"),
                               text: "$experience/$newlevelCap",
                               size: 25,
                             ),

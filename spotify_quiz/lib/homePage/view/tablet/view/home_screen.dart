@@ -28,6 +28,24 @@ class HomeScreenTablet extends StatelessWidget {
     var newlevelCap = ((experience / 200).floor() + 1) * 200;
 
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: utilities.secondaryColor,
+        actions: <Widget>[
+          IconButton(
+            key: const Key("TabletLogoutHome"),
+            icon: Icon(
+              Icons.logout_outlined,
+              color: utilities.primaryColor,
+            ),
+            onPressed: () async {
+              context
+                  .read<AuthenticationBloc>()
+                  .add(AuthenticationLogoutRequested());
+              // ignore: use_build_context_synchronously
+            },
+          )
+        ],
+      ),
       backgroundColor: utilities.secondaryColor,
       body: Center(
         child: Row(
@@ -46,12 +64,13 @@ class HomeScreenTablet extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     const SizedBox(
-                      height: 30,
+                      height: 10,
                     ),
                     Column(
                       children: [
                         CircleAvatar(
-                          radius: 115,
+                          key: const Key("TabletProfilePic"),
+                          radius: 95,
                           backgroundImage:
                               NetworkImage(utilities.imageUserProfile),
                         ),
@@ -59,6 +78,7 @@ class HomeScreenTablet extends StatelessWidget {
                           height: 10,
                         ),
                         CustomText(
+                          key: const Key("TabletUsername"),
                           text:
                               context.read<AuthenticationBloc>().user.username,
                           thirdColor: true,
@@ -79,6 +99,7 @@ class HomeScreenTablet extends StatelessWidget {
                             Container(
                               alignment: Alignment.center,
                               child: CustomText(
+                                key: const Key("TabletLevelHome"),
                                 text: AppLocalizations.of(context)!.level,
                                 thirdColor: true,
                                 size: 30,
@@ -88,6 +109,7 @@ class HomeScreenTablet extends StatelessWidget {
                             Container(
                               alignment: Alignment.center,
                               child: CustomText(
+                                key: const Key("TabletLevelInfoHome"),
                                 text: context
                                     .read<AuthenticationBloc>()
                                     .user
@@ -114,6 +136,7 @@ class HomeScreenTablet extends StatelessWidget {
                             Container(
                               alignment: Alignment.center,
                               child: CustomText(
+                                key: const Key("TabletNOfQuizHome"),
                                 text: AppLocalizations.of(context)!.nofquiz,
                                 size: 30,
                                 thirdColor: true,
@@ -123,6 +146,7 @@ class HomeScreenTablet extends StatelessWidget {
                             Container(
                               alignment: Alignment.center,
                               child: CustomText(
+                                key: const Key("TabletNOfQuizInfoHome"),
                                 text: context
                                     .read<AuthenticationBloc>()
                                     .user
@@ -157,6 +181,7 @@ class HomeScreenTablet extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         CustomText(
+                          key: const Key("TabletStatisticTextHome"),
                           text: AppLocalizations.of(context)!.statistics,
                           thirdColor: true,
                           size: 25,
@@ -172,7 +197,8 @@ class HomeScreenTablet extends StatelessWidget {
                                 width: 5,
                               ),
                               CustomText(
-                                key: const Key("CorrectAnswerTextProfile"),
+                                key:
+                                    const Key("TabletCorrectAnswerTextProfile"),
                                 alignCenter: true,
                                 text:
                                     AppLocalizations.of(context)!.correctanswer,
@@ -180,7 +206,8 @@ class HomeScreenTablet extends StatelessWidget {
                                 size: 25,
                               ),
                               CustomText(
-                                key: const Key("CorrectAnswerInfoProfile"),
+                                key:
+                                    const Key("TabletCorrectAnswerInfoProfile"),
                                 alignCenter: true,
                                 text: nOfQuiz != 0
                                     ? "${(100 * correctAnswers / (correctAnswers + wrongAnswers)).round()}%"
@@ -196,14 +223,14 @@ class HomeScreenTablet extends StatelessWidget {
                                 width: 10,
                               ),
                               CustomText(
-                                key: const Key("WrongAnswerTextProfile"),
+                                key: const Key("TabletWrongAnswerTextProfile"),
                                 alignCenter: true,
                                 text: AppLocalizations.of(context)!.wronganswer,
                                 thirdColor: true,
                                 size: 25,
                               ),
                               CustomText(
-                                key: const Key("WrongAnswerInfoProfile"),
+                                key: const Key("TabletWrongAnswerInfoProfile"),
                                 alignCenter: true,
                                 text: nOfQuiz != 0
                                     ? "${(100 * wrongAnswers / (correctAnswers + wrongAnswers)).round()}%"
@@ -219,14 +246,14 @@ class HomeScreenTablet extends StatelessWidget {
                                 width: 10,
                               ),
                               CustomText(
-                                key: const Key("ExperienceTextProfile"),
+                                key: const Key("TabletExperienceTextProfile"),
                                 alignCenter: true,
                                 text: AppLocalizations.of(context)!.experience,
                                 thirdColor: true,
                                 size: 25,
                               ),
                               CustomText(
-                                key: const Key("ExperienceInfoProfile"),
+                                key: const Key("TabletExperienceInfoProfile"),
                                 alignCenter: true,
                                 text: "$experience/$newlevelCap",
                                 size: 25,
@@ -240,14 +267,14 @@ class HomeScreenTablet extends StatelessWidget {
                                 width: 10,
                               ),
                               CustomText(
-                                key: const Key("BestScoreTextProfile"),
+                                key: const Key("TabletBestScoreTextProfile"),
                                 alignCenter: true,
                                 text: AppLocalizations.of(context)!.bestScore,
                                 thirdColor: true,
                                 size: 25,
                               ),
                               CustomText(
-                                key: const Key("BestScoreInfoProfile"),
+                                key: const Key("TabletBestScoreInfoProfile"),
                                 alignCenter: true,
                                 text: bestScore.toString(),
                                 size: 25,

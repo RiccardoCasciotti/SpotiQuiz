@@ -86,7 +86,7 @@ class _CustomButtonsHomeState extends State<CustomButtonsHome> {
                     // ignore: use_build_context_synchronously
                     context.read<AuthenticationBloc>().userGlobal = users;
 
-                    Future.delayed(animationDuration).then((_) => {
+                    await Future.delayed(animationDuration).then((_) => {
                           Navigator.push(
                             context,
                             SlideRightRoute(

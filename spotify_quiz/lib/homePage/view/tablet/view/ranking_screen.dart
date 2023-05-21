@@ -108,6 +108,7 @@ class RankingScreenTablet extends StatelessWidget {
                       Flexible(
                         flex: 4,
                         child: CustomText(
+                          key: const Key("TabletLocalRankingText"),
                           text: AppLocalizations.of(context)!.localranking,
                           size: 30,
                           bold: true,
@@ -140,6 +141,7 @@ class RankingScreenTablet extends StatelessWidget {
                                   height: 10,
                                 ),
                                 Table(
+                                  key: const Key("TabletTableLocalRanking"),
                                   border: TableBorder.symmetric(),
                                   defaultVerticalAlignment:
                                       TableCellVerticalAlignment.middle,
@@ -149,6 +151,8 @@ class RankingScreenTablet extends StatelessWidget {
                                         Container(
                                           alignment: Alignment.center,
                                           child: CustomText(
+                                            key: const Key(
+                                                "TabletUsernameLocalRanking"),
                                             text: AppLocalizations.of(context)!
                                                 .usernameranking,
                                             thirdColor: true,
@@ -159,6 +163,8 @@ class RankingScreenTablet extends StatelessWidget {
                                         Container(
                                           alignment: Alignment.center,
                                           child: CustomText(
+                                            key: const Key(
+                                                "TabletLevelLocalRanking"),
                                             text: AppLocalizations.of(context)!
                                                 .level,
                                             thirdColor: true,
@@ -169,6 +175,8 @@ class RankingScreenTablet extends StatelessWidget {
                                         Container(
                                           alignment: Alignment.center,
                                           child: CustomText(
+                                            key: const Key(
+                                                "TabletBestScoreLocalRanking"),
                                             text: AppLocalizations.of(context)!
                                                 .bestscoreranking,
                                             thirdColor: true,
@@ -216,6 +224,7 @@ class RankingScreenTablet extends StatelessWidget {
                       Flexible(
                         flex: 4,
                         child: CustomText(
+                          key: const Key("TabletGlobalRankingText"),
                           text: AppLocalizations.of(context)!.globalranking,
                           size: 30,
                           bold: true,
@@ -248,6 +257,7 @@ class RankingScreenTablet extends StatelessWidget {
                                   height: 10,
                                 ),
                                 Table(
+                                  key: const Key("TabletTableGlobalRanking"),
                                   border: TableBorder.symmetric(),
                                   defaultVerticalAlignment:
                                       TableCellVerticalAlignment.middle,
@@ -257,6 +267,8 @@ class RankingScreenTablet extends StatelessWidget {
                                         Container(
                                           alignment: Alignment.center,
                                           child: CustomText(
+                                            key: const Key(
+                                                "TabletUsernameGlobalRanking"),
                                             text: AppLocalizations.of(context)!
                                                 .usernameranking,
                                             thirdColor: true,
@@ -267,6 +279,8 @@ class RankingScreenTablet extends StatelessWidget {
                                         Container(
                                           alignment: Alignment.center,
                                           child: CustomText(
+                                            key: const Key(
+                                                "TabletLevelGlobalRanking"),
                                             text: AppLocalizations.of(context)!
                                                 .level,
                                             thirdColor: true,
@@ -277,6 +291,8 @@ class RankingScreenTablet extends StatelessWidget {
                                         Container(
                                           alignment: Alignment.center,
                                           child: CustomText(
+                                            key: const Key(
+                                                "TabletBestScoreGlobalRanking"),
                                             text: AppLocalizations.of(context)!
                                                 .bestscoreranking,
                                             thirdColor: true,
