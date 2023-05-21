@@ -49,7 +49,7 @@ class _PlayButtonState extends State<PlayButtonQuiz> {
                 context,
                 ScaleRoute(
                   page: QuizPage(
-                    selectedMode: 0,
+                    selectedMode: 1,
                   ),
                 ),
               ).then(
