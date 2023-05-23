@@ -40,35 +40,7 @@ class _CustomButtonsHomeState extends State<CustomButtonsHome> {
     _tapped2 = false;
   }
 
-  Future<Placemark> _getAddressFromLatLng(Position position) async {
-    List<Placemark> placemarks = await placemarkFromCoordinates(position!.latitude, position!.longitude);
-        
-    Placemark place = placemarks[0];
-
-    return place;  
-      
-      
-  }
-
-  Future<void> _getCurrentPosition() async {
-    final hasPermission = await _handleLocationPermission();
-    if (!hasPermission) return;
-    Position position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
-       
-    _currentPosition = position;
-    Placemark pos  = await _getAddressFromLatLng(_currentPosition);
-
-    List<Event> events = await get_events_on_position(pos.locality);
-
-      setState(() {
-        _tapped2 = true;
-        _currentCity = "${pos.locality}" ;
-        print(_currentCity);
-        _events = events;
-      });
-      ;
-  }
-
+  
   Future<bool> _handleLocationPermission() async {
     bool serviceEnabled;
     LocationPermission permission;
@@ -185,14 +157,14 @@ class _CustomButtonsHomeState extends State<CustomButtonsHome> {
                       : utilities.tertiaryColor,
                   foregroundColor: utilities.secondaryColor,
                   onPressed: () async {
-                    await _getCurrentPosition();
-                  
-                    if(_currentCity != "" ){
+                    //await _getCurrentPosition();
+                    final hasPermission = await _handleLocationPermission();
+                    if(hasPermission ){
                     Future.delayed(animationDuration).then((_) => {
                           Navigator.push(
                             context,
                             SlideLeftRoute(
-                              page: EventsPage(events: _events),
+                              page: EventsPage(),
                             ),
                           ).then(
                             (value) => setState(() {

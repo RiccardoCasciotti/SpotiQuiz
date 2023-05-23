@@ -12,9 +12,9 @@
   "events": "События",
 
   "home": "Home",
-
+  "loadingevents": "Загрузка событий",
   "quizpage": "Quiz",
-
+  "noevents": "Мероприятий нет :(",
   "statistics": "Статистика",
 
   "correctanswer": "Правильные ответы",

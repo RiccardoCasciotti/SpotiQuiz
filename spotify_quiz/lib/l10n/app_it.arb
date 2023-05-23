@@ -10,9 +10,9 @@
   "ranking": "Classifica",
 
   "events": "Eventi",
-
+  "loadingevents": "Caricamento eventi",
   "home": "Home",
-
+  "noevents": "Non ci sono eventi disponibili :(",
   "quizpage": "Quiz",
 
   "statistics": "Statistiche",

@@ -11,8 +11,10 @@ import 'package:spotify_quiz/user/bloc/user_bloc.dart';
 
 import 'package:spotify_quiz/utility/utilities.dart' as utilities;
 
+import '../../models/artist.dart';
 import '../../utility/api_calls.dart';
 
+bool artists_fetch = false;
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
@@ -27,8 +29,12 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _selectedIndex = 0;
+  List<Artist> _artists = [];
 
-  void _onItemTapped(int index) {
+  void _onItemTapped(int index) async {
+    print(index);
+    
+     
     setState(() {
       _selectedIndex = index;
     });
@@ -64,7 +70,7 @@ class _MyHomePageState extends State<MyHomePage> {
       Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) =>  EventsPage(events: []),
+        builder: (context) =>  EventsPage(),
       ),
     );
     
@@ -87,7 +93,7 @@ class _MyHomePageState extends State<MyHomePage> {
       QuizScreen(
         onItemTapped: _onItemTapped,
         selectedIndex: _selectedIndex,
-        artists: [],
+        artists: _artists,
       )
     ];
 

@@ -10,7 +10,6 @@ import '../../custom_widgets/bottom_nav_bar.dart';
 import '../../custom_widgets/box_custom_pic.dart';
 import '../../gameInfoPage/view/game_info_view.dart';
 
-// ignore: must_be_immutable
 class QuizScreen extends StatelessWidget {
   void Function(int)? onItemTapped;
   List<Artist> artists;
@@ -194,6 +193,7 @@ class QuizScreen extends StatelessWidget {
       backgroundColor: utilities.secondaryColor,
       body: SingleChildScrollView(
         child: Column(
+          //mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             const SizedBox(
@@ -201,8 +201,10 @@ class QuizScreen extends StatelessWidget {
             ),
             //UPPER PART WITH THE TYPE OF QUIZ
             Column(
+              mainAxisSize: MainAxisSize.min,
               children: [
                 Column(
+                  mainAxisSize: MainAxisSize.min,
                   children: [
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
@@ -232,8 +234,10 @@ class QuizScreen extends StatelessWidget {
             ),
             //LOWER PART PANEL WITH FAVOURITE ARTISTS
             Column(
+              mainAxisSize: MainAxisSize.min,
               children: [
                 Column(
+                  mainAxisSize: MainAxisSize.min,
                   children: [
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
@@ -248,7 +252,8 @@ class QuizScreen extends StatelessWidget {
                     ),
                   ],
                 ),
-        //         ListView.separated(
+        //         Container(
+        //             child:ListView.separated(
         //           shrinkWrap:true,
         //   scrollDirection: Axis.horizontal,
         //   padding: const EdgeInsets.all(12),
@@ -261,8 +266,8 @@ class QuizScreen extends StatelessWidget {
         //   itemBuilder: (context, index) {
         //     return artistCard(artists[index]);
         //   },
-        // )
-                
+        // ),
+        //         )    
               ],
             ),
             const SizedBox(
@@ -278,9 +283,9 @@ class QuizScreen extends StatelessWidget {
     );
   }
 
-  //List of widgets done to populate the page at first
 
   Widget artistCard(Artist artist)  {
+    
     return Column(
       textDirection: TextDirection.ltr,
       children: [
@@ -305,4 +310,100 @@ class QuizScreen extends StatelessWidget {
     );
   }
 
+
+
+  //List of widgets done to populate the page at first
+
+  List<Widget> trialArtists = [
+    Column(
+      textDirection: TextDirection.ltr,
+      children: [
+        CustomContainerPicNetwork(
+          picUrl:
+              'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg',
+          withBorder: false,
+          width: 150,
+          height: 150,
+        ),
+        Container(
+          alignment: Alignment.centerLeft,
+          child: CustomText(
+            text: "Peppe",
+            size: 20,
+            bold: true,
+            alignCenter: false,
+            thirdColor: true,
+          ),
+        ),
+      ],
+    ),
+    Column(
+      children: [
+        CustomContainerPicNetwork(
+          picUrl:
+              'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg',
+          withBorder: false,
+          width: 150,
+          height: 150,
+        ),
+        CustomText(
+          text: "Peppe",
+          size: 20,
+          bold: true,
+          thirdColor: true,
+        ),
+      ],
+    ),
+    Column(
+      children: [
+        CustomContainerPicNetwork(
+          picUrl:
+              'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg',
+          withBorder: false,
+          width: 150,
+          height: 150,
+        ),
+        CustomText(
+          text: "Peppe",
+          size: 20,
+          bold: true,
+          thirdColor: true,
+        ),
+      ],
+    ),
+    Column(
+      children: [
+        CustomContainerPicNetwork(
+          picUrl:
+              'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg',
+          withBorder: false,
+          width: 150,
+          height: 150,
+        ),
+        CustomText(
+          text: "Peppe",
+          size: 20,
+          bold: true,
+          thirdColor: true,
+        ),
+      ],
+    ),
+    Column(
+      children: [
+        CustomContainerPicNetwork(
+          picUrl:
+              'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg',
+          withBorder: false,
+          width: 150,
+          height: 150,
+        ),
+        CustomText(
+          text: "Peppe",
+          size: 20,
+          bold: true,
+          thirdColor: true,
+        ),
+      ],
+    ),
+  ];
 }

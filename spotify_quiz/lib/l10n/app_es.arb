@@ -11,6 +11,8 @@
 
   "events": "Eventos",
 
+  "loadingevents": "Cargando eventos",
+  "noevents": "No hay eventos disponibles :(",
   "home": "Home",
 
   "quizpage": "Quiz",

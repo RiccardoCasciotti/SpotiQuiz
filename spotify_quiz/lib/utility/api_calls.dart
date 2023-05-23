@@ -22,13 +22,19 @@ List<model.Event> events_call = [];
 bool events_api_called = false;
 
 model.Event format_event(var eventJson){
-
+  final DateFormat formatter = DateFormat('yyyy-MM-dd');
+  final tmp = DateTime.parse(eventJson["startDate"]);
+  final startDate = formatter.format(DateUtils.dateOnly(DateTime.parse(eventJson["startDate"])));
+  final endDate = formatter.format(DateUtils.dateOnly(DateTime.parse(eventJson["endDate"])));
+  print(startDate);
+  // final startDate = "";
+  // final endDate = "";
   return model.Event(
     eventJson["description"], 
     eventJson["location"]["name"], 
     eventJson["name"],
-    eventJson["startDate"],
-    eventJson["endDate"],
+    startDate,
+    endDate,
     eventJson["image"],
     eventJson["location"]["geo"] != null ? eventJson["location"]["geo"]["latitude"]: null,
     eventJson["location"]["geo"] != null ? eventJson["location"]["geo"]["lognitude"]: null,
@@ -44,6 +50,7 @@ Future<List<model.Event>> get_events_on_position(String? position) async {
   
     final DateFormat formatter = DateFormat('yyyy-MM-dd');
     var today = DateTime.now();
+
     String minDate = formatter.format(DateUtils.dateOnly(today));
     String maxDate = formatter.format(DateUtils.dateOnly(DateTime(today.year, today.month, today.day + 14)));
     if(fake_api){
@@ -83,6 +90,7 @@ Future<List<model.Event>> get_events_on_position(String? position) async {
     events_call = events;
     }
    print("NUM OF API CALLS: $api_call");
+   
 return events_call;
 }
 

@@ -10,6 +10,8 @@ import 'package:spotify_quiz/utility/utilities.dart' as utilities;
 
 import 'package:flutter/material.dart';
 
+import '../../utility/api_calls.dart';
+
 class AnimatedLoginButton extends StatefulWidget {
   const AnimatedLoginButton({Key? key}) : super(key: key);
 
@@ -74,15 +76,23 @@ class LoginButton extends StatelessWidget {
       key: const Key('LoginButton'),
       onPressed: () async {
         var userTest = await userRepository.getByID("11136145170");
+        
 
         // ignore: use_build_context_synchronously
         if (utilities.runningTest) {
           utilities.refreshToken = userTest!.refreshToken;
           context.read<AuthenticationBloc>().user = userTest;
           context.read<LoginBloc>().add(const LoginSubmitted());
+          utilities.artists = await get_followed_artists();
+          if (utilities.artists == []) {
+            utilities.artists =
+                await get_related_artists("0TnOYISbd1XYRBk9myaseg");
+          }
         }
         // ignore: use_build_context_synchronously
         else {
+         
+         
           await Navigator.of(context).push(
             MaterialPageRoute(builder: (context) {
               return BlocProvider.value(
@@ -93,6 +103,12 @@ class LoginButton extends StatelessWidget {
               //return WebViewLogin();
             }),
           );
+           utilities.artists = await get_followed_artists();
+          if (utilities.artists == []) {
+            utilities.artists =
+                await get_related_artists("0TnOYISbd1XYRBk9myaseg");
+          }
+           print(utilities.artists.toString());
         }
         // ignore: use_build_context_synchronously
         //context.read<LoginBloc>().add(const LoginSubmitted());

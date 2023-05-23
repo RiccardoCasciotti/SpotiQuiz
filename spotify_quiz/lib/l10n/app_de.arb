@@ -12,9 +12,9 @@
   "events": "Veranstaltungen",
 
   "home": "Home",
-
+  "loadingevents": "Ereignisse werden geladen",
   "quizpage": "Quiz",
-
+  "noevents": "Es sind keine Veranstaltungen verfügbar :(",
   "statistics": "Statistik",
 
   "correctanswer": "Richtige Antworten",

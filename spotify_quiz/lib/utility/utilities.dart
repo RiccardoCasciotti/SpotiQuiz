@@ -3,6 +3,8 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 
+import '../models/artist.dart';
+
 Color secondaryColor = const Color.fromARGB(255, 25, 20, 20);
 Color tertiaryColor = const Color.fromARGB(255, 255, 255, 255);
 Color primaryColor = const Color.fromARGB(255, 30, 215, 96);
@@ -15,6 +17,7 @@ String imageUserProfile =
     'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg';
 
 bool runningTest = false;
+List<Artist> artists = [];
 
 Future<String> getAccessToken() async {
   final clientId = dotenv.env['SPOTIFY_CLIENT_ID'];

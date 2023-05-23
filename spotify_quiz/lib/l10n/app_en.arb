@@ -19,6 +19,16 @@
     "description": "The level of the player"
   },
 
+  "noevents": "There aren't any events available :(",
+  "@level": {
+    "description": "The level of the player"
+  },
+
+
+ "loadingevents": "Loading events",
+  "@loadingevents": {
+    "description": "Loading events"
+  },
   "ranking": "Ranking",
   "@ranking": {
     "description": "Ranking in the first page"

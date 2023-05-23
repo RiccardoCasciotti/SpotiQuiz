@@ -70,6 +70,7 @@ dependencies:
   audioplayers: ^4.0.1
   geocoding: ^2.1.0
   geolocator: ^9.0.2
+  auto_size_text: ^3.0.0
 
 dev_dependencies:
   flutter_test:
