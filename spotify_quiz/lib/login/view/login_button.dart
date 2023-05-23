@@ -14,7 +14,7 @@ class LoginButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final UserRepository userRepository = UserRepository();
-    return ElevatedButton(
+    return MaterialButton(
       key: const Key('LoginButton'),
       onPressed: () async {
         var userTest = await userRepository.getByID("11136145170");
@@ -41,12 +41,14 @@ class LoginButton extends StatelessWidget {
         // ignore: use_build_context_synchronously
         //context.read<LoginBloc>().add(const LoginSubmitted());
       },
-      style: ElevatedButton.styleFrom(
-        backgroundColor: const Color.fromRGBO(54, 217, 174, 1),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10.0),
-        ),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(15.0),
       ),
+      color: const Color.fromRGBO(54, 217, 174, 1),
+      //hoverColor: const Color.fromRGBO(60, 187, 171, 1),
+      highlightColor: const Color.fromRGBO(60, 187, 171, 1),
+      //focusColor: const Color.fromRGBO(60, 187, 171, 1),
+      splashColor: const Color.fromRGBO(60, 187, 171, 1),
       child: CustomText(
         text: "Login with Spotify",
         size: 25,
