@@ -248,19 +248,20 @@ class QuizScreen extends StatelessWidget {
                     ),
                   ],
                 ),
-                ListView.separated(
-          scrollDirection: Axis.horizontal,
-          padding: const EdgeInsets.all(12),
-          itemCount: artists.length,
-          separatorBuilder: (context, index) {
-            return const SizedBox(
-              height: 12,
-            );
-          },
-          itemBuilder: (context, index) {
-            return artistCard(artists[index]);
-          },
-        )
+        //         ListView.separated(
+        //           shrinkWrap:true,
+        //   scrollDirection: Axis.horizontal,
+        //   padding: const EdgeInsets.all(12),
+        //   itemCount: artists.length,
+        //   separatorBuilder: (context, index) {
+        //     return const SizedBox(
+        //       height: 12,
+        //     );
+        //   },
+        //   itemBuilder: (context, index) {
+        //     return artistCard(artists[index]);
+        //   },
+        // )
                 
               ],
             ),
