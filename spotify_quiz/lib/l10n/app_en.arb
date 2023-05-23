@@ -113,7 +113,7 @@
   "@casual": {
     "description": "Casual mode text"
   },
-  
+ 
   "album": "Album",
   "@album": {
     "description": "Casual mode text"
@@ -122,13 +122,12 @@
   "@sarabanda": {
     "description": "sarabanda mode text"
   },
-
-  "gameinfoartist": "Game mode based on your favourite artists",
+  "gameinfoartist": "Guess the artist based on the picture!",
   "@gameinfoartist": {
     "description": "Info box artist mode"
   },
 
-  "gameinfosong": "Game mode based on your favourite songs",
+  "gameinfosong": "Listen the song and guess which one is it!",
   "@gameinfosong": {
     "description": "Info box song mode"
   },
@@ -196,7 +195,13 @@
      "experience": "Experience",
   "@experience": {
     "description": "The experience of the user"
+  },
+
+  "createquiz": "Creating your quiz...",
+  "@createquiz": {
+    "description": "Text waiting for the quiz"
   }
+
 
 }
 

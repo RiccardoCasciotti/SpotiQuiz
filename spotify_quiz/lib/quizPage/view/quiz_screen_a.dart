@@ -20,15 +20,9 @@ class QuizA extends StatelessWidget {
     return MediaQuery.of(context).orientation == Orientation.portrait
         ? Column(
             children: [
-              Container(
-                alignment: Alignment.center,
-                width: double.infinity,
-                child: Question(
-                  questions![questionIndex]['questionText'].toString(),
-                ),
-              ),
               if (questions![questionIndex]['image'] != null)
                 Container(
+                  key: const Key("ImageSinger"),
                   alignment: Alignment.center,
                   width: 300,
                   height: 300,
@@ -46,8 +40,13 @@ class QuizA extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   ...(questions![questionIndex]['answers']).map((answer) {
-                    return Answer(() => answerQuestion!(answer['score']),
-                        answer['text'].toString(), null);
+                    final index =
+                        (questions![questionIndex]['answers']).indexOf(answer) +
+                            1;
+                    return Answer(
+                        key: Key("AnswerQuestion$index"),
+                        () => answerQuestion!(answer['score']),
+                        answer['text'].toString());
                   })
                 ],
               )
@@ -55,18 +54,12 @@ class QuizA extends StatelessWidget {
           )
         : Column(
             children: [
-              Container(
-                alignment: Alignment.center,
-                width: double.infinity,
-                child: QuestionHorizontal(
-                  questions![questionIndex]['questionText'].toString(),
-                ),
-              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   if (questions![questionIndex]['image'] != null)
                     Container(
+                      key: const Key("ImageSingerHorizontal"),
                       alignment: Alignment.center,
                       width: 250,
                       height: 250,
@@ -86,7 +79,11 @@ class QuizA extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       ...(questions![questionIndex]['answers']).map((answer) {
+                        final index = (questions![questionIndex]['answers'])
+                                .indexOf(answer) +
+                            1;
                         return AnswerHorizontal(
+                            key: Key("AnswerQuestionHorizontal$index"),
                             () => answerQuestion!(answer['score']),
                             answer['text'].toString(), null);
                       })

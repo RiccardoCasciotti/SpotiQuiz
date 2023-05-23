@@ -32,5 +32,3 @@ Future<String> getAccessToken() async {
   final bodyJson = json.decode(response.body);
   return bodyJson["access_token"];
 }
-
-

@@ -45,9 +45,9 @@
 
   "casual": "Casuale",
 
-  "gameinfoartist": "Modalità di gioco basata sui tuoi artisti preferiti",
+  "gameinfoartist": "Indovina l'artista in base alla sua immagine!",
 
-  "gameinfosong": "Modalità di gioco basata sui tuoi brani preferiti",
+  "gameinfosong": "Ascolta la canzone e indovina qual é!",
 
   "gameinfoalbum": "Modalità di gioco che si basa sui tuoi album preferiti",
   "gamesarabanda": "Il classico Sarabanda! Associa il brano al titolo",
@@ -73,5 +73,7 @@
 
   "bestScore": "Miglior Punteggio",
 
-  "experience": "Esperienza"
+  "experience": "Esperienza",
+
+  "createquiz": "Creando il tuo quiz..."
 }

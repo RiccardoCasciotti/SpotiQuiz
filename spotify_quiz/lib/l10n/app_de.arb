@@ -45,9 +45,9 @@
 
   "casual": "Zufällig",
 
-  "gameinfoartist": "Spielmodus basierend auf ihren lieblingskünstlern",
+  "gameinfoartist": "Erraten Sie den Künstler anhand des Bildes!",
 
-  "gameinfosong": "Spielmodus auf der grundlage ihrer lieblingsstrecken",
+  "gameinfosong": "Hören Sie sich das Lied an und raten Sie, was es ist!",
 
   "gameinfoalbum": "Spielemodus, der auf Ihren Lieblingsalben basiert",
   "gamesarabanda": "Die klassische Sarabande! Verknüpfen Sie das Lied mit dem Titel",
@@ -73,5 +73,7 @@
 
   "bestScore": "Bestes Ergebnis",
 
-  "experience": "Erfahrung"
+  "experience": "Erfahrung",
+
+  "createquiz": "Erstellen Sie Ihr Quiz..."
 }

@@ -15,7 +15,7 @@ class Result extends StatelessWidget {
   const Result(
       this.resultScore, this.questionScore, this.returnHome, this.moveOn,
       {Key? key})
-      : super(key: key);
+      : super(key: const Key("ResultScreenPage"));
 
   @override
   Widget build(BuildContext context) {
@@ -25,6 +25,7 @@ class Result extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
                 CustomText(
+                  key: const Key("ResultText"),
                   text: questionScore > 0
                       ? AppLocalizations.of(context)!.correctanswerquiz
                       : AppLocalizations.of(context)!.wronganswerquiz,
@@ -40,6 +41,7 @@ class Result extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     CustomText(
+                      key: const Key("ScoreQuiz"),
                       text: AppLocalizations.of(context)!.scorequiz,
                       size: 35,
                       alignCenter: true,
@@ -47,6 +49,7 @@ class Result extends StatelessWidget {
                       bold: true,
                     ),
                     CustomText(
+                      key: const Key("ScoreQuizInfo"),
                       text: '$resultScore',
                       size: 35,
                       thirdColor: true,
@@ -63,10 +66,12 @@ class Result extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     TextButtonReturn(
+                      key: const Key("ReturnButton"),
                       text: AppLocalizations.of(context)!.quitbutton,
                       selectHandler: (_) => returnHome(),
                     ),
                     TextButtonReturn(
+                      key: const Key("ContinueButton"),
                       text: AppLocalizations.of(context)!.continuebutton,
                       selectHandler: (_) => moveOn(),
                     ),

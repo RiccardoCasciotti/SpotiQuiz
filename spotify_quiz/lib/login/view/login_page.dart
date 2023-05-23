@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:spotify_quiz/login/login.dart';
-import 'package:spotify_quiz/utility/utilities.dart' as utilities;
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
@@ -11,18 +10,30 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ImageProvider logo = const AssetImage("assets/images/logo2.png");
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Login'),
-        backgroundColor: utilities.primaryColor,
-      ),
-      body: const Center(
-        child: Padding(
-          padding:  EdgeInsets.all(12),
-          child: LoginButton(),
-          ),
+      body: Center(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Hero(
+              tag: "logo",
+              child: Container(
+                height: 230,
+                width: 230,
+                margin: const EdgeInsets.all(10.0),
+                padding: const EdgeInsets.all(3.0),
+                child: Image(image: logo),
+              ),
+            ),
+            const Padding(
+              padding: EdgeInsets.all(12),
+              child: AnimatedLoginButton(),
+            ),
+          ],
         ),
-      );
-    
+      ),
+    );
   }
 }

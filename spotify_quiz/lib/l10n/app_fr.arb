@@ -45,9 +45,9 @@
 
   "casual": "Au hasard",
 
-  "gameinfoartist": "Mode de jeu basé sur vos artistes préférés",
+  "gameinfoartist": "Devinez l'artiste en vous basant sur la photo !",
 
-  "gameinfosong": "Mode de jeu basé sur vos pistes préférées",
+  "gameinfosong": "Écoutez la chanson et devinez ce que c'est !",
 
   "gameinfoalbum": "Mode de jeu basé sur vos albums préférés",
   "gamesarabanda": "La Sarabande classique ! Associez la chanson au titre",
@@ -74,5 +74,7 @@
 
   "bestScore": "Meilleur Score",
 
-  "experience": "Expérience"
+  "experience": "Expérience",
+
+  "createquiz": "Création de votre quizz..."
 }
