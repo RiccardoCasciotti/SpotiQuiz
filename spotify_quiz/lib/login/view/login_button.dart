@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:spotify_quiz/authentication/web_view/web_view_login.dart';
+import 'package:spotify_quiz/custom_widgets/text.dart';
 import 'package:spotify_quiz/login/login.dart';
 import 'package:spotify_quiz/authentication/bloc/authentication_bloc.dart';
 import 'package:spotify_quiz/repositories/user/user_repository.dart';
@@ -21,7 +22,7 @@ class LoginButton extends StatelessWidget {
         // ignore: use_build_context_synchronously
         if (utilities.runningTest) {
           utilities.refreshToken = userTest!.refreshToken;
-          context.read<AuthenticationBloc>().user = userTest!;
+          context.read<AuthenticationBloc>().user = userTest;
           context.read<LoginBloc>().add(const LoginSubmitted());
         }
         // ignore: use_build_context_synchronously
@@ -40,9 +41,19 @@ class LoginButton extends StatelessWidget {
         // ignore: use_build_context_synchronously
         //context.read<LoginBloc>().add(const LoginSubmitted());
       },
-      style: ButtonStyle(
-          backgroundColor: MaterialStateProperty.all(utilities.secondaryColor)),
-      child: const Text('Login'),
+      style: ElevatedButton.styleFrom(
+        backgroundColor: const Color.fromRGBO(54, 217, 174, 1),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10.0),
+        ),
+      ),
+      child: CustomText(
+        text: "Login with Spotify",
+        size: 25,
+        secondColor: true,
+        bold: true,
+        italic: true,
+      ),
     );
   }
 }
