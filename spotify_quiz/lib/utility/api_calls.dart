@@ -15,6 +15,7 @@ import 'package:spotify_quiz/utility/utilities.dart' as utilities;
 
 String limit_albums = "20";
 String market = 'IT';
+int api_call = 0;
 
 var i = 0;
 List<model.Event> events_call = [];
@@ -44,7 +45,10 @@ Future<List<model.Event>> get_events_on_position(String? position) async {
     var today = DateTime.now();
     String minDate = formatter.format(DateUtils.dateOnly(today));
     String maxDate = formatter.format(DateUtils.dateOnly(DateTime(today.year, today.month, today.day + 14)));
-    if( !events_api_called && position != null && position != ""){
+    if( api_call< 11 && !events_api_called && position != null && position != ""){
+      api_call++;
+      print("NEW API CALL!!!!   NUM OF API CALLS: $api_call");
+      
       events_api_called = true;
     final eventsInfo = await http.get(
         Uri.parse(
@@ -64,7 +68,7 @@ Future<List<model.Event>> get_events_on_position(String? position) async {
     // print(events.toString());
     events_call = events;
     }
-  
+   print("NUM OF API CALLS: $api_call");
 return events_call;
 }
 

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:spotify_quiz/custom_widgets/text.dart';
+import 'package:spotify_quiz/models/artist.dart';
 import 'package:spotify_quiz/utility/transitions.dart';
 import 'package:spotify_quiz/utility/utilities.dart' as utilities;
 
@@ -12,11 +13,13 @@ import '../../gameInfoPage/view/game_info_view.dart';
 // ignore: must_be_immutable
 class QuizScreen extends StatelessWidget {
   void Function(int)? onItemTapped;
+  List<Artist> artists;
   int selectedIndex;
   QuizScreen({
     Key? key,
     required this.onItemTapped,
     required this.selectedIndex,
+    required this.artists,
   }) : super(key: const Key("QuizPage"));
 
   @override
@@ -245,13 +248,20 @@ class QuizScreen extends StatelessWidget {
                     ),
                   ],
                 ),
-                SingleChildScrollView(
-                  key: const Key("ArtistList"),
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
-                    children: trialArtists,
-                  ),
-                ),
+                ListView.separated(
+          scrollDirection: Axis.horizontal,
+          padding: const EdgeInsets.all(12),
+          itemCount: artists.length,
+          separatorBuilder: (context, index) {
+            return const SizedBox(
+              height: 12,
+            );
+          },
+          itemBuilder: (context, index) {
+            return artistCard(artists[index]);
+          },
+        )
+                
               ],
             ),
             const SizedBox(
@@ -269,13 +279,13 @@ class QuizScreen extends StatelessWidget {
 
   //List of widgets done to populate the page at first
 
-  List<Widget> trialArtists = [
-    Column(
+  Widget artistCard(Artist artist)  {
+    return Column(
       textDirection: TextDirection.ltr,
       children: [
         CustomContainerPicNetwork(
           picUrl:
-              'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg',
+              artist.images![1].url,
           withBorder: false,
           width: 150,
           height: 150,
@@ -283,7 +293,7 @@ class QuizScreen extends StatelessWidget {
         Container(
           alignment: Alignment.centerLeft,
           child: CustomText(
-            text: "Peppe",
+            text: artist.name,
             size: 20,
             bold: true,
             alignCenter: false,
@@ -291,74 +301,7 @@ class QuizScreen extends StatelessWidget {
           ),
         ),
       ],
-    ),
-    Column(
-      children: [
-        CustomContainerPicNetwork(
-          picUrl:
-              'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg',
-          withBorder: false,
-          width: 150,
-          height: 150,
-        ),
-        CustomText(
-          text: "Peppe",
-          size: 20,
-          bold: true,
-          thirdColor: true,
-        ),
-      ],
-    ),
-    Column(
-      children: [
-        CustomContainerPicNetwork(
-          picUrl:
-              'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg',
-          withBorder: false,
-          width: 150,
-          height: 150,
-        ),
-        CustomText(
-          text: "Peppe",
-          size: 20,
-          bold: true,
-          thirdColor: true,
-        ),
-      ],
-    ),
-    Column(
-      children: [
-        CustomContainerPicNetwork(
-          picUrl:
-              'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg',
-          withBorder: false,
-          width: 150,
-          height: 150,
-        ),
-        CustomText(
-          text: "Peppe",
-          size: 20,
-          bold: true,
-          thirdColor: true,
-        ),
-      ],
-    ),
-    Column(
-      children: [
-        CustomContainerPicNetwork(
-          picUrl:
-              'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg',
-          withBorder: false,
-          width: 150,
-          height: 150,
-        ),
-        CustomText(
-          text: "Peppe",
-          size: 20,
-          bold: true,
-          thirdColor: true,
-        ),
-      ],
-    ),
-  ];
+    );
+  }
+
 }

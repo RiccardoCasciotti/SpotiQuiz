@@ -63,6 +63,7 @@ class _CustomButtonsHomeState extends State<CustomButtonsHome> {
       setState(() {
         _tapped2 = true;
         _currentCity = "${pos.locality}" ;
+        print(_currentCity);
         _events = events;
       });
       ;

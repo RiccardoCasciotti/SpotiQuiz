@@ -87,6 +87,7 @@ class _MyHomePageState extends State<MyHomePage> {
       QuizScreen(
         onItemTapped: _onItemTapped,
         selectedIndex: _selectedIndex,
+        artists: [],
       )
     ];
 

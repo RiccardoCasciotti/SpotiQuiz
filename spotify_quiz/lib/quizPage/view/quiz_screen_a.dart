@@ -46,7 +46,7 @@ class QuizA extends StatelessWidget {
                     return Answer(
                         key: Key("AnswerQuestion$index"),
                         () => answerQuestion!(answer['score']),
-                        answer['text'].toString());
+                        answer['text'].toString(), null);
                   })
                 ],
               )
