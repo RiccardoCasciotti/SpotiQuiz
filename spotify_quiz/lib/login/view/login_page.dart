@@ -29,7 +29,7 @@ class LoginPage extends StatelessWidget {
             ),
             const Padding(
               padding: EdgeInsets.all(12),
-              child: LoginButton(),
+              child: AnimatedLoginButton(),
             ),
           ],
         ),
