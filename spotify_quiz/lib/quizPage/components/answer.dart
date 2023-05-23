@@ -5,8 +5,9 @@ import 'package:spotify_quiz/utility/utilities.dart' as utilities;
 class Answer extends StatefulWidget {
   final Function selectHandler;
   final String answerText;
+  final Function ? playerStop;
 
-  const Answer(this.selectHandler, this.answerText, {Key? key})
+  const Answer(this.selectHandler, this.answerText, this.playerStop, {Key? key})
       : super(key: key);
 
   @override
@@ -16,6 +17,8 @@ class Answer extends StatefulWidget {
 class _AnswerState extends State<Answer> {
   bool _tapped = false;
   final animationDuration = const Duration(milliseconds: 50);
+  
+  
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +27,10 @@ class _AnswerState extends State<Answer> {
       child: SizedBox(
         width: double.infinity,
         child: ElevatedButton(
-          onPressed: () {
+          onPressed: () async {
+            if( widget.playerStop != null){
+              await  widget.playerStop!();
+            }
             setState(() {
               _tapped = true;
             });
@@ -53,8 +59,9 @@ class _AnswerState extends State<Answer> {
 class AnswerHorizontal extends StatefulWidget {
   final Function selectHandler;
   final String answerText;
+  final Function ? playerStop;
 
-  const AnswerHorizontal(this.selectHandler, this.answerText, {Key? key})
+  const AnswerHorizontal(this.selectHandler, this.answerText, this.playerStop, {Key? key})
       : super(key: key);
 
   @override
@@ -64,16 +71,21 @@ class AnswerHorizontal extends StatefulWidget {
 class _AnswerHorizontalState extends State<AnswerHorizontal> {
   bool _tapped = false;
   final animationDuration = const Duration(milliseconds: 50);
-
+  
   @override
   Widget build(BuildContext context) {
+   
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: SizedBox(
         width: 380,
         height: 45,
         child: ElevatedButton(
-          onPressed: () {
+          onPressed: () async {
+            if( widget.playerStop != null){
+              await  widget.playerStop!();
+            }
+            
             setState(() {
               _tapped = true;
             });

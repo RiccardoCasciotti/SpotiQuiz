@@ -67,6 +67,9 @@ dependencies:
   random_date: ^0.0.7
   random_x: ^0.3.1
   uuid: ^3.0.7
+  audioplayers: ^4.0.1
+  geocoding: ^2.1.0
+  geolocator: ^9.0.2
 
 dev_dependencies:
   flutter_test:

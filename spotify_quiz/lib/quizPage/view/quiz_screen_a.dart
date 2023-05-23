@@ -47,7 +47,7 @@ class QuizA extends StatelessWidget {
                 children: [
                   ...(questions![questionIndex]['answers']).map((answer) {
                     return Answer(() => answerQuestion!(answer['score']),
-                        answer['text'].toString());
+                        answer['text'].toString(), null);
                   })
                 ],
               )
@@ -88,7 +88,7 @@ class QuizA extends StatelessWidget {
                       ...(questions![questionIndex]['answers']).map((answer) {
                         return AnswerHorizontal(
                             () => answerQuestion!(answer['score']),
-                            answer['text'].toString());
+                            answer['text'].toString(), null);
                       })
                     ],
                   )

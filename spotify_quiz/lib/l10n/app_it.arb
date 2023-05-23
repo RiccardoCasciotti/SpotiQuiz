@@ -49,10 +49,14 @@
 
   "gameinfosong": "Modalità di gioco basata sui tuoi brani preferiti",
 
-  "gameinfocasual": "Modalità di gioco basata su artisti e brani casuali",
+  "gameinfoalbum": "Modalità di gioco che si basa sui tuoi album preferiti",
+  "gamesarabanda": "Il classico Sarabanda! Associa il brano al titolo",
+
+  "gameinfocasual": "Modalità di gioco che sfrutta tutti i tipi di quiz",
 
   "playbutton": "Gioca",
-
+  "sarabanda": "Sarabanda",
+  "album": "Album",
   "playbuttonquiz": "Ascolta",
 
   "gobackbutton": "Torna indietro",

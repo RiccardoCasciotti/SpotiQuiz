@@ -77,6 +77,29 @@ Map<String, Object> format(model.Question q) {
     print("There was no image");
     print((q.obj as model.Artist).images!.length);
   }
+  else if (q.type == "D") {
+    qText = "What's the title of this song?";
+    
+
+    for (var i = 0; i < q.options.length; i++) {
+      answers.add({"text": q.options[i], "score": -2});
+    }
+    answers.add({"text": q.answer, "score": 10});
+    answers.shuffle();
+    if ((q.obj as model.Track).images != null) {
+      
+      model.Image image = (q.obj as model.Track).images![1];
+      return {
+        'questionText': qText,
+        'answers': answers,
+        'image': image,
+        'type': q.type,
+        'preview_url': (q.obj as model.Track).preview_url
+      };
+    }
+    print("There was no image");
+    print((q.obj as model.Artist).images!.length);
+  }
 
 
   return {

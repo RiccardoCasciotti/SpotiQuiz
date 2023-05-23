@@ -180,6 +180,7 @@ Future<model.Question> generate_d() async{
   var res = model.Question(answer ,options , type, obj as model.Track);
   // print(res.toString());
   // print((res.obj as model.Track).toString());
+  
   return res;
 
 }

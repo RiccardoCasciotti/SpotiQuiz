@@ -31,13 +31,13 @@ class GameInfoPage extends StatelessWidget {
         selectedMode: selectedGame,
       ),
       GameInfoScreen(
-        text: AppLocalizations.of(context)!.gameinfocasual,
-        urlImage: 'assets/images/concert.jpg',
+        text: AppLocalizations.of(context)!.gameinfoalbum,
+        urlImage: 'assets/images/album.jpg',
         selectedMode: selectedGame,
       ),
       GameInfoScreen(
-        text: AppLocalizations.of(context)!.gameinfocasual,
-        urlImage: 'assets/images/concert.jpg',
+        text: AppLocalizations.of(context)!.gamesarabanda,
+        urlImage: 'assets/images/sarabanda.jpg',
         selectedMode: selectedGame,
       ),
       GameInfoScreen(

@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:geocoding/geocoding.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:spotify_quiz/custom_widgets/text.dart';
 import 'package:spotify_quiz/eventsPage/view/events_page_view.dart';
 import 'package:spotify_quiz/rankingPage/ranking_page_view.dart';
+import 'package:spotify_quiz/utility/api_calls.dart';
 import 'package:spotify_quiz/utility/utilities.dart' as utilities;
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../authentication/bloc/authentication_bloc.dart';
+import '../models/event.dart';
 import '../repositories/user/user_repository.dart';
 import '../utility/transitions.dart';
 
@@ -24,13 +28,73 @@ class CustomButtonsHome extends StatefulWidget {
 class _CustomButtonsHomeState extends State<CustomButtonsHome> {
   bool _tapped1 = false;
   bool _tapped2 = false;
+  late Position _currentPosition;
+  String? _currentCity = "";
   final animationDuration = const Duration(milliseconds: 50);
+  late List<Event> _events;
 
   @override
   void initState() {
     super.initState();
     _tapped1 = false;
     _tapped2 = false;
+  }
+
+  Future<Placemark> _getAddressFromLatLng(Position position) async {
+    List<Placemark> placemarks = await placemarkFromCoordinates(position!.latitude, position!.longitude);
+        
+    Placemark place = placemarks[0];
+
+    return place;  
+      
+      
+  }
+
+  Future<void> _getCurrentPosition() async {
+    final hasPermission = await _handleLocationPermission();
+    if (!hasPermission) return;
+    Position position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
+       
+    _currentPosition = position;
+    Placemark pos  = await _getAddressFromLatLng(_currentPosition);
+
+    List<Event> events = await get_events_on_position(pos.locality);
+
+      setState(() {
+        _tapped2 = true;
+        _currentCity = "${pos.locality}" ;
+        _events = events;
+      });
+      ;
+  }
+
+  Future<bool> _handleLocationPermission() async {
+    bool serviceEnabled;
+    LocationPermission permission;
+
+    serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!serviceEnabled) {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          content: Text(
+              'Location services are disabled. Please enable the services')));
+      return false;
+    }
+    permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied) {
+        ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('Location permissions are denied')));
+        return false;
+      }
+    }
+    if (permission == LocationPermission.deniedForever) {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          content: Text(
+              'Location permissions are permanently denied, we cannot request permissions.')));
+      return false;
+    }
+    return true;
   }
 
   @override
@@ -119,15 +183,15 @@ class _CustomButtonsHomeState extends State<CustomButtonsHome> {
                       ? utilities.primaryColor
                       : utilities.tertiaryColor,
                   foregroundColor: utilities.secondaryColor,
-                  onPressed: () {
-                    setState(() {
-                      _tapped2 = true;
-                    });
+                  onPressed: () async {
+                    await _getCurrentPosition();
+                  
+                    if(_currentCity != "" ){
                     Future.delayed(animationDuration).then((_) => {
                           Navigator.push(
                             context,
                             SlideLeftRoute(
-                              page: const EventsPage(),
+                              page: EventsPage(events: _events),
                             ),
                           ).then(
                             (value) => setState(() {
@@ -135,6 +199,12 @@ class _CustomButtonsHomeState extends State<CustomButtonsHome> {
                             }),
                           ),
                         });
+                    }
+                    else{
+                      setState(() {
+                              _tapped2 = false;
+                            });
+                    }
                   },
                   child: const Icon(Icons.star_outline_sharp),
                 ),

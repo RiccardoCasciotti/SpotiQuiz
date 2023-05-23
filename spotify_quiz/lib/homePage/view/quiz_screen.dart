@@ -24,6 +24,8 @@ class QuizScreen extends StatelessWidget {
     ImageProvider mic = const AssetImage("assets/images/mic.jpg");
     ImageProvider singer = const AssetImage("assets/images/singer.jpg");
     ImageProvider concert = const AssetImage("assets/images/concert.jpg");
+    ImageProvider album = const AssetImage("assets/images/album.jpg");
+    ImageProvider sarabanda = const AssetImage("assets/images/sarabanda.jpg");
     //List of widgets to populate the upper part.
     //It needs to be in the build because it uses a context to navigate through pages
 
@@ -103,7 +105,7 @@ class QuizScreen extends StatelessWidget {
               tag: "gameC",
               child: CustomContainerPic(
                 key: const Key("ThirdQuizButton"),
-                pic: concert,
+                pic: album,
                 withBorder: true,
                 width: 150,
                 height: 150,
@@ -113,7 +115,7 @@ class QuizScreen extends StatelessWidget {
           ),
           CustomText(
             key: const Key("ThirdQuizText"),
-            text: AppLocalizations.of(context)!.casual,
+            text: AppLocalizations.of(context)!.album,
             size: 20,
             bold: true,
             italic: true,
@@ -134,7 +136,7 @@ class QuizScreen extends StatelessWidget {
               tag: "gameD",
               child: CustomContainerPic(
                 key: const Key("ForthQuizButton"),
-                pic: concert,
+                pic: sarabanda,
                 withBorder: true,
                 width: 150,
                 height: 150,
@@ -144,7 +146,7 @@ class QuizScreen extends StatelessWidget {
           ),
           CustomText(
             key: const Key("ForthQuizButton"),
-            text: AppLocalizations.of(context)!.casual,
+            text: AppLocalizations.of(context)!.sarabanda,
             size: 20,
             bold: true,
             italic: true,

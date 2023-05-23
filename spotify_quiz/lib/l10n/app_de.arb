@@ -49,14 +49,18 @@
 
   "gameinfosong": "Spielmodus auf der grundlage ihrer lieblingsstrecken",
 
-  "gameinfocasual": "Spielmodus basierend auf zufälligen künstlern und titeln",
+  "gameinfoalbum": "Spielemodus, der auf Ihren Lieblingsalben basiert",
+  "gamesarabanda": "Die klassische Sarabande! Verknüpfen Sie das Lied mit dem Titel",
+
+  "gameinfocasual": "Spielmodus, der alle Arten von Quizzen nutzt",
 
   "playbutton": "Spielen",
 
   "playbuttonquiz": "Hören",
 
   "gobackbutton": "Zurück zum anfang",
-
+"sarabanda": "Sarabanda",
+  "album": "Album",
   "correctanswerquiz": "Richtige Antwort!",
 
   "wronganswerquiz": "Falsche Antwort!",

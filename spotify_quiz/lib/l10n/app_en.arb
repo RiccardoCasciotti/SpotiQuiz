@@ -109,9 +109,18 @@
     "description": "Song mode text"
   },
 
-  "casual": "Casual",
+  "casual": "Random",
   "@casual": {
     "description": "Casual mode text"
+  },
+  
+  "album": "Album",
+  "@album": {
+    "description": "Casual mode text"
+  },
+  "sarabanda": "Sarabanda",
+  "@sarabanda": {
+    "description": "sarabanda mode text"
   },
 
   "gameinfoartist": "Game mode based on your favourite artists",
@@ -124,7 +133,17 @@
     "description": "Info box song mode"
   },
 
-  "gameinfocasual": "Game mode based on casual artists and songs",
+  "gameinfoalbum": "Game mode that is based on your favorite albums", 
+  "@gameinfoalbum": {
+    "description": "Game mode that is based on your favorite albums"
+  },
+  "gamesarabanda": "The classic Sarabande! Match the song to its title",
+  "@gamesarabanda": {
+    "description": "The classic Sarabande! Match the song to its title"
+  },
+  
+
+  "gameinfocasual": "Game mode that uses all types of quizzes",
   "@gameinfocasual": {
     "description": "Info box casual mode"
   },

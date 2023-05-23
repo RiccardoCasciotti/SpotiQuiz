@@ -49,7 +49,12 @@
 
   "gameinfosong": "Modo de reproducción basado en tus canciones favoritas",
 
-  "gameinfocasual": "Modo de juego basado en artistas y canciones aleatorias",
+  "gameinfoalbum": "Modo de juego basado en tus álbumes favoritos",
+  "gamesarabanda": "¡La clásica Sarabanda! Asociar la canción con el título.",
+
+  "gameinfocasual": "Modo de juego que aprovecha todo tipo de cuestionarios.",
+"sarabanda": "Sarabanda",
+  "album": "Album",
 
   "playbutton": "Juegas",
 

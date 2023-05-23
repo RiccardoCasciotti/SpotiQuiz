@@ -1,6 +1,7 @@
 import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:spotify_quiz/eventsPage/view/events_page_view.dart';
 import 'package:spotify_quiz/homePage/view/home_screen.dart';
 import 'package:spotify_quiz/homePage/view/quiz_screen.dart';
@@ -9,6 +10,8 @@ import 'package:spotify_quiz/repositories/user/user_repository.dart';
 import 'package:spotify_quiz/user/bloc/user_bloc.dart';
 
 import 'package:spotify_quiz/utility/utilities.dart' as utilities;
+
+import '../../utility/api_calls.dart';
 
 
 class MyHomePage extends StatefulWidget {
@@ -53,13 +56,18 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  void _goToEventPage(context) {
-    Navigator.push(
+  
+
+  void _goToEventPage(context) async{
+
+    
+      Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => const EventsPage(),
+        builder: (context) =>  EventsPage(events: []),
       ),
     );
+    
   }
 
   @override
@@ -67,6 +75,8 @@ class _MyHomePageState extends State<MyHomePage> {
     precacheImage(const AssetImage("assets/images/mic.jpg"), context);
     precacheImage(const AssetImage("assets/images/singer.jpg"), context);
     precacheImage(const AssetImage("assets/images/concert.jpg"), context);
+    precacheImage(const AssetImage("assets/images/sarabanda.jpg"), context);
+    precacheImage(const AssetImage("assets/images/album.jpg"), context);
     //var tmp = get_artist("0TnOYISbd1XYRBk9myaseg");// ############################################### !!
     final pages = [
       HomeScreen(

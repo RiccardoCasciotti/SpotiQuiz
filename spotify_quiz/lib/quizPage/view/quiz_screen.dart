@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:spotify_quiz/quizPage/view/quiz_screen_a.dart';
 import 'package:spotify_quiz/quizPage/view/quiz_screen_b.dart';
 import 'package:spotify_quiz/quizPage/view/quiz_screen_c.dart';
+import 'package:spotify_quiz/quizPage/view/quiz_screen_d.dart';
 import '../../custom_widgets/text.dart';
 import '../components/answer.dart';
 import '../components/question.dart';
@@ -31,9 +32,7 @@ class Quiz extends StatelessWidget {
       return QuizC(questions: questions, answerQuestion: answerQuestion, questionIndex: questionIndex);
     }
     else{
-      return
-      
-     CustomText(text: "QUESTION TYPE D", size: 14);
+      return QuizD(questions: questions, answerQuestion: answerQuestion, questionIndex: questionIndex);
     }
    //return QuizB(questions: questions, answerQuestion: answerQuestion, questionIndex: questionIndex);
   }
