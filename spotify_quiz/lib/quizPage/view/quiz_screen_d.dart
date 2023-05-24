@@ -70,197 +70,172 @@ class _QuizDState extends State<QuizD> {
         ? Column(
             children: [
               if (widget.isRandom)
-                Container(
-                  alignment: Alignment.center,
-                  width: double.infinity,
-                  child: Question(
-                    widget.questions![widget.questionIndex]['questionText']
-                        .toString(),
-                  ),
+                CustomText(
+                  size: 20,
+                  thirdColor: true,
+                  bold: true,
+                  text: widget.questions![widget.questionIndex]['questionText']
+                      .toString(),
                 ),
-              if (widget.questions![widget.questionIndex]['image'] != null)
-                Container(
-                  alignment: Alignment.center,
-                  width: 200,
-                  height: 200,
-                  child: Image.network(
-                      (widget.questions![widget.questionIndex]['image']
-                              as model.Image)
-                          .url,
-                      height: (widget.questions![widget.questionIndex]['image']
-                              as model.Image)
-                          .heigth
-                          .toDouble(),
-                      width: (widget.questions![widget.questionIndex]['image']
-                              as model.Image)
-                          .width
-                          .toDouble()),
-                ),
-              Container(
-                child: Wrap(
-                  spacing: 10,
-                  children: [
-                    ElevatedButton.icon(
-                        onPressed: () async {
-                          if (!isplaying && !audioplayed) {
-                            await player.play(preview_url);
-
-                            setState(() {
-                              isplaying = false;
-                              audioplayed = false;
-                              currentpos = 0;
-                            });
-
-                            setState(() {
-                              isplaying = true;
-                              audioplayed = true;
-                            });
-                          } else if (audioplayed && !isplaying) {
-                            await player.resume();
-
-                            setState(() {
-                              isplaying = true;
-                              audioplayed = true;
-                            });
-                          } else {
-                            await player.pause();
-
-                            setState(() {
-                              isplaying = false;
-                            });
-                          }
-                        },
-                        icon: Icon(isplaying ? Icons.pause : Icons.play_arrow),
-                        label: Text(isplaying ? "Pause" : "Play")),
-                    ElevatedButton.icon(
-                        onPressed: () async {
-                          await player.stop();
-                          //stop success
-                          setState(() {
-                            isplaying = false;
-                            audioplayed = false;
-                            currentpos = 0;
-                          });
-                        },
-                        icon: Icon(Icons.stop),
-                        label: Text("Stop")),
-                  ],
-                ),
+              const SizedBox(
+                height: 50,
               ),
               Column(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   ...(widget.questions![widget.questionIndex]['answers'])
                       .map((answer) {
-                    return Answer(() => widget.answerQuestion!(answer['score']),
-                        answer['text'].toString(), player.stop);
+                    final index = (widget.questions![widget.questionIndex]
+                                ['answers'])
+                            .indexOf(answer) +
+                        1;
+                    return Answer(
+                        key: Key("AnswerQuestion$index"),
+                        () => widget.answerQuestion!(answer['score']),
+                        answer['text'].toString(),
+                        player.stop);
                   })
                 ],
-              )
+              ),
+              const SizedBox(
+                height: 80,
+              ),
+              Wrap(
+                spacing: 10,
+                children: [
+                  ElevatedButton.icon(
+                      onPressed: () async {
+                        if (!isplaying && !audioplayed) {
+                          await player.play(preview_url);
+
+                          setState(() {
+                            isplaying = false;
+                            audioplayed = false;
+                            currentpos = 0;
+                          });
+
+                          setState(() {
+                            isplaying = true;
+                            audioplayed = true;
+                          });
+                        } else if (audioplayed && !isplaying) {
+                          await player.resume();
+
+                          setState(() {
+                            isplaying = true;
+                            audioplayed = true;
+                          });
+                        } else {
+                          await player.pause();
+
+                          setState(() {
+                            isplaying = false;
+                          });
+                        }
+                      },
+                      icon: Icon(isplaying ? Icons.pause : Icons.play_arrow),
+                      label: Text(isplaying ? "Pause" : "Play")),
+                  const SizedBox(
+                    width: 20,
+                  ),
+                  ElevatedButton.icon(
+                      onPressed: () async {
+                        await player.stop();
+                        //stop success
+                        setState(() {
+                          isplaying = false;
+                          audioplayed = false;
+                          currentpos = 0;
+                        });
+                      },
+                      icon: Icon(Icons.stop),
+                      label: Text("Stop")),
+                ],
+              ),
             ],
           )
         : Column(
             children: [
-              Container(
-                alignment: Alignment.center,
-                width: double.infinity,
-                child: QuestionHorizontal(
-                  widget.questions![widget.questionIndex]['questionText']
+              if (widget.isRandom)
+                CustomText(
+                  size: 20,
+                  thirdColor: true,
+                  bold: true,
+                  text: widget.questions![widget.questionIndex]['questionText']
                       .toString(),
                 ),
+              const SizedBox(
+                height: 20,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  if (widget.questions![widget.questionIndex]['image'] != null)
-                    Column(
-                      children: [
-                        Container(
-                          alignment: Alignment.center,
-                          width: 200,
-                          height: 200,
-                          child: Image.network(
-                            (widget.questions![widget.questionIndex]['image']
-                                    as model.Image)
-                                .url,
-                          ),
-                        ),
-                        Wrap(
-                          spacing: 10,
-                          children: [
-                            ElevatedButton.icon(
-                                onPressed: () async {
-                                  if (!isplaying && !audioplayed) {
-                                    await player.play(preview_url);
-
-                                    setState(() {
-                                      isplaying = false;
-                                      audioplayed = false;
-                                      currentpos = 0;
-                                    });
-
-                                    setState(() {
-                                      isplaying = true;
-                                      audioplayed = true;
-                                    });
-                                  } else if (audioplayed && !isplaying) {
-                                    await player.resume();
-
-                                    setState(() {
-                                      isplaying = true;
-                                      audioplayed = true;
-                                    });
-                                  } else {
-                                    await player.pause();
-
-                                    setState(() {
-                                      isplaying = false;
-                                    });
-                                  }
-                                },
-                                icon: Icon(
-                                    isplaying ? Icons.pause : Icons.play_arrow),
-                                label: Text(isplaying ? "Pause" : "Play")),
-                            ElevatedButton.icon(
-                                onPressed: () async {
-                                  await player.stop();
-                                  //stop success
-                                  setState(() {
-                                    isplaying = false;
-                                    audioplayed = false;
-                                    currentpos = 0;
-                                  });
-                                },
-                                icon: Icon(Icons.stop),
-                                label: Text("Stop")),
-                          ],
-                        ),
-                      ],
-                    ),
-                  // Container(
-                  //   alignment: Alignment.center,
-                  //   width: double.infinity,
-                  //   child: CustomText(
-                  //     text:
-                  //         questions![questionIndex]['questionText'].toString(),
-                  //     size: 14,
-                  //     alignCenter: true,
-                  //     thirdColor: true,
-                  //   ),
-                  // ),
-
                   Column(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       ...(widget.questions![widget.questionIndex]['answers'])
                           .map((answer) {
+                        final index = (widget.questions![widget.questionIndex]
+                                    ['answers'])
+                                .indexOf(answer) +
+                            1;
                         return AnswerHorizontal(
+                            key: Key("AnswerQuestionHorizontal$index"),
                             () => widget.answerQuestion!(answer['score']),
                             answer['text'].toString(),
                             player.stop);
                       })
                     ],
-                  )
+                  ),
+                  Column(
+                    children: [
+                      ElevatedButton.icon(
+                          onPressed: () async {
+                            if (!isplaying && !audioplayed) {
+                              await player.play(preview_url);
+
+                              setState(() {
+                                isplaying = false;
+                                audioplayed = false;
+                                currentpos = 0;
+                              });
+
+                              setState(() {
+                                isplaying = true;
+                                audioplayed = true;
+                              });
+                            } else if (audioplayed && !isplaying) {
+                              await player.resume();
+
+                              setState(() {
+                                isplaying = true;
+                                audioplayed = true;
+                              });
+                            } else {
+                              await player.pause();
+
+                              setState(() {
+                                isplaying = false;
+                              });
+                            }
+                          },
+                          icon:
+                              Icon(isplaying ? Icons.pause : Icons.play_arrow),
+                          label: Text(isplaying ? "Pause" : "Play")),
+                      ElevatedButton.icon(
+                          onPressed: () async {
+                            await player.stop();
+                            //stop success
+                            setState(() {
+                              isplaying = false;
+                              audioplayed = false;
+                              currentpos = 0;
+                            });
+                          },
+                          icon: Icon(Icons.stop),
+                          label: Text("Stop")),
+                    ],
+                  ),
                 ],
               )
             ],
