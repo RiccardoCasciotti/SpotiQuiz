@@ -17,7 +17,7 @@ var questions_c_prefetch;
 var questions_d_prefetch;
 var questions_r_prefetch;
 var events_prefetch;
-bool events_prefetched = false;
+bool prefetched = false;
 String nationality = "";
 String accessToken = "";
 String refreshToken = "";

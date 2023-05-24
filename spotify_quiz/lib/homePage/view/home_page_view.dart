@@ -107,15 +107,16 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    if( !utilities.prefetched ) {
     utilities.questions_a_prefetch = createQuestions("A");
     utilities.questions_b_prefetch = createQuestions("B");
     utilities.questions_c_prefetch = createQuestions("C");
     utilities.questions_d_prefetch = createQuestions("D");
     utilities.questions_r_prefetch = createQuestions("R");
     
-    if( !utilities.events_prefetched ) {
+    
         utilities.events_prefetch = _getCurrentPosition();
-        utilities.events_prefetched = true;
+        utilities.prefetched = true;
     } 
 
     precacheImage(const AssetImage("assets/images/mic.jpg"), context);

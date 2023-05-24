@@ -83,9 +83,23 @@ class _QuizPageState extends State<QuizPage> {
     print("QuestionIndex");
     print(_questionIndex);
     //FUNCTION WE CALL WHEN WE GIVE AN ANSWER, HERE WE CAN IMPLEMENT THE LOGIC TO CREATE NEW QUESTIONS
-    if ((_questionIndex + 1) % limit == 1) {
+    if ((_questionIndex) % limit == 1) {
       print("Create Second List");
       _secondSlotQuestions = createQuestions(widget.selectedMode);
+      if(widget.selectedMode == "A"){
+      utilities.questions_a_prefetch = _secondSlotQuestions;
+    }
+    else if(widget.selectedMode == "B"){
+     utilities.questions_b_prefetch= _secondSlotQuestions;
+    }
+    else if(widget.selectedMode == "C"){
+      utilities.questions_c_prefetch= _secondSlotQuestions;
+    }
+    else if(widget.selectedMode == "D"){
+      utilities.questions_d_prefetch= _secondSlotQuestions;
+    }else{
+      utilities.questions_r_prefetch= _secondSlotQuestions;
+    }
     }
     if (score > 0) {
       _correctAnswers++;
@@ -97,7 +111,13 @@ class _QuizPageState extends State<QuizPage> {
     if ((_questionIndex + 1) % limit == 0) {
       print(_questionIndex);
       print("Populating First List");
-      _questions = _secondSlotQuestions;
+     
+      setState(() {
+      _questionIndex = (_questionIndex + 1) % limit;
+      _questionScore = score;
+      _hasAnswered = true;
+       _questions = _secondSlotQuestions;
+    });
     }
 
     setState(() {
