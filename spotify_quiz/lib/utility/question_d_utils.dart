@@ -127,7 +127,9 @@ Future<model.Question> generate_d() async{
     // print("FOLLOWED LENGTH: ${consume_followed_artists.length}");
 
     tracks = await get_top_tracks(artist.id);
-    
+    if(tracks.isEmpty){  
+      await generate_d();    
+    }
     for(var i = 0; i < 3; i++){
       int index = random.nextInt(consume_followed_artists.length); 
       var tmp = await get_top_tracks(consume_followed_artists[index].id);
@@ -161,7 +163,9 @@ Future<model.Question> generate_d() async{
     // print("SIMILAR LENGTH: ${consume_similar_artists.length}");
     
     tracks = await get_top_tracks(artist.id);
-  
+    if(tracks.isEmpty){  
+      await generate_d();    
+    }
     for(var i = 0; i < 3; i++){
       int index = random.nextInt(consume_similar_artists.length); 
       var tmp = await get_top_tracks(consume_similar_artists[index].id);
