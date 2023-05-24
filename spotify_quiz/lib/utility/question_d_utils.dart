@@ -164,7 +164,7 @@ Future<model.Question> generate_d() async{
   
   return res;
   }
-   else if (consume_similar_artists.length > 3){
+   else {
     
     artist = consume_similar_artists.last;
     consume_similar_artists.removeLast();
@@ -211,7 +211,7 @@ Future<model.Question> generate_d() async{
   
   return res;
   }
-   return  await generate_d();
+   
   
   
 
