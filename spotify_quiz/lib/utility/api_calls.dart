@@ -21,7 +21,7 @@ var i = 0;
 List<model.Event> events_call = [];
 bool events_api_called = false;
 
-model.Event format_event(var eventJson) {
+
 model.Event format_event(var eventJson) {
   final DateFormat formatter = DateFormat('yyyy-MM-dd');
   final tmp = DateTime.parse(eventJson["startDate"]);
