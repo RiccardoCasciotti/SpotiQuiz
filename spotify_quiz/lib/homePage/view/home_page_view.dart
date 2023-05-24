@@ -12,6 +12,8 @@ import 'package:spotify_quiz/user/bloc/user_bloc.dart';
 
 import 'package:spotify_quiz/utility/utilities.dart' as utilities;
 
+import '../../custom_widgets/box_custom_pic.dart';
+import '../../custom_widgets/text.dart';
 import '../../models/artist.dart';
 import '../../quizPage/controllers/question_controller.dart';
 import '../../utility/api_calls.dart';
@@ -30,33 +32,86 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
-
-
   int _selectedIndex = 0;
   List<Artist> _artists = [];
+  List<Artist> _suggestedArtists = [];
+  List<Widget> artistsList = [];
+
+  void populateArtists() async {
+    var i = 0;
+    _artists = await get_followed_artists();
+    if (_artists.isNotEmpty) {
+      _suggestedArtists = await get_related_artists(_artists[0].id);
+    } else {
+      _suggestedArtists = await get_related_artists("0TnOYISbd1XYRBk9myaseg");
+    }
+    for (Artist artist in _artists) {
+      artistsList.add(
+        Column(
+          textDirection: TextDirection.ltr,
+          children: [
+            CustomContainerPicNetwork(
+              picUrl: artist.images![1].url,
+              withBorder: false,
+              width: 150,
+              height: 150,
+            ),
+            CustomText(
+              text: artist.name,
+              size: 18,
+              alignCenter: true,
+              thirdColor: true,
+            ),
+          ],
+        ),
+      );
+      i++;
+      if (i == 5) {
+        return;
+      }
+    }
+    if (i < 5) {
+      for (Artist artist in _suggestedArtists) {
+        artistsList.add(
+          Column(
+            textDirection: TextDirection.ltr,
+            children: [
+              CustomContainerPicNetwork(
+                picUrl: artist.images![1].url,
+                withBorder: false,
+                width: 150,
+                height: 150,
+              ),
+              CustomText(
+                text: artist.name,
+                size: 18,
+                alignCenter: true,
+                thirdColor: true,
+              ),
+            ],
+          ),
+        );
+        i++;
+        if (i == 5) {
+          return;
+        }
+      }
+    }
+  }
 
   void _onItemTapped(int index) async {
     print(index);
-    
-     
+
     setState(() {
       _selectedIndex = index;
     });
   }
 
-/*
- TO DEBUG FIREBASE FUNCTIONALITIES
-
-  void _createUser(context) {
-    BlocProvider.of<UserBloc>(context)
-        .add(Create("mench", "Ursula", 1, 1, 1, 1));
+  @override
+  void initState() {
+    populateArtists();
+    super.initState();
   }
-
-  void _getUsers(context) {
-    BlocProvider.of<UserBloc>(context).add(GetDataByID("mench"));
-  }
-*/
 
   void _goToRankingPage(context) {
     Navigator.push(
@@ -67,24 +122,18 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  
-
-  void _goToEventPage(context) async{
-
-    
-      Navigator.push(
+  void _goToEventPage(context) async {
+    Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) =>  EventsPage(),
+        builder: (context) => const EventsPage(),
       ),
     );
-
-   
-    
   }
-   Future<Placemark> _getAddressFromLatLng(Position position) async {
+
+  Future<Placemark> _getAddressFromLatLng(Position position) async {
     List<Placemark> placemarks =
-        await placemarkFromCoordinates(position!.latitude, position!.longitude);
+        await placemarkFromCoordinates(position.latitude, position.longitude);
 
     Placemark place = placemarks[0];
 
@@ -97,7 +146,6 @@ class _MyHomePageState extends State<MyHomePage> {
     Position position = await Geolocator.getCurrentPosition(
         desiredAccuracy: LocationAccuracy.high);
 
-    
     Placemark pos = await _getAddressFromLatLng(position);
     var events = await get_events_on_position(pos.locality);
     //_currentCity = "${pos.locality}";
@@ -134,7 +182,7 @@ class _MyHomePageState extends State<MyHomePage> {
       QuizScreen(
         onItemTapped: _onItemTapped,
         selectedIndex: _selectedIndex,
-        artists: _artists,
+        artists: artistsList,
       )
     ];
 
