@@ -186,7 +186,11 @@ Future<List<model.Album>> get_artist_albums(String artist_id) async {
   List<model.Album> albums = [];
   for (var i = 0; i < List.from(albumsJson["items"]).length; i++) {
     var curr_album = List.from(albumsJson["items"])[i];
+    if( curr_album["release_date_precision"] != "day"){
+      continue;
+    }
     final res = create_album(curr_album);
+
     albums.add(res);
   }
 
