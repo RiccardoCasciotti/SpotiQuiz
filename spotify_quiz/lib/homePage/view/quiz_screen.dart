@@ -9,20 +9,87 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../custom_widgets/bottom_nav_bar.dart';
 import '../../custom_widgets/box_custom_pic.dart';
 import '../../gameInfoPage/view/game_info_view.dart';
+import '../../utility/api_calls.dart';
 
-class QuizScreen extends StatelessWidget {
+class QuizScreen extends StatefulWidget {
   void Function(int)? onItemTapped;
-  List<Widget> artists;
+
   int selectedIndex;
   QuizScreen({
     Key? key,
     required this.onItemTapped,
     required this.selectedIndex,
-    required this.artists,
   }) : super(key: const Key("QuizPage"));
 
   @override
+  QuizScreenState createState() => QuizScreenState();
+}
+
+class QuizScreenState extends State<QuizScreen> {
+  @override
   Widget build(BuildContext context) {
+    Future<List<Artist>> getArtists() async {
+      return get_artist_quizpage();
+      /*
+    if (_artists.isNotEmpty) {
+      _suggestedArtists = await get_related_artists(_artists[0].id);
+    } else {
+      _suggestedArtists = await get_related_artists("0TnOYISbd1XYRBk9myaseg");
+    }
+    for (Artist artist in _artists) {
+      artistsList.add(
+        Column(
+          textDirection: TextDirection.ltr,
+          children: [
+            CustomContainerPicNetwork(
+              picUrl: artist.images![1].url,
+              withBorder: false,
+              width: 150,
+              height: 150,
+            ),
+            CustomText(
+              text: artist.name,
+              size: 18,
+              alignCenter: true,
+              thirdColor: true,
+            ),
+          ],
+        ),
+      );
+      i++;
+      if (i == 5) {
+        return;
+      }
+    }
+    if (i < 5) {
+      for (Artist artist in _suggestedArtists) {
+        artistsList.add(
+          Column(
+            textDirection: TextDirection.ltr,
+            children: [
+              CustomContainerPicNetwork(
+                picUrl: artist.images![1].url,
+                withBorder: false,
+                width: 150,
+                height: 150,
+              ),
+              CustomText(
+                text: artist.name,
+                size: 18,
+                alignCenter: true,
+                thirdColor: true,
+              ),
+            ],
+          ),
+        );
+        i++;
+        if (i == 5) {
+          return;
+        }
+      }
+    }*/
+    }
+
     ImageProvider mic = const AssetImage("assets/images/mic.jpg");
     ImageProvider singer = const AssetImage("assets/images/singer.jpg");
     ImageProvider concert = const AssetImage("assets/images/concert.jpg");
@@ -252,14 +319,59 @@ class QuizScreen extends StatelessWidget {
                     ),
                   ],
                 ),
-                SingleChildScrollView(
-                  key: const Key("ArtistList"),
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: artists,
-                  ),
-                ),
+                FutureBuilder<List<Artist>>(
+                    future: getArtists(),
+                    builder: (context, snapshot) {
+                      if (snapshot.hasData) {
+                        final artists = snapshot.data!;
+                        List<Widget> artistsBox = [];
+                        for (Artist artist in artists) {
+                          artistsBox.add(
+                            Column(
+                              textDirection: TextDirection.ltr,
+                              children: [
+                                CustomContainerPicNetwork(
+                                  picUrl: artist.images![1].url,
+                                  withBorder: false,
+                                  width: 150,
+                                  height: 150,
+                                ),
+                                CustomText(
+                                  text: artist.name,
+                                  size: 18,
+                                  alignCenter: true,
+                                  thirdColor: true,
+                                ),
+                              ],
+                            ),
+                          );
+                          i++;
+                        }
+                        return SingleChildScrollView(
+                          key: const Key("GameList"),
+                          scrollDirection: Axis.horizontal,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: artistsBox,
+                          ),
+                        );
+                      } else {
+                        return Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: const [
+                            SizedBox(
+                              width: 60,
+                              height: 60,
+                            ),
+                            SizedBox(
+                              width: 60,
+                              height: 60,
+                              child: CircularProgressIndicator(),
+                            ),
+                          ],
+                        );
+                      }
+                    }),
               ],
             ),
             const SizedBox(
@@ -269,8 +381,8 @@ class QuizScreen extends StatelessWidget {
         ),
       ),
       bottomNavigationBar: CustomNavBar(
-        selectedIndex: selectedIndex,
-        onItemTapped: onItemTapped,
+        selectedIndex: widget.selectedIndex,
+        onItemTapped: widget.onItemTapped,
       ),
     );
   }
@@ -298,96 +410,4 @@ class QuizScreen extends StatelessWidget {
 
   //List of widgets done to populate the page at first
 
-  List<Widget> trialArtists = [
-    Column(
-      textDirection: TextDirection.ltr,
-      children: [
-        CustomContainerPicNetwork(
-          picUrl:
-              'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg',
-          withBorder: false,
-          width: 150,
-          height: 150,
-        ),
-        Container(
-          alignment: Alignment.centerLeft,
-          child: CustomText(
-            text: "Peppe",
-            size: 20,
-            bold: true,
-            alignCenter: false,
-            thirdColor: true,
-          ),
-        ),
-      ],
-    ),
-    Column(
-      children: [
-        CustomContainerPicNetwork(
-          picUrl:
-              'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg',
-          withBorder: false,
-          width: 150,
-          height: 150,
-        ),
-        CustomText(
-          text: "Peppe",
-          size: 20,
-          bold: true,
-          thirdColor: true,
-        ),
-      ],
-    ),
-    Column(
-      children: [
-        CustomContainerPicNetwork(
-          picUrl:
-              'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg',
-          withBorder: false,
-          width: 150,
-          height: 150,
-        ),
-        CustomText(
-          text: "Peppe",
-          size: 20,
-          bold: true,
-          thirdColor: true,
-        ),
-      ],
-    ),
-    Column(
-      children: [
-        CustomContainerPicNetwork(
-          picUrl:
-              'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg',
-          withBorder: false,
-          width: 150,
-          height: 150,
-        ),
-        CustomText(
-          text: "Peppe",
-          size: 20,
-          bold: true,
-          thirdColor: true,
-        ),
-      ],
-    ),
-    Column(
-      children: [
-        CustomContainerPicNetwork(
-          picUrl:
-              'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg',
-          withBorder: false,
-          width: 150,
-          height: 150,
-        ),
-        CustomText(
-          text: "Peppe",
-          size: 20,
-          bold: true,
-          thirdColor: true,
-        ),
-      ],
-    ),
-  ];
 }

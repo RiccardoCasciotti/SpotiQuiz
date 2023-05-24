@@ -55,7 +55,7 @@ class QuizC extends StatelessWidget {
                 children: [
                   ...(questions![questionIndex]['answers']).map((answer) {
                     return Answer(() => answerQuestion!(answer['score']),
-                        answer['text'].toString(), null );
+                        answer['text'].toString(), null);
                   })
                 ],
               )
@@ -63,33 +63,40 @@ class QuizC extends StatelessWidget {
           )
         : Column(
             children: [
-              Container(
-                alignment: Alignment.center,
-                width: double.infinity,
-                child: QuestionHorizontal(
-                  questions![questionIndex]['questionText'].toString(),
-                ),
+              CustomText(
+                size: 20,
+                thirdColor: true,
+                bold: true,
+                text: questions![questionIndex]['questionText'].toString(),
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   if (questions![questionIndex]['image'] != null)
-                    Container(
-                      alignment: Alignment.center,
-                      width: 150,
-                      height: 150,
-                      child: Image.network(
-                          (questions![questionIndex]['image'] as model.Image)
-                              .url,
-                          height: (questions![questionIndex]['image']
-                                  as model.Image)
-                              .heigth
-                              .toDouble(),
-                          width: (questions![questionIndex]['image']
-                                  as model.Image)
-                              .width
-                              .toDouble()),
+                    Column(
+                      children: [
+                        Container(
+                          alignment: Alignment.center,
+                          width: 200,
+                          height: 200,
+                          child: Image.network(
+                            (questions![questionIndex]['image'] as model.Image)
+                                .url,
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        CustomText(
+                          size: 15,
+                          bold: true,
+                          thirdColor: true,
+                          text: questions![questionIndex]['album_title']
+                              .toString(),
+                        ),
+                      ],
                     ),
+
                   // Container(
                   //   alignment: Alignment.center,
                   //   width: double.infinity,
@@ -107,7 +114,8 @@ class QuizC extends StatelessWidget {
                       ...(questions![questionIndex]['answers']).map((answer) {
                         return AnswerHorizontal(
                             () => answerQuestion!(answer['score']),
-                            answer['text'].toString(), null);
+                            answer['text'].toString(),
+                            null);
                       })
                     ],
                   )

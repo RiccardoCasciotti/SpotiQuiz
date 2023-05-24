@@ -33,71 +33,6 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _selectedIndex = 0;
-  List<Artist> _artists = [];
-  List<Artist> _suggestedArtists = [];
-  List<Widget> artistsList = [];
-
-  void populateArtists() async {
-    var i = 0;
-    _artists = await get_followed_artists();
-    if (_artists.isNotEmpty) {
-      _suggestedArtists = await get_related_artists(_artists[0].id);
-    } else {
-      _suggestedArtists = await get_related_artists("0TnOYISbd1XYRBk9myaseg");
-    }
-    for (Artist artist in _artists) {
-      artistsList.add(
-        Column(
-          textDirection: TextDirection.ltr,
-          children: [
-            CustomContainerPicNetwork(
-              picUrl: artist.images![1].url,
-              withBorder: false,
-              width: 150,
-              height: 150,
-            ),
-            CustomText(
-              text: artist.name,
-              size: 18,
-              alignCenter: true,
-              thirdColor: true,
-            ),
-          ],
-        ),
-      );
-      i++;
-      if (i == 5) {
-        return;
-      }
-    }
-    if (i < 5) {
-      for (Artist artist in _suggestedArtists) {
-        artistsList.add(
-          Column(
-            textDirection: TextDirection.ltr,
-            children: [
-              CustomContainerPicNetwork(
-                picUrl: artist.images![1].url,
-                withBorder: false,
-                width: 150,
-                height: 150,
-              ),
-              CustomText(
-                text: artist.name,
-                size: 18,
-                alignCenter: true,
-                thirdColor: true,
-              ),
-            ],
-          ),
-        );
-        i++;
-        if (i == 5) {
-          return;
-        }
-      }
-    }
-  }
 
   void _onItemTapped(int index) async {
     print(index);
@@ -109,7 +44,6 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   void initState() {
-    populateArtists();
     super.initState();
   }
 
@@ -155,17 +89,16 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    if( !utilities.prefetched ) {
-    utilities.questions_a_prefetch = createQuestions("A");
-    utilities.questions_b_prefetch = createQuestions("B");
-    utilities.questions_c_prefetch = createQuestions("C");
-    utilities.questions_d_prefetch = createQuestions("D");
-    utilities.questions_r_prefetch = createQuestions("R");
-    
-    
-        utilities.events_prefetch = _getCurrentPosition();
-        utilities.prefetched = true;
-    } 
+    if (!utilities.prefetched) {
+      utilities.questions_a_prefetch = createQuestions("A");
+      utilities.questions_b_prefetch = createQuestions("B");
+      utilities.questions_c_prefetch = createQuestions("C");
+      utilities.questions_d_prefetch = createQuestions("D");
+      utilities.questions_r_prefetch = createQuestions("R");
+
+      utilities.events_prefetch = _getCurrentPosition();
+      utilities.prefetched = true;
+    }
 
     precacheImage(const AssetImage("assets/images/mic.jpg"), context);
     precacheImage(const AssetImage("assets/images/singer.jpg"), context);
@@ -182,7 +115,6 @@ class _MyHomePageState extends State<MyHomePage> {
       QuizScreen(
         onItemTapped: _onItemTapped,
         selectedIndex: _selectedIndex,
-        artists: artistsList,
       )
     ];
 
