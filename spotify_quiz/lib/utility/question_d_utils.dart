@@ -131,6 +131,13 @@ Future<model.Question> generate_d() async{
     for(var i = 0; i < 3; i++){
       int index = random.nextInt(consume_followed_artists.length); 
       var tmp = await get_top_tracks(consume_followed_artists[index].id);
+      if(tmp.isEmpty){
+        consume_followed_artists.remove(index);
+        if(consume_followed_artists.length  < 3 ){
+          await init_data();
+        }
+        continue;
+      }
       tmp.shuffle();
       var option = tmp.last;
 
@@ -158,6 +165,14 @@ Future<model.Question> generate_d() async{
     for(var i = 0; i < 3; i++){
       int index = random.nextInt(consume_similar_artists.length); 
       var tmp = await get_top_tracks(consume_similar_artists[index].id);
+
+      if(tmp.isEmpty){
+        consume_similar_artists.remove(index);
+        if(consume_similar_artists.length  < 3 ){
+          await init_data();
+        }
+        continue;
+      }
       tmp.shuffle();
       var option = tmp.last;
 
