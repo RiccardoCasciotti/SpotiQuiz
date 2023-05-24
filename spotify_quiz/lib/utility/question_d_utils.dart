@@ -128,7 +128,7 @@ Future<model.Question> generate_d() async{
 
     tracks = await get_top_tracks(artist.id);
     if(tracks.isEmpty){  
-      await generate_d();    
+      return await generate_d();    
     }
     for(var i = 0; i < 3; i++){
       int index = random.nextInt(consume_followed_artists.length); 
@@ -152,9 +152,19 @@ Future<model.Question> generate_d() async{
         i--;
       }
     }
+    int index = random.nextInt(tracks.length); 
+  obj =  tracks[index];
+  answer = obj.name;
+  
+  String type = "D";
 
+  var res = model.Question(answer ,options , type, obj as model.Track);
+  // print(res.toString());
+  // print((res.obj as model.Track).toString());
+  
+  return res;
   }
-  else{
+   else if (consume_similar_artists.length > 3){
     
     artist = consume_similar_artists.last;
     consume_similar_artists.removeLast();
@@ -164,7 +174,7 @@ Future<model.Question> generate_d() async{
     
     tracks = await get_top_tracks(artist.id);
     if(tracks.isEmpty){  
-      await generate_d();    
+      return await generate_d();    
     }
     for(var i = 0; i < 3; i++){
       int index = random.nextInt(consume_similar_artists.length); 
@@ -189,8 +199,7 @@ Future<model.Question> generate_d() async{
         i--;
       }
     }
-  }
-  int index = random.nextInt(tracks.length); 
+    int index = random.nextInt(tracks.length); 
   obj =  tracks[index];
   answer = obj.name;
   
@@ -201,5 +210,9 @@ Future<model.Question> generate_d() async{
   // print((res.obj as model.Track).toString());
   
   return res;
+  }
+   return  await generate_d();
+  
+  
 
 }
