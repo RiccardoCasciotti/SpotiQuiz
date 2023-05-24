@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../custom_widgets/text.dart';
 import '../components/answer.dart';
 import '../components/question.dart';
 import 'package:spotify_quiz/models/models.dart' as model;
@@ -20,23 +21,27 @@ class QuizA extends StatelessWidget {
     return MediaQuery.of(context).orientation == Orientation.portrait
         ? Column(
             children: [
-              Container(
-                alignment: Alignment.center,
-                width: double.infinity,
-                child: Question(
-                  questions![questionIndex]['questionText'].toString(),
-                ),
+              CustomText(
+                size: 20,
+                thirdColor: true,
+                bold: true,
+                text: questions![questionIndex]['questionText'].toString(),
+              ),
+              const SizedBox(
+                height: 20,
               ),
               if (questions![questionIndex]['image'] != null)
                 Container(
-                  key: const Key("ImageSinger"),
                   alignment: Alignment.center,
-                  width: 300,
-                  height: 300,
+                  width: 200,
+                  height: 200,
                   child: Image.network(
                     (questions![questionIndex]['image'] as model.Image).url,
                   ),
                 ),
+              const SizedBox(
+                height: 20,
+              ),
               Column(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
@@ -56,25 +61,34 @@ class QuizA extends StatelessWidget {
           )
         : Column(
             children: [
-              Container(
-                alignment: Alignment.center,
-                width: double.infinity,
-                child: Question(
-                  questions![questionIndex]['questionText'].toString(),
-                ),
+              CustomText(
+                size: 20,
+                thirdColor: true,
+                bold: true,
+                text: questions![questionIndex]['questionText'].toString(),
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   if (questions![questionIndex]['image'] != null)
-                    Container(
-                      key: const Key("ImageSingerHorizontal"),
-                      alignment: Alignment.center,
-                      width: 250,
-                      height: 250,
-                      child: Image.network(
-                        (questions![questionIndex]['image'] as model.Image).url,
-                      ),
+                    Column(
+                      children: [
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        Container(
+                          alignment: Alignment.center,
+                          width: 200,
+                          height: 200,
+                          child: Image.network(
+                            (questions![questionIndex]['image'] as model.Image)
+                                .url,
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                      ],
                     ),
                   Column(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,

@@ -27,6 +27,9 @@ class QuizC extends StatelessWidget {
                 bold: true,
                 text: questions![questionIndex]['questionText'].toString(),
               ),
+              const SizedBox(
+                height: 20,
+              ),
               if (questions![questionIndex]['image'] != null)
                 Container(
                   alignment: Alignment.center,
@@ -36,6 +39,9 @@ class QuizC extends StatelessWidget {
                     (questions![questionIndex]['image'] as model.Image).url,
                   ),
                 ),
+              const SizedBox(
+                height: 20,
+              ),
               CustomText(
                 size: 20,
                 thirdColor: true,
@@ -46,8 +52,14 @@ class QuizC extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   ...(questions![questionIndex]['answers']).map((answer) {
-                    return Answer(() => answerQuestion!(answer['score']),
-                        answer['text'].toString(), null);
+                    final index =
+                        (questions![questionIndex]['answers']).indexOf(answer) +
+                            1;
+                    return Answer(
+                        key: Key("AnswerQuestion$index"),
+                        () => answerQuestion!(answer['score']),
+                        answer['text'].toString(),
+                        null);
                   })
                 ],
               )
@@ -67,6 +79,9 @@ class QuizC extends StatelessWidget {
                   if (questions![questionIndex]['image'] != null)
                     Column(
                       children: [
+                        const SizedBox(
+                          height: 20,
+                        ),
                         Container(
                           alignment: Alignment.center,
                           width: 200,
@@ -79,32 +94,28 @@ class QuizC extends StatelessWidget {
                         const SizedBox(
                           height: 10,
                         ),
-                        CustomText(
-                          size: 15,
-                          bold: true,
-                          thirdColor: true,
-                          text: questions![questionIndex]['album_title']
-                              .toString(),
+                        SizedBox(
+                          width: 300,
+                          height: 50,
+                          child: CustomText(
+                            size: 15,
+                            bold: true,
+                            thirdColor: true,
+                            text: questions![questionIndex]['album_title']
+                                .toString(),
+                          ),
                         ),
                       ],
                     ),
-
-                  // Container(
-                  //   alignment: Alignment.center,
-                  //   width: double.infinity,
-                  //   child: CustomText(
-                  //     text:
-                  //         questions![questionIndex]['questionText'].toString(),
-                  //     size: 14,
-                  //     alignCenter: true,
-                  //     thirdColor: true,
-                  //   ),
-                  // ),
                   Column(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       ...(questions![questionIndex]['answers']).map((answer) {
+                        final index = (questions![questionIndex]['answers'])
+                                .indexOf(answer) +
+                            1;
                         return AnswerHorizontal(
+                            key: Key("AnswerQuestionHorizontal$index"),
                             () => answerQuestion!(answer['score']),
                             answer['text'].toString(),
                             null);
