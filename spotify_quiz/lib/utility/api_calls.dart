@@ -269,7 +269,9 @@ Future<List<model.Track>> get_top_tracks(String artist_id) async {
 
   for (var i = 0; i < List.from(tracksJson["tracks"]).length; i++) {
     var tmp = List.from(tracksJson["tracks"])[i];
-
+    if(tmp['id'] == null || tmp['name'] == null || tmp['preview_url']  == null){
+      continue;
+    }
     model.Track track = track_format(tmp);
 
     tracks.add(track);
