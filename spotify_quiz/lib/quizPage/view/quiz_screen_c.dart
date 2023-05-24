@@ -21,12 +21,11 @@ class QuizC extends StatelessWidget {
     return MediaQuery.of(context).orientation == Orientation.portrait
         ? Column(
             children: [
-              Container(
-                alignment: Alignment.center,
-                width: double.infinity,
-                child: Question(
-                  questions![questionIndex]['questionText'].toString(),
-                ),
+              CustomText(
+                size: 20,
+                thirdColor: true,
+                bold: true,
+                text: questions![questionIndex]['questionText'].toString(),
               ),
               if (questions![questionIndex]['image'] != null)
                 Container(
@@ -34,21 +33,14 @@ class QuizC extends StatelessWidget {
                   width: 200,
                   height: 200,
                   child: Image.network(
-                      (questions![questionIndex]['image'] as model.Image).url,
-                      height:
-                          (questions![questionIndex]['image'] as model.Image)
-                              .heigth
-                              .toDouble(),
-                      width: (questions![questionIndex]['image'] as model.Image)
-                          .width
-                          .toDouble()),
+                    (questions![questionIndex]['image'] as model.Image).url,
+                  ),
                 ),
-              Container(
-                alignment: Alignment.center,
-                width: double.infinity,
-                child: Question(
-                  questions![questionIndex]['album_title'].toString(),
-                ),
+              CustomText(
+                size: 20,
+                thirdColor: true,
+                bold: true,
+                text: questions![questionIndex]['album_title'].toString(),
               ),
               Column(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,

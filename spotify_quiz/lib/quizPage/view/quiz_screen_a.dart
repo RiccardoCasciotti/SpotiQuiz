@@ -34,14 +34,8 @@ class QuizA extends StatelessWidget {
                   width: 300,
                   height: 300,
                   child: Image.network(
-                      (questions![questionIndex]['image'] as model.Image).url,
-                      height:
-                          (questions![questionIndex]['image'] as model.Image)
-                              .heigth
-                              .toDouble(),
-                      width: (questions![questionIndex]['image'] as model.Image)
-                          .width
-                          .toDouble()),
+                    (questions![questionIndex]['image'] as model.Image).url,
+                  ),
                 ),
               Column(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -53,7 +47,8 @@ class QuizA extends StatelessWidget {
                     return Answer(
                         key: Key("AnswerQuestion$index"),
                         () => answerQuestion!(answer['score']),
-                        answer['text'].toString(), null);
+                        answer['text'].toString(),
+                        null);
                   })
                 ],
               )
@@ -61,17 +56,16 @@ class QuizA extends StatelessWidget {
           )
         : Column(
             children: [
-
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Container(
+              Container(
                 alignment: Alignment.center,
                 width: double.infinity,
                 child: Question(
                   questions![questionIndex]['questionText'].toString(),
                 ),
               ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
                   if (questions![questionIndex]['image'] != null)
                     Container(
                       key: const Key("ImageSingerHorizontal"),
@@ -79,16 +73,8 @@ class QuizA extends StatelessWidget {
                       width: 250,
                       height: 250,
                       child: Image.network(
-                          (questions![questionIndex]['image'] as model.Image)
-                              .url,
-                          height: (questions![questionIndex]['image']
-                                  as model.Image)
-                              .heigth
-                              .toDouble(),
-                          width: (questions![questionIndex]['image']
-                                  as model.Image)
-                              .width
-                              .toDouble()),
+                        (questions![questionIndex]['image'] as model.Image).url,
+                      ),
                     ),
                   Column(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -100,7 +86,8 @@ class QuizA extends StatelessWidget {
                         return AnswerHorizontal(
                             key: Key("AnswerQuestionHorizontal$index"),
                             () => answerQuestion!(answer['score']),
-                            answer['text'].toString(), null);
+                            answer['text'].toString(),
+                            null);
                       })
                     ],
                   )
