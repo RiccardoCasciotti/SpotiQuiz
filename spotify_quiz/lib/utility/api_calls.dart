@@ -22,12 +22,14 @@ List<model.Event> events_call = [];
 bool events_api_called = false;
 
 model.Event format_event(var eventJson) {
+model.Event format_event(var eventJson) {
   final DateFormat formatter = DateFormat('yyyy-MM-dd');
   final tmp = DateTime.parse(eventJson["startDate"]);
   final startDate = formatter
       .format(DateUtils.dateOnly(DateTime.parse(eventJson["startDate"])));
   final endDate = formatter
       .format(DateUtils.dateOnly(DateTime.parse(eventJson["endDate"])));
+
   print(startDate);
   // final startDate = "";
   // final endDate = "";
@@ -234,6 +236,60 @@ Future<List<model.Artist>> get_followed_artists() async {
     artists.add(res);
   }
 
+  return artists;
+}
+
+Future<List<model.Artist>> get_artist_quizpage() async {
+  accessToken = await getAccessToken();
+  List<model.Artist> artists = [];
+  final artistsInfo = await http.get(
+      Uri.parse("https://api.spotify.com/v1/me/following?type=artist"),
+      headers: {
+        "Authorization": 'Authorization: Bearer $accessToken',
+        "content-type": "application/x-www-form-urlencoded"
+      });
+
+  final artistsJson = json.decode(artistsInfo.body);
+
+  for (var i = 0;
+      i < List.from(artistsJson["artists"]["items"]).length && i < 5;
+      i++) {
+    var curr_artist = List.from(artistsJson["artists"]["items"])[i];
+
+    final res = create_artist(curr_artist);
+    artists.add(res);
+  }
+  final http.Response relArtistsInfo;
+  if (artists.length < 5) {
+    if (artists.isNotEmpty) {
+      final String firstArtistId = artists[0].id;
+
+      relArtistsInfo = await http.get(
+          Uri.parse(
+              "https://api.spotify.com/v1/artists/$firstArtistId/related-artists"),
+          headers: {
+            "Authorization": 'Authorization: Bearer $accessToken',
+            "content-type": "application/x-www-form-urlencoded"
+          });
+    } else {
+      relArtistsInfo = await http.get(
+          Uri.parse(
+              "https://api.spotify.com/v1/artists/0TnOYISbd1XYRBk9myaseg/related-artists"),
+          headers: {
+            "Authorization": 'Authorization: Bearer $accessToken',
+            "content-type": "application/x-www-form-urlencoded"
+          });
+    }
+
+    final relArtistsJson = json.decode(relArtistsInfo.body);
+
+    for (var i = 0; i < List.from(relArtistsJson["artists"]).length; i++) {
+      var curr_rel_artist = List.from(relArtistsJson["artists"])[i];
+
+      final res = create_artist(curr_rel_artist);
+      artists.add(res);
+    }
+  }
   return artists;
 }
 
