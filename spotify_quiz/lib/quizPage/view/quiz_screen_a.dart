@@ -2,18 +2,21 @@ import 'package:flutter/material.dart';
 import '../../custom_widgets/text.dart';
 import '../components/answer.dart';
 import '../components/question.dart';
+import 'package:spotify_quiz/utility/utilities.dart' as utilities;
 import 'package:spotify_quiz/models/models.dart' as model;
 
 class QuizA extends StatelessWidget {
   final List<dynamic>? questions;
   final int questionIndex;
   final Function? answerQuestion;
+  final bool isRandom;
 
   const QuizA({
     Key? key,
     required this.questions,
     required this.answerQuestion,
     required this.questionIndex,
+    required this.isRandom,
   }) : super(key: key);
 
   @override
@@ -21,12 +24,13 @@ class QuizA extends StatelessWidget {
     return MediaQuery.of(context).orientation == Orientation.portrait
         ? Column(
             children: [
-              CustomText(
-                size: 20,
-                thirdColor: true,
-                bold: true,
-                text: questions![questionIndex]['questionText'].toString(),
-              ),
+              if (isRandom)
+                CustomText(
+                  size: 20,
+                  thirdColor: true,
+                  bold: true,
+                  text: questions![questionIndex]['questionText'].toString(),
+                ),
               const SizedBox(
                 height: 20,
               ),
@@ -35,8 +39,17 @@ class QuizA extends StatelessWidget {
                   alignment: Alignment.center,
                   width: 200,
                   height: 200,
-                  child: Image.network(
-                    (questions![questionIndex]['image'] as model.Image).url,
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                        image: NetworkImage(
+                          (questions![questionIndex]['image'] as model.Image)
+                              .url,
+                        ),
+                        fit: BoxFit.fill),
+                    border: Border.all(
+                      color: utilities.tertiaryColor,
+                      width: 1,
+                    ),
                   ),
                 ),
               const SizedBox(
@@ -61,12 +74,13 @@ class QuizA extends StatelessWidget {
           )
         : Column(
             children: [
-              CustomText(
-                size: 20,
-                thirdColor: true,
-                bold: true,
-                text: questions![questionIndex]['questionText'].toString(),
-              ),
+              if (isRandom)
+                CustomText(
+                  size: 20,
+                  thirdColor: true,
+                  bold: true,
+                  text: questions![questionIndex]['questionText'].toString(),
+                ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
@@ -80,9 +94,18 @@ class QuizA extends StatelessWidget {
                           alignment: Alignment.center,
                           width: 200,
                           height: 200,
-                          child: Image.network(
-                            (questions![questionIndex]['image'] as model.Image)
-                                .url,
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
+                                image: NetworkImage(
+                                  (questions![questionIndex]['image']
+                                          as model.Image)
+                                      .url,
+                                ),
+                                fit: BoxFit.fill),
+                            border: Border.all(
+                              color: utilities.tertiaryColor,
+                              width: 1,
+                            ),
                           ),
                         ),
                         const SizedBox(

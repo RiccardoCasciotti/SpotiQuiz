@@ -13,12 +13,14 @@ class QuizD extends StatefulWidget {
   final List<dynamic>? questions;
   final int questionIndex;
   final Function? answerQuestion;
+  final bool isRandom;
 
   const QuizD({
     Key? key,
     required this.questions,
     required this.answerQuestion,
     required this.questionIndex,
+    required this.isRandom,
   }) : super(key: key);
 
   @override
@@ -67,14 +69,15 @@ class _QuizDState extends State<QuizD> {
     return MediaQuery.of(context).orientation == Orientation.portrait
         ? Column(
             children: [
-              Container(
-                alignment: Alignment.center,
-                width: double.infinity,
-                child: Question(
-                  widget.questions![widget.questionIndex]['questionText']
-                      .toString(),
+              if (widget.isRandom)
+                Container(
+                  alignment: Alignment.center,
+                  width: double.infinity,
+                  child: Question(
+                    widget.questions![widget.questionIndex]['questionText']
+                        .toString(),
+                  ),
                 ),
-              ),
               if (widget.questions![widget.questionIndex]['image'] != null)
                 Container(
                   alignment: Alignment.center,

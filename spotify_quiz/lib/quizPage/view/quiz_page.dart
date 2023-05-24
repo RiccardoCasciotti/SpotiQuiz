@@ -194,6 +194,7 @@ class _QuizPageState extends State<QuizPage> {
                             answerQuestion: _answerQuestion,
                             questionIndex: _questionIndex,
                             questions: snapshot.data,
+                            isRandom: widget.selectedMode == "R",
                           ),
                         );
                 } else {
