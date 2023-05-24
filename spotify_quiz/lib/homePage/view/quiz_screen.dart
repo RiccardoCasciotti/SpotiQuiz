@@ -12,7 +12,7 @@ import '../../gameInfoPage/view/game_info_view.dart';
 
 class QuizScreen extends StatelessWidget {
   void Function(int)? onItemTapped;
-  List<Artist> artists;
+  List<Widget> artists;
   int selectedIndex;
   QuizScreen({
     Key? key,
@@ -252,22 +252,14 @@ class QuizScreen extends StatelessWidget {
                     ),
                   ],
                 ),
-        //         Container(
-        //             child:ListView.separated(
-        //           shrinkWrap:true,
-        //   scrollDirection: Axis.horizontal,
-        //   padding: const EdgeInsets.all(12),
-        //   itemCount: artists.length,
-        //   separatorBuilder: (context, index) {
-        //     return const SizedBox(
-        //       height: 12,
-        //     );
-        //   },
-        //   itemBuilder: (context, index) {
-        //     return artistCard(artists[index]);
-        //   },
-        // ),
-        //         )    
+                SingleChildScrollView(
+                  key: const Key("ArtistList"),
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: artists,
+                  ),
+                ),
               ],
             ),
             const SizedBox(
@@ -283,34 +275,26 @@ class QuizScreen extends StatelessWidget {
     );
   }
 
-
-  Widget artistCard(Artist artist)  {
-    
+  Widget artistCard(Artist artist) {
     return Column(
       textDirection: TextDirection.ltr,
       children: [
         CustomContainerPicNetwork(
-          picUrl:
-              artist.images![1].url,
+          picUrl: artist.images![1].url,
           withBorder: false,
           width: 150,
           height: 150,
         ),
-        Container(
-          alignment: Alignment.centerLeft,
-          child: CustomText(
-            text: artist.name,
-            size: 20,
-            bold: true,
-            alignCenter: false,
-            thirdColor: true,
-          ),
+        CustomText(
+          text: artist.name,
+          size: 20,
+          bold: true,
+          alignCenter: false,
+          thirdColor: true,
         ),
       ],
     );
   }
-
-
 
   //List of widgets done to populate the page at first
 

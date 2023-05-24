@@ -55,16 +55,18 @@ class CustomContainerPicNetwork extends StatelessWidget {
   double width;
   double circularity;
   bool withBorder;
+  bool fit;
 
-  CustomContainerPicNetwork({
-    Key? key,
-    required this.picUrl,
-    this.sizeBorder = 2.0,
-    this.height = 200,
-    this.width = 200,
-    this.circularity = 100,
-    this.withBorder = true,
-  }) : super(key: key);
+  CustomContainerPicNetwork(
+      {Key? key,
+      required this.picUrl,
+      this.sizeBorder = 2.0,
+      this.height = 200,
+      this.width = 200,
+      this.circularity = 100,
+      this.withBorder = true,
+      this.fit = false})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -75,10 +77,10 @@ class CustomContainerPicNetwork extends StatelessWidget {
       padding: const EdgeInsets.all(3.0),
       decoration: BoxDecoration(
         image: DecorationImage(
-          image: NetworkImage(
-            picUrl,
-          ),
-        ),
+            image: NetworkImage(
+              picUrl,
+            ),
+            fit: BoxFit.fill),
         border: withBorder
             ? Border.all(
                 color: utilities.tertiaryColor,

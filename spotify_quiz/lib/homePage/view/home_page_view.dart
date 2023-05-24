@@ -12,6 +12,8 @@ import 'package:spotify_quiz/user/bloc/user_bloc.dart';
 
 import 'package:spotify_quiz/utility/utilities.dart' as utilities;
 
+import '../../custom_widgets/box_custom_pic.dart';
+import '../../custom_widgets/text.dart';
 import '../../models/artist.dart';
 import '../../quizPage/controllers/question_controller.dart';
 import '../../utility/api_calls.dart';
@@ -30,19 +32,46 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
-
-
   int _selectedIndex = 0;
   List<Artist> _artists = [];
+  List<Widget> artistsList = [];
+  void populateArtists() async {
+    _artists = await get_followed_artists();
+
+    for (Artist artist in _artists) {
+      print("artist present");
+      artistsList.add(Column(
+        textDirection: TextDirection.ltr,
+        children: [
+          CustomContainerPicNetwork(
+            picUrl: artist.images![1].url,
+            withBorder: false,
+            width: 150,
+            height: 150,
+          ),
+          CustomText(
+            text: artist.name,
+            size: 18,
+            alignCenter: true,
+            thirdColor: true,
+          ),
+        ],
+      ));
+    }
+  }
 
   void _onItemTapped(int index) async {
     print(index);
-    
-     
+
     setState(() {
       _selectedIndex = index;
     });
+  }
+
+  @override
+  void initState() {
+    populateArtists();
+    super.initState();
   }
 
 /*
@@ -67,22 +96,16 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  
-
-  void _goToEventPage(context) async{
-
-    
-      Navigator.push(
+  void _goToEventPage(context) async {
+    Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) =>  EventsPage(),
+        builder: (context) => EventsPage(),
       ),
     );
-
-   
-    
   }
-   Future<Placemark> _getAddressFromLatLng(Position position) async {
+
+  Future<Placemark> _getAddressFromLatLng(Position position) async {
     List<Placemark> placemarks =
         await placemarkFromCoordinates(position!.latitude, position!.longitude);
 
@@ -97,7 +120,6 @@ class _MyHomePageState extends State<MyHomePage> {
     Position position = await Geolocator.getCurrentPosition(
         desiredAccuracy: LocationAccuracy.high);
 
-    
     Placemark pos = await _getAddressFromLatLng(position);
     var events = await get_events_on_position(pos.locality);
     //_currentCity = "${pos.locality}";
@@ -112,11 +134,11 @@ class _MyHomePageState extends State<MyHomePage> {
     utilities.questions_c_prefetch = createQuestions("C");
     utilities.questions_d_prefetch = createQuestions("D");
     utilities.questions_r_prefetch = createQuestions("R");
-    
-    if( !utilities.events_prefetched ) {
-        utilities.events_prefetch = _getCurrentPosition();
-        utilities.events_prefetched = true;
-    } 
+
+    if (!utilities.events_prefetched) {
+      utilities.events_prefetch = _getCurrentPosition();
+      utilities.events_prefetched = true;
+    }
 
     precacheImage(const AssetImage("assets/images/mic.jpg"), context);
     precacheImage(const AssetImage("assets/images/singer.jpg"), context);
@@ -133,7 +155,7 @@ class _MyHomePageState extends State<MyHomePage> {
       QuizScreen(
         onItemTapped: _onItemTapped,
         selectedIndex: _selectedIndex,
-        artists: _artists,
+        artists: artistsList,
       )
     ];
 
