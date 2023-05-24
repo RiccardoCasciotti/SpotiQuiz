@@ -22,7 +22,6 @@ List<model.Event> events_call = [];
 bool events_api_called = false;
 
 model.Event format_event(var eventJson) {
-model.Event format_event(var eventJson) {
   final DateFormat formatter = DateFormat('yyyy-MM-dd');
   final tmp = DateTime.parse(eventJson["startDate"]);
   final startDate = formatter
@@ -177,14 +176,14 @@ Future<List<model.Artist>> get_related_artists(String artist_id) async {
 
   final artistsJson = json.decode(artistsInfo.body);
   List<model.Artist> artists = [];
-  if( !List.from(artistsJson["artists"]).isEmpty ){
-  for (var i = 0; i < List.from(artistsJson["artists"]).length; i++) {
-    var curr_artist = List.from(artistsJson["artists"])[i];
+  if (!List.from(artistsJson["artists"]).isEmpty) {
+    for (var i = 0; i < List.from(artistsJson["artists"]).length; i++) {
+      var curr_artist = List.from(artistsJson["artists"])[i];
 
-    final res = create_artist(curr_artist);
-    artists.add(res);
+      final res = create_artist(curr_artist);
+      artists.add(res);
+    }
   }
-}
   return artists;
 }
 
