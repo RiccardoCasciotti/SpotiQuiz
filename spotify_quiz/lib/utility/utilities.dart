@@ -4,12 +4,20 @@ import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 
 import '../models/artist.dart';
+import '../quizPage/controllers/question_controller.dart';
 
 Color secondaryColor = const Color.fromARGB(255, 25, 20, 20);
 Color tertiaryColor = const Color.fromARGB(255, 255, 255, 255);
 Color primaryColor = const Color.fromARGB(255, 30, 215, 96);
 Color similSecondaryColor = const Color.fromARGB(255, 25, 25, 20);
 Color wrongAnswerColor = const Color.fromARGB(255, 231, 34, 34);
+var questions_a_prefetch;
+var questions_b_prefetch;
+var questions_c_prefetch;
+var questions_d_prefetch;
+var questions_r_prefetch;
+var events_prefetch;
+bool events_prefetched = false;
 String nationality = "";
 String accessToken = "";
 String refreshToken = "";

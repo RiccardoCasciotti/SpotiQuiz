@@ -92,6 +92,7 @@ Future<void> init_data() async {
     if(count == 10){
       similar_id = initializer_id;
       count = 0;
+      print("problema");
       await init_data();
     }
 

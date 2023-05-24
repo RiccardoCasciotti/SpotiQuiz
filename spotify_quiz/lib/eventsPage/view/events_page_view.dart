@@ -27,33 +27,12 @@ class _EventsPageState extends State<EventsPage> {
 
   @override
   void initState() {
-    _events = _getCurrentPosition();
+    _events = utilities.events_prefetch;
     super.initState();
     //List<Map<String, Object>> questions = [];
   }
 
-  Future<Placemark> _getAddressFromLatLng(Position position) async {
-    List<Placemark> placemarks =
-        await placemarkFromCoordinates(position!.latitude, position!.longitude);
-
-    Placemark place = placemarks[0];
-
-    return place;
-  }
-
-  Future<List<dynamic>> _getCurrentPosition() async {
-    // final hasPermission = await _handleLocationPermission();
-    // if (!hasPermission) return;
-    Position position = await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.high);
-
-    _currentPosition = position;
-    Placemark pos = await _getAddressFromLatLng(_currentPosition);
-    var events = await get_events_on_position(pos.locality);
-    _currentCity = "${pos.locality}";
-    print(_currentCity);
-    return events;
-  }
+  
 
   @override
   Widget build(BuildContext context) {

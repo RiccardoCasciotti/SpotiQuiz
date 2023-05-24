@@ -20,6 +20,13 @@ class QuizA extends StatelessWidget {
     return MediaQuery.of(context).orientation == Orientation.portrait
         ? Column(
             children: [
+              Container(
+                alignment: Alignment.center,
+                width: double.infinity,
+                child: Question(
+                  questions![questionIndex]['questionText'].toString(),
+                ),
+              ),
               if (questions![questionIndex]['image'] != null)
                 Container(
                   key: const Key("ImageSinger"),
@@ -54,9 +61,17 @@ class QuizA extends StatelessWidget {
           )
         : Column(
             children: [
+
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
+                  Container(
+                alignment: Alignment.center,
+                width: double.infinity,
+                child: Question(
+                  questions![questionIndex]['questionText'].toString(),
+                ),
+              ),
                   if (questions![questionIndex]['image'] != null)
                     Container(
                       key: const Key("ImageSingerHorizontal"),

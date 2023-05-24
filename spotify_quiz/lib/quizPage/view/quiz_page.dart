@@ -52,7 +52,20 @@ class _QuizPageState extends State<QuizPage> {
 
   @override
   void initState() {
-    _questions = createQuestions(widget.selectedMode);
+    if(widget.selectedMode == "A"){
+      _questions = utilities.questions_a_prefetch;
+    }
+    else if(widget.selectedMode == "B"){
+      _questions = utilities.questions_b_prefetch;
+    }
+    else if(widget.selectedMode == "C"){
+      _questions = utilities.questions_c_prefetch;
+    }
+    else if(widget.selectedMode == "D"){
+      _questions = utilities.questions_d_prefetch;
+    }else{
+      _questions = utilities.questions_r_prefetch;
+    }
     super.initState();
     //List<Map<String, Object>> questions = [];
   }
