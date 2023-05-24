@@ -30,9 +30,10 @@ class _PlayButtonState extends State<PlayButton> {
 
   @override
   void initState() {
-    super.initState();
+    
     _tapped = false;
     _selectedMode = widget.selectedMode;
+    super.initState();
   }
 
   @override
@@ -49,7 +50,12 @@ class _PlayButtonState extends State<PlayButton> {
         setState(() {
           _tapped = true;
         });
-        Future.delayed(animationDuration).then((_) => {
+        Future.delayed(animationDuration).then((_) {
+
+          setState(() {
+          _tapped = false;
+        });
+
               Navigator.push(
                 context,
                 ScaleRoute(
@@ -57,11 +63,7 @@ class _PlayButtonState extends State<PlayButton> {
                     selectedMode: _selectedMode,
                   ),
                 ),
-              ).then(
-                (value) => setState(() {
-                  _tapped = false;
-                }),
-              ),
+              );
             });
       },
       label: CustomText(

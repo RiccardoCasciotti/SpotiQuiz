@@ -22,12 +22,14 @@ List<model.Event> events_call = [];
 bool events_api_called = false;
 
 model.Event format_event(var eventJson) {
+model.Event format_event(var eventJson) {
   final DateFormat formatter = DateFormat('yyyy-MM-dd');
   final tmp = DateTime.parse(eventJson["startDate"]);
   final startDate = formatter
       .format(DateUtils.dateOnly(DateTime.parse(eventJson["startDate"])));
   final endDate = formatter
       .format(DateUtils.dateOnly(DateTime.parse(eventJson["endDate"])));
+
   print(startDate);
   // final startDate = "";
   // final endDate = "";
@@ -175,13 +177,14 @@ Future<List<model.Artist>> get_related_artists(String artist_id) async {
 
   final artistsJson = json.decode(artistsInfo.body);
   List<model.Artist> artists = [];
+  if( !List.from(artistsJson["artists"]).isEmpty ){
   for (var i = 0; i < List.from(artistsJson["artists"]).length; i++) {
     var curr_artist = List.from(artistsJson["artists"])[i];
 
     final res = create_artist(curr_artist);
     artists.add(res);
   }
-
+}
   return artists;
 }
 
@@ -199,16 +202,17 @@ Future<List<model.Album>> get_artist_albums(String artist_id) async {
 
   final albumsJson = json.decode(albumsInfo.body);
   List<model.Album> albums = [];
-  for (var i = 0; i < List.from(albumsJson["items"]).length; i++) {
-    var curr_album = List.from(albumsJson["items"])[i];
-    if (curr_album["release_date_precision"] != "day") {
-      continue;
+  if (!List.from(albumsJson["items"]).isEmpty) {
+    for (var i = 0; i < List.from(albumsJson["items"]).length; i++) {
+      var curr_album = List.from(albumsJson["items"])[i];
+      if (curr_album["release_date_precision"] != "day") {
+        continue;
+      }
+      final res = create_album(curr_album);
+
+      albums.add(res);
     }
-    final res = create_album(curr_album);
-
-    albums.add(res);
   }
-
   return albums;
 }
 
@@ -339,17 +343,18 @@ Future<List<model.Track>> get_top_tracks(String artist_id) async {
   final tracksJson = json.decode(tracksInfo.body);
 
   List<model.Track> tracks = [];
+  if (!List.from(tracksJson["tracks"]).isEmpty) {
+    for (var i = 0; i < List.from(tracksJson["tracks"]).length; i++) {
+      var tmp = List.from(tracksJson["tracks"])[i];
+      if (tmp['id'] == null ||
+          tmp['name'] == null ||
+          tmp['preview_url'] == null) {
+        continue;
+      }
+      model.Track track = track_format(tmp);
 
-  for (var i = 0; i < List.from(tracksJson["tracks"]).length; i++) {
-    var tmp = List.from(tracksJson["tracks"])[i];
-    if (tmp['id'] == null ||
-        tmp['name'] == null ||
-        tmp['preview_url'] == null) {
-      continue;
+      tracks.add(track);
     }
-    model.Track track = track_format(tmp);
-
-    tracks.add(track);
   }
   return tracks;
 }
