@@ -36,58 +36,48 @@ int similar_index = 0;
 int i = 0;
 
 Future<void> init_data() async {
- 
-  
-  if (followed_artists.isEmpty && i == 0){
+  if (followed_artists.isEmpty && i == 0) {
     followed_artists = await get_followed_artists();
-    if(!followed_artists.isEmpty){
+    if (!followed_artists.isEmpty) {
       consume_followed_artists = followed_artists;
       consume_followed_artists.shuffle();
     }
-    
+
     i++;
   }
 
-  
-
-
-  if (consume_similar_artists.length < 4){
-
+  if (consume_similar_artists.length < 4) {
     var candidate;
 
-    if(!followed_artists.isEmpty ){
-
+    if (!followed_artists.isEmpty) {
       candidate = followed_artists.last;
       followed_artists.removeLast();
- 
-    }
-
-    else if(!similar_artists.isEmpty) {
-
+    } else if (!similar_artists.isEmpty) {
       candidate = similar_artists.last;
       similar_artists.removeLast();
-
-    }
-    else if (similar_artists.isEmpty){
-
+    } else if (similar_artists.isEmpty) {
       similar_artists = await get_related_artists(similar_id);
-      similar_artists = similar_artists.sublist(0,similar_artists.length < 30 ? similar_artists.length : 30 );
+      similar_artists = similar_artists.sublist(
+          0, similar_artists.length < 30 ? similar_artists.length : 30);
       similar_artists.shuffle();
       candidate = similar_artists.last;
       similar_artists.removeLast();
-
     }
     similar_id = candidate.id;
 
     consume_similar_artists = await get_related_artists(similar_id);
 
-    consume_similar_artists = consume_similar_artists.sublist(0,consume_similar_artists.length < 30 ? consume_similar_artists.length : 30 );
+    consume_similar_artists = consume_similar_artists.sublist(
+        0,
+        consume_similar_artists.length < 30
+            ? consume_similar_artists.length
+            : 30);
 
     while (consume_similar_artists.length < 4 && count < 10) {
       count++;
       await init_data();
     }
-    if(count == 10){
+    if (count == 10) {
       similar_id = initializer_id;
       count = 0;
       await init_data();
@@ -99,17 +89,13 @@ Future<void> init_data() async {
   // if(consume_followed_artists.length < 4){
   //   consume_similar_artists = consume_followed_artists + consume_similar_artists;
   // }
-
-
 }
 
-
-Future<model.Question> generate_d() async{
+Future<model.Question> generate_d() async {
   // D: SARABANDA
   // get a list of followed artists
   // call get top tracks given an artist chosen from above
 
-  
   await init_data();
   model.Track obj;
   String answer;
@@ -118,8 +104,8 @@ Future<model.Question> generate_d() async{
   model.Artist artist;
   List<model.Track> tracks;
   Random random = Random();
-  
-  if(consume_followed_artists.length > 3){
+
+  if (consume_followed_artists.length > 3) {
     artist = consume_followed_artists.last;
     consume_followed_artists.removeLast();
     // for(var i = 0; i < consume_followed_artists.length; i++)
@@ -127,13 +113,13 @@ Future<model.Question> generate_d() async{
     // print("FOLLOWED LENGTH: ${consume_followed_artists.length}");
 
     tracks = await get_top_tracks(artist.id);
-    
-    for(var i = 0; i < 3; i++){
-      int index = random.nextInt(consume_followed_artists.length); 
+
+    for (var i = 0; i < 3; i++) {
+      int index = random.nextInt(consume_followed_artists.length);
       var tmp = await get_top_tracks(consume_followed_artists[index].id);
-      if(tmp.isEmpty){
+      if (tmp.isEmpty) {
         consume_followed_artists.remove(index);
-        if(consume_followed_artists.length  < 3 ){
+        if (consume_followed_artists.length < 3) {
           await init_data();
         }
         continue;
@@ -141,34 +127,30 @@ Future<model.Question> generate_d() async{
       tmp.shuffle();
       var option = tmp.last;
 
-      if( !options_track.contains(option)){
+      if (!options_track.contains(option)) {
         options_track.add(option);
         final opt = "${option.name} by ${option.artists[0].name}";
         options.add(opt);
-      }
-      else{
+      } else {
         i--;
       }
     }
-
-  }
-  else{
-    
+  } else {
     artist = consume_similar_artists.last;
     consume_similar_artists.removeLast();
     // for(var i = 0; i < consume_similar_artists.length; i++)
     //   print("SIMILAR: ${consume_similar_artists[i].name}");
     // print("SIMILAR LENGTH: ${consume_similar_artists.length}");
-    
+
     tracks = await get_top_tracks(artist.id);
-  
-    for(var i = 0; i < 3; i++){
-      int index = random.nextInt(consume_similar_artists.length); 
+
+    for (var i = 0; i < 3; i++) {
+      int index = random.nextInt(consume_similar_artists.length);
       var tmp = await get_top_tracks(consume_similar_artists[index].id);
 
-      if(tmp.isEmpty){
+      if (tmp.isEmpty) {
         consume_similar_artists.remove(index);
-        if(consume_similar_artists.length  < 3 ){
+        if (consume_similar_artists.length < 3) {
           await init_data();
         }
         continue;
@@ -176,26 +158,24 @@ Future<model.Question> generate_d() async{
       tmp.shuffle();
       var option = tmp.last;
 
-      if( !options_track.contains(option)){
+      if (!options_track.contains(option)) {
         options_track.add(option);
         final opt = "${option.name} by ${option.artists[0].name}";
         options.add(opt);
-      }
-      else{
+      } else {
         i--;
       }
     }
   }
-  int index = random.nextInt(tracks.length); 
-  obj =  tracks[index];
+  int index = random.nextInt(tracks.length - 1);
+  obj = tracks[index];
   answer = obj.name;
-  
+
   String type = "D";
 
-  var res = model.Question(answer ,options , type, obj as model.Track);
+  var res = model.Question(answer, options, type, obj as model.Track);
   // print(res.toString());
   // print((res.obj as model.Track).toString());
-  
-  return res;
 
+  return res;
 }
