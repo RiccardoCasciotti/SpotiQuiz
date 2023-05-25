@@ -2,10 +2,14 @@ import 'package:authentication_repository/authentication_repository.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:geocoding/geocoding.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:intl/intl.dart';
 import 'package:spotify_quiz/repositories/firebase_options.dart';
+import 'package:spotify_quiz/utility/utilities.dart' as utilities;
 
 import 'package:spotify_quiz/homePage/view/tablet/view/home_page_view.dart';
+import 'package:spotify_quiz/utility/api_calls.dart';
 import 'authentication/authentication.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
@@ -31,8 +35,36 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   //FirebaseFirestore db = FirebaseFirestore.instance;
   // Add a new document with a generated ID
-  //db.collection("users").add(user);
+  //db.collection("users").add(user); 
+  Future<Placemark> _getAddressFromLatLng(Position position) async {
+    List<Placemark> placemarks =
+        await placemarkFromCoordinates(position.latitude, position.longitude);
 
+    Placemark place = placemarks[0];
+
+    return place;
+  }
+
+  Future<List<dynamic>> _getCurrentPosition() async {
+    // final hasPermission = await _handleLocationPermission();
+    var permission = await Geolocator.checkPermission();
+     if (permission != LocationPermission.always && permission != LocationPermission.whileInUse) return [];
+
+    Position position = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.high);
+
+    Placemark pos = await _getAddressFromLatLng(position);
+    var events = await get_events_on_position(pos.locality);
+    //_currentCity = "${pos.locality}";
+    //print(_currentCity);
+    return events;
+  }
+  var permission = await Geolocator.checkPermission();
+  if (permission == LocationPermission.always && permission == LocationPermission.whileInUse){
+    utilities.events_prefetch=  _getCurrentPosition();
+    utilities.location = true;
+  }
+  
   runApp(const MyApp());
 }
 
@@ -62,6 +94,11 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
+    precacheImage(const AssetImage("assets/images/mic.jpg"), context);
+    precacheImage(const AssetImage("assets/images/singer.jpg"), context);
+    precacheImage(const AssetImage("assets/images/concert.jpg"), context);
+    precacheImage(const AssetImage("assets/images/sarabanda.jpg"), context);
+    precacheImage(const AssetImage("assets/images/album.jpg"), context);
     return RepositoryProvider.value(
       value: _authenticationRepository,
       child: MultiBlocProvider(

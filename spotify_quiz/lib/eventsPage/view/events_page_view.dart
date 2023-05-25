@@ -32,8 +32,6 @@ class _EventsPageState extends State<EventsPage> {
     //List<Map<String, Object>> questions = [];
   }
 
-  
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -63,14 +61,11 @@ class _EventsPageState extends State<EventsPage> {
 
                       return Center(
                           child: ListView.separated(
-                            
                         padding: const EdgeInsets.all(12),
                         itemCount: snapshot.data!.length,
-                        
                         separatorBuilder: (context, index) {
                           return const SizedBox(
                             height: 12,
-                            
                           );
                         },
                         itemBuilder: (context, index) {
@@ -113,71 +108,121 @@ class _EventsPageState extends State<EventsPage> {
 }
 
 Widget buildCard(Event event, BuildContext context) {
-  return Container(
-     //height: MediaQuery.of(context).size.height,
-      //width: MediaQuery.of(context).size.width,
-      child: Container(
-          //padding: EdgeInsets.all(10.0),
-          
-          margin: EdgeInsets.all(3.0),
-          decoration: BoxDecoration(
-              color: Colors.white70,
-              border: Border.all(
-                  //color: Color.fromARGB(a, r, g, b)[500],
-                  ),
-              borderRadius: BorderRadius.all(Radius.circular(8))),
-          child: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-            Container(
-              
-                padding: EdgeInsets.all(10.0),
-                height: 75,
-                width: 75,
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(8.0),
-                  child: Image.network(
-                    event.image_url,
-                    height: 75,
-                    width: 75,
+  return Card(
+    elevation: 8.0,
+    margin: new EdgeInsets.symmetric(horizontal: 10.0, vertical: 6.0),
+    child: Container(
+      decoration: BoxDecoration(color: Color.fromRGBO(64, 75, 96, .9)),
+      child: ListTile(
+        contentPadding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+        leading: Expanded(
+          child: Container(
+            padding: EdgeInsets.only(right: 12.0),
+            decoration: new BoxDecoration(
+                border: new Border(
+                    right: new BorderSide(width: 1.0, color: Colors.white24))),
+            child: 
+            Image.network(
+              event.image_url,
+            
+            ),
+          ),
+        ),
+        title: Padding(
+          padding: EdgeInsets.all(5.0),
+          child: Text(
+            event.event_name,
+            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+          ),
+        ),
 
-                    //fit: BoxFit.cover,
-                  ),
-                )),
-            Container(
-                margin: EdgeInsets.all(10.0),
-                //width: double.infinity,
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Container(
-                        padding: EdgeInsets.all(3.0),
-                        child: SizedBox(
-                            //width: double.infinity,
-                            
-                            height: 20,
-                            child: AutoSizeText(
-                            style: TextStyle(fontSize: 14),
-                            
-              maxLines: 2,
-                            "Event:   ${event.event_name}",
-                          )
-                           ),
-                          
-                        ),
-                        
-                        Container(
-                            padding: EdgeInsets.all(3.0),
-                            child: Text(
-                              selectionColor: Colors.black,
-                              "Date:   ${event.startDate}",
-                            )),
-                    Container(
-                        padding: EdgeInsets.all(3.0),
-                        child: Text(
-                          selectionColor: Colors.black,
-                          "Venue:   ${event.venue_name}",
-                        )),
-                  ],
-                ))
-          ])));
+        subtitle: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Padding(
+                padding: EdgeInsets.all(5.0),
+                child: Text(event.venue_name,
+                    style: TextStyle(color: Colors.white))),
+            Padding(
+                padding: EdgeInsets.all(5.0),
+                child: Text(event.startDate,
+                    style: TextStyle(color: Colors.white))),
+          ],
+        ),
+        // trailing:
+        //     Icon(Icons.keyboard_arrow_right, color: Colors.white, size: 30.0),
+        // onTap: () {
+
+        // },
+      ),
+    ),
+  );
+
+  // return Container(
+  //    //height: MediaQuery.of(context).size.height,
+  //     //width: MediaQuery.of(context).size.width,
+  //     child: Container(
+  //         //padding: EdgeInsets.all(10.0),
+
+  //         margin: EdgeInsets.all(3.0),
+  //         decoration: BoxDecoration(
+  //             color: Colors.white70,
+  //             border: Border.all(
+  //                 //color: Color.fromARGB(a, r, g, b)[500],
+  //                 ),
+  //             borderRadius: BorderRadius.all(Radius.circular(8))),
+  //         child: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+  //           Container(
+
+  //               padding: EdgeInsets.all(10.0),
+  //               height: 75,
+  //               width: 75,
+  //               child: ClipRRect(
+  //                 borderRadius: BorderRadius.circular(8.0),
+  //                 child: Image.network(
+  //                   event.image_url,
+  //                   height: 75,
+  //                   width: 75,
+
+  //                   //fit: BoxFit.cover,
+  //                 ),
+  //               )),
+  //           Container(
+  //               margin: EdgeInsets.all(10.0),
+  //               //width: double.infinity,
+  //               child: Column(
+  //                 mainAxisSize: MainAxisSize.min,
+  //                 crossAxisAlignment: CrossAxisAlignment.start,
+  //                 children: [
+  //                   Container(
+  //                       padding: EdgeInsets.all(3.0),
+  //                       child: SizedBox(
+  //                           //width: double.infinity,
+
+  //                           height: 20,
+  //                           child: AutoSizeText(
+  //                           style: TextStyle(fontSize: 14),
+
+  //             maxLines: 2,
+  //                           "Event:   ${event.event_name}",
+  //                         )
+  //                          ),
+
+  //                       ),
+
+  //                       Container(
+  //                           padding: EdgeInsets.all(3.0),
+  //                           child: Text(
+  //                             selectionColor: Colors.black,
+  //                             "Date:   ${event.startDate}",
+  //                           )),
+  //                   Container(
+  //                       padding: EdgeInsets.all(3.0),
+  //                       child: Text(
+  //                         selectionColor: Colors.black,
+  //                         "Venue:   ${event.venue_name}",
+  //                       )),
+  //                 ],
+  //               ))
+  //         ])));
 }

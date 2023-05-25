@@ -119,7 +119,7 @@ Future<model.Question> generate_a() async {
     // print("SIMILAR LENGTH: ${consume_similar_artists.length}");
     Random random = Random();
 
-    print(consume_similar_artists.length);
+   
     for (var i = 0; i < 3; i++) {
       int index = random.nextInt(consume_similar_artists.length);
       if (!options.contains(consume_similar_artists[index].name)) {

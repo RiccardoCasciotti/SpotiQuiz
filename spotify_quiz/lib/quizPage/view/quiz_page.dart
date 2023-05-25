@@ -80,10 +80,12 @@ class _QuizPageState extends State<QuizPage> {
   var _secondSlotQuestions;
 
   Future<void> _answerQuestion(int score) async {
-    print("QuestionIndex");
-    print(_questionIndex);
+    setState(() {
+      
+      _hasAnswered = true;
+    });
     //FUNCTION WE CALL WHEN WE GIVE AN ANSWER, HERE WE CAN IMPLEMENT THE LOGIC TO CREATE NEW QUESTIONS
-    if ((_questionIndex) % limit == 1) {
+    if ((_questionIndex) % limit == 0) {
       print("Create Second List");
       _secondSlotQuestions = createQuestions(widget.selectedMode);
       if(widget.selectedMode == "A"){
@@ -111,20 +113,12 @@ class _QuizPageState extends State<QuizPage> {
     if ((_questionIndex + 1) % limit == 0) {
       print(_questionIndex);
       print("Populating First List");
-     
-      setState(() {
-      _questionIndex = (_questionIndex + 1) % limit;
-      _questionScore = score;
-      _hasAnswered = true;
        _questions = _secondSlotQuestions;
-    });
-    }
 
-    setState(() {
+    }
       _questionIndex = (_questionIndex + 1) % limit;
       _questionScore = score;
-      _hasAnswered = true;
-    });
+    
   }
 
   void moveOn() {

@@ -50,6 +50,5 @@ Future<model.Quiz> generate_quiz(String type) async {
       wrong: 0,
       type: type,
       questions: questions);
-  print(res.toString());
   return res;
 }

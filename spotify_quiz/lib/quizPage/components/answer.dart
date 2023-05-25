@@ -28,14 +28,18 @@ class _AnswerState extends State<Answer> {
         width: double.infinity,
         child: ElevatedButton(
           onPressed: () async {
-            if( widget.playerStop != null){
-              await  widget.playerStop!();
-            }
+            
             setState(() {
               _tapped = true;
             });
-            Future.delayed(animationDuration).then((_) => {
-                  widget.selectHandler(),
+            if( widget.playerStop != null){
+              await  widget.playerStop!();
+            }
+            
+            Future.delayed(animationDuration).then((_){
+                 
+                  widget.selectHandler();
+                  
                 });
           },
           style: ButtonStyle(

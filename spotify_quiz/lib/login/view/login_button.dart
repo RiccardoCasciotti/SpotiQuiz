@@ -108,7 +108,7 @@ class LoginButton extends StatelessWidget {
             utilities.artists =
                 await get_related_artists("0TnOYISbd1XYRBk9myaseg");
           }
-           print(utilities.artists.toString());
+     
         }
         // ignore: use_build_context_synchronously
         //context.read<LoginBloc>().add(const LoginSubmitted());

@@ -70,7 +70,7 @@ Future<List<model.Event>> get_events_on_position(String? position) async {
                 ? List.from(eventsJson["data"]).length
                 : 20);
         i++) {
-      print(List.from(eventsJson["data"])[i]);
+     
       var curr_event = List.from(eventsJson["data"])[i];
       events.add(format_event(curr_event));
     }

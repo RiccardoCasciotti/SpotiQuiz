@@ -57,9 +57,9 @@ class WebViewLogin extends StatelessWidget {
           
           if( requestUri.contains("error=access_denied")){
   
-          
-          Navigator.pop(context);
           context.read<AuthenticationBloc>().add( AuthenticationLogoutRequested());
+          Navigator.pop(context);
+          
           return NavigationDecision.prevent;
           
           }
@@ -97,7 +97,7 @@ class WebViewLogin extends StatelessWidget {
 
         
             context.read<LoginBloc>().add(const LoginSubmitted());
-            controller.clearCache();
+            //controller.clearCache();
             Navigator.pop(context);
           
            }

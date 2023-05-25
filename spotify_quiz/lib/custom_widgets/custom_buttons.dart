@@ -40,6 +40,29 @@ class _CustomButtonsHomeState extends State<CustomButtonsHome> {
     _tapped2 = false;
   }
 
+Future<Placemark> _getAddressFromLatLng(Position position) async {
+    List<Placemark> placemarks =
+        await placemarkFromCoordinates(position.latitude, position.longitude);
+
+    Placemark place = placemarks[0];
+
+    return place;
+  }
+
+  Future<List<dynamic>> _getCurrentPosition() async {
+    // final hasPermission = await _handleLocationPermission();
+    var permission = await Geolocator.checkPermission();
+     if (permission != LocationPermission.always && permission != LocationPermission.whileInUse) return [];
+
+    Position position = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.high);
+
+    Placemark pos = await _getAddressFromLatLng(position);
+    var events = await get_events_on_position(pos.locality);
+    //_currentCity = "${pos.locality}";
+    //print(_currentCity);
+    return events;
+  }
   
   Future<bool> _handleLocationPermission() async {
     bool serviceEnabled;
@@ -158,8 +181,12 @@ class _CustomButtonsHomeState extends State<CustomButtonsHome> {
                   foregroundColor: utilities.secondaryColor,
                   onPressed: () async {
                     //await _getCurrentPosition();
-                    final hasPermission = await _handleLocationPermission();
-                    if(hasPermission ){
+                    
+                    if( utilities.location == false && utilities.events_prefetch == null){
+                        utilities.location= await _handleLocationPermission();
+                        utilities.events_prefetch =  _getCurrentPosition();
+                    }
+                    if(utilities.location ){
                     Future.delayed(animationDuration).then((_) => {
                           Navigator.push(
                             context,
