@@ -34,17 +34,20 @@ class _EventsPageState extends State<EventsPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Stack( 
-      children: [
-        Image.asset(
-            "assets/images/event.jpg",
-            height: MediaQuery.of(context).size.height,
-            width: MediaQuery.of(context).size.width,
-            fit: BoxFit.cover,
+    return Container(
+      key: const Key("BackGroundImageLocalRanking"),
+      constraints: const BoxConstraints.expand(),
+      decoration: const BoxDecoration(
+        image: DecorationImage(
+          opacity: 0.4,
+          image: AssetImage(
+            'assets/images/event.jpg',
           ),
-    Scaffold(
-      backgroundColor: Colors.transparent,
-        
+          fit: BoxFit.cover,
+        ),
+      ),
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
         appBar: AppBar(
           backgroundColor: utilities.secondaryColor,
@@ -52,73 +55,54 @@ class _EventsPageState extends State<EventsPage> {
           elevation: 0.0,
           title: const Text("Go back"),
         ),
-        body: 
-      
-        
-        Center(
-          
-            child: FutureBuilder<List<dynamic>>(
-                future: _events, // a previously-obtained Future<String> or null
-                builder: (BuildContext context,
-                    AsyncSnapshot<List<dynamic>> snapshot) {
-                  if (snapshot.connectionState == ConnectionState.done) {
-                    if (snapshot.hasError) {
-                      print("Error ${snapshot.error}");
-                    }
-                    if (snapshot.hasData) {
-                      if (snapshot.data!.length == 0) {
-                        return CustomText(
-                            text: AppLocalizations.of(context)!.noevents,
-                            size: 20);
-                      }
-
-                      return Center(
-                          child: ListView.separated(
-                        padding: const EdgeInsets.all(12),
-                        itemCount: snapshot.data!.length,
-                        separatorBuilder: (context, index) {
-                          return const SizedBox(
-                            height: 12,
-                          );
-                        },
-                        itemBuilder: (context, index) {
-                          return buildCard(snapshot.data![index], context);
-                        },
-                      ));
-                    }
+        body: Center(
+          child: FutureBuilder<List<dynamic>>(
+              future: _events, // a previously-obtained Future<String> or null
+              builder: (BuildContext context,
+                  AsyncSnapshot<List<dynamic>> snapshot) {
+                if (snapshot.connectionState == ConnectionState.done) {
+                  if (snapshot.hasError) {
+                    print("Error ${snapshot.error}");
                   }
+                  if (snapshot.hasData) {
+                    if (snapshot.data!.length == 0) {
+                      return CustomText(
+                          text: AppLocalizations.of(context)!.noevents,
+                          size: 20);
+                    }
 
-                  return PageTransitionSwitcher(
-                    
-                    duration: const Duration(milliseconds: 500),
-                    transitionBuilder: (child, animation, secondaryAnimation) =>
-                        SharedAxisTransition(
-                      animation: animation,
-                      secondaryAnimation: secondaryAnimation,
-                      fillColor: utilities.secondaryColor,
-                      transitionType: SharedAxisTransitionType.horizontal,
-                      child: child,
+                    return ListView.separated(
+                      padding: const EdgeInsets.all(12),
+                      itemCount: snapshot.data!.length,
+                      separatorBuilder: (context, index) {
+                        return const SizedBox(
+                          height: 12,
+                        );
+                      },
+                      itemBuilder: (context, index) {
+                        return buildCard(snapshot.data![index], context);
+                      },
+                    );
+                  }
+                }
+
+                return Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const CircularProgressIndicator(),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 16),
+                      child: CustomText(
+                        text: AppLocalizations.of(context)!.loadingevents,
+                        size: 20,
+                      ),
                     ),
-                    child: Column(
-                       
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const SizedBox(
-                          width: 60,
-                          height: 60,
-                          child: CircularProgressIndicator(),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 16),
-                          child: CustomText(
-                            text: AppLocalizations.of(context)!.loadingevents,
-                            size: 20,
-                          ),
-                        ),
-                      ],
-                    ),
-                  );
-                })))],);
+                  ],
+                );
+              }),
+        ),
+      ),
+    );
   }
 }
 
@@ -128,42 +112,41 @@ Widget buildCard(Event event, BuildContext context) {
     margin: new EdgeInsets.symmetric(horizontal: 10.0, vertical: 6.0),
     child: Container(
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.all(Radius.circular(3.0)),
-        color: Colors.white),
+          borderRadius: BorderRadius.all(Radius.circular(3.0)),
+          color: Colors.white),
       child: ListTile(
         contentPadding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
         leading: Container(
           child: Container(
-            padding: EdgeInsets.only(right: 12.0),
-            decoration: new BoxDecoration(
-                border: new Border(
-                    right: new BorderSide(width: 1.0, color: Colors.black))),
-            child: Stack(children: [
-              Image.asset("assets/images/eventPlaceholder.jpg",
-              scale: 1.5,),
-            Image.network(
-              event.image_url,
-              frameBuilder: (BuildContext context, Widget child, int? frame,
-            bool wasSynchronouslyLoaded) {
-          if (wasSynchronouslyLoaded) {
-            return child;
-          }
-          return AnimatedOpacity(
-            opacity: frame == null ? 0 : 1,
-            duration: const Duration(seconds: 1),
-            curve: Curves.easeOut,
-            child: child,
-          );
-        },
-              loadingBuilder: (BuildContext context, Widget child,
-            ImageChunkEvent? loadingProgress) {
-          if (loadingProgress == null) return child;
-          return  CircularProgressIndicator();
-        }
-        
-            
-            ),],)
-          ),
+              padding: EdgeInsets.only(right: 12.0),
+              decoration: new BoxDecoration(
+                  border: new Border(
+                      right: new BorderSide(width: 1.0, color: Colors.black))),
+              child: Stack(
+                children: [
+                  Image.asset(
+                    "assets/images/eventPlaceholder.jpg",
+                    scale: 1.5,
+                  ),
+                  Image.network(event.image_url, frameBuilder:
+                      (BuildContext context, Widget child, int? frame,
+                          bool wasSynchronouslyLoaded) {
+                    if (wasSynchronouslyLoaded) {
+                      return child;
+                    }
+                    return AnimatedOpacity(
+                      opacity: frame == null ? 0 : 1,
+                      duration: const Duration(seconds: 1),
+                      curve: Curves.easeOut,
+                      child: child,
+                    );
+                  }, loadingBuilder: (BuildContext context, Widget child,
+                      ImageChunkEvent? loadingProgress) {
+                    if (loadingProgress == null) return child;
+                    return CircularProgressIndicator();
+                  }),
+                ],
+              )),
         ),
         title: Padding(
           padding: EdgeInsets.all(5.0),
