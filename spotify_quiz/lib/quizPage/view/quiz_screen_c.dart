@@ -121,6 +121,7 @@ class QuizC extends StatelessWidget {
                           width: 300,
                           height: 50,
                           child: CustomText(
+                            alignCenter: true,
                             size: 15,
                             bold: true,
                             thirdColor: true,

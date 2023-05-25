@@ -78,7 +78,21 @@ class _QuizDState extends State<QuizD> {
                       .toString(),
                 ),
               const SizedBox(
-                height: 50,
+                height: 20,
+              ),
+              if (widget.questions![widget.questionIndex]['image'] != null)
+                Container(
+                  alignment: Alignment.center,
+                  width: 200,
+                  height: 200,
+                  child: Image.network(
+                    (widget.questions![widget.questionIndex]['image']
+                            as model.Image)
+                        .url,
+                  ),
+                ),
+              const SizedBox(
+                height: 20,
               ),
               Column(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -189,51 +203,81 @@ class _QuizDState extends State<QuizD> {
                   ),
                   Column(
                     children: [
-                      ElevatedButton.icon(
-                          onPressed: () async {
-                            if (!isplaying && !audioplayed) {
-                              await player.play(preview_url);
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      if (widget.questions![widget.questionIndex]['image'] !=
+                          null)
+                        Container(
+                          alignment: Alignment.center,
+                          width: 180,
+                          height: 180,
+                          child: Image.network(
+                            (widget.questions![widget.questionIndex]['image']
+                                    as model.Image)
+                                .url,
+                          ),
+                        ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      Row(
+                        children: [
+                          ElevatedButton.icon(
+                            onPressed: () async {
+                              if (!isplaying && !audioplayed) {
+                                await player.play(preview_url);
 
+                                setState(() {
+                                  isplaying = false;
+                                  audioplayed = false;
+                                  currentpos = 0;
+                                });
+
+                                setState(() {
+                                  isplaying = true;
+                                  audioplayed = true;
+                                });
+                              } else if (audioplayed && !isplaying) {
+                                await player.resume();
+
+                                setState(() {
+                                  isplaying = true;
+                                  audioplayed = true;
+                                });
+                              } else {
+                                await player.pause();
+
+                                setState(() {
+                                  isplaying = false;
+                                });
+                              }
+                            },
+                            icon: Icon(
+                                isplaying ? Icons.pause : Icons.play_arrow),
+                            label: Text(isplaying ? "Pause" : "Play"),
+                          ),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          ElevatedButton.icon(
+                            onPressed: () async {
+                              await player.stop();
+                              //stop success
                               setState(() {
                                 isplaying = false;
                                 audioplayed = false;
                                 currentpos = 0;
                               });
-
-                              setState(() {
-                                isplaying = true;
-                                audioplayed = true;
-                              });
-                            } else if (audioplayed && !isplaying) {
-                              await player.resume();
-
-                              setState(() {
-                                isplaying = true;
-                                audioplayed = true;
-                              });
-                            } else {
-                              await player.pause();
-
-                              setState(() {
-                                isplaying = false;
-                              });
-                            }
-                          },
-                          icon:
-                              Icon(isplaying ? Icons.pause : Icons.play_arrow),
-                          label: Text(isplaying ? "Pause" : "Play")),
-                      ElevatedButton.icon(
-                          onPressed: () async {
-                            await player.stop();
-                            //stop success
-                            setState(() {
-                              isplaying = false;
-                              audioplayed = false;
-                              currentpos = 0;
-                            });
-                          },
-                          icon: Icon(Icons.stop),
-                          label: Text("Stop")),
+                            },
+                            icon: Icon(Icons.stop),
+                            label: Text("Stop"),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
                     ],
                   ),
                 ],

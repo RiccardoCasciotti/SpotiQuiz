@@ -58,7 +58,7 @@ class QuizB extends StatelessWidget {
                 size: 20,
                 thirdColor: true,
                 bold: true,
-                text: questions![questionIndex]['album_title'].toString(),
+                text: questions![questionIndex]['song_title'].toString(),
               ),
               Column(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -124,7 +124,7 @@ class QuizB extends StatelessWidget {
                             size: 15,
                             bold: true,
                             thirdColor: true,
-                            text: questions![questionIndex]['album_title']
+                            text: questions![questionIndex]['song_title']
                                 .toString(),
                           ),
                         ),
