@@ -55,6 +55,7 @@ class QuizB extends StatelessWidget {
                 height: 20,
               ),
               CustomText(
+                alignCenter: true,
                 size: 20,
                 thirdColor: true,
                 bold: true,
