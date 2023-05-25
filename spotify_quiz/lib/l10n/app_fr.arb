@@ -12,7 +12,7 @@
   "events": "Evénements",
   "loadingevents": "Chargement des événements",
   "home": "Home",
-  "noevents": "Il n'y a pas d'événements disponibles :(",
+  "noevents": "Il n'y a pas d'événements disponibles :",
   "quizpage": "Quiz",
   "noaccountText":"Notre plateforme nécessite que vous ayez un compte spotify. Vous n'en avez pas encore ? Rendez-vous sur www.spotify.com pour vous inscrire et vous connecter sur SpotiQuiz pour défier vos amis !",
   "noaccount":"Je n'ai pas de compte spotify",
@@ -38,7 +38,7 @@
 
   "chooseaquiz": "Choisissez un quiz !",
 
-  "yourfavartists": "Vos artistes préférés",
+  "yourfavartists": "Artistes que vous pourriez aimer",
 
   "artist": "Artistes",
 

@@ -268,31 +268,34 @@ class QuizScreenState extends State<QuizScreen> {
             ),
             //UPPER PART WITH THE TYPE OF QUIZ
             Column(
-              mainAxisSize: MainAxisSize.min,
               children: [
                 Column(
-                  mainAxisSize: MainAxisSize.min,
                   children: [
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        CustomText(
-                          key: const Key("PresentationText"),
-                          text: AppLocalizations.of(context)!.chooseaquiz,
-                          size: 30.0,
-                          bold: true,
+                        Padding(
+                          padding:
+                              const EdgeInsets.fromLTRB(15.0, 0.0, 0.0, 0.0),
+                          child: CustomText(
+                            key: const Key("PresentationText"),
+                            text: AppLocalizations.of(context)!.chooseaquiz,
+                            size: 30.0,
+                            bold: true,
+                          ),
                         ),
                       ],
                     ),
                   ],
                 ),
-                SingleChildScrollView(
-                  key: const Key("GameList"),
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: trialGames,
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(8.0, 15.0, 0.0, 0.0),
+                  child: SingleChildScrollView(
+                    key: const Key("GameList"),
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: trialGames,
+                    ),
                   ),
                 ),
               ],
@@ -302,78 +305,80 @@ class QuizScreenState extends State<QuizScreen> {
             ),
             //LOWER PART PANEL WITH FAVOURITE ARTISTS
             Column(
-              mainAxisSize: MainAxisSize.min,
               children: [
                 Column(
-                  mainAxisSize: MainAxisSize.min,
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      
-                      children: [
-                        CustomText(
-                          key: const Key("ArtistText"),
-                          text: AppLocalizations.of(context)!.yourfavartists,
-                          size: 30.0,
-                          bold: true,
-                        ),
-                      ],
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(15.0, 0.0, 0.0, 0.0),
+                      child: Row(
+                        children: [
+                          CustomText(
+                            key: const Key("ArtistText"),
+                            text: AppLocalizations.of(context)!.yourfavartists,
+                            size: 30.0,
+                            bold: true,
+                          ),
+                        ],
+                      ),
                     ),
                   ],
                 ),
-                FutureBuilder<List<Artist>>(
-                    future: getArtists(),
-                    builder: (context, snapshot) {
-                      if (snapshot.hasData) {
-                        final artists = snapshot.data!;
-                        List<Widget> artistsBox = [];
-                        for (Artist artist in artists) {
-                          artistsBox.add(
-                            Column(
-                              textDirection: TextDirection.ltr,
-                              children: [
-                                CustomContainerPicNetwork(
-                                  picUrl: artist.images![1].url,
-                                  withBorder: false,
-                                  width: 150,
-                                  height: 150,
-                                ),
-                                CustomText(
-                                  text: artist.name,
-                                  size: 18,
-                                  alignCenter: true,
-                                  thirdColor: true,
-                                ),
-                              ],
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(8.0, 15.0, 0.0, 0.0),
+                  child: FutureBuilder<List<Artist>>(
+                      future: getArtists(),
+                      builder: (context, snapshot) {
+                        if (snapshot.hasData) {
+                          final artists = snapshot.data!;
+                          List<Widget> artistsBox = [];
+                          for (Artist artist in artists) {
+                            artistsBox.add(
+                              Column(
+                                textDirection: TextDirection.ltr,
+                                children: [
+                                  CustomContainerPicNetwork(
+                                    picUrl: artist.images![1].url,
+                                    withBorder: false,
+                                    width: 150,
+                                    height: 150,
+                                  ),
+                                  CustomText(
+                                    text: artist.name,
+                                    size: 18,
+                                    alignCenter: true,
+                                    thirdColor: true,
+                                  ),
+                                ],
+                              ),
+                            );
+                            i++;
+                          }
+                          return SingleChildScrollView(
+                            key: const Key("GameList"),
+                            scrollDirection: Axis.horizontal,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: artistsBox,
                             ),
                           );
-                          i++;
+                        } else {
+                          return Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: const [
+                              SizedBox(
+                                width: 60,
+                                height: 60,
+                              ),
+                              SizedBox(
+                                width: 60,
+                                height: 60,
+                                child: CircularProgressIndicator(),
+                              ),
+                            ],
+                          );
                         }
-                        return SingleChildScrollView(
-                          key: const Key("GameList"),
-                          scrollDirection: Axis.horizontal,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: artistsBox,
-                          ),
-                        );
-                      } else {
-                        return Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: const [
-                            SizedBox(
-                              width: 60,
-                              height: 60,
-                            ),
-                            SizedBox(
-                              width: 60,
-                              height: 60,
-                              child: CircularProgressIndicator(),
-                            ),
-                          ],
-                        );
-                      }
-                    }),
+                      }),
+                ),
               ],
             ),
             const SizedBox(

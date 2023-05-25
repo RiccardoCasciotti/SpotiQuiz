@@ -29,7 +29,7 @@
     "description": ""
   },
 
-  "noevents": "There aren't any events available :(",
+  "noevents": "There aren't any events available :",
   "@level": {
     "description": "The level of the player"
   },
@@ -114,7 +114,7 @@
     "description": "First text in quiz page"
   },
 
-  "yourfavartists": "Your favourite artists",
+  "yourfavartists": "Artists you could like",
   "@yourfavartists": {
     "description": "Second text in quiz page"
   },
