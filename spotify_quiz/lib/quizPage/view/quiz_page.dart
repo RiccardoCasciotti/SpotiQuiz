@@ -107,11 +107,15 @@ class _QuizPageState extends State<QuizPage> {
     if ((_questionIndex + 1) % limit == 0) {
       print(_questionIndex);
       print("Populating First List");
-       _questions = _secondSlotQuestions;
-
-    }
+     
+      setState(() {
       _questionIndex = (_questionIndex + 1) % limit;
       _questionScore = score;
+      _hasAnswered = true;
+       _questions = _secondSlotQuestions;
+    });
+    }
+
     
   }
 
