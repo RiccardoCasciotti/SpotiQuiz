@@ -76,6 +76,7 @@ class _MyHomePageState extends State<MyHomePage> {
       utilities.questions_d_prefetch = createQuestions("D");
       utilities.questions_r_prefetch = createQuestions("R");
       utilities.prefetched = true;
+      precacheImage(const AssetImage("assets/images/event.jpg"), context);
     }
 
     // precacheImage(const AssetImage("assets/images/mic.jpg"), context);

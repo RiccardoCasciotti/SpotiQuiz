@@ -43,7 +43,20 @@ class _EventsPageState extends State<EventsPage> {
           elevation: 0.0,
           title: const Text("Go back"),
         ),
-        body: Center(
+        body: Container(
+        key: const Key("BackGroundImage"),
+        constraints: const BoxConstraints.expand(),
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            opacity: 0.5,
+            image: AssetImage(
+              "assets/images/event.jpg",
+            ),
+            fit: BoxFit.cover,
+          ),
+        ),
+        child:
+        Center(
             child: FutureBuilder<List<dynamic>>(
                 future: _events, // a previously-obtained Future<String> or null
                 builder: (BuildContext context,
@@ -103,7 +116,7 @@ class _EventsPageState extends State<EventsPage> {
                       ],
                     ),
                   );
-                })));
+                }))));
   }
 }
 
@@ -112,7 +125,9 @@ Widget buildCard(Event event, BuildContext context) {
     elevation: 8.0,
     margin: new EdgeInsets.symmetric(horizontal: 10.0, vertical: 6.0),
     child: Container(
-      decoration: BoxDecoration(color: Color.fromRGBO(64, 75, 96, .9)),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.all(Radius.circular(3.0)),
+        color: Colors.white),
       child: ListTile(
         contentPadding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
         leading: Container(
@@ -120,7 +135,7 @@ Widget buildCard(Event event, BuildContext context) {
             padding: EdgeInsets.only(right: 12.0),
             decoration: new BoxDecoration(
                 border: new Border(
-                    right: new BorderSide(width: 1.0, color: Colors.white24))),
+                    right: new BorderSide(width: 1.0, color: Colors.black))),
             child: 
             Image.network(
               event.image_url,
@@ -149,7 +164,7 @@ Widget buildCard(Event event, BuildContext context) {
           padding: EdgeInsets.all(5.0),
           child: Text(
             event.event_name,
-            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+            style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
           ),
         ),
 
@@ -159,11 +174,11 @@ Widget buildCard(Event event, BuildContext context) {
             Padding(
                 padding: EdgeInsets.all(5.0),
                 child: Text(event.venue_name,
-                    style: TextStyle(color: Colors.white))),
+                    style: TextStyle(color: Colors.black))),
             Padding(
                 padding: EdgeInsets.all(5.0),
                 child: Text(event.startDate,
-                    style: TextStyle(color: Colors.white))),
+                    style: TextStyle(color: Colors.black))),
           ],
         ),
         // trailing:
