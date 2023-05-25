@@ -1,4 +1,5 @@
 import 'package:authentication_repository/authentication_repository.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -61,9 +62,17 @@ void main() async {
   }
   var permission = await Geolocator.checkPermission();
   if (permission == LocationPermission.always && permission == LocationPermission.whileInUse){
-    utilities.events_prefetch=  _getCurrentPosition();
+    utilities.events_prefetch=   _getCurrentPosition();
     utilities.location = true;
+   
+//     CachedNetworkImage(
+//    imageUrl: "http://via.placeholder.com/350x150",
+//    placeholder: (context, url) => new CircularProgressIndicator(),
+//    errorWidget: (context, url, error) => new Icon(Icons.error),
+//  );
   }
+  
+  
   
   runApp(const MyApp());
 }

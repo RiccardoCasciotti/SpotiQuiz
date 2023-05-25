@@ -115,7 +115,7 @@ Widget buildCard(Event event, BuildContext context) {
       decoration: BoxDecoration(color: Color.fromRGBO(64, 75, 96, .9)),
       child: ListTile(
         contentPadding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
-        leading: Expanded(
+        leading: Container(
           child: Container(
             padding: EdgeInsets.only(right: 12.0),
             decoration: new BoxDecoration(
@@ -124,6 +124,23 @@ Widget buildCard(Event event, BuildContext context) {
             child: 
             Image.network(
               event.image_url,
+              frameBuilder: (BuildContext context, Widget child, int? frame,
+            bool wasSynchronouslyLoaded) {
+          if (wasSynchronouslyLoaded) {
+            return child;
+          }
+          return AnimatedOpacity(
+            opacity: frame == null ? 0 : 1,
+            duration: const Duration(seconds: 1),
+            curve: Curves.easeOut,
+            child: child,
+          );
+        },
+              loadingBuilder: (BuildContext context, Widget child,
+            ImageChunkEvent? loadingProgress) {
+          if (loadingProgress == null) return child;
+          return  CircularProgressIndicator();
+        }
             
             ),
           ),
