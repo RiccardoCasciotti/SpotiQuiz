@@ -111,7 +111,7 @@ class LoginButton extends StatelessWidget {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(8.0),
       ),
-      color: utilities.primaryColor,
+      color: const Color.fromARGB(255, 25, 210, 90),
       highlightColor: const Color.fromRGBO(60, 187, 171, 1),
       splashColor: const Color.fromRGBO(60, 187, 171, 1),
       child: CustomText(
