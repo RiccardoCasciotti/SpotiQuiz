@@ -34,8 +34,17 @@ class _EventsPageState extends State<EventsPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        backgroundColor: utilities.secondaryColor,
+    return Stack( 
+      children: [
+        Image.asset(
+            "assets/images/event.jpg",
+            height: MediaQuery.of(context).size.height,
+            width: MediaQuery.of(context).size.width,
+            fit: BoxFit.cover,
+          ),
+    Scaffold(
+      backgroundColor: Colors.transparent,
+        
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
         appBar: AppBar(
           backgroundColor: utilities.secondaryColor,
@@ -43,21 +52,11 @@ class _EventsPageState extends State<EventsPage> {
           elevation: 0.0,
           title: const Text("Go back"),
         ),
-        body: Container(
-        key: const Key("BackGroundImageEvents"),
-        constraints: const BoxConstraints.expand(),
-        decoration: const BoxDecoration(
-          image: DecorationImage(
-            opacity: 0.5,
-            image: AssetImage(
-              "assets/images/event.jpg",
-            ),
-            fit: BoxFit.cover,
-          ),
-        ),
-        child:
+        body: 
+      
         
         Center(
+          
             child: FutureBuilder<List<dynamic>>(
                 future: _events, // a previously-obtained Future<String> or null
                 builder: (BuildContext context,
@@ -90,6 +89,7 @@ class _EventsPageState extends State<EventsPage> {
                   }
 
                   return PageTransitionSwitcher(
+                    
                     duration: const Duration(milliseconds: 500),
                     transitionBuilder: (child, animation, secondaryAnimation) =>
                         SharedAxisTransition(
@@ -100,6 +100,7 @@ class _EventsPageState extends State<EventsPage> {
                       child: child,
                     ),
                     child: Column(
+                       
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         const SizedBox(
@@ -117,7 +118,7 @@ class _EventsPageState extends State<EventsPage> {
                       ],
                     ),
                   );
-                }))));
+                })))],);
   }
 }
 
@@ -137,7 +138,9 @@ Widget buildCard(Event event, BuildContext context) {
             decoration: new BoxDecoration(
                 border: new Border(
                     right: new BorderSide(width: 1.0, color: Colors.black))),
-            child: 
+            child: Stack(children: [
+              Image.asset("assets/images/eventPlaceholder.jpg",
+              scale: 1.5,),
             Image.network(
               event.image_url,
               frameBuilder: (BuildContext context, Widget child, int? frame,
@@ -157,8 +160,9 @@ Widget buildCard(Event event, BuildContext context) {
           if (loadingProgress == null) return child;
           return  CircularProgressIndicator();
         }
+        
             
-            ),
+            ),],)
           ),
         ),
         title: Padding(
