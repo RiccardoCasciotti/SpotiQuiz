@@ -52,18 +52,15 @@ class _QuizPageState extends State<QuizPage> {
 
   @override
   void initState() {
-    if(widget.selectedMode == "A"){
+    if (widget.selectedMode == "A") {
       _questions = utilities.questions_a_prefetch;
-    }
-    else if(widget.selectedMode == "B"){
+    } else if (widget.selectedMode == "B") {
       _questions = utilities.questions_b_prefetch;
-    }
-    else if(widget.selectedMode == "C"){
+    } else if (widget.selectedMode == "C") {
       _questions = utilities.questions_c_prefetch;
-    }
-    else if(widget.selectedMode == "D"){
+    } else if (widget.selectedMode == "D") {
       _questions = utilities.questions_d_prefetch;
-    }else{
+    } else {
       _questions = utilities.questions_r_prefetch;
     }
     super.initState();
@@ -88,20 +85,17 @@ class _QuizPageState extends State<QuizPage> {
     if ((_questionIndex) % limit == 0) {
       print("Create Second List");
       _secondSlotQuestions = createQuestions(widget.selectedMode);
-      if(widget.selectedMode == "A"){
-      utilities.questions_a_prefetch = _secondSlotQuestions;
-    }
-    else if(widget.selectedMode == "B"){
-     utilities.questions_b_prefetch= _secondSlotQuestions;
-    }
-    else if(widget.selectedMode == "C"){
-      utilities.questions_c_prefetch= _secondSlotQuestions;
-    }
-    else if(widget.selectedMode == "D"){
-      utilities.questions_d_prefetch= _secondSlotQuestions;
-    }else{
-      utilities.questions_r_prefetch= _secondSlotQuestions;
-    }
+      if (widget.selectedMode == "A") {
+        utilities.questions_a_prefetch = _secondSlotQuestions;
+      } else if (widget.selectedMode == "B") {
+        utilities.questions_b_prefetch = _secondSlotQuestions;
+      } else if (widget.selectedMode == "C") {
+        utilities.questions_c_prefetch = _secondSlotQuestions;
+      } else if (widget.selectedMode == "D") {
+        utilities.questions_d_prefetch = _secondSlotQuestions;
+      } else {
+        utilities.questions_r_prefetch = _secondSlotQuestions;
+      }
     }
     if (score > 0) {
       _correctAnswers++;
@@ -184,18 +178,19 @@ class _QuizPageState extends State<QuizPage> {
                           transitionBuilder:
                               (child, animation, secondaryAnimation) =>
                                   SharedAxisTransition(
-                                    animation: animation,
-                                    secondaryAnimation: secondaryAnimation,
-                                    fillColor: utilities.secondaryColor,
-                                    transitionType:
-                                        SharedAxisTransitionType.horizontal,
-                                    child: child,
-                                  ),
+                            animation: animation,
+                            secondaryAnimation: secondaryAnimation,
+                            fillColor: utilities.secondaryColor,
+                            transitionType: SharedAxisTransitionType.horizontal,
+                            child: child,
+                          ),
                           child: Quiz(
                             answerQuestion: _answerQuestion,
                             questionIndex: _questionIndex,
                             questions: snapshot.data,
-                          ));
+                            isRandom: widget.selectedMode == "R",
+                          ),
+                        );
                 } else {
                   return PageTransitionSwitcher(
                     duration: const Duration(milliseconds: 500),
