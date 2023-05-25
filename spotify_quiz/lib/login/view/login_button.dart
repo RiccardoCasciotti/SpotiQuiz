@@ -8,8 +8,6 @@ import 'package:spotify_quiz/repositories/user/user_repository.dart';
 
 import 'package:spotify_quiz/utility/utilities.dart' as utilities;
 
-import 'package:flutter/material.dart';
-
 import '../../utility/api_calls.dart';
 
 class AnimatedLoginButton extends StatefulWidget {
@@ -74,10 +72,9 @@ class LoginButton extends StatelessWidget {
     final UserRepository userRepository = UserRepository();
     return MaterialButton(
       key: const Key('LoginButton'),
-      padding: EdgeInsets.all(7.0),
+      padding: const EdgeInsets.all(7.0),
       onPressed: () async {
         var userTest = await userRepository.getByID("11136145170");
-        
 
         // ignore: use_build_context_synchronously
         if (utilities.runningTest) {
@@ -92,8 +89,6 @@ class LoginButton extends StatelessWidget {
         }
         // ignore: use_build_context_synchronously
         else {
-         
-         
           await Navigator.of(context).push(
             MaterialPageRoute(builder: (context) {
               return BlocProvider.value(
@@ -104,12 +99,11 @@ class LoginButton extends StatelessWidget {
               //return WebViewLogin();
             }),
           );
-           utilities.artists = await get_followed_artists();
+          utilities.artists = await get_followed_artists();
           if (utilities.artists == []) {
             utilities.artists =
                 await get_related_artists("0TnOYISbd1XYRBk9myaseg");
           }
-     
         }
         // ignore: use_build_context_synchronously
         //context.read<LoginBloc>().add(const LoginSubmitted());
@@ -117,7 +111,7 @@ class LoginButton extends StatelessWidget {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(8.0),
       ),
-      color: const Color.fromRGBO(54, 217, 174, 1),
+      color: utilities.primaryColor,
       highlightColor: const Color.fromRGBO(60, 187, 171, 1),
       splashColor: const Color.fromRGBO(60, 187, 171, 1),
       child: CustomText(

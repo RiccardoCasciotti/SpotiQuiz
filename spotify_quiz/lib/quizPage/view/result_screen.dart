@@ -63,12 +63,15 @@ class Result extends StatelessWidget {
                 ),
                 //Text
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     TextButtonReturn(
                       key: const Key("ReturnButton"),
                       text: AppLocalizations.of(context)!.quitbutton,
                       selectHandler: (_) => returnHome(),
+                    ),
+                    const SizedBox(
+                      width: 30,
                     ),
                     TextButtonReturn(
                       key: const Key("ContinueButton"),

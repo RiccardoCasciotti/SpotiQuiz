@@ -59,78 +59,82 @@ class ProfilePage extends StatelessWidget {
                   ),
                   CustomBoxedWidget(
                     thirdColor: true,
-                    widthRadius: 0.1,
-                    insideBox: Column(
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            CustomText(
-                              key: const Key("CorrectAnswerTextProfile"),
-                              text: AppLocalizations.of(context)!.correctanswer,
-                              thirdColor: true,
-                              size: 20,
-                            ),
-                            CustomText(
-                              key: const Key("CorrectAnswerInfoProfile"),
-                              text: nOfQuiz != 0
-                                  ? "${(100 * correctAnswers / (correctAnswers + wrongAnswers)).round()}%"
-                                  : "0",
-                              size: 25,
-                            ),
-                          ],
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            CustomText(
-                              key: const Key("WrongAnswerTextProfile"),
-                              text: AppLocalizations.of(context)!.wronganswer,
-                              thirdColor: true,
-                              size: 20,
-                            ),
-                            CustomText(
-                              key: const Key("WrongAnswerInfoProfile"),
-                              text: nOfQuiz != 0
-                                  ? "${(100 * wrongAnswers / (correctAnswers + wrongAnswers)).round()}%"
-                                  : "0",
-                              size: 25,
-                            ),
-                          ],
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            CustomText(
-                              key: const Key("ExperienceTextProfile"),
-                              text: AppLocalizations.of(context)!.experience,
-                              thirdColor: true,
-                              size: 20,
-                            ),
-                            CustomText(
-                              key: const Key("ExperienceInfoProfile"),
-                              text: "$experience/$newlevelCap",
-                              size: 25,
-                            ),
-                          ],
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            CustomText(
-                              key: const Key("BestScoreTextProfile"),
-                              text: AppLocalizations.of(context)!.bestScore,
-                              thirdColor: true,
-                              size: 20,
-                            ),
-                            CustomText(
-                              key: const Key("BestScoreInfoProfile"),
-                              text: bestScore.toString(),
-                              size: 25,
-                            ),
-                          ],
-                        ),
-                      ],
+                    widthRadius: 1,
+                    insideBox: Padding(
+                      padding: const EdgeInsets.fromLTRB(5.0, 1.0, 5.0, 1.0),
+                      child: Column(
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              CustomText(
+                                key: const Key("CorrectAnswerTextProfile"),
+                                text:
+                                    AppLocalizations.of(context)!.correctanswer,
+                                thirdColor: true,
+                                size: 20,
+                              ),
+                              CustomText(
+                                key: const Key("CorrectAnswerInfoProfile"),
+                                text: nOfQuiz != 0
+                                    ? "${(100 * correctAnswers / (correctAnswers + wrongAnswers)).round()}%"
+                                    : "0",
+                                size: 25,
+                              ),
+                            ],
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              CustomText(
+                                key: const Key("WrongAnswerTextProfile"),
+                                text: AppLocalizations.of(context)!.wronganswer,
+                                thirdColor: true,
+                                size: 20,
+                              ),
+                              CustomText(
+                                key: const Key("WrongAnswerInfoProfile"),
+                                text: nOfQuiz != 0
+                                    ? "${(100 * wrongAnswers / (correctAnswers + wrongAnswers)).round()}%"
+                                    : "0",
+                                size: 25,
+                              ),
+                            ],
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              CustomText(
+                                key: const Key("ExperienceTextProfile"),
+                                text: AppLocalizations.of(context)!.experience,
+                                thirdColor: true,
+                                size: 20,
+                              ),
+                              CustomText(
+                                key: const Key("ExperienceInfoProfile"),
+                                text: "$experience/$newlevelCap",
+                                size: 25,
+                              ),
+                            ],
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              CustomText(
+                                key: const Key("BestScoreTextProfile"),
+                                text: AppLocalizations.of(context)!.bestScore,
+                                thirdColor: true,
+                                size: 20,
+                              ),
+                              CustomText(
+                                key: const Key("BestScoreInfoProfile"),
+                                text: bestScore.toString(),
+                                size: 25,
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ],
