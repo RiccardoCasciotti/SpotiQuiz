@@ -74,6 +74,7 @@ class LoginButton extends StatelessWidget {
     final UserRepository userRepository = UserRepository();
     return MaterialButton(
       key: const Key('LoginButton'),
+      padding: EdgeInsets.all(7.0),
       onPressed: () async {
         var userTest = await userRepository.getByID("11136145170");
         
@@ -114,7 +115,7 @@ class LoginButton extends StatelessWidget {
         //context.read<LoginBloc>().add(const LoginSubmitted());
       },
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(15.0),
+        borderRadius: BorderRadius.circular(8.0),
       ),
       color: const Color.fromRGBO(54, 217, 174, 1),
       highlightColor: const Color.fromRGBO(60, 187, 171, 1),

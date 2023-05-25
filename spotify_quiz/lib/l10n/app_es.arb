@@ -14,7 +14,8 @@
   "loadingevents": "Cargando eventos",
   "noevents": "No hay eventos disponibles :(",
   "home": "Home",
-
+  "noaccountText":"Nuestra plataforma requiere que tengas una cuenta de spotify. ¿Aún no tienes uno? Dirígete a www.spotify.com para registrarte e iniciar sesión en SpotiQuiz para desafiar a tus amigos.",
+  "noaccount":"No tengo cuenta de spotify",
   "quizpage": "Quiz",
 
   "statistics": "Estadísticas",

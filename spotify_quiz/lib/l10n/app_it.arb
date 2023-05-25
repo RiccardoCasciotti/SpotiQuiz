@@ -14,7 +14,8 @@
   "home": "Home",
   "noevents": "Non ci sono eventi disponibili :(",
   "quizpage": "Quiz",
-
+  "noaccountText":"La nostra piattaforma richiede di avere un account Spotify. Non ne hai ancora uno? Vai su www.spotify.com per iscriverti e accedi a SpotiQuiz per sfidare i tuoi amici!",
+  "noaccount":"Non ho un account Spotify",
   "statistics": "Statistiche",
 
   "correctanswer": "Risposte Corrette",

@@ -19,6 +19,16 @@
     "description": "The level of the player"
   },
 
+"noaccount": "I don't have a spotify account",
+  "@level": {
+    "description": "I don't have a spotify account"
+  },
+
+"noaccountText": "Our platform requires you to have a spotify account. Don't have one yet? Head over to www.spotify.com to sign up and login on SpotiQuiz to challenge your friends!",
+  "@level": {
+    "description": ""
+  },
+
   "noevents": "There aren't any events available :(",
   "@level": {
     "description": "The level of the player"
