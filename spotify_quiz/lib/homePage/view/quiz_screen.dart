@@ -274,7 +274,8 @@ class QuizScreenState extends State<QuizScreen> {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         CustomText(
                           key: const Key("PresentationText"),
@@ -307,7 +308,8 @@ class QuizScreenState extends State<QuizScreen> {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      
                       children: [
                         CustomText(
                           key: const Key("ArtistText"),

@@ -44,7 +44,7 @@ class _EventsPageState extends State<EventsPage> {
           title: const Text("Go back"),
         ),
         body: Container(
-        key: const Key("BackGroundImage"),
+        key: const Key("BackGroundImageEvents"),
         constraints: const BoxConstraints.expand(),
         decoration: const BoxDecoration(
           image: DecorationImage(
@@ -56,6 +56,7 @@ class _EventsPageState extends State<EventsPage> {
           ),
         ),
         child:
+        
         Center(
             child: FutureBuilder<List<dynamic>>(
                 future: _events, // a previously-obtained Future<String> or null
