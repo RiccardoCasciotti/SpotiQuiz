@@ -81,11 +81,7 @@ class LoginButton extends StatelessWidget {
           utilities.refreshToken = userTest!.refreshToken;
           context.read<AuthenticationBloc>().user = userTest;
           context.read<LoginBloc>().add(const LoginSubmitted());
-          utilities.artists = await get_followed_artists();
-          if (utilities.artists == []) {
-            utilities.artists =
-                await get_related_artists("0TnOYISbd1XYRBk9myaseg");
-          }
+    
         }
         // ignore: use_build_context_synchronously
         else {
@@ -99,11 +95,6 @@ class LoginButton extends StatelessWidget {
               //return WebViewLogin();
             }),
           );
-          utilities.artists = await get_followed_artists();
-          if (utilities.artists == []) {
-            utilities.artists =
-                await get_related_artists("0TnOYISbd1XYRBk9myaseg");
-          }
         }
         // ignore: use_build_context_synchronously
         //context.read<LoginBloc>().add(const LoginSubmitted());

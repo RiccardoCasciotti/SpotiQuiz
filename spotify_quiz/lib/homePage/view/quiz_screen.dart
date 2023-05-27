@@ -28,67 +28,7 @@ class QuizScreen extends StatefulWidget {
 class QuizScreenState extends State<QuizScreen> {
   @override
   Widget build(BuildContext context) {
-    Future<List<Artist>> getArtists() async {
-      return get_artist_quizpage();
-      /*
-    if (_artists.isNotEmpty) {
-      _suggestedArtists = await get_related_artists(_artists[0].id);
-    } else {
-      _suggestedArtists = await get_related_artists("0TnOYISbd1XYRBk9myaseg");
-    }
-    for (Artist artist in _artists) {
-      artistsList.add(
-        Column(
-          textDirection: TextDirection.ltr,
-          children: [
-            CustomContainerPicNetwork(
-              picUrl: artist.images![1].url,
-              withBorder: false,
-              width: 150,
-              height: 150,
-            ),
-            CustomText(
-              text: artist.name,
-              size: 18,
-              alignCenter: true,
-              thirdColor: true,
-            ),
-          ],
-        ),
-      );
-      i++;
-      if (i == 5) {
-        return;
-      }
-    }
-    if (i < 5) {
-      for (Artist artist in _suggestedArtists) {
-        artistsList.add(
-          Column(
-            textDirection: TextDirection.ltr,
-            children: [
-              CustomContainerPicNetwork(
-                picUrl: artist.images![1].url,
-                withBorder: false,
-                width: 150,
-                height: 150,
-              ),
-              CustomText(
-                text: artist.name,
-                size: 18,
-                alignCenter: true,
-                thirdColor: true,
-              ),
-            ],
-          ),
-        );
-        i++;
-        if (i == 5) {
-          return;
-        }
-      }
-    }*/
-    }
+    
 
     ImageProvider mic = const AssetImage("assets/images/mic.jpg");
     ImageProvider singer = const AssetImage("assets/images/singer.jpg");
@@ -326,7 +266,7 @@ class QuizScreenState extends State<QuizScreen> {
                 Padding(
                   padding: const EdgeInsets.fromLTRB(8.0, 15.0, 0.0, 0.0),
                   child: FutureBuilder<List<Artist>>(
-                      future: getArtists(),
+                      future:  utilities.artists,
                       builder: (context, snapshot) {
                         if (snapshot.hasData) {
                           final artists = snapshot.data!;

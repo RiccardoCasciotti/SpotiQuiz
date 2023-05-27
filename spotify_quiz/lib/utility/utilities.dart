@@ -28,9 +28,11 @@ String imageUserProfile =
     'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg';
 
 bool runningTest = false;
-List<Artist> artists = [];
+var artists;
+var access_token;
 
 Future<String> getAccessToken() async {
+  
   final clientId = dotenv.env['SPOTIFY_CLIENT_ID'];
   final clientSecret = dotenv.env['SPOTIFY_CLIENT_SECRET'];
   final response = await http.post(
@@ -44,5 +46,6 @@ Future<String> getAccessToken() async {
     body: {"refresh_token": refreshToken, "grant_type": "refresh_token"},
   );
   final bodyJson = json.decode(response.body);
+  print(bodyJson);
   return bodyJson["access_token"];
 }

@@ -6,6 +6,7 @@ import 'package:http/http.dart' as http;
 import 'package:spotify_quiz/authentication/bloc/authentication_bloc.dart';
 import 'package:spotify_quiz/repositories/user/user_repository.dart';
 import 'package:webview_flutter/webview_flutter.dart';
+import 'package:spotify_quiz/utility/utilities.dart' as utilities;
 
 import '../../login/bloc/login_bloc.dart';
 
@@ -66,7 +67,7 @@ class WebViewLogin extends StatelessWidget {
 
           else if( requestUri.contains("http://spotify_quiz-api.com/?code=" )){
             var code = requestUri.split("code=")[1];
-
+            print("CODE REQUESTED");
             final response = await http.post(
             Uri.parse("https://accounts.spotify.com/api/token"),
             headers: {
@@ -82,17 +83,17 @@ class WebViewLogin extends StatelessWidget {
             },
           );
 
-         
+            print("CODE REQUESTED AFTER");
            
 
 
           final bodyJson = json.decode(response.body);
 
           if (response.statusCode == 200) {
-            
+            //utilities.access_token = bodyJson["access_token"];
             var data = await userRepository.apiGetUser(
                 '${bodyJson["access_token"]}', '${bodyJson["refresh_token"]}');
-             
+            print("USER ACQUIRED");
             context.read<AuthenticationBloc>().user = data;
 
         

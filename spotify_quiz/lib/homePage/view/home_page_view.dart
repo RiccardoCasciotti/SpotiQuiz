@@ -76,6 +76,7 @@ class _MyHomePageState extends State<MyHomePage> {
       utilities.questions_d_prefetch = createQuestions("D");
       utilities.questions_r_prefetch = createQuestions("R");
       utilities.prefetched = true;
+      utilities.artists = get_artist_quizpage();
       precacheImage(const AssetImage("assets/images/event.jpg"), context);
     }
 

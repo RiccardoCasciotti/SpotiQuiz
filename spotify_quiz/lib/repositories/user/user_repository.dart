@@ -135,8 +135,8 @@ class UserRepository {
     });
 
     final userJson = json.decode(userInfo.body);
-
-    if (userJson["error"] != {}) {
+    
+    if (userJson["error"] != null) {
       debugPrint("Error in the API request: ${userJson["error"]}");
     }
 
