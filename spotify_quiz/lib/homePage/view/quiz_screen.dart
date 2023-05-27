@@ -333,20 +333,23 @@ class QuizScreenState extends State<QuizScreen> {
                           List<Widget> artistsBox = [];
                           for (Artist artist in artists) {
                             artistsBox.add(
-                              Column(
-                                textDirection: TextDirection.ltr,
+                              Row(
                                 children: [
                                   CustomContainerPicNetwork(
                                     picUrl: artist.images![1].url,
                                     withBorder: false,
-                                    width: 150,
-                                    height: 150,
+                                    width: 100,
+                                    height: 100,
+                                    circularity: 10,
                                   ),
-                                  CustomText(
-                                    text: artist.name,
-                                    size: 18,
-                                    alignCenter: true,
-                                    thirdColor: true,
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: CustomText(
+                                      text: artist.name,
+                                      size: 20,
+                                      alignCenter: true,
+                                      thirdColor: true,
+                                    ),
                                   ),
                                 ],
                               ),
@@ -355,8 +358,8 @@ class QuizScreenState extends State<QuizScreen> {
                           }
                           return SingleChildScrollView(
                             key: const Key("GameList"),
-                            scrollDirection: Axis.horizontal,
-                            child: Row(
+                            scrollDirection: Axis.vertical,
+                            child: Column(
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: artistsBox,
                             ),
