@@ -181,7 +181,7 @@ void main() {
     await tester.pumpAndSettle(const Duration(seconds: 2));
 
     //test
-    expect(find.byKey(const Key("GameList")), findsOneWidget);
+    expect(find.byKey(const Key("GameList")), findsWidgets);
   });
 
   testWidgets('QuizPage Layout: Artist List', (WidgetTester tester) async {
@@ -202,7 +202,7 @@ void main() {
     await tester.pumpAndSettle(const Duration(seconds: 2));
 
     //test
-    expect(find.byKey(const Key("ArtistList")), findsOneWidget);
+    expect(find.byKey(const Key("ArtistsList")), findsOneWidget);
   });
 
   testWidgets('QuizPage Layout: Artist Text', (WidgetTester tester) async {

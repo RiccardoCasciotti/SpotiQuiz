@@ -35,7 +35,7 @@ class _EventsPageState extends State<EventsPage> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      key: const Key("BackGroundImageLocalRanking"),
+      key: const Key("BackGroundImageEvent"),
       constraints: const BoxConstraints.expand(),
       decoration: const BoxDecoration(
         image: DecorationImage(
@@ -56,6 +56,7 @@ class _EventsPageState extends State<EventsPage> {
           title: const Text("Go back"),
         ),
         body: Center(
+          key: const Key("eventFrame"),
           child: FutureBuilder<List<dynamic>>(
               future: _events, // a previously-obtained Future<String> or null
               builder: (BuildContext context,
@@ -65,13 +66,14 @@ class _EventsPageState extends State<EventsPage> {
                     print("Error ${snapshot.error}");
                   }
                   if (snapshot.hasData) {
-                    if (snapshot.data!.length == 0) {
+                    if (snapshot.data!.isEmpty) {
                       return CustomText(
                           text: AppLocalizations.of(context)!.noevents,
                           size: 20);
                     }
 
                     return ListView.separated(
+                      key: const Key("eventsList"),
                       padding: const EdgeInsets.all(12),
                       itemCount: snapshot.data!.length,
                       separatorBuilder: (context, index) {
@@ -108,27 +110,28 @@ class _EventsPageState extends State<EventsPage> {
 
 Widget buildCard(Event event, BuildContext context) {
   return Card(
+    key: const Key("CardFrame"),
     elevation: 8.0,
-    margin: new EdgeInsets.symmetric(horizontal: 10.0, vertical: 6.0),
+    margin: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 6.0),
     child: Container(
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(3.0)),
           color: Colors.white),
       child: ListTile(
-        contentPadding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
-        leading: Container(
-          child: Container(
-              padding: EdgeInsets.only(right: 12.0),
-              decoration: new BoxDecoration(
-                  border: new Border(
-                      right: new BorderSide(width: 1.0, color: Colors.black))),
+        contentPadding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+        leading:
+            Container(
+              padding:const EdgeInsets.only(right: 12.0),
+              decoration:  const BoxDecoration(
+                  border:  Border(
+                      right:  BorderSide(width: 1.0, color: Colors.black))),
               child: Stack(
                 children: [
                   Image.asset(
                     "assets/images/eventPlaceholder.jpg",
                     scale: 1.5,
                   ),
-                  Image.network(event.image_url, frameBuilder:
+                  Image.network(key: const Key("CardImage"), event.image_url, frameBuilder:
                       (BuildContext context, Widget child, int? frame,
                           bool wasSynchronouslyLoaded) {
                     if (wasSynchronouslyLoaded) {
@@ -147,12 +150,12 @@ Widget buildCard(Event event, BuildContext context) {
                   }),
                 ],
               )),
-        ),
+        
         title: Padding(
-          padding: EdgeInsets.all(5.0),
+          padding: const EdgeInsets.all(5.0),
           child: Text(
             event.event_name,
-            style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+            style: const TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
           ),
         ),
 
@@ -160,89 +163,17 @@ Widget buildCard(Event event, BuildContext context) {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Padding(
-                padding: EdgeInsets.all(5.0),
+                padding: const EdgeInsets.all(5.0),
                 child: Text(event.venue_name,
-                    style: TextStyle(color: Colors.black))),
+                    style:  const TextStyle(color: Colors.black))),
             Padding(
-                padding: EdgeInsets.all(5.0),
+                padding: const EdgeInsets.all(5.0),
                 child: Text(event.startDate,
-                    style: TextStyle(color: Colors.black))),
+                    style: const TextStyle(color: Colors.black))),
           ],
         ),
-        // trailing:
-        //     Icon(Icons.keyboard_arrow_right, color: Colors.white, size: 30.0),
-        // onTap: () {
-
-        // },
       ),
     ),
   );
 
-  // return Container(
-  //    //height: MediaQuery.of(context).size.height,
-  //     //width: MediaQuery.of(context).size.width,
-  //     child: Container(
-  //         //padding: EdgeInsets.all(10.0),
-
-  //         margin: EdgeInsets.all(3.0),
-  //         decoration: BoxDecoration(
-  //             color: Colors.white70,
-  //             border: Border.all(
-  //                 //color: Color.fromARGB(a, r, g, b)[500],
-  //                 ),
-  //             borderRadius: BorderRadius.all(Radius.circular(8))),
-  //         child: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-  //           Container(
-
-  //               padding: EdgeInsets.all(10.0),
-  //               height: 75,
-  //               width: 75,
-  //               child: ClipRRect(
-  //                 borderRadius: BorderRadius.circular(8.0),
-  //                 child: Image.network(
-  //                   event.image_url,
-  //                   height: 75,
-  //                   width: 75,
-
-  //                   //fit: BoxFit.cover,
-  //                 ),
-  //               )),
-  //           Container(
-  //               margin: EdgeInsets.all(10.0),
-  //               //width: double.infinity,
-  //               child: Column(
-  //                 mainAxisSize: MainAxisSize.min,
-  //                 crossAxisAlignment: CrossAxisAlignment.start,
-  //                 children: [
-  //                   Container(
-  //                       padding: EdgeInsets.all(3.0),
-  //                       child: SizedBox(
-  //                           //width: double.infinity,
-
-  //                           height: 20,
-  //                           child: AutoSizeText(
-  //                           style: TextStyle(fontSize: 14),
-
-  //             maxLines: 2,
-  //                           "Event:   ${event.event_name}",
-  //                         )
-  //                          ),
-
-  //                       ),
-
-  //                       Container(
-  //                           padding: EdgeInsets.all(3.0),
-  //                           child: Text(
-  //                             selectionColor: Colors.black,
-  //                             "Date:   ${event.startDate}",
-  //                           )),
-  //                   Container(
-  //                       padding: EdgeInsets.all(3.0),
-  //                       child: Text(
-  //                         selectionColor: Colors.black,
-  //                         "Venue:   ${event.venue_name}",
-  //                       )),
-  //                 ],
-  //               ))
-  //         ])));
 }

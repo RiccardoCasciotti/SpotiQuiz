@@ -297,7 +297,7 @@ class QuizScreenState extends State<QuizScreen> {
                             i++;
                           }
                           return SingleChildScrollView(
-                            key: const Key("GameList"),
+                            key: const Key("ArtistsList"),
                             scrollDirection: Axis.vertical,
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.start,

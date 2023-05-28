@@ -56,11 +56,15 @@ Future<Placemark> _getAddressFromLatLng(Position position) async {
 
     Position position = await Geolocator.getCurrentPosition(
         desiredAccuracy: LocationAccuracy.high);
-
-    Placemark pos = await _getAddressFromLatLng(position);
-    var events = await get_events_on_position(pos.locality);
-    //_currentCity = "${pos.locality}";
-    //print(_currentCity);
+var events;
+if(utilities.runningTest){
+      events = await get_events_on_position("Milano");
+    }
+    else{
+      Placemark pos = await _getAddressFromLatLng(position);
+      events = await get_events_on_position(pos.locality);
+    }
+    
     return events;
   }
   
@@ -183,7 +187,12 @@ Future<Placemark> _getAddressFromLatLng(Position position) async {
                     //await _getCurrentPosition();
                     
                     if( utilities.location == false && utilities.events_prefetch == null){
+                      if(!utilities.runningTest){
                         utilities.location= await _handleLocationPermission();
+                      }
+                        else{
+                          utilities.location = true;
+                        }
                         utilities.events_prefetch =  _getCurrentPosition();
                     }
                     if(utilities.location ){
