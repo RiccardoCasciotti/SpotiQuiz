@@ -59,6 +59,15 @@ class CustomNavRail extends StatelessWidget {
             thirdColor: selectedIndex != 2,
           ),
         ),
+        NavigationRailDestination(
+          icon: const Icon(Icons.star_outline_sharp),
+          selectedIcon: const Icon(Icons.star_sharp),
+          label: CustomText(
+            text: AppLocalizations.of(context)!.events,
+            size: selectedIndex != 3 ? 13 : 20,
+            thirdColor: selectedIndex != 3,
+          ),
+        ),
       ],
     );
   }
