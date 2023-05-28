@@ -48,20 +48,41 @@ void main() async {
 
   Future<List<dynamic>> _getCurrentPosition() async {
     // final hasPermission = await _handleLocationPermission();
-    var permission = await Geolocator.checkPermission();
+    var permission;
+    if(utilities.runningTest){
+      permission = LocationPermission.always;
+    }
+    else{
+      permission = await Geolocator.checkPermission();
+    }
+    
      if (permission != LocationPermission.always && permission != LocationPermission.whileInUse) return [];
 
-    Position position = await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.high);
+   
+    
+    var events;
 
-    Placemark pos = await _getAddressFromLatLng(position);
-    var events = await get_events_on_position(pos.locality);
-    //_currentCity = "${pos.locality}";
-    //print(_currentCity);
+    if(utilities.runningTest){
+      events = await get_events_on_position("Milano");
+    }
+    else{
+       Position position = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.high);
+      Placemark pos = await _getAddressFromLatLng(position);
+      events = await get_events_on_position(pos.locality);
+    }
+    
     return events;
   }
-  var permission = await Geolocator.checkPermission();
-  if (permission == LocationPermission.always && permission == LocationPermission.whileInUse){
+  var permission;
+  if(utilities.runningTest) {
+    permission = LocationPermission.always;
+  }
+  else{
+   permission = await Geolocator.checkPermission();
+  }
+  if (permission == LocationPermission.always || permission == LocationPermission.whileInUse){
+    print("Prefetching events...");
     utilities.events_prefetch=   _getCurrentPosition();
     utilities.location = true;
    

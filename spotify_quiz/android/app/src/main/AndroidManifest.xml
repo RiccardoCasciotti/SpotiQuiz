@@ -4,8 +4,9 @@
    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
    <application
-        android:label="spotify_quiz"
+        android:label="SpotiQuiz"
         android:name="${applicationName}"
+        
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
