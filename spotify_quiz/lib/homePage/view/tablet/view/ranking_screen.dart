@@ -95,7 +95,7 @@ class RankingScreenTablet extends StatelessWidget {
             ),
             Expanded(
               child: Container(
-                key: const Key("BackGroundImageTabletLocalRanking"),
+                key: const Key("BackGroundImageTabletRanking"),
                 constraints: const BoxConstraints.expand(),
                 decoration: const BoxDecoration(
                   image: DecorationImage(

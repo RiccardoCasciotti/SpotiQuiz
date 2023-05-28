@@ -349,6 +349,30 @@ void main() {
     expect(find.byIcon(Icons.emoji_events_outlined), findsOneWidget);
   });
 
+  testWidgets('Quiz Page Layout: Event Button', (WidgetTester tester) async {
+    //setup
+    app.main();
+
+    await tester.pumpAndSettle(const Duration(seconds: 5));
+
+    final Finder button = find.byKey(const Key('LoginButton'));
+
+    //do
+
+    await tester.tap(button);
+
+    await tester.pumpAndSettle(const Duration(seconds: 2));
+
+    final Finder buttonHome = find.byIcon(Icons.question_mark_outlined);
+
+    await tester.tap(buttonHome);
+
+    await tester.pumpAndSettle(const Duration(seconds: 2));
+
+    //test
+    expect(find.byIcon(Icons.star_outline_sharp), findsOneWidget);
+  });
+
   testWidgets('Click Quiz Button', (WidgetTester tester) async {
     //setup
     app.main();
@@ -437,6 +461,36 @@ void main() {
 
     //test
     expect(find.byKey(const Key("TabletRankingPage")), findsOneWidget);
+  });
+
+  testWidgets('Click Event Button', (WidgetTester tester) async {
+    //setup
+    app.main();
+
+    await tester.pumpAndSettle(const Duration(seconds: 5));
+
+    final Finder button = find.byKey(const Key('LoginButton'));
+
+    //do
+
+    await tester.tap(button);
+
+    await tester.pumpAndSettle(const Duration(seconds: 2));
+
+    final Finder buttonHome = find.byIcon(Icons.question_mark_outlined);
+
+    await tester.tap(buttonHome);
+
+    await tester.pumpAndSettle(const Duration(seconds: 2));
+
+    final Finder buttonEvent = find.byIcon(Icons.star_outline_sharp);
+
+    await tester.tap(buttonEvent);
+
+    await tester.pumpAndSettle(const Duration(seconds: 2));
+
+    //test
+    expect(find.byKey(const Key("TabletEventPage")), findsOneWidget);
   });
 
   testWidgets('Click Game1', (WidgetTester tester) async {

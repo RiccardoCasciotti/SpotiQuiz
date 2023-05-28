@@ -28,6 +28,7 @@ class LoginPageState extends State<LoginPage> {
               Hero(
                 tag: "logo",
                 child: Container(
+                  key: const Key("LogoSpotyQuiz"),
                   height: 230,
                   width: 230,
                   margin: const EdgeInsets.all(10.0),
@@ -48,6 +49,7 @@ class LoginPageState extends State<LoginPage> {
                     });
                   },
                   child: Text(
+                    key: const Key("NoAccountText"),
                     AppLocalizations.of(context)!.noaccount,
                     textAlign: TextAlign.center,
                     style: GoogleFonts.openSans(

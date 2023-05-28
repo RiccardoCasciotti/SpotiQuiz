@@ -94,6 +94,7 @@ class EventsPageTabletState extends State<EventScreenTablet> {
                                   }
 
                                   return GridView.builder(
+                                    key: const Key("TabEventPage"),
                                     gridDelegate:
                                         SliverGridDelegateWithFixedCrossAxisCount(
                                             crossAxisCount: 2,
