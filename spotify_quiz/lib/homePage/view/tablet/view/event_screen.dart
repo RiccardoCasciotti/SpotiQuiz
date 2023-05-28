@@ -70,56 +70,70 @@ class EventsPageTabletState extends State<EventScreenTablet> {
                   backgroundColor: Colors.transparent,
                   floatingActionButtonLocation:
                       FloatingActionButtonLocation.centerFloat,
-                  body: Center(
-                    child: FutureBuilder<List<dynamic>>(
-                        future:
-                            _events, // a previously-obtained Future<String> or null
-                        builder: (BuildContext context,
-                            AsyncSnapshot<List<dynamic>> snapshot) {
-                          if (snapshot.connectionState ==
-                              ConnectionState.done) {
-                            if (snapshot.hasError) {
-                              print("Error ${snapshot.error}");
-                            }
-                            if (snapshot.hasData) {
-                              if (snapshot.data!.length == 0) {
-                                return CustomText(
-                                    text:
-                                        AppLocalizations.of(context)!.noevents,
-                                    size: 20);
+                  body: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: FutureBuilder<List<dynamic>>(
+                            future: _events,
+                            builder: (BuildContext context,
+                                AsyncSnapshot<List<dynamic>> snapshot) {
+                              if (snapshot.connectionState ==
+                                  ConnectionState.done) {
+                                if (snapshot.hasError) {
+                                  print("Error ${snapshot.error}");
+                                }
+                                if (snapshot.hasData) {
+                                  if (snapshot.data!.isEmpty) {
+                                    return CustomText(
+                                      text: AppLocalizations.of(context)!
+                                          .noevents,
+                                      size: 20,
+                                    );
+                                  }
+
+                                  return GridView.builder(
+                                    gridDelegate:
+                                        SliverGridDelegateWithFixedCrossAxisCount(
+                                            crossAxisCount: 2,
+                                            childAspectRatio:
+                                                MediaQuery.of(context)
+                                                            .orientation !=
+                                                        Orientation.portrait
+                                                    ? (1 / .26)
+                                                    : (1 / .4)),
+                                    padding: const EdgeInsets.all(12),
+                                    itemCount: snapshot.data!.length,
+                                    itemBuilder: (context, index) {
+                                      return buildCard(
+                                        snapshot.data![index],
+                                        context,
+                                      );
+                                    },
+                                  );
+                                }
                               }
 
-                              return ListView.separated(
-                                padding: const EdgeInsets.all(12),
-                                itemCount: snapshot.data!.length,
-                                separatorBuilder: (context, index) {
-                                  return const SizedBox(
-                                    height: 12,
-                                  );
-                                },
-                                itemBuilder: (context, index) {
-                                  return buildCard(
-                                      snapshot.data![index], context);
-                                },
+                              return Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  const CircularProgressIndicator(),
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 16),
+                                    child: CustomText(
+                                      text: AppLocalizations.of(context)!
+                                          .loadingevents,
+                                      size: 20,
+                                    ),
+                                  ),
+                                ],
                               );
-                            }
-                          }
-
-                          return Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              const CircularProgressIndicator(),
-                              Padding(
-                                padding: const EdgeInsets.only(top: 16),
-                                child: CustomText(
-                                  text: AppLocalizations.of(context)!
-                                      .loadingevents,
-                                  size: 20,
-                                ),
-                              ),
-                            ],
-                          );
-                        }),
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -196,9 +210,6 @@ Widget buildCard(Event event, BuildContext context) {
                     style: const TextStyle(color: Colors.black))),
           ],
         ),
-        // trailing:
-        //     Icon(Icons.keyboard_arrow_right, color: Colors.white, size: 30.0),
-        // onTap: () {
 
         // },
       ),
