@@ -10,12 +10,14 @@ import 'package:spotify_quiz/utility/utilities.dart' as utilities;
 class GameInfoScreenTablet extends StatelessWidget {
   String urlImage;
   String text;
+  String selectedMode;
 
   GameInfoScreenTablet({
     Key? key,
     required this.text,
     required this.urlImage,
-  }) : super(key: const Key("TableGameInfoPage"));
+    required this.selectedMode,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -52,11 +54,11 @@ class GameInfoScreenTablet extends StatelessWidget {
           ),
         ),
       ),
-      floatingActionButton: const SizedBox(
+      floatingActionButton: SizedBox(
         height: 250,
         width: 250,
         child: FittedBox(
-          child: PlayButtonTablet(),
+          child: PlayButtonTablet( selectedMode: selectedMode,),
         ),
       ),
     );

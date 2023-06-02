@@ -32,6 +32,9 @@ class ResultTablet extends StatelessWidget {
             wrongColor: questionScore > 0 ? false : true,
             bold: true,
           ),
+          const SizedBox(
+                height: 100,
+              ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
@@ -58,6 +61,9 @@ class ResultTablet extends StatelessWidget {
             ],
           ),
           //Text
+          const SizedBox(
+                height: 100,
+              ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
@@ -67,6 +73,9 @@ class ResultTablet extends StatelessWidget {
               TextButtonReturn(
                 text: AppLocalizations.of(context)!.quitbutton,
                 selectHandler: (context) => returnHome(),
+              ),
+              const SizedBox(
+                width: 100,
               ),
               TextButtonReturn(
                 text: AppLocalizations.of(context)!.continuebutton,

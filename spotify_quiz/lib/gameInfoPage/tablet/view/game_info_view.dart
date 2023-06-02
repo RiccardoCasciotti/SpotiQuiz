@@ -10,29 +10,64 @@ import 'package:spotify_quiz/utility/utilities.dart' as utilities;
 
 // ignore: must_be_immutable
 class GameInfoPageTablet extends StatelessWidget {
-  int selectedGame;
+  String selectedGame;
 
   GameInfoPageTablet({
     Key? key,
     required this.selectedGame,
-  }) : super(key: key);
+  }) : super(key: const Key("TabletQuizPage"));
 
   @override
   Widget build(BuildContext context) {
     final pages = [
       GameInfoScreenTablet(
-          text: AppLocalizations.of(context)!.gameinfoartist,
-          urlImage: 'assets/images/singer.jpg'),
+        key: Key("gameInfoPageA"),
+        text: AppLocalizations.of(context)!.gameinfoartist,
+        urlImage: 'assets/images/singer.jpg',
+        selectedMode: selectedGame,
+      ),
       GameInfoScreenTablet(
-          text: AppLocalizations.of(context)!.gameinfosong,
-          urlImage: 'assets/images/mic.jpg'),
+        key: Key("gameInfoPageB"),
+        text: AppLocalizations.of(context)!.gameinfosong,
+        urlImage: 'assets/images/mic.jpg',
+        selectedMode: selectedGame,
+      ),
       GameInfoScreenTablet(
-          text: AppLocalizations.of(context)!.gameinfocasual,
-          urlImage: 'assets/images/concert.jpg'),
+        key: Key("gameInfoPageC"),
+        text: AppLocalizations.of(context)!.gameinfoalbum,
+        urlImage: 'assets/images/album.jpg',
+        selectedMode: selectedGame,
+      ),
+      GameInfoScreenTablet(
+        key: Key("gameInfoPageD"),
+        text: AppLocalizations.of(context)!.gamesarabanda,
+        urlImage: 'assets/images/sarabanda.jpg',
+        selectedMode: selectedGame,
+      ),
+      GameInfoScreenTablet(
+        key: Key("gameInfoPageR"),
+        text: AppLocalizations.of(context)!.gameinfocasual,
+        urlImage: 'assets/images/concert.jpg',
+        selectedMode: selectedGame,
+      ),
     ];
-    if (selectedGame > 0 && selectedGame < 4) {
-      return pages[selectedGame - 1];
-    } else {
+
+    if (selectedGame == "A") {
+      return pages[0];
+    }
+    else if (selectedGame == "B") {
+      return pages[1];
+    } 
+    else if (selectedGame == "C") {
+      return pages[2];
+    } 
+    else if (selectedGame == "D") {
+      return pages[3];
+    } 
+    else if (selectedGame == "R") {
+      return pages[4];
+    } 
+     else {
       return Scaffold(
         backgroundColor: utilities.secondaryColor,
         appBar: AppBar(

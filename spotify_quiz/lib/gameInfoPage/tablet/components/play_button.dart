@@ -10,7 +10,8 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:spotify_quiz/utility/utilities.dart' as utilities;
 
 class PlayButtonTablet extends StatefulWidget {
-  const PlayButtonTablet() : super(key: const Key("TabletPlayButtonInfoPage"));
+   String selectedMode;
+   PlayButtonTablet({ required this.selectedMode,Key? key}) : super(key: const Key("TabletPlayButtonInfoPage"));
 
   @override
   State<PlayButtonTablet> createState() => _PlayButtonTabletState();
@@ -18,12 +19,15 @@ class PlayButtonTablet extends StatefulWidget {
 
 class _PlayButtonTabletState extends State<PlayButtonTablet> {
   bool _tapped = false;
+  String _selectedMode = "";
   final animationDuration = const Duration(milliseconds: 50);
 
   @override
   void initState() {
-    super.initState();
+    
     _tapped = false;
+    _selectedMode = widget.selectedMode;
+    super.initState();
   }
 
   @override
@@ -44,7 +48,7 @@ class _PlayButtonTabletState extends State<PlayButtonTablet> {
               Navigator.push(
                 context,
                 ScaleRoute(
-                  page: const QuizPageTablet(),
+                  page:  QuizPageTablet(selectedMode: _selectedMode,),
                 ),
               ).then(
                 (value) => setState(() {

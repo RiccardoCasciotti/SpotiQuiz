@@ -10,6 +10,8 @@ import 'package:spotify_quiz/user/bloc/user_bloc.dart';
 import 'package:spotify_quiz/utility/utilities.dart' as utilities;
 
 import '../../../../authentication/bloc/authentication_bloc.dart';
+import '../../../../quizPage/controllers/question_controller.dart';
+import '../../../../utility/api_calls.dart';
 
 class MyHomePageTablet extends StatefulWidget {
   const MyHomePageTablet({super.key});
@@ -76,6 +78,16 @@ class _MyHomePageTabletState extends State<MyHomePageTablet> {
 
   @override
   Widget build(BuildContext context) {
+    if (!utilities.prefetched) {
+      utilities.questions_a_prefetch = createQuestions("A");
+      utilities.questions_b_prefetch = createQuestions("B");
+      utilities.questions_c_prefetch = createQuestions("C");
+      utilities.questions_d_prefetch = createQuestions("D");
+      utilities.questions_r_prefetch = createQuestions("R");
+      utilities.prefetched = true;
+      utilities.artists = get_artist_quizpage();
+      precacheImage(const AssetImage("assets/images/event.jpg"), context);
+    }
     precacheImage(const AssetImage("assets/images/mic.jpg"), context);
     precacheImage(const AssetImage("assets/images/singer.jpg"), context);
     precacheImage(const AssetImage("assets/images/concert.jpg"), context);

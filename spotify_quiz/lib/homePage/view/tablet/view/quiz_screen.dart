@@ -9,6 +9,8 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'package:spotify_quiz/utility/utilities.dart' as utilities;
 
+import '../../../../models/artist.dart';
+
 // ignore: must_be_immutable
 class QuizScreenTablet extends StatelessWidget {
   void Function(int)? onItemTapped;
@@ -21,25 +23,25 @@ class QuizScreenTablet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ImageProvider mic = const AssetImage("assets/images/mic.jpg");
+   ImageProvider mic = const AssetImage("assets/images/mic.jpg");
     ImageProvider singer = const AssetImage("assets/images/singer.jpg");
     ImageProvider concert = const AssetImage("assets/images/concert.jpg");
-    //List of widgets to populate the upper part.
-    //It needs to be in the build because it uses a context to navigate through pages
+    ImageProvider album = const AssetImage("assets/images/album.jpg");
+    ImageProvider sarabanda = const AssetImage("assets/images/sarabanda.jpg");
 
     List<Widget> trialGames = [
       Column(
         children: [
           GestureDetector(
-            key: const Key("TabletGame1"),
+            key: const Key("TabletGameA"),
             onTap: () => Navigator.push(
               context,
               ScaleRoute(
-                page: GameInfoPageTablet(selectedGame: 1),
+                page: GameInfoPageTablet(selectedGame: "A"),
               ),
             ),
             child: Hero(
-              tag: "game1",
+              tag: "gameA",
               child: CustomContainerPic(
                 pic: singer,
                 withBorder: true,
@@ -48,7 +50,7 @@ class QuizScreenTablet extends StatelessWidget {
             ),
           ),
           CustomText(
-            key: const Key("TabletGame1Text"),
+            key: const Key("TabletGameAText"),
             text: AppLocalizations.of(context)!.artist,
             size: 20,
             bold: true,
@@ -63,15 +65,15 @@ class QuizScreenTablet extends StatelessWidget {
       Column(
         children: [
           GestureDetector(
-            key: const Key("TabletGame2"),
+            key: const Key("TabletGameB"),
             onTap: () => Navigator.push(
               context,
               ScaleRoute(
-                page: GameInfoPageTablet(selectedGame: 2),
+                page: GameInfoPageTablet(selectedGame: "B"),
               ),
             ),
             child: Hero(
-              tag: "game2",
+              tag: "gameB",
               child: CustomContainerPic(
                 pic: mic,
                 withBorder: true,
@@ -80,7 +82,7 @@ class QuizScreenTablet extends StatelessWidget {
             ),
           ),
           CustomText(
-            key: const Key("TabletGame2Text"),
+            key: const Key("TabletGameBText"),
             text: AppLocalizations.of(context)!.song,
             size: 20,
             bold: true,
@@ -95,15 +97,81 @@ class QuizScreenTablet extends StatelessWidget {
       Column(
         children: [
           GestureDetector(
-            key: const Key("TabletGame3"),
+            key: const Key("TabletGameC"),
             onTap: () => Navigator.push(
               context,
               ScaleRoute(
-                page: GameInfoPageTablet(selectedGame: 3),
+                page: GameInfoPageTablet(selectedGame: "C"),
               ),
             ),
             child: Hero(
-              tag: "game3",
+              tag: "gameC",
+              child: CustomContainerPic(
+                pic: album,
+                withBorder: true,
+                circularity: 10,
+              ),
+            ),
+          ),
+          CustomText(
+            key: const Key("TabletGameCText"),
+            text: AppLocalizations.of(context)!.album,
+            size: 20,
+            bold: true,
+            italic: true,
+            thirdColor: true,
+          ),
+          
+        ],
+      ),
+      const SizedBox(
+        width: 50,
+      ),
+      Column(
+        children: [
+          GestureDetector(
+            key: const Key("TabletGameD"),
+            onTap: () => Navigator.push(
+              context,
+              ScaleRoute(
+                page: GameInfoPageTablet(selectedGame: "D"),
+              ),
+            ),
+            child: Hero(
+              tag: "gameD",
+              child: CustomContainerPic(
+                pic: sarabanda,
+                withBorder: true,
+                circularity: 10,
+              ),
+            ),
+          ),
+          CustomText(
+            key: const Key("TabletGameDText"),
+            text: AppLocalizations.of(context)!.sarabanda,
+            size: 20,
+            bold: true,
+            italic: true,
+            thirdColor: true,
+          ),
+          
+        ],
+      ),
+      const SizedBox(
+        width: 50,
+      ),
+      Column(
+        children: [
+          GestureDetector(
+            key: const Key("TabletGameR"),
+            onTap: () => Navigator.push(
+              context,
+              ScaleRoute(
+                page: GameInfoPageTablet(selectedGame: "R"),
+              ),
+            ),
+            child: Hero(
+              tag: "gameR",
               child: CustomContainerPic(
                 pic: concert,
                 withBorder: true,
@@ -112,14 +180,18 @@ class QuizScreenTablet extends StatelessWidget {
             ),
           ),
           CustomText(
-            key: const Key("TabletGame3Text"),
+            key: const Key("TabletGameRText"),
             text: AppLocalizations.of(context)!.casual,
             size: 20,
             bold: true,
             italic: true,
             thirdColor: true,
           ),
+          
         ],
+      ),
+      const SizedBox(
+        width: 50,
       ),
     ];
     return Scaffold(
@@ -172,12 +244,7 @@ class QuizScreenTablet extends StatelessWidget {
                     const SizedBox(
                       height: 50,
                     ),
-                    //LOWER PART PANEL WITH FAVOURITE ARTISTS
-                    Column(
-                      children: [
-                        Column(
-                          children: [
-                            Row(
+                    Row(
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
                                 CustomText(
@@ -189,17 +256,93 @@ class QuizScreenTablet extends StatelessWidget {
                                 ),
                               ],
                             ),
-                          ],
-                        ),
-                        SingleChildScrollView(
-                          key: const Key("TabletArtistList"),
-                          scrollDirection: Axis.horizontal,
-                          child: Row(
-                            children: trialArtists,
-                          ),
-                        ),
-                      ],
-                    ),
+                    //LOWER PART PANEL WITH FAVOURITE ARTISTS
+                    Padding(
+                  padding: const EdgeInsets.fromLTRB(8.0, 15.0, 0.0, 0.0),
+                  child: FutureBuilder<List<Artist>>(
+                      future:  utilities.artists,
+                      builder: (context, snapshot) {
+                        if (snapshot.hasData) {
+                          final artists = snapshot.data!;
+                          List<Widget> artistsBox = [];
+                          for (Artist artist in artists) {
+                            artistsBox.add(
+                              Row(
+                                children: [
+                                  CustomContainerPicNetwork(
+                                    picUrl: artist.images![1].url,
+                                    withBorder: false,
+                                    width: 100,
+                                    height: 100,
+                                    circularity: 10,
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: CustomText(
+                                      text: artist.name,
+                                      size: 20,
+                                      alignCenter: true,
+                                      thirdColor: true,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            );
+                          
+                          }
+                          return SingleChildScrollView(
+                            key: const Key("TabletArtistList"),
+                            scrollDirection: Axis.vertical,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: artistsBox,
+                            ),
+                          );
+                        } else {
+                          return Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: const [
+                              SizedBox(
+                                width: 60,
+                                height: 60,
+                              ),
+                              SizedBox(
+                                width: 60,
+                                height: 60,
+                                child: CircularProgressIndicator(),
+                              ),
+                            ],
+                          );
+                        }
+                      }),
+                ),
+                    // Column(
+                    //   children: [
+                    //     Column(
+                    //       children: [
+                    //         Row(
+                    //           mainAxisAlignment: MainAxisAlignment.start,
+                    //           children: [
+                    //             CustomText(
+                    //               key: const Key("TabletArtistText"),
+                    //               text: AppLocalizations.of(context)!
+                    //                   .yourfavartists,
+                    //               size: 30.0,
+                    //               bold: true,
+                    //             ),
+                    //           ],
+                    //         ),
+                    //       ],
+                    //     ),
+                    //     SingleChildScrollView(
+                    //       key: const Key("TabletArtistList"),
+                    //       scrollDirection: Axis.horizontal,
+                    //       child: Row(
+                    //         children: trialArtists,
+                    //       ),
+                    //     ),
+                    //   ],
+                    // ),
                     const SizedBox(
                       height: 20,
                     ),

@@ -42,6 +42,7 @@ class QuizScreenState extends State<QuizScreen> {
       Column(
         children: [
           GestureDetector(
+            key: const Key("FirstQuizButton"),
             onTap: () => Navigator.push(
               context,
               ScaleRoute(

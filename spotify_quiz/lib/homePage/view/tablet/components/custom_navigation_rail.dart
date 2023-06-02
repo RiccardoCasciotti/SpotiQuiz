@@ -45,6 +45,7 @@ class CustomNavRail extends StatelessWidget {
           icon: const Icon(Icons.question_mark_outlined),
           selectedIcon: const Icon(Icons.question_mark),
           label: CustomText(
+            key: Key("quizButtonHome"),
             text: AppLocalizations.of(context)!.quizpage,
             size: selectedIndex != 1 ? 13 : 20,
             thirdColor: selectedIndex != 1,
