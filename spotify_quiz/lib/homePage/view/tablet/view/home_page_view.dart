@@ -12,6 +12,7 @@ import 'package:spotify_quiz/utility/utilities.dart' as utilities;
 import '../../../../authentication/bloc/authentication_bloc.dart';
 import '../../../../quizPage/controllers/question_controller.dart';
 import '../../../../utility/api_calls.dart';
+import 'event_screen.dart';
 
 class MyHomePageTablet extends StatefulWidget {
   const MyHomePageTablet({super.key});
@@ -88,15 +89,20 @@ class _MyHomePageTabletState extends State<MyHomePageTablet> {
       utilities.artists = get_artist_quizpage();
       precacheImage(const AssetImage("assets/images/event.jpg"), context);
     }
+
     precacheImage(const AssetImage("assets/images/mic.jpg"), context);
     precacheImage(const AssetImage("assets/images/singer.jpg"), context);
     precacheImage(const AssetImage("assets/images/concert.jpg"), context);
+
+    precacheImage(const AssetImage("assets/images/victorycup1.png"), context);
     final pages = [
       HomeScreenTablet(
           onItemTapped: _onItemTapped, selectedIndex: _selectedIndex),
       QuizScreenTablet(
           onItemTapped: _onItemTapped, selectedIndex: _selectedIndex),
       RankingScreenTablet(
+          onItemTapped: _onItemTapped, selectedIndex: _selectedIndex),
+      EventScreenTablet(
           onItemTapped: _onItemTapped, selectedIndex: _selectedIndex),
     ];
 

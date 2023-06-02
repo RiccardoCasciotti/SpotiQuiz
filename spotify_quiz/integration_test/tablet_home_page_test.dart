@@ -365,6 +365,24 @@ void main() {
     expect(find.byIcon(Icons.emoji_events_outlined), findsOneWidget);
   });
 
+  testWidgets('HomePage Layout: Event Button', (WidgetTester tester) async {
+    //setup
+    app.main();
+
+    await tester.pumpAndSettle(const Duration(seconds: 5));
+
+    final Finder button = find.byKey(const Key('LoginButton'));
+
+    //do
+
+    await tester.tap(button);
+
+    await tester.pumpAndSettle(const Duration(seconds: 2));
+
+    //test
+    expect(find.byIcon(Icons.star_outline_sharp), findsOneWidget);
+  });
+
   testWidgets('HomePage Layout: Logout Button', (WidgetTester tester) async {
     //setup
     app.main();
@@ -477,5 +495,29 @@ void main() {
 
     //test
     expect(find.byKey(const Key("TabletRankingPage")), findsOneWidget);
+  });
+
+  testWidgets('Click Event Button', (WidgetTester tester) async {
+    //setup
+    app.main();
+
+    await tester.pumpAndSettle(const Duration(seconds: 5));
+
+    final Finder button = find.byKey(const Key('LoginButton'));
+
+    //do
+
+    await tester.tap(button);
+
+    await tester.pumpAndSettle(const Duration(seconds: 2));
+
+    final Finder buttonEvents = find.byIcon(Icons.star_outline_sharp);
+
+    await tester.tap(buttonEvents);
+
+    await tester.pumpAndSettle(const Duration(seconds: 2));
+
+    //test
+    expect(find.byKey(const Key("TabletEventPage")), findsOneWidget);
   });
 }

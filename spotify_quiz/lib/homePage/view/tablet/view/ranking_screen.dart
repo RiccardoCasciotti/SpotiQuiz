@@ -94,242 +94,270 @@ class RankingScreenTablet extends StatelessWidget {
               width: 1,
             ),
             Expanded(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Column(
-                    children: [
-                      const Flexible(
-                        flex: 1,
-                        child: SizedBox(
-                          height: 50,
+              child: Container(
+                key: const Key("BackGroundImageTabletRanking"),
+                constraints: const BoxConstraints.expand(),
+                decoration: const BoxDecoration(
+                  image: DecorationImage(
+                    opacity: 0.07,
+                    image: AssetImage(
+                      'assets/images/victorycup1.png',
+                    ),
+                    fit: BoxFit.cover,
+                  ),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Column(
+                      children: [
+                        const Flexible(
+                          flex: 1,
+                          child: SizedBox(
+                            height: 50,
+                          ),
                         ),
-                      ),
-                      Flexible(
-                        flex: 4,
-                        child: CustomText(
-                          key: const Key("TabletLocalRankingText"),
-                          text: AppLocalizations.of(context)!.localranking,
-                          size: 30,
-                          bold: true,
-                          thirdColor: true,
+                        Flexible(
+                          flex: 4,
+                          child: CustomText(
+                            key: const Key("TabletLocalRankingText"),
+                            text: AppLocalizations.of(context)!.localranking,
+                            size: 30,
+                            bold: true,
+                            thirdColor: true,
+                          ),
                         ),
-                      ),
-                      const Flexible(
-                        flex: 1,
-                        child: SizedBox(
-                          height: 50,
+                        const Flexible(
+                          flex: 1,
+                          child: SizedBox(
+                            height: 50,
+                          ),
                         ),
-                      ),
-                      Flexible(
-                        flex: 16,
-                        child: SingleChildScrollView(
-                          scrollDirection: Axis.vertical,
-                          child: Container(
-                            width: 300,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(20.0),
-                                border: Border.all(
-                                  color: utilities.tertiaryColor,
-                                  style: BorderStyle.solid,
-                                  width: 0.1,
-                                ),
-                                shape: BoxShape.rectangle),
-                            child: Column(
-                              children: [
-                                const SizedBox(
-                                  height: 10,
-                                ),
-                                Table(
-                                  key: const Key("TabletTableLocalRanking"),
-                                  border: TableBorder.symmetric(),
-                                  defaultVerticalAlignment:
-                                      TableCellVerticalAlignment.middle,
-                                  children: <TableRow>[
-                                    TableRow(
-                                      children: <Widget>[
-                                        Container(
-                                          alignment: Alignment.center,
-                                          child: CustomText(
-                                            key: const Key(
-                                                "TabletUsernameLocalRanking"),
-                                            text: AppLocalizations.of(context)!
-                                                .usernameranking,
-                                            thirdColor: true,
-                                            size: 18,
-                                            bold: true,
-                                          ),
+                        Flexible(
+                          flex: 16,
+                          child: SingleChildScrollView(
+                            scrollDirection: Axis.vertical,
+                            child: Container(
+                              width: 300,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20.0),
+                                  border: Border.all(
+                                    color: utilities.tertiaryColor,
+                                    style: BorderStyle.solid,
+                                    width: 1,
+                                  ),
+                                  shape: BoxShape.rectangle),
+                              child: Column(
+                                children: [
+                                  const SizedBox(
+                                    height: 10,
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Table(
+                                      key: const Key("TabletTableLocalRanking"),
+                                      border: TableBorder.symmetric(),
+                                      defaultVerticalAlignment:
+                                          TableCellVerticalAlignment.middle,
+                                      children: <TableRow>[
+                                        TableRow(
+                                          children: <Widget>[
+                                            Container(
+                                              alignment: Alignment.center,
+                                              child: CustomText(
+                                                key: const Key(
+                                                    "TabletUsernameLocalRanking"),
+                                                text: AppLocalizations.of(
+                                                        context)!
+                                                    .usernameranking,
+                                                thirdColor: true,
+                                                size: 18,
+                                                bold: true,
+                                              ),
+                                            ),
+                                            Container(
+                                              alignment: Alignment.center,
+                                              child: CustomText(
+                                                key: const Key(
+                                                    "TabletLevelLocalRanking"),
+                                                text: AppLocalizations.of(
+                                                        context)!
+                                                    .level,
+                                                thirdColor: true,
+                                                size: 18,
+                                                bold: true,
+                                              ),
+                                            ),
+                                            Container(
+                                              alignment: Alignment.center,
+                                              child: CustomText(
+                                                key: const Key(
+                                                    "TabletBestScoreLocalRanking"),
+                                                text: AppLocalizations.of(
+                                                        context)!
+                                                    .bestscoreranking,
+                                                thirdColor: true,
+                                                size: 18,
+                                                bold: true,
+                                              ),
+                                            ),
+                                          ],
                                         ),
-                                        Container(
-                                          alignment: Alignment.center,
-                                          child: CustomText(
-                                            key: const Key(
-                                                "TabletLevelLocalRanking"),
-                                            text: AppLocalizations.of(context)!
-                                                .level,
-                                            thirdColor: true,
-                                            size: 18,
-                                            bold: true,
-                                          ),
+                                        const TableRow(
+                                          children: <Widget>[
+                                            SizedBox(
+                                              height: 20,
+                                            ),
+                                            SizedBox(
+                                              height: 20,
+                                            ),
+                                            SizedBox(
+                                              height: 20,
+                                            ),
+                                          ],
                                         ),
-                                        Container(
-                                          alignment: Alignment.center,
-                                          child: CustomText(
-                                            key: const Key(
-                                                "TabletBestScoreLocalRanking"),
-                                            text: AppLocalizations.of(context)!
-                                                .bestscoreranking,
-                                            thirdColor: true,
-                                            size: 18,
-                                            bold: true,
-                                          ),
-                                        ),
+                                        for (TableRow row in rowsByNation) row
                                       ],
+                                      defaultColumnWidth:
+                                          const FlexColumnWidth(),
                                     ),
-                                    const TableRow(
-                                      children: <Widget>[
-                                        SizedBox(
-                                          height: 20,
-                                        ),
-                                        SizedBox(
-                                          height: 20,
-                                        ),
-                                        SizedBox(
-                                          height: 20,
-                                        ),
-                                      ],
-                                    ),
-                                    for (TableRow row in rowsByNation) row
-                                  ],
-                                  defaultColumnWidth: const FlexColumnWidth(),
-                                ),
-                                const SizedBox(
-                                  height: 10,
-                                ),
-                              ],
+                                  ),
+                                  const SizedBox(
+                                    height: 10,
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                    ],
-                  ),
-                  Column(
-                    children: [
-                      const Flexible(
-                        flex: 1,
-                        child: SizedBox(
-                          height: 50,
+                      ],
+                    ),
+                    Column(
+                      children: [
+                        const Flexible(
+                          flex: 1,
+                          child: SizedBox(
+                            height: 50,
+                          ),
                         ),
-                      ),
-                      Flexible(
-                        flex: 4,
-                        child: CustomText(
-                          key: const Key("TabletGlobalRankingText"),
-                          text: AppLocalizations.of(context)!.globalranking,
-                          size: 30,
-                          bold: true,
-                          thirdColor: true,
+                        Flexible(
+                          flex: 4,
+                          child: CustomText(
+                            key: const Key("TabletGlobalRankingText"),
+                            text: AppLocalizations.of(context)!.globalranking,
+                            size: 30,
+                            bold: true,
+                            thirdColor: true,
+                          ),
                         ),
-                      ),
-                      const Flexible(
-                        flex: 1,
-                        child: SizedBox(
-                          height: 50,
+                        const Flexible(
+                          flex: 1,
+                          child: SizedBox(
+                            height: 50,
+                          ),
                         ),
-                      ),
-                      Flexible(
-                        flex: 16,
-                        child: SingleChildScrollView(
-                          scrollDirection: Axis.vertical,
-                          child: Container(
-                            width: 300,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(20.0),
-                                border: Border.all(
-                                  color: utilities.tertiaryColor,
-                                  style: BorderStyle.solid,
-                                  width: 0.1,
-                                ),
-                                shape: BoxShape.rectangle),
-                            child: Column(
-                              children: [
-                                const SizedBox(
-                                  height: 10,
-                                ),
-                                Table(
-                                  key: const Key("TabletTableGlobalRanking"),
-                                  border: TableBorder.symmetric(),
-                                  defaultVerticalAlignment:
-                                      TableCellVerticalAlignment.middle,
-                                  children: <TableRow>[
-                                    TableRow(
-                                      children: <Widget>[
-                                        Container(
-                                          alignment: Alignment.center,
-                                          child: CustomText(
-                                            key: const Key(
-                                                "TabletUsernameGlobalRanking"),
-                                            text: AppLocalizations.of(context)!
-                                                .usernameranking,
-                                            thirdColor: true,
-                                            size: 18,
-                                            bold: true,
-                                          ),
+                        Flexible(
+                          flex: 16,
+                          child: SingleChildScrollView(
+                            scrollDirection: Axis.vertical,
+                            child: Container(
+                              width: 300,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20.0),
+                                  border: Border.all(
+                                    color: utilities.tertiaryColor,
+                                    style: BorderStyle.solid,
+                                    width: 1,
+                                  ),
+                                  shape: BoxShape.rectangle),
+                              child: Column(
+                                children: [
+                                  const SizedBox(
+                                    height: 10,
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Table(
+                                      key:
+                                          const Key("TabletTableGlobalRanking"),
+                                      border: TableBorder.symmetric(),
+                                      defaultVerticalAlignment:
+                                          TableCellVerticalAlignment.middle,
+                                      children: <TableRow>[
+                                        TableRow(
+                                          children: <Widget>[
+                                            Container(
+                                              alignment: Alignment.center,
+                                              child: CustomText(
+                                                key: const Key(
+                                                    "TabletUsernameGlobalRanking"),
+                                                text: AppLocalizations.of(
+                                                        context)!
+                                                    .usernameranking,
+                                                thirdColor: true,
+                                                size: 18,
+                                                bold: true,
+                                              ),
+                                            ),
+                                            Container(
+                                              alignment: Alignment.center,
+                                              child: CustomText(
+                                                key: const Key(
+                                                    "TabletLevelGlobalRanking"),
+                                                text: AppLocalizations.of(
+                                                        context)!
+                                                    .level,
+                                                thirdColor: true,
+                                                size: 18,
+                                                bold: true,
+                                              ),
+                                            ),
+                                            Container(
+                                              alignment: Alignment.center,
+                                              child: CustomText(
+                                                key: const Key(
+                                                    "TabletBestScoreGlobalRanking"),
+                                                text: AppLocalizations.of(
+                                                        context)!
+                                                    .bestscoreranking,
+                                                thirdColor: true,
+                                                size: 18,
+                                                bold: true,
+                                              ),
+                                            ),
+                                          ],
                                         ),
-                                        Container(
-                                          alignment: Alignment.center,
-                                          child: CustomText(
-                                            key: const Key(
-                                                "TabletLevelGlobalRanking"),
-                                            text: AppLocalizations.of(context)!
-                                                .level,
-                                            thirdColor: true,
-                                            size: 18,
-                                            bold: true,
-                                          ),
+                                        const TableRow(
+                                          children: <Widget>[
+                                            SizedBox(
+                                              height: 20,
+                                            ),
+                                            SizedBox(
+                                              height: 20,
+                                            ),
+                                            SizedBox(
+                                              height: 20,
+                                            ),
+                                          ],
                                         ),
-                                        Container(
-                                          alignment: Alignment.center,
-                                          child: CustomText(
-                                            key: const Key(
-                                                "TabletBestScoreGlobalRanking"),
-                                            text: AppLocalizations.of(context)!
-                                                .bestscoreranking,
-                                            thirdColor: true,
-                                            size: 18,
-                                            bold: true,
-                                          ),
-                                        ),
+                                        for (TableRow row in rowsGlobal) row
                                       ],
+                                      defaultColumnWidth:
+                                          const FlexColumnWidth(),
                                     ),
-                                    const TableRow(
-                                      children: <Widget>[
-                                        SizedBox(
-                                          height: 20,
-                                        ),
-                                        SizedBox(
-                                          height: 20,
-                                        ),
-                                        SizedBox(
-                                          height: 20,
-                                        ),
-                                      ],
-                                    ),
-                                    for (TableRow row in rowsGlobal) row
-                                  ],
-                                  defaultColumnWidth: const FlexColumnWidth(),
-                                ),
-                                const SizedBox(
-                                  height: 10,
-                                ),
-                              ],
+                                  ),
+                                  const SizedBox(
+                                    height: 10,
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                    ],
-                  ),
-                ],
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
           ],

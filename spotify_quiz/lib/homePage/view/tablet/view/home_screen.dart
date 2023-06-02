@@ -28,23 +28,22 @@ class HomeScreenTablet extends StatelessWidget {
     var newlevelCap = ((experience / 200).floor() + 1) * 200;
 
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: utilities.secondaryColor,
-        actions: <Widget>[
-          IconButton(
-            key: const Key("TabletLogoutHome"),
-            icon: Icon(
-              Icons.logout_outlined,
-              color: utilities.primaryColor,
-            ),
-            onPressed: () async {
-              context
-                  .read<AuthenticationBloc>()
-                  .add(AuthenticationLogoutRequested());
-              // ignore: use_build_context_synchronously
-            },
-          )
-        ],
+      floatingActionButton: Padding(
+        padding: const EdgeInsets.fromLTRB(0.0, 0.0, 20.0, 15.0),
+        child: FloatingActionButton(
+          backgroundColor: utilities.primaryColor,
+          key: const Key("TabletLogoutHome"),
+          child: Icon(
+            Icons.logout_outlined,
+            color: utilities.secondaryColor,
+          ),
+          onPressed: () async {
+            context
+                .read<AuthenticationBloc>()
+                .add(AuthenticationLogoutRequested());
+            // ignore: use_build_context_synchronously
+          },
+        ),
       ),
       backgroundColor: utilities.secondaryColor,
       body: Center(
@@ -193,17 +192,18 @@ class HomeScreenTablet extends StatelessWidget {
                         Table(
                           children: <TableRow>[
                             TableRow(children: [
-                              const SizedBox(
-                                width: 5,
-                              ),
-                              CustomText(
-                                key:
-                                    const Key("TabletCorrectAnswerTextProfile"),
-                                alignCenter: true,
-                                text:
-                                    AppLocalizations.of(context)!.correctanswer,
-                                thirdColor: true,
-                                size: 25,
+                              Padding(
+                                padding: const EdgeInsets.fromLTRB(
+                                    40.0, 0.0, 0.0, 0.0),
+                                child: CustomText(
+                                  key: const Key(
+                                      "TabletCorrectAnswerTextProfile"),
+                                  alignCenter: true,
+                                  text: AppLocalizations.of(context)!
+                                      .correctanswer,
+                                  thirdColor: true,
+                                  size: 25,
+                                ),
                               ),
                               CustomText(
                                 key:
@@ -214,20 +214,37 @@ class HomeScreenTablet extends StatelessWidget {
                                     : "0",
                                 size: 25,
                               ),
-                              const SizedBox(
-                                width: 5,
+                              CustomText(
+                                key: const Key("TabletExperienceTextProfile"),
+                                alignCenter: true,
+                                text: AppLocalizations.of(context)!.experience,
+                                thirdColor: true,
+                                size: 25,
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.fromLTRB(
+                                    0.0, 0.0, 40.0, 0.0),
+                                child: CustomText(
+                                  key: const Key("TabletExperienceInfoProfile"),
+                                  alignCenter: true,
+                                  text: "$experience/$newlevelCap",
+                                  size: 25,
+                                ),
                               ),
                             ]),
                             TableRow(children: [
-                              const SizedBox(
-                                width: 10,
-                              ),
-                              CustomText(
-                                key: const Key("TabletWrongAnswerTextProfile"),
-                                alignCenter: true,
-                                text: AppLocalizations.of(context)!.wronganswer,
-                                thirdColor: true,
-                                size: 25,
+                              Padding(
+                                padding: const EdgeInsets.fromLTRB(
+                                    40.0, 0.0, 0.0, 0.0),
+                                child: CustomText(
+                                  key:
+                                      const Key("TabletWrongAnswerTextProfile"),
+                                  alignCenter: true,
+                                  text:
+                                      AppLocalizations.of(context)!.wronganswer,
+                                  thirdColor: true,
+                                  size: 25,
+                                ),
                               ),
                               CustomText(
                                 key: const Key("TabletWrongAnswerInfoProfile"),
@@ -237,35 +254,6 @@ class HomeScreenTablet extends StatelessWidget {
                                     : "0",
                                 size: 25,
                               ),
-                              const SizedBox(
-                                width: 10,
-                              ),
-                            ]),
-                            TableRow(children: [
-                              const SizedBox(
-                                width: 10,
-                              ),
-                              CustomText(
-                                key: const Key("TabletExperienceTextProfile"),
-                                alignCenter: true,
-                                text: AppLocalizations.of(context)!.experience,
-                                thirdColor: true,
-                                size: 25,
-                              ),
-                              CustomText(
-                                key: const Key("TabletExperienceInfoProfile"),
-                                alignCenter: true,
-                                text: "$experience/$newlevelCap",
-                                size: 25,
-                              ),
-                              const SizedBox(
-                                width: 10,
-                              ),
-                            ]),
-                            TableRow(children: [
-                              const SizedBox(
-                                width: 10,
-                              ),
                               CustomText(
                                 key: const Key("TabletBestScoreTextProfile"),
                                 alignCenter: true,
@@ -273,14 +261,15 @@ class HomeScreenTablet extends StatelessWidget {
                                 thirdColor: true,
                                 size: 25,
                               ),
-                              CustomText(
-                                key: const Key("TabletBestScoreInfoProfile"),
-                                alignCenter: true,
-                                text: bestScore.toString(),
-                                size: 25,
-                              ),
-                              const SizedBox(
-                                width: 10,
+                              Padding(
+                                padding: const EdgeInsets.fromLTRB(
+                                    0.0, 0.0, 40.0, 0.0),
+                                child: CustomText(
+                                  key: const Key("TabletBestScoreInfoProfile"),
+                                  alignCenter: true,
+                                  text: bestScore.toString(),
+                                  size: 25,
+                                ),
                               ),
                             ]),
                           ],
@@ -288,7 +277,7 @@ class HomeScreenTablet extends StatelessWidget {
                       ],
                     ),
                     const SizedBox(
-                      height: 50,
+                      height: 40,
                     ),
                   ],
                 ),
