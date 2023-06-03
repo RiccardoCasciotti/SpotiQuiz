@@ -50,6 +50,21 @@ class GlobalRankScreen extends StatelessWidget {
           ],
         ),
       );
+      rows.add(
+        const TableRow(
+          children: <Widget>[
+            SizedBox(
+              height: 10,
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            SizedBox(
+              height: 10,
+            ),
+          ],
+        ),
+      );
     }
 
     return Scaffold(
@@ -66,7 +81,7 @@ class GlobalRankScreen extends StatelessWidget {
         constraints: const BoxConstraints.expand(),
         decoration: const BoxDecoration(
           image: DecorationImage(
-            opacity: 0.07,
+            opacity: 0.13,
             image: AssetImage(
               'assets/images/victorycup1.png',
             ),
