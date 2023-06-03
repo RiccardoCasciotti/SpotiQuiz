@@ -147,16 +147,16 @@
     "description": "Info box artist mode"
   },
 
-  "gameinfosong": "Listen the song and guess which one is it!",
+  "gameinfosong": "Guess who sings the song based on its name!",
   "@gameinfosong": {
     "description": "Info box song mode"
   },
 
-  "gameinfoalbum": "Game mode that is based on your favorite albums", 
+  "gameinfoalbum": "Guess the release date of the album!", 
   "@gameinfoalbum": {
     "description": "Game mode that is based on your favorite albums"
   },
-  "gamesarabanda": "The classic Sarabande! Match the song to its title",
+  "gamesarabanda": "The classic Sarabande! match the song to its title",
   "@gamesarabanda": {
     "description": "The classic Sarabande! Match the song to its title"
   },
