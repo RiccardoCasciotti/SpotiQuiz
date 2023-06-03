@@ -21,7 +21,6 @@ var i = 0;
 List<model.Event> events_call = [];
 bool events_api_called = false;
 
-
 model.Event format_event(var eventJson) {
   final DateFormat formatter = DateFormat('yyyy-MM-dd');
   final tmp = DateTime.parse(eventJson["startDate"]);
@@ -70,7 +69,6 @@ Future<List<model.Event>> get_events_on_position(String? position) async {
                 ? List.from(eventsJson["data"]).length
                 : 20);
         i++) {
-     
       var curr_event = List.from(eventsJson["data"])[i];
       events.add(format_event(curr_event));
     }
@@ -257,7 +255,7 @@ Future<List<model.Artist>> get_artist_quizpage() async {
     var curr_artist = List.from(artistsJson["artists"]["items"])[i];
 
     final res = create_artist(curr_artist);
-    artists.add(res);
+    //artists.add(res);
   }
   final http.Response relArtistsInfo;
   if (artists.length < 5) {
