@@ -13,7 +13,7 @@ import '../../utility/api_calls.dart';
 class EventsPage extends StatefulWidget {
   const EventsPage({
     Key? key,
-  }) : super(key: key);
+  }) : super(key: const Key("EventPage"));
 
   @override
   State<EventsPage> createState() => _EventsPageState();
@@ -118,54 +118,53 @@ Widget buildCard(Event event, BuildContext context) {
           borderRadius: BorderRadius.all(Radius.circular(3.0)),
           color: Colors.white),
       child: ListTile(
-        contentPadding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
-        leading:
-            Container(
-              padding:const EdgeInsets.only(right: 12.0),
-              decoration:  const BoxDecoration(
-                  border:  Border(
-                      right:  BorderSide(width: 1.0, color: Colors.black))),
-              child: Stack(
-                children: [
-                  Image.asset(
-                    "assets/images/eventPlaceholder.jpg",
-                    scale: 1.5,
-                  ),
-                  Image.network(key: const Key("CardImage"), event.image_url, frameBuilder:
-                      (BuildContext context, Widget child, int? frame,
-                          bool wasSynchronouslyLoaded) {
-                    if (wasSynchronouslyLoaded) {
-                      return child;
-                    }
-                    return AnimatedOpacity(
-                      opacity: frame == null ? 0 : 1,
-                      duration: const Duration(seconds: 1),
-                      curve: Curves.easeOut,
-                      child: child,
-                    );
-                  }, loadingBuilder: (BuildContext context, Widget child,
-                      ImageChunkEvent? loadingProgress) {
-                    if (loadingProgress == null) return child;
-                    return CircularProgressIndicator();
-                  }),
-                ],
-              )),
-        
+        contentPadding:
+            const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+        leading: Container(
+            padding: const EdgeInsets.only(right: 12.0),
+            decoration: const BoxDecoration(
+                border:
+                    Border(right: BorderSide(width: 1.0, color: Colors.black))),
+            child: Stack(
+              children: [
+                Image.asset(
+                  "assets/images/eventPlaceholder.jpg",
+                  scale: 1.5,
+                ),
+                Image.network(key: const Key("CardImage"), event.image_url,
+                    frameBuilder: (BuildContext context, Widget child,
+                        int? frame, bool wasSynchronouslyLoaded) {
+                  if (wasSynchronouslyLoaded) {
+                    return child;
+                  }
+                  return AnimatedOpacity(
+                    opacity: frame == null ? 0 : 1,
+                    duration: const Duration(seconds: 1),
+                    curve: Curves.easeOut,
+                    child: child,
+                  );
+                }, loadingBuilder: (BuildContext context, Widget child,
+                        ImageChunkEvent? loadingProgress) {
+                  if (loadingProgress == null) return child;
+                  return CircularProgressIndicator();
+                }),
+              ],
+            )),
         title: Padding(
           padding: const EdgeInsets.all(5.0),
           child: Text(
             event.event_name,
-            style: const TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+            style: const TextStyle(
+                color: Colors.black, fontWeight: FontWeight.bold),
           ),
         ),
-
         subtitle: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Padding(
                 padding: const EdgeInsets.all(5.0),
                 child: Text(event.venue_name,
-                    style:  const TextStyle(color: Colors.black))),
+                    style: const TextStyle(color: Colors.black))),
             Padding(
                 padding: const EdgeInsets.all(5.0),
                 child: Text(event.startDate,
@@ -175,5 +174,4 @@ Widget buildCard(Event event, BuildContext context) {
       ),
     ),
   );
-
 }

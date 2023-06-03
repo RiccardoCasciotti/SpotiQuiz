@@ -36,6 +36,7 @@ class QuizA extends StatelessWidget {
               ),
               if (questions![questionIndex]['image'] != null)
                 Container(
+                  key: const Key("ImageSinger"),
                   alignment: Alignment.center,
                   width: 200,
                   height: 200,
