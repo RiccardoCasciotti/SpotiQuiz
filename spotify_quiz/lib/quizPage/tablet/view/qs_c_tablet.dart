@@ -21,6 +21,7 @@ class QuizCtablet extends StatelessWidget {
     required this.isRandom,
   }) : super(key: key);
 
+
   @override
   Widget build(BuildContext context) {
     return MediaQuery.of(context).orientation == Orientation.portrait

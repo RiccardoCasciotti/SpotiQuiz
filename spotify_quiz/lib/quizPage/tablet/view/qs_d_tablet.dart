@@ -42,6 +42,11 @@ class _QuizDtabletState extends State<QuizDtablet> {
   late Uint8List audiobytes;
 
   AudioPlayer player = AudioPlayer();
+  @override
+void dispose() async {
+ await player.stop();
+ super.dispose();
+}
 
   @override
   void initState() {

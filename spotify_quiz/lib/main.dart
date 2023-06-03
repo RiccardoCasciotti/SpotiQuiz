@@ -81,6 +81,7 @@ void main() async {
   else{
    permission = await Geolocator.checkPermission();
   }
+  print("Permission: $permission");
   if (permission == LocationPermission.always || permission == LocationPermission.whileInUse){
     print("Prefetching events...");
     utilities.events_prefetch=   _getCurrentPosition();
