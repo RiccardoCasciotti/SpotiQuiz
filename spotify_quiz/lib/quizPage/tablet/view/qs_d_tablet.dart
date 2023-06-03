@@ -43,8 +43,8 @@ class _QuizDtabletState extends State<QuizDtablet> {
 
   AudioPlayer player = AudioPlayer();
   @override
-void dispose() async {
- await player.stop();
+void dispose() {
+ player.stop();
  super.dispose();
 }
 
