@@ -50,10 +50,10 @@
 
   "gameinfoartist": "¡Adivina el artista basándote en la imagen!",
 
-  "gameinfosong": "¡Escucha la canción y adivina cuál es!",
+  "gameinfosong": "¡Adivina quién canta la canción según su nombre!",
 
-  "gameinfoalbum": "Modo de juego basado en tus álbumes favoritos",
-  "gamesarabanda": "¡La clásica Sarabanda! Asociar la canción con el título.",
+  "gameinfoalbum": "¡Adivina la fecha de lanzamiento del álbum!",
+  "gamesarabanda": "¡La clásica Sarabanda! asociar la canción con el título.",
 
   "gameinfocasual": "Modo de juego que aprovecha todo tipo de cuestionarios.",
 "sarabanda": "Sarabanda",

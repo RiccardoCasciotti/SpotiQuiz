@@ -239,6 +239,75 @@ Future<List<model.Artist>> get_followed_artists() async {
 
 Future<List<model.Artist>> get_artist_quizpage() async {
   accessToken = await getAccessToken();
+  List<model.Artist> followed_artists = [];
+  List<model.Artist> similar_artists = [];
+  String similar_id = "0TnOYISbd1XYRBk9myaseg";
+  String initializer_id = "0TnOYISbd1XYRBk9myaseg";
+
+  List<model.Artist> consume_followed_artists = [];
+  List<model.Artist> consume_similar_artists = [];
+
+  int similar_index = 0;
+  int i = 0;
+  int count = 0;
+
+  Future<void> init_data() async {
+    if (followed_artists.isEmpty && i == 0) {
+      followed_artists = await get_followed_artists();
+      if (followed_artists.isNotEmpty) {
+        consume_followed_artists = followed_artists;
+        consume_followed_artists.shuffle();
+      }
+
+      i++;
+    }
+
+    if (consume_similar_artists.length < 4) {
+      var candidate;
+
+      if (followed_artists.isNotEmpty) {
+        candidate = followed_artists.last;
+        followed_artists.removeLast();
+      } else if (similar_artists.isNotEmpty) {
+        candidate = similar_artists.last;
+        similar_artists.removeLast();
+      } else if (similar_artists.isEmpty) {
+        similar_artists = await get_related_artists(similar_id);
+        similar_artists = similar_artists.sublist(
+            0, similar_artists.length < 30 ? similar_artists.length : 30);
+        similar_artists.shuffle();
+        candidate = similar_artists.last;
+        similar_artists.removeLast();
+      }
+      similar_id = candidate.id;
+
+      consume_similar_artists = await get_related_artists(similar_id);
+
+      consume_similar_artists = consume_similar_artists.sublist(
+          0,
+          consume_similar_artists.length < 30
+              ? consume_similar_artists.length
+              : 30);
+      while (consume_similar_artists.length < 4 && count < 10) {
+        count++;
+        await init_data();
+      }
+      if (count == 10) {
+        similar_id = initializer_id;
+        count = 0;
+        await init_data();
+      }
+    }
+  }
+
+  await init_data();
+  return consume_similar_artists;
+}
+
+//VERSIONE ALTERNATIVA
+
+/*Future<List<model.Artist>> get_artist_quizpage() async {
+  accessToken = await getAccessToken();
   List<model.Artist> artists = [];
   final artistsInfo = await http.get(
       Uri.parse("https://api.spotify.com/v1/me/following?type=artist"),
@@ -255,41 +324,47 @@ Future<List<model.Artist>> get_artist_quizpage() async {
     var curr_artist = List.from(artistsJson["artists"]["items"])[i];
 
     final res = create_artist(curr_artist);
-    //artists.add(res);
+    artists.add(res);
   }
   final http.Response relArtistsInfo;
-  if (artists.length < 5) {
-    if (artists.isNotEmpty) {
-      final String firstArtistId = artists[0].id;
-
-      relArtistsInfo = await http.get(
-          Uri.parse(
-              "https://api.spotify.com/v1/artists/$firstArtistId/related-artists"),
-          headers: {
-            "Authorization": 'Authorization: Bearer $accessToken',
-            "content-type": "application/x-www-form-urlencoded"
-          });
+  List<model.Artist> artistsToGet = [];
+  final String firstArtistId;
+  if (artists.isNotEmpty) {
+    if (artists.length > 1) {
+      firstArtistId =
+          artists.elementAt(0 + Random().nextInt((artists.length) - 1)).id;
     } else {
-      relArtistsInfo = await http.get(
-          Uri.parse(
-              "https://api.spotify.com/v1/artists/0TnOYISbd1XYRBk9myaseg/related-artists"),
-          headers: {
-            "Authorization": 'Authorization: Bearer $accessToken',
-            "content-type": "application/x-www-form-urlencoded"
-          });
+      firstArtistId = artists.elementAt(0).id;
     }
 
-    final relArtistsJson = json.decode(relArtistsInfo.body);
-
-    for (var i = 0; i < List.from(relArtistsJson["artists"]).length; i++) {
-      var curr_rel_artist = List.from(relArtistsJson["artists"])[i];
-
-      final res = create_artist(curr_rel_artist);
-      artists.add(res);
-    }
+    relArtistsInfo = await http.get(
+        Uri.parse(
+            "https://api.spotify.com/v1/artists/$firstArtistId/related-artists"),
+        headers: {
+          "Authorization": 'Authorization: Bearer $accessToken',
+          "content-type": "application/x-www-form-urlencoded"
+        });
+  } else {
+    relArtistsInfo = await http.get(
+        Uri.parse(
+            "https://api.spotify.com/v1/artists/0TnOYISbd1XYRBk9myaseg/related-artists"),
+        headers: {
+          "Authorization": 'Authorization: Bearer $accessToken',
+          "content-type": "application/x-www-form-urlencoded"
+        });
   }
-  return artists;
-}
+
+  final relArtistsJson = json.decode(relArtistsInfo.body);
+
+  for (var i = 0; i < List.from(relArtistsJson["artists"]).length; i++) {
+    var curr_rel_artist = List.from(relArtistsJson["artists"])[i];
+
+    final res = create_artist(curr_rel_artist);
+    artistsToGet.add(res);
+  }
+
+  return artistsToGet;
+} */
 
 Future<model.Artist> get_artist(String artist_id) async {
   accessToken = await getAccessToken();
