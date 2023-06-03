@@ -23,7 +23,7 @@ class QuizScreenTablet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-   ImageProvider mic = const AssetImage("assets/images/mic.jpg");
+    ImageProvider mic = const AssetImage("assets/images/mic.jpg");
     ImageProvider singer = const AssetImage("assets/images/singer.jpg");
     ImageProvider concert = const AssetImage("assets/images/concert.jpg");
     ImageProvider album = const AssetImage("assets/images/album.jpg");
@@ -121,7 +121,6 @@ class QuizScreenTablet extends StatelessWidget {
             italic: true,
             thirdColor: true,
           ),
-          
         ],
       ),
       const SizedBox(
@@ -154,7 +153,6 @@ class QuizScreenTablet extends StatelessWidget {
             italic: true,
             thirdColor: true,
           ),
-          
         ],
       ),
       const SizedBox(
@@ -187,7 +185,6 @@ class QuizScreenTablet extends StatelessWidget {
             italic: true,
             thirdColor: true,
           ),
-          
         ],
       ),
       const SizedBox(
@@ -245,77 +242,170 @@ class QuizScreenTablet extends StatelessWidget {
                       height: 50,
                     ),
                     Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                CustomText(
-                                  key: const Key("TabletArtistText"),
-                                  text: AppLocalizations.of(context)!
-                                      .yourfavartists,
-                                  size: 30.0,
-                                  bold: true,
-                                ),
-                              ],
-                            ),
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        CustomText(
+                          key: const Key("TabletArtistText"),
+                          text: AppLocalizations.of(context)!.yourfavartists,
+                          size: 30.0,
+                          bold: true,
+                        ),
+                      ],
+                    ),
                     //LOWER PART PANEL WITH FAVOURITE ARTISTS
                     Padding(
-                  padding: const EdgeInsets.fromLTRB(8.0, 15.0, 0.0, 0.0),
-                  child: FutureBuilder<List<Artist>>(
-                      future:  utilities.artists,
-                      builder: (context, snapshot) {
-                        if (snapshot.hasData) {
-                          final artists = snapshot.data!;
-                          List<Widget> artistsBox = [];
-                          for (Artist artist in artists) {
-                            artistsBox.add(
-                              Row(
-                                children: [
-                                  CustomContainerPicNetwork(
-                                    picUrl: artist.images![1].url,
-                                    withBorder: false,
-                                    width: 100,
-                                    height: 100,
-                                    circularity: 10,
+                      padding: const EdgeInsets.fromLTRB(8.0, 15.0, 0.0, 0.0),
+                      child: FutureBuilder<List<Artist>>(
+                          future: utilities.artists,
+                          builder: (context, snapshot) {
+                            if (snapshot.hasData) {
+                              final artists = snapshot.data!;
+                              List<Widget> artistsBox = [];
+                              for (Artist artist in artists) {
+                                artistsBox.add(
+                                  Row(
+                                    children: [
+                                      CustomContainerPicNetwork(
+                                        picUrl: artist.images![1].url,
+                                        withBorder: false,
+                                        width: 100,
+                                        height: 100,
+                                        circularity: 10,
+                                      ),
+                                      Flexible(
+                                        fit: FlexFit.loose,
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Align(
+                                            alignment: MediaQuery.of(context)
+                                                        .orientation !=
+                                                    Orientation.portrait
+                                                ? Alignment.centerLeft
+                                                : Alignment.center,
+                                            child: CustomTextTableTablet(
+                                              text: artist.name,
+                                              size: 20,
+                                              alignCenter: true,
+                                              thirdColor: true,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
                                   ),
-                                  Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: CustomText(
-                                      text: artist.name,
-                                      size: 20,
-                                      alignCenter: true,
-                                      thirdColor: true,
+                                );
+                              }
+                              final artistsRow = <TableRow>[];
+
+                              if (MediaQuery.of(context).orientation ==
+                                  Orientation.portrait) {
+                                for (int ind = 0;
+                                    ind < artists.length / 2.floor();
+                                    ind += 2) {
+                                  artistsRow.add(
+                                    TableRow(
+                                      children: <Widget>[
+                                        Padding(
+                                          padding: const EdgeInsets.fromLTRB(
+                                              50, 0, 0, 0),
+                                          child: artistsBox[ind],
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.fromLTRB(
+                                              0, 0, 0, 0),
+                                          child: artistsBox[ind + 1],
+                                        ),
+                                      ],
                                     ),
+                                  );
+                                  artistsRow.add(
+                                    const TableRow(
+                                      children: <Widget>[
+                                        SizedBox(
+                                          height: 10,
+                                        ),
+                                        SizedBox(
+                                          height: 10,
+                                        ),
+                                      ],
+                                    ),
+                                  );
+                                }
+                              } else {
+                                for (int ind = 0;
+                                    ind < artists.length / 3.floor();
+                                    ind += 3) {
+                                  artistsRow.add(
+                                    TableRow(
+                                      children: <Widget>[
+                                        Padding(
+                                          padding: const EdgeInsets.fromLTRB(
+                                              0, 0, 0, 0),
+                                          child: artistsBox[ind],
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.fromLTRB(
+                                              0, 0, 0, 0),
+                                          child: artistsBox[ind + 1],
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.fromLTRB(
+                                              0, 0, 0, 0),
+                                          child: artistsBox[ind + 2],
+                                        ),
+                                      ],
+                                    ),
+                                  );
+                                  artistsRow.add(
+                                    const TableRow(
+                                      children: <Widget>[
+                                        SizedBox(
+                                          height: 10,
+                                        ),
+                                        SizedBox(
+                                          height: 10,
+                                        ),
+                                        SizedBox(
+                                          height: 10,
+                                        ),
+                                      ],
+                                    ),
+                                  );
+                                }
+                              }
+
+                              return SingleChildScrollView(
+                                key: const Key("TabletArtistList"),
+                                scrollDirection: Axis.vertical,
+                                child: Table(
+                                  key: const Key("TabletTableLocalRanking"),
+                                  border: TableBorder.symmetric(),
+                                  defaultVerticalAlignment:
+                                      TableCellVerticalAlignment.middle,
+                                  children: <TableRow>[
+                                    for (TableRow row in artistsRow) row
+                                  ],
+                                  defaultColumnWidth: const FlexColumnWidth(),
+                                ),
+                              );
+                            } else {
+                              return Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: const [
+                                  SizedBox(
+                                    width: 60,
+                                    height: 60,
+                                  ),
+                                  SizedBox(
+                                    width: 60,
+                                    height: 60,
+                                    child: CircularProgressIndicator(),
                                   ),
                                 ],
-                              ),
-                            );
-                          
-                          }
-                          return SingleChildScrollView(
-                            key: const Key("TabletArtistList"),
-                            scrollDirection: Axis.vertical,
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: artistsBox,
-                            ),
-                          );
-                        } else {
-                          return Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: const [
-                              SizedBox(
-                                width: 60,
-                                height: 60,
-                              ),
-                              SizedBox(
-                                width: 60,
-                                height: 60,
-                                child: CircularProgressIndicator(),
-                              ),
-                            ],
-                          );
-                        }
-                      }),
-                ),
+                              );
+                            }
+                          }),
+                    ),
                     // Column(
                     //   children: [
                     //     Column(
