@@ -48,10 +48,10 @@
 
   "gameinfoartist": "Devinez l'artiste en vous basant sur la photo !",
 
-  "gameinfosong": "Écoutez la chanson et devinez ce que c'est !",
+  "gameinfosong": "Devinez qui chante la chanson en fonction de son nom !",
 
-  "gameinfoalbum": "Mode de jeu basé sur vos albums préférés",
-  "gamesarabanda": "La Sarabande classique ! Associez la chanson au titre",
+  "gameinfoalbum": "Devinez la date de sortie de l'album !",
+  "gamesarabanda": "La Sarabande classique ! associez la chanson au titre",
 
   "gameinfocasual": "Mode de jeu qui tire parti de tous les types de quiz",
   "sarabanda": "Sarabanda",

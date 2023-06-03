@@ -28,8 +28,6 @@ class QuizScreen extends StatefulWidget {
 class QuizScreenState extends State<QuizScreen> {
   @override
   Widget build(BuildContext context) {
-    
-
     ImageProvider mic = const AssetImage("assets/images/mic.jpg");
     ImageProvider singer = const AssetImage("assets/images/singer.jpg");
     ImageProvider concert = const AssetImage("assets/images/concert.jpg");
@@ -42,7 +40,6 @@ class QuizScreenState extends State<QuizScreen> {
       Column(
         children: [
           GestureDetector(
-            key: const Key("FirstQuizButton"),
             onTap: () => Navigator.push(
               context,
               ScaleRoute(
@@ -155,7 +152,7 @@ class QuizScreenState extends State<QuizScreen> {
             ),
           ),
           CustomText(
-            key: const Key("ForthQuizButton"),
+            key: const Key("ForthQuizText"),
             text: AppLocalizations.of(context)!.sarabanda,
             size: 20,
             bold: true,
@@ -176,7 +173,7 @@ class QuizScreenState extends State<QuizScreen> {
             child: Hero(
               tag: "gameR",
               child: CustomContainerPic(
-                key: const Key("FifthQuizText"),
+                key: const Key("FifthQuizButton"),
                 pic: concert,
                 withBorder: true,
                 width: 150,
@@ -267,7 +264,7 @@ class QuizScreenState extends State<QuizScreen> {
                 Padding(
                   padding: const EdgeInsets.fromLTRB(8.0, 15.0, 0.0, 0.0),
                   child: FutureBuilder<List<Artist>>(
-                      future:  utilities.artists,
+                      future: utilities.artists,
                       builder: (context, snapshot) {
                         if (snapshot.hasData) {
                           final artists = snapshot.data!;
