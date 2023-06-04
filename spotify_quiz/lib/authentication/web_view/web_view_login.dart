@@ -94,6 +94,7 @@ class WebViewLogin extends StatelessWidget {
             var data = await userRepository.apiGetUser(
                 '${bodyJson["access_token"]}', '${bodyJson["refresh_token"]}');
             print("USER ACQUIRED");
+            utilities.accessToken = bodyJson["access_token"];
             context.read<AuthenticationBloc>().user = data;
 
         

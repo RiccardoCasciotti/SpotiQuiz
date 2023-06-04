@@ -39,8 +39,8 @@ void main() async {
   //db.collection("users").add(user); 
   Future<Placemark> _getAddressFromLatLng(Position position) async {
     List<Placemark> placemarks =
-        await placemarkFromCoordinates(position.latitude, position.longitude);
-
+        await placemarkFromCoordinates(position.latitude, position.longitude, );
+  print(placemarks);
     Placemark place = placemarks[0];
 
     return place;
@@ -63,7 +63,7 @@ void main() async {
     var events;
 
     if(utilities.runningTest){
-      events = await get_events_on_position("Milano");
+      events = await get_events_on_position("Milan");
     }
     else{
        Position position = await Geolocator.getCurrentPosition(

@@ -42,8 +42,8 @@ class _CustomButtonsHomeState extends State<CustomButtonsHome> {
 
 Future<Placemark> _getAddressFromLatLng(Position position) async {
     List<Placemark> placemarks =
-        await placemarkFromCoordinates(position.latitude, position.longitude);
-
+        await placemarkFromCoordinates(position.latitude, position.longitude, localeIdentifier: "en");
+    print(placemarks);
     Placemark place = placemarks[0];
 
     return place;

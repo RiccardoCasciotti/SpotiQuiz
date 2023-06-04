@@ -32,7 +32,7 @@ class _MyHomePageTabletState extends State<MyHomePageTablet> {
 
   Future<Placemark> _getAddressFromLatLng(Position position) async {
     List<Placemark> placemarks =
-        await placemarkFromCoordinates(position.latitude, position.longitude);
+        await placemarkFromCoordinates(position.latitude, position.longitude, localeIdentifier: "en");
 
     Placemark place = placemarks[0];
 
