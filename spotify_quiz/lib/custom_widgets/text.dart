@@ -24,6 +24,7 @@ class CustomText extends StatelessWidget {
     this.secondColor = false,
     this.thirdColor = false,
     this.wrongColor = false,
+    
   }) : super(key: key);
 
   @override
