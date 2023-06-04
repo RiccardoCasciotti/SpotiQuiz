@@ -4,6 +4,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:http/http.dart';
 import 'package:intl/intl.dart';
 import 'package:random_x/random_x.dart';
 import 'package:spotify_quiz/utility/quiz_utils.dart';
@@ -29,7 +30,6 @@ model.Event format_event(var eventJson) {
   final endDate = formatter
       .format(DateUtils.dateOnly(DateTime.parse(eventJson["endDate"])));
 
-  print(startDate);
   // final startDate = "";
   // final endDate = "";
   return model.Event(
@@ -49,6 +49,7 @@ model.Event format_event(var eventJson) {
 }
 
 Future<List<model.Event>> get_events_on_position(String? position) async {
+  
   String eventsKey = dotenv.env['EVENTS_KEY']!;
   String eventsHost = dotenv.env['EVENTS_HOST']!;
   List<model.Event> events = [];
@@ -60,7 +61,10 @@ Future<List<model.Event>> get_events_on_position(String? position) async {
   String minDate = formatter.format(DateUtils.dateOnly(today));
   String maxDate = formatter.format(
       DateUtils.dateOnly(DateTime(today.year, today.month, today.day + 14)));
-  if (fake_api) {
+
+  
+
+  if (utilities.fake_api) {
     final eventsJson = fake_event_api_call();
 
     for (var i = 0;
@@ -80,12 +84,22 @@ Future<List<model.Event>> get_events_on_position(String? position) async {
       position != null &&
       position != "") {
     api_call++;
+
     print("NEW API CALL!!!!   NUM OF API CALLS: $api_call");
+    
+    String geoCodingKey = dotenv.env['GEOCODING_KEY']!;
+  
+  Response position_data = await http
+        .get(Uri.parse("https://api.opencagedata.com/geocode/v1/json?q=$position&key=$geoCodingKey"));
+  
+  final geoCodeJson = json.decode(position_data.body);
+  final city = (geoCodeJson["results"][0]["formatted"]).split(",")[0];
+ 
 
     events_api_called = true;
     final eventsInfo = await http.get(
         Uri.parse(
-            "https://concerts-artists-events-tracker.p.rapidapi.com/location?name=$position&minDate=$minDate&maxDate=$maxDate&page=1"),
+            "https://concerts-artists-events-tracker.p.rapidapi.com/location?name=$city&minDate=$minDate&maxDate=$maxDate&page=1"),
         headers: {'X-RapidAPI-Key': eventsKey, 'X-RapidAPI-Host': eventsHost});
 
     final eventsJson = json.decode(eventsInfo.body);
@@ -163,7 +177,7 @@ model.Album create_album(var albumJson) {
 }
 
 Future<List<model.Artist>> get_related_artists(String artist_id) async {
-  accessToken = await getAccessToken();
+  accessToken =  getAccessToken();
 
   final artistsInfo = await http.get(
       Uri.parse(
@@ -187,7 +201,7 @@ Future<List<model.Artist>> get_related_artists(String artist_id) async {
 }
 
 Future<List<model.Album>> get_artist_albums(String artist_id) async {
-  accessToken = await getAccessToken();
+  accessToken =  getAccessToken();
   const market = "IT";
 
   final albumsInfo = await http.get(
@@ -215,7 +229,7 @@ Future<List<model.Album>> get_artist_albums(String artist_id) async {
 }
 
 Future<List<model.Artist>> get_followed_artists() async {
-  accessToken = await getAccessToken();
+  accessToken =  getAccessToken();
 
   final artistsInfo = await http.get(
       Uri.parse("https://api.spotify.com/v1/me/following?type=artist"),
@@ -238,7 +252,7 @@ Future<List<model.Artist>> get_followed_artists() async {
 }
 
 Future<List<model.Artist>> get_artist_quizpage() async {
-  accessToken = await getAccessToken();
+  accessToken =  getAccessToken();
   List<model.Artist> followed_artists = [];
   List<model.Artist> similar_artists = [];
   String similar_id = "0TnOYISbd1XYRBk9myaseg";
@@ -367,7 +381,7 @@ Future<List<model.Artist>> get_artist_quizpage() async {
 } */
 
 Future<model.Artist> get_artist(String artist_id) async {
-  accessToken = await getAccessToken();
+  accessToken =  getAccessToken();
 
   // ######################################### Insert here to test
   // if( i == 0 ){
@@ -403,7 +417,7 @@ model.Track track_format(track) {
 }
 
 Future<List<model.Track>> get_top_tracks(String artist_id) async {
-  accessToken = await getAccessToken();
+  accessToken =  getAccessToken();
 
   final tracksInfo = await http.get(
       Uri.parse(

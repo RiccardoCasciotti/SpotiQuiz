@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
@@ -28,10 +29,14 @@ String imageUserProfile =
     'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg';
 
 bool runningTest = false;
-var artists;
-var access_token;
+bool fake_api = true;
 
-Future<String> getAccessToken() async {
+var artists;
+var i = 0;
+
+Future<void> getAccessTokenRoutine() async {
+  
+  Timer.periodic(Duration(seconds: 3200), (timer) async {
   final clientId = dotenv.env['SPOTIFY_CLIENT_ID'];
   final clientSecret = dotenv.env['SPOTIFY_CLIENT_SECRET'];
   final response = await http.post(
@@ -46,5 +51,16 @@ Future<String> getAccessToken() async {
   );
   final bodyJson = json.decode(response.body);
 
-  return bodyJson["access_token"];
+   accessToken = bodyJson["access_token"];
+});
+}
+
+String getAccessToken() {
+if(i == 0){
+  getAccessTokenRoutine();
+  i++;
+}
+//print("ACCESS TOKEN: $access_token");
+  return accessToken;
+
 }
