@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:spotify_quiz/custom_widgets/text.dart';
 import 'package:spotify_quiz/utility/utilities.dart' as utilities;
 
@@ -45,13 +46,22 @@ class _AnswerStateTablet extends State<AnswerTablet> {
                 ? MaterialStateProperty.all(utilities.primaryColor)
                 : MaterialStateProperty.all(utilities.tertiaryColor),
           ),
-          child: CustomText(
-            text: widget.answerText,
-            size: 30,
-            alignCenter: true,
-            secondColor: true,
-            bold: true,
-          ),
+          child: Wrap(
+          alignment: WrapAlignment.center,
+
+        children: [Text(
+      widget.answerText,
+      //overflow: TextOverflow.ellipsis,
+      textAlign: TextAlign.center ,
+      style: GoogleFonts.openSans(
+        fontSize: 25,
+        color: Colors.black,
+        fontWeight: FontWeight.bold ,
+      ),
+    )]
+    ),
+          
+          
         ),
       ),
     );
@@ -101,13 +111,22 @@ class _AnswerHorizontalStateTablet extends State<AnswerHorizontalTablet> {
                 ? MaterialStateProperty.all(utilities.primaryColor)
                 : MaterialStateProperty.all(utilities.tertiaryColor),
           ),
-          child: CustomText(
-            text: widget.answerText,
-            size: 30,
-            alignCenter: true,
-            secondColor: true,
-            bold: true,
-          ),
+         
+        child: Wrap(
+          alignment: WrapAlignment.center,
+
+        children: [Text(
+      widget.answerText,
+      //overflow: TextOverflow.ellipsis,
+      textAlign: TextAlign.center ,
+      style: GoogleFonts.openSans(
+        fontSize: 25,
+        color: Colors.black,
+        fontWeight: FontWeight.bold ,
+      ),
+    ),]
+    
+    ),
         ),
       ),
     );
