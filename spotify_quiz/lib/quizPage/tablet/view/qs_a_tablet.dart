@@ -37,6 +37,7 @@ class QuizAtablet extends StatelessWidget {
               ),
               if (questions![questionIndex]['image'] != null)
                 Container(
+                  key: const Key("ImageTablet"),
                   alignment: Alignment.center,
                   width: 400,
                   height: 400,
@@ -57,28 +58,26 @@ class QuizAtablet extends StatelessWidget {
                 height: 40,
               ),
               Flexible(
-          flex: 0,
-          
-          child: GridView.count(
-            crossAxisCount: 2,
-            crossAxisSpacing: 20,
-            mainAxisSpacing: 20,
-            shrinkWrap: true,
-            childAspectRatio: 4,
-                children: [
-                  ...(questions![questionIndex]['answers']).map((answer) {
-                    final index =
-                        (questions![questionIndex]['answers']).indexOf(answer) +
+                  flex: 0,
+                  child: GridView.count(
+                    crossAxisCount: 2,
+                    crossAxisSpacing: 20,
+                    mainAxisSpacing: 20,
+                    shrinkWrap: true,
+                    childAspectRatio: 4,
+                    children: [
+                      ...(questions![questionIndex]['answers']).map((answer) {
+                        final index = (questions![questionIndex]['answers'])
+                                .indexOf(answer) +
                             1;
-                    return AnswerTablet(
-                        key: Key("AnswerQuestion$index"),
-                        () => answerQuestion!(answer['score']),
-                        answer['text'].toString(),
-                        null);
-                  })
-                ],
-              )
-              )
+                        return AnswerTablet(
+                            key: Key("AnswerQuestion$index"),
+                            () => answerQuestion!(answer['score']),
+                            answer['text'].toString(),
+                            null);
+                      })
+                    ],
+                  ))
             ],
           )
         : Column(
@@ -91,7 +90,6 @@ class QuizAtablet extends StatelessWidget {
                   text: questions![questionIndex]['questionText'].toString(),
                 ),
               Column(
-                
                 children: [
                   if (questions![questionIndex]['image'] != null)
                     Column(
@@ -100,6 +98,7 @@ class QuizAtablet extends StatelessWidget {
                           height: 20,
                         ),
                         Container(
+                          key: const Key("ImageTablet"),
                           alignment: Alignment.center,
                           width: 300,
                           height: 300,
