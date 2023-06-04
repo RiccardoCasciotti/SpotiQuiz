@@ -29,7 +29,7 @@ String imageUserProfile =
     'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg';
 
 bool runningTest = false;
-bool fake_api = true;
+bool fake_api = false;
 
 var artists;
 var i = 0;
