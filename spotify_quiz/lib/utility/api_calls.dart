@@ -104,6 +104,8 @@ Future<List<model.Event>> get_events_on_position(String? position) async {
 
     final eventsJson = json.decode(eventsInfo.body);
     //final eventsJson = json.decode('{"data":[{"@context":"http://schema.org","@type":"MusicEvent","description":"Daniele Silvestri at Teatro Lirico at 2023-05-22T21:00:00+0200","endDate":"2023-05-22","eventStatus":"https://schema.org/EventScheduled","image":"https://images.sk-static.com/images/media/profile_images/artists/519444/huge_avatar","location":{"@type":"Place","address":{"@type":"PostalAddress","addressCountry":"Italy","addressLocality":"Milan","postalCode":"20122","streetAddress":"Via Larga, 16"},"geo":{"@type":"GeoCoordinates","latitude":45.46134,"longitude":9.19166},"name":"Teatro Lirico","sameAs":null},"name":"Daniele Silvestri","performer":[{"@type":"MusicGroup","name":"Daniele Silvestri"}],"startDate":"2023-05-22T21:00:00+0200"}]}');
+   if(eventsJson["data"] != null)
+   {
     for (var i = 0;
         i <
             (List.from(eventsJson["data"]).length < 20
@@ -116,6 +118,7 @@ Future<List<model.Event>> get_events_on_position(String? position) async {
     }
     // print(eventsJson);
     // print(events.toString());
+    }
     events_call = events;
   }
   print("NUM OF API CALLS: $api_call");
