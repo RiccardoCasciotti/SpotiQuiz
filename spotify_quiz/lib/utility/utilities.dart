@@ -28,7 +28,7 @@ String refreshToken = "";
 String imageUserProfile =
     'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg';
 
-bool runningTest = false;
+bool runningTest = true;
 bool fake_api = true;
 
 var artists;
@@ -37,6 +37,22 @@ var i = 0;
 Future<void> getAccessTokenRoutine() async {
   
   Timer.periodic(Duration(seconds: 3200), (timer) async {
+  await getNewAccessToken();
+});
+}
+
+String getAccessToken() {
+if(i == 0){
+  
+  getAccessTokenRoutine();
+  i++;
+}
+//print("ACCESS TOKEN: $access_token");
+  return accessToken;
+
+}
+
+Future<void> getNewAccessToken() async {
   final clientId = dotenv.env['SPOTIFY_CLIENT_ID'];
   final clientSecret = dotenv.env['SPOTIFY_CLIENT_SECRET'];
   final response = await http.post(
@@ -52,15 +68,4 @@ Future<void> getAccessTokenRoutine() async {
   final bodyJson = json.decode(response.body);
 
    accessToken = bodyJson["access_token"];
-});
-}
-
-String getAccessToken() {
-if(i == 0){
-  getAccessTokenRoutine();
-  i++;
-}
-//print("ACCESS TOKEN: $access_token");
-  return accessToken;
-
 }

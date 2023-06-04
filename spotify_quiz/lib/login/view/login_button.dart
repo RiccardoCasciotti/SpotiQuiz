@@ -79,6 +79,7 @@ class LoginButton extends StatelessWidget {
         // ignore: use_build_context_synchronously
         if (utilities.runningTest) {
           utilities.refreshToken = userTest!.refreshToken;
+          await utilities.getNewAccessToken();
           context.read<AuthenticationBloc>().user = userTest;
           context.read<LoginBloc>().add(const LoginSubmitted());
     
