@@ -121,7 +121,7 @@ Future<List<model.Event>> get_events_on_position(String? position) async {
     }
     events_call = events;
   }
-  print("NUM OF API CALLS: $api_call");
+  //print("NUM OF API CALLS: $api_call");
 
   return events_call;
 }
@@ -192,7 +192,7 @@ Future<List<model.Artist>> get_related_artists(String artist_id) async {
 
   final artistsJson = json.decode(artistsInfo.body);
   List<model.Artist> artists = [];
-  if (!List.from(artistsJson["artists"]).isEmpty) {
+  if (artistsJson["artists"] != null) {
     for (var i = 0; i < List.from(artistsJson["artists"]).length; i++) {
       var curr_artist = List.from(artistsJson["artists"])[i];
 
@@ -217,7 +217,7 @@ Future<List<model.Album>> get_artist_albums(String artist_id) async {
 
   final albumsJson = json.decode(albumsInfo.body);
   List<model.Album> albums = [];
-  if (!List.from(albumsJson["items"]).isEmpty) {
+  if (albumsJson["items"] != null) {
     for (var i = 0; i < List.from(albumsJson["items"]).length; i++) {
       var curr_album = List.from(albumsJson["items"])[i];
       if (curr_album["release_date_precision"] != "day") {
@@ -400,6 +400,7 @@ Future<model.Artist> get_artist(String artist_id) async {
         "content-type": "application/x-www-form-urlencoded"
       });
   final artistJson = json.decode(artistInfo.body);
+  
   return create_artist(artistJson);
 }
 
@@ -433,7 +434,7 @@ Future<List<model.Track>> get_top_tracks(String artist_id) async {
   final tracksJson = json.decode(tracksInfo.body);
 
   List<model.Track> tracks = [];
-  if (!List.from(tracksJson["tracks"]).isEmpty) {
+  if (tracksJson["tracks"] != null) {
     for (var i = 0; i < List.from(tracksJson["tracks"]).length; i++) {
       var tmp = List.from(tracksJson["tracks"])[i];
       if (tmp['id'] == null ||
