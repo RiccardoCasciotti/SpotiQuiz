@@ -20,9 +20,9 @@ class QuizTablet extends StatelessWidget {
       required this.answerQuestion,
       required this.questionIndex,
       required this.isRandom})
-      : super(key: const Key("QuizScreenPageTablet"));
+      : super(key: key);
 
-  @override
+@override
   Widget build(BuildContext context) {
     if (questions![questionIndex]["type"] == "A") {
       return QuizAtablet(
@@ -53,6 +53,7 @@ class QuizTablet extends StatelessWidget {
         isRandom: isRandom,
       );
     }
+    
   }
 
   // @override
