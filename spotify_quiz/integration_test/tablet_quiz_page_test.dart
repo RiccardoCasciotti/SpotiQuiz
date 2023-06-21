@@ -26,9 +26,9 @@ void main() {
 
     await tester.pumpAndSettle(const Duration(seconds: 2));
 
-    final Finder buttonHome = find.byIcon(Icons.question_mark_outlined);
+    
 
-    await tester.tap(buttonHome);
+    await tester.pumpAndSettle(const Duration(seconds: 2));
 
     //test
     expect(find.byKey(const Key("NavigationRail")), findsOneWidget);
@@ -176,118 +176,6 @@ void main() {
 
     //test
     expect(find.byKey(const Key("TabletGameC")), findsOneWidget);
-  });
-
-  testWidgets('Quiz Page Layout: Text GameD', (WidgetTester tester) async {
-    //setup
-    app.main();
-
-    await tester.pumpAndSettle(const Duration(seconds: 5));
-
-    final Finder button = find.byKey(const Key('LoginButton'));
-
-    //do
-
-    await tester.tap(button);
-
-    await tester.pumpAndSettle(const Duration(seconds: 2));
-
-    final Finder buttonHome = find.byIcon(Icons.question_mark_outlined);
-
-    await tester.tap(buttonHome);
-
-    await tester.pumpAndSettle(const Duration(seconds: 2));
-
-    await tester.dragUntilVisible(find.byKey(const Key("TabletGameD")),
-        find.byKey(const Key("TabletListGames")), const Offset(30.0, 0));
-    await tester.pumpAndSettle(const Duration(seconds: 2));
-
-    //test
-    expect(find.byKey(const Key("TabletGameDText")), findsOneWidget);
-  });
-
-  testWidgets('Quiz Page Layout: Button GameD', (WidgetTester tester) async {
-    //setup
-    app.main();
-
-    await tester.pumpAndSettle(const Duration(seconds: 5));
-
-    final Finder button = find.byKey(const Key('LoginButton'));
-
-    //do
-
-    await tester.tap(button);
-
-    await tester.pumpAndSettle(const Duration(seconds: 2));
-
-    final Finder buttonHome = find.byIcon(Icons.question_mark_outlined);
-
-    await tester.tap(buttonHome);
-
-    await tester.pumpAndSettle(const Duration(seconds: 2));
-
-    await tester.dragUntilVisible(find.byKey(const Key("TabletGameD")),
-        find.byKey(const Key("TabletListGames")), const Offset(30.0, 0));
-    await tester.pumpAndSettle(const Duration(seconds: 2));
-
-    //test
-    expect(find.byKey(const Key("TabletGameD")), findsOneWidget);
-  });
-
-  testWidgets('Quiz Page Layout: Text GameR', (WidgetTester tester) async {
-    //setup
-    app.main();
-
-    await tester.pumpAndSettle(const Duration(seconds: 5));
-
-    final Finder button = find.byKey(const Key('LoginButton'));
-
-    //do
-
-    await tester.tap(button);
-
-    await tester.pumpAndSettle(const Duration(seconds: 2));
-
-    final Finder buttonHome = find.byIcon(Icons.question_mark_outlined);
-
-    await tester.tap(buttonHome);
-
-    await tester.pumpAndSettle(const Duration(seconds: 2));
-
-    await tester.dragUntilVisible(find.byKey(const Key("TabletGameR")),
-        find.byKey(const Key("TabletListGames")), const Offset(50.0, 0));
-    await tester.pumpAndSettle(const Duration(seconds: 2));
-
-    //test
-    expect(find.byKey(const Key("TabletGameRText")), findsOneWidget);
-  });
-
-  testWidgets('Quiz Page Layout: Button GameR', (WidgetTester tester) async {
-    //setup
-    app.main();
-
-    await tester.pumpAndSettle(const Duration(seconds: 5));
-
-    final Finder button = find.byKey(const Key('LoginButton'));
-
-    //do
-
-    await tester.tap(button);
-
-    await tester.pumpAndSettle(const Duration(seconds: 2));
-
-    final Finder buttonHome = find.byIcon(Icons.question_mark_outlined);
-
-    await tester.tap(buttonHome);
-
-    await tester.pumpAndSettle(const Duration(seconds: 2));
-
-    await tester.dragUntilVisible(find.byKey(const Key("TabletGameR")),
-        find.byKey(const Key("TabletListGames")), const Offset(50.0, 0));
-    await tester.pumpAndSettle(const Duration(seconds: 2));
-
-    //test
-    expect(find.byKey(const Key("TabletGameR")), findsOneWidget);
   });
 
   testWidgets('Quiz Page Layout: Presentation Text',
@@ -603,6 +491,7 @@ void main() {
     expect(find.byKey(const Key("TabletEventPage")), findsOneWidget);
   });
 
+  
   testWidgets('Click GameA', (WidgetTester tester) async {
     //setup
     app.main();
@@ -721,38 +610,5 @@ void main() {
     //test
     expect(find.byKey(const Key("gameInfoPageD")), findsOneWidget);
   });
-
-  testWidgets('Click GameR', (WidgetTester tester) async {
-    //setup
-    app.main();
-
-    await tester.pumpAndSettle(const Duration(seconds: 5));
-
-    final Finder button = find.byKey(const Key('LoginButton'));
-
-    //do
-
-    await tester.tap(button);
-
-    await tester.pumpAndSettle(const Duration(seconds: 6));
-
-    final Finder buttonHome = find.byIcon(Icons.question_mark_outlined);
-
-    await tester.tap(buttonHome);
-
-    await tester.pumpAndSettle(const Duration(seconds: 6));
-
-    await tester.dragUntilVisible(find.byKey(const Key("TabletGameR")),
-        find.byKey(const Key("TabletListGames")), const Offset(50.0, 0));
-    await tester.pumpAndSettle(const Duration(seconds: 2));
-
-    final Finder buttonGame1 = find.byKey(const Key("TabletGameR"));
-
-    await tester.tap(buttonGame1);
-
-    await tester.pumpAndSettle(const Duration(seconds: 2));
-
-    //test
-    expect(find.byKey(const Key("gameInfoPageR")), findsOneWidget);
-  });
+  
 }

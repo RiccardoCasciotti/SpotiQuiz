@@ -15,7 +15,7 @@ class ResultTablet extends StatelessWidget {
   const ResultTablet(
       this.resultScore, this.questionScore, this.returnHome, this.moveOn,
       {Key? key})
-      : super(key: const Key("ResultScreenPageTablet"));
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +24,6 @@ class ResultTablet extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
           CustomText(
-            key: const Key("ResultText"),
             text: questionScore > 0
                 ? AppLocalizations.of(context)!.correctanswerquiz
                 : AppLocalizations.of(context)!.wronganswerquiz,
@@ -34,8 +33,8 @@ class ResultTablet extends StatelessWidget {
             bold: true,
           ),
           const SizedBox(
-            height: 100,
-          ),
+                height: 100,
+              ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
@@ -43,7 +42,6 @@ class ResultTablet extends StatelessWidget {
                 width: 100,
               ),
               CustomText(
-                key: const Key("ScoreQuiz"),
                 text: AppLocalizations.of(context)!.scorequiz,
                 size: 35,
                 alignCenter: true,
@@ -51,7 +49,6 @@ class ResultTablet extends StatelessWidget {
                 bold: true,
               ),
               CustomText(
-                key: const Key("ScoreQuizInfo"),
                 text: '$resultScore',
                 size: 35,
                 alignCenter: true,
@@ -65,8 +62,8 @@ class ResultTablet extends StatelessWidget {
           ),
           //Text
           const SizedBox(
-            height: 100,
-          ),
+                height: 100,
+              ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
@@ -74,7 +71,6 @@ class ResultTablet extends StatelessWidget {
                 width: 30,
               ),
               TextButtonReturn(
-                key: const Key("ReturnButton"),
                 text: AppLocalizations.of(context)!.quitbutton,
                 selectHandler: (context) => returnHome(),
               ),
@@ -82,7 +78,6 @@ class ResultTablet extends StatelessWidget {
                 width: 100,
               ),
               TextButtonReturn(
-                key: const Key("ContinueButton"),
                 text: AppLocalizations.of(context)!.continuebutton,
                 selectHandler: (context) => moveOn(),
               ),
