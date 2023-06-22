@@ -12,13 +12,24 @@ import 'package:spotify_quiz/models/track.dart';
 import 'package:spotify_quiz/repositories/user/user_repository.dart';
 import 'package:spotify_quiz/utility/api_calls.dart';
 
+import 'package:firebase_core/firebase_core.dart';
+import 'package:spotify_quiz/repositories/firebase_options.dart';
+
 import 'package:spotify_quiz/utility/utilities.dart' as utilities;
 
 void main() async {
   app.main();
+
+  // ignore: unused_local_variable
+  final fbApp = await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  WidgetsFlutterBinding.ensureInitialized();
+
   utilities.runningTest = true;
   UserRepository userRepo = UserRepository();
   await dotenv.load(fileName: ".env");
+
   utilities.refreshToken = dotenv.env['TEST_REFRESH_TOKEN']!;
 
   await utilities.getNewAccessToken();
