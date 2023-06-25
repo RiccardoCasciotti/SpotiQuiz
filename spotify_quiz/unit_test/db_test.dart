@@ -19,7 +19,7 @@ import 'package:spotify_quiz/utility/utilities.dart' as utilities;
 
 void main() async {
   app.main();
-
+  await dotenv.load(fileName: ".env");
   // ignore: unused_local_variable
   final fbApp = await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
@@ -28,7 +28,7 @@ void main() async {
 
   utilities.runningTest = true;
   UserRepository userRepo = UserRepository();
-  await dotenv.load(fileName: ".env");
+  
 
   utilities.refreshToken = dotenv.env['TEST_REFRESH_TOKEN']!;
 
