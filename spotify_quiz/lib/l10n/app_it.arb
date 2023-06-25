@@ -76,5 +76,7 @@
 
   "experience": "Esperienza",
 
-  "createquiz": "Creando il tuo quiz..."
+  "createquiz": "Creando il tuo quiz...",
+
+  "loginSpotify": "Accedi con Spotify"
 }

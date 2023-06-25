@@ -77,6 +77,8 @@
 
   "experience": "Oпыт",
 
-  "createquiz": "Создание теста..."
+  "createquiz": "Создание теста...",
+
+   "loginSpotify": "Войти через Spotify"
 
 }

@@ -220,6 +220,11 @@
   "createquiz": "Creating your quiz...",
   "@createquiz": {
     "description": "Text waiting for the quiz"
+  },
+
+  "loginSpotify": "Login with Spotify",
+  "@loginSpotify": {
+    "description": "The button to login with spotify"
   }
 
 
