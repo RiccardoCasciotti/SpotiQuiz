@@ -55,7 +55,7 @@ class WebViewLogin extends StatelessWidget {
         onNavigationRequest: (NavigationRequest req) async {
           var requestUri = req.url;
         
-          
+          print(requestUri);
           if( requestUri.contains("error=access_denied")){
   
           context.read<AuthenticationBloc>().add( AuthenticationLogoutRequested());
@@ -63,6 +63,10 @@ class WebViewLogin extends StatelessWidget {
           
           return NavigationDecision.prevent;
           
+          }
+         
+          else if( requestUri.contains("https://accounts.google.com")){
+            return NavigationDecision.prevent;
           }
 
           else if( requestUri.contains("http://spotify_quiz-api.com/?code=" )){
