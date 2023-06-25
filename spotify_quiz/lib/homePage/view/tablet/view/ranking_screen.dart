@@ -168,7 +168,7 @@ class RankingScreenTablet extends StatelessWidget {
                           child: SingleChildScrollView(
                             scrollDirection: Axis.vertical,
                             child: Container(
-                              width: 300,
+                              width: 340,
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(20.0),
                                   border: Border.all(
@@ -291,7 +291,7 @@ class RankingScreenTablet extends StatelessWidget {
                           child: SingleChildScrollView(
                             scrollDirection: Axis.vertical,
                             child: Container(
-                              width: 300,
+                              width: 340,
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(20.0),
                                   border: Border.all(
