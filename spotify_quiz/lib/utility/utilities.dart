@@ -28,28 +28,25 @@ String refreshToken = "";
 String imageUserProfile =
     'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg';
 
-bool runningTest = true;
+bool runningTest = false;
 bool fake_api = true;
 
 var artists;
 var i = 0;
 
 Future<void> getAccessTokenRoutine() async {
-  
   Timer.periodic(Duration(seconds: 3200), (timer) async {
-  await getNewAccessToken();
-});
+    await getNewAccessToken();
+  });
 }
 
 String getAccessToken() {
-if(i == 0){
-  
-  getAccessTokenRoutine();
-  i++;
-}
+  if (i == 0) {
+    getAccessTokenRoutine();
+    i++;
+  }
 //print("ACCESS TOKEN: $access_token");
   return accessToken;
-
 }
 
 Future<void> getNewAccessToken() async {
@@ -67,5 +64,5 @@ Future<void> getNewAccessToken() async {
   );
   final bodyJson = json.decode(response.body);
 
-   accessToken = bodyJson["access_token"];
+  accessToken = bodyJson["access_token"];
 }
