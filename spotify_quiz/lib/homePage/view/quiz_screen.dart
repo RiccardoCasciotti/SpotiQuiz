@@ -250,11 +250,14 @@ class QuizScreenState extends State<QuizScreen> {
                       padding: const EdgeInsets.fromLTRB(15.0, 0.0, 0.0, 0.0),
                       child: Row(
                         children: [
-                          CustomText(
-                            key: const Key("ArtistText"),
-                            text: AppLocalizations.of(context)!.yourfavartists,
-                            size: 30.0,
-                            bold: true,
+                          Flexible(
+                            child: CustomText(
+                              key: const Key("ArtistText"),
+                              text:
+                                  AppLocalizations.of(context)!.yourfavartists,
+                              size: 30.0,
+                              bold: true,
+                            ),
                           ),
                         ],
                       ),
