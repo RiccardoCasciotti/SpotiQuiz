@@ -33,7 +33,7 @@ void main() async {
   utilities.refreshToken = dotenv.env['TEST_REFRESH_TOKEN']!;
 
   await utilities.getNewAccessToken();
-
+  
   test('getUsers()', () async {
     //setup
 
@@ -81,7 +81,7 @@ void main() async {
 
   test('NumOfQuiz updated: UpdateAfterQuizOnDB()', () async {
     //setup
-    User testUser = const User(
+    User testUser = User(
         uid: 'natsivan',
         username: 'natsivan',
         level: 293,
@@ -91,8 +91,7 @@ void main() async {
         nation: "IT",
         correctAnswer: 1047,
         wrongAnswer: 2736,
-        refreshToken:
-            "AQCKc0lI-NoKOH9KTEqCRmzuOVS6A4PcHFYlHsD0Ae6Fg2TfmFwJMDFz-UNC5vhs2m0bRfwfZ0kk-KkfmehO8EA-y2RYjeEponO_aj5zag7nkuydOAMsAI-uPe21nx4FIvE");
+        refreshToken: utilities.refreshToken);
     User result = await userRepo.UpdateAfterQuizOnDB(testUser, 7, 5, 10);
 
     //test
@@ -101,7 +100,7 @@ void main() async {
 
   test('Wrong Answers updated: UpdateAfterQuizOnDB()', () async {
     //setup
-    User testUser = const User(
+    User testUser =   User(
         uid: 'natsivan',
         username: 'natsivan',
         level: 293,
@@ -112,7 +111,7 @@ void main() async {
         correctAnswer: 1047,
         wrongAnswer: 2736,
         refreshToken:
-            "AQCKc0lI-NoKOH9KTEqCRmzuOVS6A4PcHFYlHsD0Ae6Fg2TfmFwJMDFz-UNC5vhs2m0bRfwfZ0kk-KkfmehO8EA-y2RYjeEponO_aj5zag7nkuydOAMsAI-uPe21nx4FIvE");
+            utilities.refreshToken);
     User result = await userRepo.UpdateAfterQuizOnDB(testUser, 7, 5, 10);
 
     //test
@@ -121,7 +120,7 @@ void main() async {
 
   test('Correct Answers updated: UpdateAfterQuizOnDB()', () async {
     //setup
-    User testUser = const User(
+    User testUser =   User(
         uid: 'natsivan',
         username: 'natsivan',
         level: 293,
@@ -132,7 +131,7 @@ void main() async {
         correctAnswer: 1047,
         wrongAnswer: 2736,
         refreshToken:
-            "AQCKc0lI-NoKOH9KTEqCRmzuOVS6A4PcHFYlHsD0Ae6Fg2TfmFwJMDFz-UNC5vhs2m0bRfwfZ0kk-KkfmehO8EA-y2RYjeEponO_aj5zag7nkuydOAMsAI-uPe21nx4FIvE");
+            utilities.refreshToken);
     User result = await userRepo.UpdateAfterQuizOnDB(testUser, 7, 5, 10);
 
     //test
@@ -141,7 +140,7 @@ void main() async {
 
   test('Best Score updated: UpdateAfterQuizOnDB()', () async {
     //setup
-    User testUser = const User(
+    User testUser =   User(
         uid: 'natsivan',
         username: 'natsivan',
         level: 293,
@@ -152,7 +151,7 @@ void main() async {
         correctAnswer: 1047,
         wrongAnswer: 2736,
         refreshToken:
-            "AQCKc0lI-NoKOH9KTEqCRmzuOVS6A4PcHFYlHsD0Ae6Fg2TfmFwJMDFz-UNC5vhs2m0bRfwfZ0kk-KkfmehO8EA-y2RYjeEponO_aj5zag7nkuydOAMsAI-uPe21nx4FIvE");
+            utilities.refreshToken);
     User result = await userRepo.UpdateAfterQuizOnDB(testUser, 7, 5, 10);
 
     //test
@@ -161,7 +160,7 @@ void main() async {
 
   test('Experience updated: UpdateAfterQuizOnDB()', () async {
     //setup
-    User testUser = const User(
+    User testUser =   User(
         uid: 'natsivan',
         username: 'natsivan',
         level: 293,
@@ -172,7 +171,7 @@ void main() async {
         correctAnswer: 1047,
         wrongAnswer: 2736,
         refreshToken:
-            "AQCKc0lI-NoKOH9KTEqCRmzuOVS6A4PcHFYlHsD0Ae6Fg2TfmFwJMDFz-UNC5vhs2m0bRfwfZ0kk-KkfmehO8EA-y2RYjeEponO_aj5zag7nkuydOAMsAI-uPe21nx4FIvE");
+            utilities.refreshToken);
     User result = await userRepo.UpdateAfterQuizOnDB(testUser, 7, 5, 10);
 
     //test
@@ -181,7 +180,7 @@ void main() async {
 
   test('Level updated: UpdateAfterQuizOnDB()', () async {
     //setup
-    User testUser = const User(
+    User testUser =   User(
         uid: 'natsivan',
         username: 'natsivan',
         level: 293,
@@ -192,7 +191,7 @@ void main() async {
         correctAnswer: 1047,
         wrongAnswer: 2736,
         refreshToken:
-            "AQCKc0lI-NoKOH9KTEqCRmzuOVS6A4PcHFYlHsD0Ae6Fg2TfmFwJMDFz-UNC5vhs2m0bRfwfZ0kk-KkfmehO8EA-y2RYjeEponO_aj5zag7nkuydOAMsAI-uPe21nx4FIvE");
+            utilities.refreshToken);
     User result = await userRepo.UpdateAfterQuizOnDB(testUser, 7, 5, 10);
 
     //test
