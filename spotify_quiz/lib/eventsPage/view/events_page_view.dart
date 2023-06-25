@@ -53,7 +53,7 @@ class _EventsPageState extends State<EventsPage> {
           backgroundColor: utilities.secondaryColor,
           foregroundColor: utilities.primaryColor,
           elevation: 0.0,
-          title: const Text("Go back"),
+          title: Text(AppLocalizations.of(context)!.gobackbutton),
         ),
         body: Center(
           key: const Key("eventFrame"),
