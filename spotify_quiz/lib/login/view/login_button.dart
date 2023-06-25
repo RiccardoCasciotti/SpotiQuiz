@@ -8,6 +8,8 @@ import 'package:spotify_quiz/repositories/user/user_repository.dart';
 
 import 'package:spotify_quiz/utility/utilities.dart' as utilities;
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import '../../utility/api_calls.dart';
 
 class AnimatedLoginButton extends StatefulWidget {
@@ -82,7 +84,6 @@ class LoginButton extends StatelessWidget {
           await utilities.getNewAccessToken();
           context.read<AuthenticationBloc>().user = userTest;
           context.read<LoginBloc>().add(const LoginSubmitted());
-    
         }
         // ignore: use_build_context_synchronously
         else {
@@ -107,7 +108,7 @@ class LoginButton extends StatelessWidget {
       highlightColor: const Color.fromRGBO(60, 187, 171, 1),
       splashColor: const Color.fromRGBO(60, 187, 171, 1),
       child: CustomText(
-        text: "Login with Spotify",
+        text: AppLocalizations.of(context)!.loginSpotify,
         size: 25,
         secondColor: true,
         bold: true,
